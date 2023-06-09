@@ -1,6 +1,9 @@
 {
   "name": "blofin-ui",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blofinex/blofin-ui.git"
+  },
   "version": "0.1.0",
   "type": "module",
   "scripts": {
