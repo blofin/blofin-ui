@@ -1,0 +1,32 @@
+import type { StorybookConfig } from "@storybook/react-vite";
+
+const config: StorybookConfig = {
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-interactions",
+    "@storybook/addon-styling",
+    "storybook-dark-mode",
+    {
+      name: "@storybook/addon-essentials",
+      options: {
+        backgrounds: false, // 👈 disable the backgrounds addon
+      },
+    },
+  ],
+  framework: {
+    name: "@storybook/react-vite",
+    options: {},
+  },
+  docs: {
+    autodocs: true,
+  },
+  async viteFinal(config) {
+    // customize the Vite config here
+    config.plugins = [...(config.plugins || [])];
+
+    // return the customized config
+    return config;
+  },
+};
+export default config;

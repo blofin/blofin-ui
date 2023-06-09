@@ -1,0 +1,7 @@
+.popover-container {
+  &:hover {
+    .popover {
+      display: flex;
+    }
+  }
+}
