@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "0.1.85",
+  "version": "0.1.86",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
   "type": "module",
@@ -17,6 +17,11 @@
     "./index.css": {
       "require": "./dist/index.css",
       "default": "./dist/index.css"
+    },
+    "./dist/Badge": {
+      "require": "./dist/Badge.umd.cjs",
+      "import": "./dist/Badge.es.js",
+      "types": "./dist/Badge.d.ts"
     }
   },
   "files": [
