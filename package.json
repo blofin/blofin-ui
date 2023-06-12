@@ -18,7 +18,7 @@
       "require": "./dist/index.css",
       "default": "./dist/index.css"
     },
-    "./dist/components/Badge/Badge": "./dist/components/Badge/Badge.js"
+    "./Badge": "./dist/Badge.es.js"
   },
   "files": [
     "dist"

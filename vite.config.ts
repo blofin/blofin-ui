@@ -45,12 +45,15 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, "src/index.ts"),
+      entry: {
+        index: resolve(__dirname, "src/index.ts"),
+        Badge: resolve(__dirname, "src/components/Badge/index.ts"),
+      },
       name: "blofin-ui",
       // the proper extensions will be added
       // formats: ["es", "umd"],
       formats: ["es"],
-      fileName: (format) => `index.${format}.js`,
+      fileName: (format) => `[name].${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
