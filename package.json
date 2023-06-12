@@ -20,7 +20,8 @@
     },
     "./Badge": {
       "require": "./dist/Badge.umd.cjs",
-      "import": "./dist/Badge.es.js"
+      "import": "./dist/Badge.es.js",
+      "types": "./dist/Badge.d.ts"
     }
   },
   "files": [
