@@ -9,6 +9,13 @@
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*"
+      ]
+    }
+  },
   "exports": {
     ".": {
       "require": "./dist/index.cjs.js",
@@ -19,15 +26,13 @@
       "default": "./dist/index.css"
     },
     "./Badge": {
-      "require": "./dist/components/Badge/index.cjs.js",
-      "import": "./dist/components/Badge/index.es.js",
-      "type": "./dist/components/Badge/index.d.ts"
+      "require": "./dist/Badge.cjs.js",
+      "import": "./dist/Badge.es.js",
+      "type": "./dist/Badge.d.ts"
     }
   },
   "files": [
-    "dist/*",
-    "index.d.ts",
-    "Badge.d.ts"
+    "dist"
   ],
   "license": "MIT",
   "scripts": {
@@ -83,7 +88,6 @@
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
-    "vite-plugin-chunk-split": "^0.4.7",
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-svgr": "^3.2.0",
     "vitest": "^0.32.0"

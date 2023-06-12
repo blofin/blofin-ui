@@ -4,7 +4,6 @@ import react from "@vitejs/plugin-react-swc";
 import { resolve } from "path";
 import tailwindcss from "tailwindcss";
 import { defineConfig } from "vite";
-import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import dts from "vite-plugin-dts";
 import svgr from "vite-plugin-svgr";
 
@@ -14,9 +13,9 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
-      beforeWriteFile: (filePath, content) => {
-        console.log(filePath);
-      },
+      // beforeWriteFile: (filePath, content) => {
+      //   console.log(filePath);
+      // },
     }),
     // chunkSplitPlugin({
     //   strategy: "unbundle",
@@ -57,13 +56,13 @@ export default defineConfig({
       // the proper extensions will be added
       // formats: ["es", "umd"],
       formats: ["es", "cjs"],
-      fileName: (format, entryName) => {
-        if (entryName === "index") {
-          return `index.${format}.js`;
-        } else {
-          return `components/[name]/index.${format}.js`;
-        }
-      },
+      // fileName: (format, entryName) => {
+      //   if (entryName === "index") {
+      //     return `index.${format}.js`;
+      //   } else {
+      //     return `components/[name]/index.${format}.js`;
+      //   }
+      // },
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
