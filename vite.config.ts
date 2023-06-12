@@ -6,6 +6,7 @@ import tailwindcss from "tailwindcss";
 import { defineConfig } from "vite";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import dts from "vite-plugin-dts";
+import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,6 +17,9 @@ export default defineConfig({
     }),
     chunkSplitPlugin({
       strategy: "unbundle",
+    }),
+    svgr({
+      exportAsDefault: true,
     }),
   ],
   css: {
