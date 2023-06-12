@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react-swc";
 import { resolve } from "path";
 import tailwindcss from "tailwindcss";
 import { defineConfig } from "vite";
+import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
@@ -12,6 +13,9 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
+    }),
+    chunkSplitPlugin({
+      strategy: "unbundle",
     }),
   ],
   css: {
@@ -30,7 +34,8 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "blofin-ui",
       // the proper extensions will be added
-      formats: ["es", "umd"],
+      // formats: ["es", "umd"],
+      formats: ["es"],
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
@@ -46,6 +51,9 @@ export default defineConfig({
           tailwindcss: "tailwindcss",
         },
         assetFileNames: "styles.css",
+        chunkFileNames: "chunks/[name].js",
+        manualChunks: undefined,
+        inlineDynamicImports: false,
       },
     },
   },
