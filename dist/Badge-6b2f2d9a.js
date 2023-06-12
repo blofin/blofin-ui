@@ -3022,4 +3022,4 @@ export {
   lt as c,
   Ae as j
 };
-//# sourceMappingURL=index-6b2f2d9a.js.map
+//# sourceMappingURL=Badge-6b2f2d9a.js.map

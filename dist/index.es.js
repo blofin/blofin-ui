@@ -1,5 +1,5 @@
-import { c as t, j as i, a as x } from "./index-6b2f2d9a.js";
-import { B as Y } from "./index-6b2f2d9a.js";
+import { c as t, j as i, a as x } from "./Badge-6b2f2d9a.js";
+import { B as Y } from "./Badge-6b2f2d9a.js";
 import "react";
 const v = t("text-white", {
   variants: {
