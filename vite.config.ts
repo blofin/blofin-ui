@@ -14,6 +14,9 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
+      beforeWriteFile: (filePath, content) => {
+        console.log(filePath);
+      },
     }),
     // chunkSplitPlugin({
     //   strategy: "unbundle",
@@ -43,6 +46,7 @@ export default defineConfig({
     setupFiles: ["./src/setup.ts"],
   },
   build: {
+    sourcemap: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: {
@@ -52,8 +56,14 @@ export default defineConfig({
       name: "blofin-ui",
       // the proper extensions will be added
       // formats: ["es", "umd"],
-      formats: ["es"],
-      fileName: (format) => `[name].${format}.js`,
+      formats: ["es", "cjs"],
+      fileName: (format, entryName) => {
+        if (entryName === "index") {
+          return `index.${format}.js`;
+        } else {
+          return `components/[name]/index.${format}.js`;
+        }
+      },
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

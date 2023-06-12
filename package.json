@@ -5,27 +5,29 @@
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
   "version": "0.1.86",
-  "main": "./dist/index.umd.js",
+  "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/index.umd.cjs",
+      "require": "./dist/index.cjs.js",
       "import": "./dist/index.es.js"
     },
     "./index.css": {
       "require": "./dist/index.css",
       "default": "./dist/index.css"
     },
-    "./dist/Badge": {
-      "require": "./dist/Badge.umd.cjs",
-      "import": "./dist/Badge.es.js",
-      "types": "./dist/Badge.d.ts"
+    "./Badge": {
+      "require": "./dist/components/Badge/index.cjs.js",
+      "import": "./dist/components/Badge/index.es.js",
+      "type": "./dist/components/Badge/index.d.ts"
     }
   },
   "files": [
-    "dist"
+    "dist/*",
+    "index.d.ts",
+    "Badge.d.ts"
   ],
   "license": "MIT",
   "scripts": {
