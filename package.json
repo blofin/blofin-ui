@@ -17,7 +17,9 @@
     "./index.css": {
       "require": "./dist/index.css",
       "default": "./dist/index.css"
-    }
+    },
+    "./components/*": "./dist/components/*/*.js",
+    "./package.json": "./package.json"
   },
   "files": [
     "dist"
