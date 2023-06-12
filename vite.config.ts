@@ -51,6 +51,7 @@ export default defineConfig({
       entry: {
         index: resolve(__dirname, "src/index.ts"),
         Badge: resolve(__dirname, "src/components/Badge/index.ts"),
+        Button: resolve(__dirname, "src/components/Button/index.ts"),
       },
       name: "blofin-ui",
       // the proper extensions will be added

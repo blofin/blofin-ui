@@ -29,6 +29,11 @@
       "require": "./dist/Badge.cjs.js",
       "import": "./dist/Badge.es.js",
       "type": "./dist/Badge.d.ts"
+    },
+    "./Button": {
+      "require": "./dist/Button.cjs.js",
+      "import": "./dist/Button.es.js",
+      "type": "./dist/Button.d.ts"
     }
   },
   "files": [
