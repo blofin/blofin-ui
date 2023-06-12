@@ -54,7 +54,7 @@ export default defineConfig({
           "react-dom": "ReactDOM",
           tailwindcss: "tailwindcss",
         },
-        assetFileNames: "styles.css",
+        assetFileNames: "index.css",
         chunkFileNames: "chunks/[name].js",
         manualChunks: undefined,
         inlineDynamicImports: false,
