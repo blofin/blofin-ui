@@ -1,4 +1,4 @@
-import { c as r } from "../../../vendor.js";
+import { c as r } from "../../vendor.js";
 const l = r("text-white", {
   variants: {
     theme: {

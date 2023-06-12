@@ -1,4 +1,4 @@
-import { c as e } from "../../../vendor.js";
+import { c as e } from "../../vendor.js";
 const a = (t) => e("text-black dark:text-white", {
   variants: {
     variant: {

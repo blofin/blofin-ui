@@ -1,4 +1,4 @@
-import { t, a } from "../../vendor.js";
+import { t, a } from "../vendor.js";
 function e(...r) {
   return t(a(r));
 }

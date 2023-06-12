@@ -1,4 +1,4 @@
-import { j as s } from "../../../vendor.js";
+import { j as s } from "../../vendor.js";
 import { c as f } from "../../utils/utils.js";
 import { b as h } from "./styles.js";
 const g = ({

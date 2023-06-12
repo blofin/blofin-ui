@@ -1,4 +1,4 @@
-import { c as e } from "../../../vendor.js";
+import { c as e } from "../../vendor.js";
 const n = (g) => {
   const a = {
     dark: {

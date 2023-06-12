@@ -17,6 +17,16 @@ export default defineConfig({
     }),
     chunkSplitPlugin({
       strategy: "unbundle",
+      customChunk: (args) => {
+        // files into src directory is export in single files
+        let { file, id, moduleId, root } = args;
+        if (file.startsWith("src/")) {
+          file = file.substring(4);
+          file = file.replace(/\.[^.$]+$/, "");
+          return file;
+        }
+        return null;
+      },
     }),
     svgr({
       exportAsDefault: true,
@@ -55,7 +65,7 @@ export default defineConfig({
           tailwindcss: "tailwindcss",
         },
         assetFileNames: "index.css",
-        chunkFileNames: "chunks/[name].js",
+        chunkFileNames: "[name].js",
         manualChunks: undefined,
         inlineDynamicImports: false,
       },
