@@ -3,4 +3,4 @@ import "react";
 export {
   e as Badge
 };
-//# sourceMappingURL=Badge.js.map
+//# sourceMappingURL=Badge.es.js.map

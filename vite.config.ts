@@ -56,6 +56,7 @@ export default defineConfig({
       // the proper extensions will be added
       // formats: ["es", "umd"],
       formats: ["es", "cjs"],
+      fileName: (format) => `[name].${format}.js`,
       // fileName: (format, entryName) => {
       //   if (entryName === "index") {
       //     return `index.${format}.js`;
