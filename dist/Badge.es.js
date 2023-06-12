@@ -1,8 +1,5 @@
-import { B as a } from "./components/Badge/Badge.js";
-import "./vendor.js";
+import { B as e } from "./index-6b2f2d9a.js";
 import "react";
-import "./utils/utils.js";
-import "./components/Badge/styles.js";
 export {
-  a as Badge
+  e as Badge
 };

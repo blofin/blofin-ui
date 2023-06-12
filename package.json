@@ -17,11 +17,6 @@
     "./index.css": {
       "require": "./dist/index.css",
       "default": "./dist/index.css"
-    },
-    "./Badge": {
-      "require": "./dist/Badge.umd.cjs",
-      "import": "./dist/Badge.es.js",
-      "types": "./dist/Badge.d.ts"
     }
   },
   "files": [
