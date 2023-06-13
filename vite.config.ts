@@ -25,7 +25,7 @@ function addEntryFiles() {
   // Initialize exports object
   const exports = {
     ".": "./dist/index.es.js",
-    "./index.css": "./dist/index.css",
+    "./blofin.css": "./dist/blofin.css",
     "./tailwind": "./dist/config/tailwind.js",
   };
 
