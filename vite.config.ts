@@ -26,7 +26,7 @@ function addEntryFiles() {
   const exports = {
     ".": "./dist/index.es.js",
     "./blofin.css": "./dist/blofin.css",
-    "./tailwind": "./dist/config/tailwind.js",
+    "./theme": "./dist/config/theme.js",
   };
 
   // Check each component directory for an index.ts file

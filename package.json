@@ -19,7 +19,7 @@
   "exports": {
     ".": "./dist/index.es.js",
     "./blofin.css": "./dist/blofin.css",
-    "./tailwind": "./dist/config/tailwind.js",
+    "./theme": "./dist/config/theme.js",
     "./Badge": "./dist/Badge.es.js",
     "./Button": "./dist/Button.es.js",
     "./Dialog": "./dist/Dialog.es.js",
