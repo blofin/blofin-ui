@@ -26,6 +26,7 @@ function addEntryFiles() {
   const exports = {
     ".": "./dist/index.es.js",
     "./index.css": "./dist/index.css",
+    "./tailwind": "./dist/config/tailwind.js",
   };
 
   // Check each component directory for an index.ts file

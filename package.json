@@ -18,12 +18,12 @@
   },
   "exports": {
     ".": "./dist/index.es.js",
-    "./blofin.css": "./dist/blofin.css",
+    "./index.css": "./dist/index.css",
+    "./tailwind": "./dist/config/tailwind.js",
     "./Badge": "./dist/Badge.es.js",
     "./Button": "./dist/Button.es.js",
     "./Dialog": "./dist/Dialog.es.js",
-    "./Form": "./dist/Form.es.js",
-    "./tailwind":"./dist/config/tailwind.js"
+    "./Form": "./dist/Form.es.js"
   },
   "files": [
     "dist"
