@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { BUITheme } from "../../types/component";
+import { BUITheme } from "../types/component";
 import { Badge } from "../components/Badge/Badge";
 import { BadgeColor } from "../components/Badge/styles";
 import useTheme from "../hooks/useTheme";

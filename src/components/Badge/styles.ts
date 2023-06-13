@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import { BUIComponentColor, BUITheme } from "../../../types/component";
+import { BUIComponentColor, BUITheme } from "../../types/component";
 
 export type BadgeColor = BUIComponentColor | "info" | "secondary";
 

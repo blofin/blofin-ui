@@ -1,4 +1,4 @@
-import { BUIComponentSize } from "../../../types/component";
+import { BUIComponentSize } from "../../types/component";
 
 export type ButtonVariant =
   | "primary"

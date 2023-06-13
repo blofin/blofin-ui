@@ -1,7 +1,7 @@
 import isEmpty from "lodash/isEmpty";
 import React, { FC, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { BUIComponentSize } from "../../../types/component";
+import { BUIComponentSize } from "../../types/component";
 import CloseIcon from "../../assets/icons/close.svg";
 import { Button } from "../Button/Button";
 import dialogVariants from "./styles";

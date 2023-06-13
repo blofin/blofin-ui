@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "0.1.96",
+  "version": "0.1.99",
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && cp -r types dist",
+    "build": "tsc && vite build && cp -r ./src/types dist",
     "build:css": "tailwindcss -m -i ./src/scss/base.scss -o ./dist/styles.css",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",

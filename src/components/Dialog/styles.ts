@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import { BUIComponentSize } from "../../../types/component";
+import { BUIComponentSize } from "../../types/component";
 
 const dialogVariants: (props: { size: BUIComponentSize }) => string = cva(
   "top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-[30px] absolute bg-white flex flex-col justify-between rounded-[10px]",

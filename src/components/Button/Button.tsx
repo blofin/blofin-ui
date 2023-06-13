@@ -1,5 +1,5 @@
 import React from "react";
-import { Base } from "../../../types/component";
+import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";
 import buttonVariants from "./styles";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./types";

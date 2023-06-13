@@ -1,4 +1,4 @@
-import { BUITheme } from "../../../types/component";
+import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
 import BadgeVariants, { BadgeColor } from "./styles";
 
