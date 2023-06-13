@@ -103,7 +103,7 @@ export default defineConfig({
           "react-dom": "ReactDOM",
           tailwindcss: "tailwindcss",
         },
-        assetFileNames: "index.css",
+        assetFileNames: "blofin.css",
         // chunkFileNames: "[name].js",
         // manualChunks: undefined,
         // inlineDynamicImports: false,
