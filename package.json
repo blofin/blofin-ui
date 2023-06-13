@@ -30,7 +30,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && cp -r types dist",
     "build:css": "tailwindcss -m -i ./src/scss/base.scss -o ./dist/styles.css",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
