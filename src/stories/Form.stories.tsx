@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import Form from "../components/Form";
+import { Form } from "../components/Form";
 import { FormInstance } from "../components/Form/interface";
 import Input from "../components/Input/Input";
 

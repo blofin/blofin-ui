@@ -18,25 +18,11 @@
     }
   },
   "exports": {
-    ".": {
-      "require": "./dist/index.cjs.js",
-      "import": "./dist/index.es.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./index.css": {
-      "require": "./dist/index.css",
-      "default": "./dist/index.css"
-    },
-    "./Badge": {
-      "require": "./dist/Badge.cjs.js",
-      "import": "./dist/Badge.es.js",
-      "types": "./dist/Badge.d.ts"
-    },
-    "./Button": {
-      "require": "./dist/Button.cjs.js",
-      "import": "./dist/Button.es.js",
-      "types": "./dist/Button.d.ts"
-    }
+    ".": "./dist/index.es.js",
+    "./index.css": "./dist/index.css",
+    "./Badge": "./dist/Badge.es.js",
+    "./Button": "./dist/Button.es.js",
+    "./Dialog": "./dist/Dialog.es.js"
   },
   "files": [
     "dist"

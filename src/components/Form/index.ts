@@ -1,5 +1,5 @@
-import Form from './Form';
-import { Item } from './FormItem';
+import Form from "./Form";
+import { Item } from "./FormItem";
 
 type RefForm = typeof Form;
 
@@ -11,4 +11,4 @@ const FormComp: FormComponent = Form as FormComponent;
 
 FormComp.Item = Item;
 
-export default FormComp;
+export { FormComp as Form };
