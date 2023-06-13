@@ -39,7 +39,8 @@
     "build-storybook": "storybook build",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "chromatic": "npx chromatic --project-token=chpt_d1d6e61f4152403"
   },
   "dependencies": {
     "class-variance-authority": "^0.6.0",
@@ -68,6 +69,7 @@
     "@vitejs/plugin-react-swc": "^3.0.0",
     "@vitest/ui": "^0.32.0",
     "autoprefixer": "^10.4.14",
+    "chromatic": "^6.19.2",
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
@@ -85,5 +87,11 @@
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-svgr": "^3.2.0",
     "vitest": "^0.32.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/blofinex/blofin-ui/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "homepage": "https://github.com/blofinex/blofin-ui#readme",
+  "_id": "blofin-ui@0.1.95"
 }

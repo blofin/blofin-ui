@@ -48,10 +48,18 @@ export const Primary: Story = {
 };
 
 export const Secondary: Story = {
-  name: "Color",
+  name: "Secondary",
   args: {
     ...Primary.args,
     color: "secondary",
+  },
+};
+
+export const Success: Story = {
+  name: "Success",
+  args: {
+    ...Primary.args,
+    color: "success",
   },
 };
 
