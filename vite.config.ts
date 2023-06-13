@@ -2,7 +2,7 @@
 
 import react from "@vitejs/plugin-react-swc";
 import fs from "fs";
-import path, { resolve } from "path";
+import path from "path";
 import tailwindcss from "tailwindcss";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
@@ -22,6 +22,12 @@ function addEntryFiles() {
     index: path.resolve(__dirname, "src/index.ts"),
   };
 
+  // Initialize exports object
+  const exports = {
+    ".": "./dist/index.es.js",
+    "./index.css": "./dist/index.css",
+  };
+
   // Check each component directory for an index.ts file
   for (const componentDir of componentDirs) {
     const indexPath = path.join(componentsDir, componentDir, "index.ts");
@@ -30,8 +36,15 @@ function addEntryFiles() {
         __dirname,
         `src/components/${componentDir}/index.ts`
       );
+      exports[`./${componentDir}`] = `./dist/${componentDir}.es.js`;
     }
   }
+
+  // Update package.json with new exports field
+  const packageJsonPath = path.join(__dirname, "package.json");
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
+  packageJson.exports = exports;
+  fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
   return entry;
 }
