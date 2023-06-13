@@ -22,7 +22,8 @@
     "./index.css": "./dist/index.css",
     "./Badge": "./dist/Badge.es.js",
     "./Button": "./dist/Button.es.js",
-    "./Dialog": "./dist/Dialog.es.js"
+    "./Dialog": "./dist/Dialog.es.js",
+    "./Form": "./dist/Form.es.js"
   },
   "files": [
     "dist"
