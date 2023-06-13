@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "0.1.99",
+  "version": "0.2.2",
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -18,11 +18,12 @@
   },
   "exports": {
     ".": "./dist/index.es.js",
-    "./index.css": "./dist/index.css",
+    "./blofin.css": "./dist/blofin.css",
     "./Badge": "./dist/Badge.es.js",
     "./Button": "./dist/Button.es.js",
     "./Dialog": "./dist/Dialog.es.js",
-    "./Form": "./dist/Form.es.js"
+    "./Form": "./dist/Form.es.js",
+    "./tailwind":"./dist/config/tailwind.js"
   },
   "files": [
     "dist"
@@ -30,7 +31,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && cp -r ./src/types dist",
+    "build": "tsc && vite build && cp -r ./src/types dist && cp -r ./src/config dist",
     "build:css": "tailwindcss -m -i ./src/scss/base.scss -o ./dist/styles.css",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
