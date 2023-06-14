@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useEffect, useState } from "react";
 import { Slider } from "../components/Slider/Slider";
+import { Typography } from "../components/Typography/Typography";
 import useTheme from "../hooks/useTheme";
 
 const meta: Meta<typeof Slider> = {
@@ -23,10 +25,18 @@ type Story = StoryObj<typeof Slider>;
 export const Primary: Story = {
   render: () => {
     const mode = useTheme();
+    const [value, setValue] = useState<number>(0);
+
+    useEffect(() => {
+      console.log("parent value", value);
+    }, [value]);
 
     return (
       <div className="py-10">
-        <Slider theme={mode} />
+        <Typography variant="body1" className="mb-4">
+          Value: {value}
+        </Typography>
+        <Slider value={value} onSliderChange={setValue} theme={mode} />
       </div>
     );
   }
@@ -35,11 +45,17 @@ export const Primary: Story = {
 export const OuterWidth: Story = {
   render: () => {
     const mode = useTheme();
+    const [value, setValue] = useState<number>(0);
 
     return (
-      <div className="mx-auto flex w-96 items-center justify-center py-10">
-        <Slider theme={mode} />
-      </div>
+      <>
+        <Typography variant="body1" className="mb-4">
+          Value: {value}
+        </Typography>
+        <div className="mx-auto flex w-96 items-center justify-center py-10">
+          <Slider value={value} onSliderChange={setValue} theme={mode} />
+        </div>
+      </>
     );
   }
 };

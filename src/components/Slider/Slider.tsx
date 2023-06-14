@@ -6,14 +6,30 @@ import { SliderMarkVariants } from "./styles";
 
 export interface SliderProps {
   /**
+   * Value of the slider
+   * @default 0
+   */
+  value: number;
+  /**
+   *
+   * @param value number
+   * @returns void
+   */
+  onSliderChange: (value: number) => void;
+  /**
    * BUI theme
    */
   theme?: BUITheme;
 }
 
-export const Slider = ({ theme = "light" }: SliderProps) => {
+export const Slider = ({ value, onSliderChange, theme = "light" }: SliderProps) => {
   const railRef = useRef<HTMLDivElement>(null);
-  const [thumbLocation, setThumbLocation] = useState<number>(0);
+  const [thumbLocation, setThumbLocation] = useState<number>(value);
+
+  const handleSliderChange = (newValue: number) => {
+    setThumbLocation(newValue);
+    onSliderChange(newValue);
+  };
 
   const handleDrag = (e: MouseEvent) => {
     e.stopPropagation();
@@ -23,11 +39,11 @@ export const Slider = ({ theme = "light" }: SliderProps) => {
       right: 0
     };
     if (e.clientX >= min && e.clientX <= max) {
-      setThumbLocation(Math.ceil(((e.clientX - min) / (max - min)) * 100));
+      handleSliderChange(Math.ceil(((e.clientX - min) / (max - min)) * 100));
     } else if (e.clientX < min && e.clientX > 0) {
-      setThumbLocation(0);
+      handleSliderChange(0);
     } else if (e.clientX > max) {
-      setThumbLocation(100);
+      handleSliderChange(100);
     }
   };
 
@@ -61,7 +77,7 @@ export const Slider = ({ theme = "light" }: SliderProps) => {
   );
 
   const handleMarkClick = (percentage: number) => {
-    setThumbLocation(percentage);
+    handleSliderChange(percentage);
   };
 
   return (

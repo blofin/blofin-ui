@@ -14,7 +14,7 @@ const TYPEOGRAPHY_TAGS = {
   body1: "p",
   body2: "p",
   body3: "p",
-  body4: "p",
+  body4: "p"
 };
 
 export interface TypographyProps {
@@ -34,7 +34,7 @@ export interface TypographyProps {
     | "body2"
     | "body3"
     | "body4";
-  weight: "regular" | "medium" | "bold";
+  weight?: "regular" | "medium" | "bold";
   className?: string;
   children?: React.ReactNode;
 }
@@ -54,8 +54,7 @@ export const Typography = ({
   return (
     <TypographyTag
       className={`${cn(TypographyVariants({ variant, weight }))} ${className}`}
-      {...props}
-    >
+      {...props}>
       {children}
     </TypographyTag>
   );
