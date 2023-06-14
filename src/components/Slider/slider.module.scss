@@ -29,9 +29,9 @@
       .mark {
         @apply w-2;
         @apply h-2;
-        @apply bg-light-primary;
         @apply rounded-full;
         @apply border border-gray-300;
+        @apply cursor-pointer;
         .mark-label {
           @apply absolute;
           @apply text-xs;

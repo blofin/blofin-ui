@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Slider } from "../components/Slider/Slider";
+import useTheme from "../hooks/useTheme";
 
 const meta: Meta<typeof Slider> = {
   /* 👇 The title prop is optional.
@@ -7,7 +8,7 @@ const meta: Meta<typeof Slider> = {
    * to learn how to generate automatic titles
    */
   title: "Components/Slider",
-  component: Slider,
+  component: Slider
 };
 
 export default meta;
@@ -20,9 +21,25 @@ type Story = StoryObj<typeof Slider>;
  * to learn how to use render functions.
  */
 export const Primary: Story = {
-  render: () => (
-    <div className="py-10">
-      <Slider />
-    </div>
-  ),
+  render: () => {
+    const mode = useTheme();
+
+    return (
+      <div className="py-10">
+        <Slider theme={mode} />
+      </div>
+    );
+  }
+};
+
+export const OuterWidth: Story = {
+  render: () => {
+    const mode = useTheme();
+
+    return (
+      <div className="mx-auto flex w-96 items-center justify-center py-10">
+        <Slider theme={mode} />
+      </div>
+    );
+  }
 };

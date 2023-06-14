@@ -1,8 +1,8 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
 import styles from "./slider.module.scss";
-import { SliderVariants } from "./styles";
+import { SliderMarkVariants } from "./styles";
 
 export interface SliderProps {
   /**
@@ -15,7 +15,7 @@ export const Slider = ({ theme = "light" }: SliderProps) => {
   const railRef = useRef<HTMLDivElement>(null);
   const [thumbLocation, setThumbLocation] = useState<number>(0);
 
-  const handleDrag = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleDrag = (e: MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
     const { left: min, right: max } = railRef.current?.getBoundingClientRect() || {
@@ -23,26 +23,70 @@ export const Slider = ({ theme = "light" }: SliderProps) => {
       right: 0
     };
     if (e.clientX >= min && e.clientX <= max) {
-      setThumbLocation(((e.clientX - min) / (max - min)) * 100);
+      setThumbLocation(Math.ceil(((e.clientX - min) / (max - min)) * 100));
     } else if (e.clientX < min && e.clientX > 0) {
       setThumbLocation(0);
     } else if (e.clientX > max) {
       setThumbLocation(100);
     }
   };
+
+  const mouseDown = useRef<boolean>(false);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    mouseDown.current = true;
+
+    document.addEventListener(
+      "mouseup",
+      () => {
+        mouseDown.current = false;
+        document.removeEventListener("mousemove", handleMouseMove);
+      },
+      { once: true }
+    );
+
+    document.addEventListener("mousemove", handleMouseMove);
+  };
+
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (mouseDown.current) {
+        handleDrag(e);
+      }
+    },
+    [mouseDown.current]
+  );
+
+  const handleMarkClick = (percentage: number) => {
+    setThumbLocation(percentage);
+  };
+
   return (
     <div className={styles["slider-container"]}>
       <div className={styles["slider-content"]}>
         <div ref={railRef} className={styles["rail"]}></div>
         <div className={styles["track"]}></div>
         <div className={styles["mark-container"]}>
-          <div className={styles["mark"]}>
+          <div
+            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme }))}`}
+            onClick={() => handleMarkClick(0)}>
             <span className={styles["mark-label"]}>0</span>
           </div>
-          <div className={styles["mark"]}></div>
-          <div className={styles["mark"]}></div>
-          <div className={styles["mark"]}></div>
-          <div className={styles["mark"]}>
+          <div
+            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme }))}`}
+            onClick={() => handleMarkClick(25)}></div>
+          <div
+            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme }))}`}
+            onClick={() => handleMarkClick(50)}></div>
+          <div
+            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme }))}`}
+            onClick={() => handleMarkClick(75)}></div>
+          <div
+            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme }))}`}
+            onClick={() => handleMarkClick(100)}>
             <span className={styles["mark-label"]}>100%</span>
           </div>
         </div>
@@ -51,8 +95,7 @@ export const Slider = ({ theme = "light" }: SliderProps) => {
           style={{
             left: `${thumbLocation}%`
           }}
-          draggable
-          onDrag={handleDrag}></div>
+          onMouseDown={handleMouseDown}></div>
       </div>
     </div>
   );
