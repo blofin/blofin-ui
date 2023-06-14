@@ -25,7 +25,7 @@ type Story = StoryObj<typeof Slider>;
 export const Primary: Story = {
   render: () => {
     const mode = useTheme();
-    const [value, setValue] = useState<number>(0);
+    const [value, setValue] = useState<number>(25);
 
     useEffect(() => {
       console.log("parent value", value);
@@ -45,7 +45,7 @@ export const Primary: Story = {
 export const OuterWidth: Story = {
   render: () => {
     const mode = useTheme();
-    const [value, setValue] = useState<number>(0);
+    const [value, setValue] = useState<number>(25);
 
     return (
       <>
