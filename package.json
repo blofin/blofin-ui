@@ -42,7 +42,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "chromatic": "npx chromatic --project-token=chpt_d1d6e61f4152403"
+    "chromatic": "npx chromatic --project-token=chpt_d1d6e61f4152403 --auto-accept-changes"
   },
   "dependencies": {
     "class-variance-authority": "^0.6.0",
