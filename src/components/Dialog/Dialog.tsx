@@ -28,7 +28,7 @@ export const Dialog: FC<DialogProps> = (props) => {
     footer,
     cancel,
     confirm,
-    open,
+    open
   } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -51,21 +51,17 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   return isOpen
     ? ReactDOM.createPortal(
-        <div className="fixed top-0 left-0 right-0 bottom-0 z-[9999] bg-black/[.6]">
+        <div className="fixed bottom-0 left-0 right-0 top-0 z-[9999] bg-black/[.6]">
           <div className={dialogVariants({ size })}>
             <CloseIcon
-              className="w-[24px] h-[24px] absolute right-[20px] cursor-pointer"
+              className="absolute right-[20px] h-[24px] w-[24px] cursor-pointer"
               onClick={handleCancel}
             />
             <div>
-              {!isEmpty(title) ? (
-                <div className="mb-[40px]">{title}</div>
-              ) : (
-                <div>{title}</div>
-              )}
+              {!isEmpty(title) ? <div className="mb-[40px]">{title}</div> : <div>{title}</div>}
               <div>{content}</div>
             </div>
-            {footer ? (
+            {footer !== null && footer ? (
               <>{footer}</>
             ) : (
               <div className="flex justify-end">
@@ -74,14 +70,12 @@ export const Dialog: FC<DialogProps> = (props) => {
                   size="medium"
                   variant="ghost"
                   label={cancelText}
-                  onClick={handleCancel}
-                ></Button>
+                  onClick={handleCancel}></Button>
                 <Button
                   size="medium"
                   variant="primary"
                   label={confirmText}
-                  onClick={handleConfirm}
-                ></Button>
+                  onClick={handleConfirm}></Button>
               </div>
             )}
           </div>
