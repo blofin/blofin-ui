@@ -20,5 +20,9 @@ type Story = StoryObj<typeof Slider>;
  * to learn how to use render functions.
  */
 export const Primary: Story = {
-  render: () => <Slider />,
+  render: () => (
+    <div className="py-10">
+      <Slider />
+    </div>
+  ),
 };
