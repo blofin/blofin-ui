@@ -56,6 +56,7 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
+      skipDiagnostics:true
       // beforeWriteFile: (filePath, content) => {
       //   console.log(filePath);
       // },
