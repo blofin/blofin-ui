@@ -108,9 +108,9 @@ module.exports = {
           20: "rgba(235, 236, 245, 0.2)"
         },
         fill: {
-          primary: "#2F3033",
-          secondary: "#606166",
-          tertiary: "#939499"
+          primary: "#000000",
+          secondary: "#232429",
+          tertiary: "#46484D"
         },
         line: {
           primary: "#2F3033",
@@ -125,9 +125,9 @@ module.exports = {
           green: "#63DBB7",
           red: "#FF8A98",
           fill: {
-            primary: "#47484D",
-            secondary: "#787980",
-            tertiary: "#ACADB3"
+            primary: "#111214",
+            secondary: "#34363D",
+            tertiary: "#5C5F66"
           }
         },
         disabled: {
