@@ -1,0 +1,54 @@
+.slider-container {
+  @apply flex w-full;
+  .slider-content {
+    @apply relative w-full;
+    .rail {
+      @apply absolute;
+      @apply w-full;
+      @apply h-1;
+      @apply bg-gray-300;
+      @apply rounded-full;
+      @apply top-1/2;
+      @apply transform -translate-y-1/2;
+    }
+    .track {
+      @apply absolute;
+      @apply h-1;
+      @apply bg-blue-500;
+      @apply rounded-full;
+      @apply top-1/2;
+      @apply transform -translate-y-1/2;
+    }
+    .mark-container {
+      @apply absolute;
+      @apply flex;
+      @apply justify-between;
+      @apply w-full;
+      @apply top-1/2;
+      @apply transform -translate-y-1/2;
+      .mark {
+        @apply w-1;
+        @apply h-1;
+        @apply bg-gray-300;
+        @apply rounded-full;
+        .mark-label {
+          @apply absolute;
+          @apply text-xs;
+          @apply text-gray-500;
+          @apply top-1/2;
+          @apply transform -translate-x-1/2;
+        }
+      }
+    }
+    .thumb {
+      @apply absolute;
+      @apply w-4;
+      @apply h-4;
+      @apply bg-blue-500;
+      @apply rounded-full;
+      @apply top-1/2;
+      @apply transform -translate-y-1/2;
+      @apply cursor-pointer;
+    }
+  }
+}
