@@ -1,0 +1,64 @@
+.slider-container {
+  @apply flex w-full;
+  .slider-content {
+    @apply relative w-full;
+    .rail {
+      @apply absolute;
+      @apply w-full;
+      @apply h-1;
+      @apply bg-gray-300;
+      @apply rounded-full;
+      @apply top-1/2;
+      @apply -translate-y-1/2 transform;
+    }
+    .track {
+      @apply absolute;
+      @apply h-1;
+      @apply bg-blue-500;
+      @apply rounded-full;
+      @apply top-1/2;
+      @apply -translate-y-1/2 transform;
+    }
+    .mark-container {
+      @apply absolute;
+      @apply flex;
+      @apply justify-between;
+      @apply w-full;
+      @apply top-1/2;
+      @apply -translate-y-1/2 transform;
+      .mark {
+        @apply w-2;
+        @apply h-2;
+        @apply bg-light-primary;
+        @apply rounded-full;
+        @apply border border-gray-300;
+        .mark-label {
+          @apply absolute;
+          @apply text-xs;
+          @apply text-gray-500;
+          @apply top-3;
+        }
+      }
+      .mark:first-of-type {
+        .mark-label {
+          @apply left-0;
+        }
+      }
+      .mark:last-of-type {
+        .mark-label {
+          @apply right-0;
+        }
+      }
+    }
+    .thumb {
+      @apply absolute;
+      @apply w-4;
+      @apply h-4;
+      @apply bg-blue-500;
+      @apply rounded-full;
+      @apply top-1/2;
+      @apply -translate-y-1/2 translate-x-10 transform;
+      @apply cursor-pointer;
+    }
+  }
+}

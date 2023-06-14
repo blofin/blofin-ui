@@ -1,0 +1,11 @@
+.popover-container {
+  @apply relative max-w-fit;
+  .popover {
+    @apply hidden absolute top-6 left-0 z-10 shadow;
+  }
+  &:hover {
+    .popover {
+      @apply flex;
+    }
+  }
+}

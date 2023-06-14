@@ -1,5 +1,5 @@
 import React from "react";
-import "./popover.scss";
+import styles from "./popover.module.scss";
 
 export interface PopoverProps {
   /**
@@ -14,11 +14,9 @@ export interface PopoverProps {
 
 export const Popover = ({ label, content }: PopoverProps) => {
   return (
-    <div className="popover-container relative max-w-fit">
+    <div className={styles["popover-container"]}>
       <label>{label}</label>
-      <div className="popover hidden absolute top-6 left-0 z-10 shadow">
-        {content}
-      </div>
+      <div className={styles["popover"]}>{content}</div>
     </div>
   );
 };
