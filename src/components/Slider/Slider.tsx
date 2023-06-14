@@ -20,6 +20,9 @@ export const Slider = ({ theme = "light" }: SliderProps) => {
           <div className={styles["mark"]}>
             <span className={styles["mark-label"]}>0</span>
           </div>
+          <div className={styles["mark"]}></div>
+          <div className={styles["mark"]}></div>
+          <div className={styles["mark"]}></div>
           <div className={styles["mark"]}>
             <span className={styles["mark-label"]}>100%</span>
           </div>
