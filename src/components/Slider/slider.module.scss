@@ -36,7 +36,7 @@
           @apply text-xs;
           @apply text-gray-500;
           @apply top-1/2;
-          @apply transform -translate-x-1/2;
+          @apply transform -translate-x-1/2 translate-y-1/2;
         }
       }
     }
@@ -47,7 +47,7 @@
       @apply bg-blue-500;
       @apply rounded-full;
       @apply top-1/2;
-      @apply transform -translate-y-1/2;
+      @apply transform -translate-y-1/2 translate-x-10;
       @apply cursor-pointer;
     }
   }
