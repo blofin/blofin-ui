@@ -1,10 +1,10 @@
 import isEmpty from "lodash/isEmpty";
 import React, { FC, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { BUIComponentSize } from "../../types/component";
+import { BUIComponentSize, BUITheme } from "../../types/component";
 import CloseIcon from "../../assets/icons/close.svg";
 import { Button } from "../Button/Button";
-import dialogVariants from "./styles";
+import { dialogVariants, textStyles } from "./styles";
 
 interface DialogProps {
   title: string | React.ReactNode;
@@ -16,6 +16,7 @@ interface DialogProps {
   cancel?: () => void;
   confirm?: () => void;
   open: boolean;
+  theme?: BUITheme;
 }
 
 export const Dialog: FC<DialogProps> = (props) => {
@@ -28,6 +29,7 @@ export const Dialog: FC<DialogProps> = (props) => {
     footer,
     cancel,
     confirm,
+    theme = "light",
     open
   } = props;
 
@@ -49,17 +51,27 @@ export const Dialog: FC<DialogProps> = (props) => {
     setIsOpen(open);
   }, [open]);
 
+  console.log(theme);
+
   return isOpen
     ? ReactDOM.createPortal(
         <div className="fixed bottom-0 left-0 right-0 top-0 z-[9999] bg-black/[.6]">
-          <div className={dialogVariants({ size })}>
+          <div className={dialogVariants({ size, theme })}>
             <CloseIcon
-              className="absolute right-[20px] h-[24px] w-[24px] cursor-pointer"
+              className={`absolute right-[20px] h-[24px] w-[24px] cursor-pointer ${textStyles({ theme })}`}
               onClick={handleCancel}
             />
-            <div>
-              {!isEmpty(title) ? <div className="mb-[40px]">{title}</div> : <div>{title}</div>}
-              <div>{content}</div>
+            <div className={textStyles({ theme })}>
+              {!isEmpty(title) ? (
+                <div className="mb-[23px] text-[18px] font-medium leading-[26px] tracking-[-0.2px]">
+                  {title}
+                </div>
+              ) : (
+                <div>{title}</div>
+              )}
+              <div className="mb-[48px] text-[14px] font-normal leading-[20px] tracking-[-0.2px]">
+                {content}
+              </div>
             </div>
             {footer !== null && (
               <>
@@ -68,16 +80,18 @@ export const Dialog: FC<DialogProps> = (props) => {
                 ) : (
                   <div className="flex justify-end">
                     <Button
-                      className="mr-[20px]"
-                      size="medium"
-                      variant="ghost"
-                      label={cancelText}
-                      onClick={handleCancel}></Button>
-                    <Button
-                      size="medium"
+                      size="small"
                       variant="primary"
                       label={confirmText}
+                      theme={theme}
                       onClick={handleConfirm}></Button>
+                    <Button
+                      className="ml-[16px]"
+                      size="small"
+                      variant="ghost"
+                      label={cancelText}
+                      theme={theme}
+                      onClick={handleCancel}></Button>
                   </div>
                 )}
               </>

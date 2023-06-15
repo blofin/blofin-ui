@@ -38,9 +38,10 @@ export const Primary: Story = {
           content="Dialog Content"
           cancelText="Cancel"
           confirmText="Confirm"
-          size="large"
+          size="small"
           cancel={cancel}
           confirm={confirm}
+          theme='dark'
         />
       </>
     );
