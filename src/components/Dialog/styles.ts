@@ -5,9 +5,9 @@ export const dialogVariants = cva(
   {
     variants: {
       size: {
-        large: `min-h-[234px] w-[800px]`,
-        medium: `min-h-[226px] w-[600px]`,
-        small: `min-h-[210px] w-[520px]`
+        large: `max-[600px]:w-[80%] min-[600px]:min-h-[234px] min-[600px]:w-[800px]`,
+        medium: `max-[600px]:w-[80%] min-[600px]:min-h-[226px] min-[600px]:w-[600px]`,
+        small: `max-[600px]:w-[80%] min-[600px]:min-h-[210px] min-[600px]:w-[520px]`
       },
       theme: {
         dark: "bg-dark-background",
@@ -17,11 +17,11 @@ export const dialogVariants = cva(
   }
 );
 
-export const textStyles=cva('',{
+export const textStyles = cva("", {
   variants: {
     theme: {
       dark: "text-dark-label",
       light: "text-light-label"
     }
   }
-})
+});
