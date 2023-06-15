@@ -1,4 +1,18 @@
 module.exports = {
+  fontSize: {
+    "9xl": "72px",
+    "8xl": "64px",
+    "7xl": "48px",
+    "6xl": "36px",
+    "5xl": "32px",
+    "4xl": "24px",
+    "3xl": "22px",
+    "2xl": "20px",
+    xl: "18px",
+    lg: "16px",
+    md: "14px",
+    sm: "12px"
+  },
   extend: {
     display: ["group-hover"],
     boxShadow: {
