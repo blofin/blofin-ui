@@ -5,7 +5,7 @@ export interface PopoverProps {
   /**
    * Popover label
    */
-  label: string;
+  label: string | React.ReactNode;
   /**
    * Popover content
    */
