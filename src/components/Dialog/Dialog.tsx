@@ -61,22 +61,26 @@ export const Dialog: FC<DialogProps> = (props) => {
               {!isEmpty(title) ? <div className="mb-[40px]">{title}</div> : <div>{title}</div>}
               <div>{content}</div>
             </div>
-            {footer !== null && footer ? (
-              <>{footer}</>
-            ) : (
-              <div className="flex justify-end">
-                <Button
-                  className="mr-[20px]"
-                  size="medium"
-                  variant="ghost"
-                  label={cancelText}
-                  onClick={handleCancel}></Button>
-                <Button
-                  size="medium"
-                  variant="primary"
-                  label={confirmText}
-                  onClick={handleConfirm}></Button>
-              </div>
+            {footer !== null && (
+              <>
+                {footer ? (
+                  <>{footer}</>
+                ) : (
+                  <div className="flex justify-end">
+                    <Button
+                      className="mr-[20px]"
+                      size="medium"
+                      variant="ghost"
+                      label={cancelText}
+                      onClick={handleCancel}></Button>
+                    <Button
+                      size="medium"
+                      variant="primary"
+                      label={confirmText}
+                      onClick={handleConfirm}></Button>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>,
