@@ -11,7 +11,8 @@ module.exports = {
     xl: "18px",
     lg: "16px",
     md: "14px",
-    sm: "12px"
+    sm: "12px",
+    xs: "10px"
   },
   extend: {
     display: ["group-hover"],
