@@ -1,0 +1,18 @@
+.toast-enter {
+  opacity: 1;
+  margin-top: -10px;
+}
+.toast-enter-active {
+  transition: all 0.3s linear;
+  opacity: 1;
+  margin-top: 0;
+}
+.toast-exit {
+  opacity: 1;
+  margin-top: 0;
+}
+.toast-exit-active {
+  transition: all 0.3s cubic-bezier(.05,.03,.99,.28);
+  opacity: 0;
+  margin-top: -10px;
+}

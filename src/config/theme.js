@@ -19,7 +19,8 @@ module.exports = {
     display: ["group-hover"],
     boxShadow: {
       card: "0px 0px 24px rgba(240, 242, 250, 0.6)",
-      table: "inset 6px 0 8px -3px rgb(0 0 0 / 5%)"
+      table: "inset 6px 0 8px -3px rgb(0 0 0 / 5%)",
+      toast: "0px 2px 16px rgba(0, 0, 0, 0.06)"
     },
     colors: {
       light: {
@@ -31,9 +32,18 @@ module.exports = {
           10: "rgba(47, 84, 235, 0.1)"
         },
         secondary: "#FF6600",
-        success: "#0FCC71",
-        warning: "#F5CD12",
-        danger: "#D62035",
+        success: {
+          DEFAULT: "#0FCC71",
+          14: "rgba(15, 204, 113, 0.14)"
+        },
+        warning: {
+          DEFAULT: "#F5CD12",
+          14: "rgba(245, 205, 18, 0.14)"
+        },
+        danger: {
+          DEFAULT: "#D62035",
+          14: "rgba(214, 32, 53, 0.14)"
+        },
         green: {
           DEFAULT: "#08C787",
           alpha: "rgba(8, 199, 135, 0.12)"
@@ -102,7 +112,8 @@ module.exports = {
           60: "rgba(92, 124, 255, 0.6)",
           40: "rgba(92, 124, 255, 0.4)",
           14: "rgba(92, 124, 255, 0.16)",
-          10: "rgba(92, 124, 255, 0.1)"
+          10: "rgba(92, 124, 255, 0.1)",
+          4: "rgba(92, 124, 255, 0.04)"
         },
         secondary: "#FF7D20",
         success: "#0FCC71",

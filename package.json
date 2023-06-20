@@ -47,6 +47,7 @@
   "dependencies": {
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
+    "react-transition-group": "^4.4.5",
     "tailwind-merge": "^1.13.1"
   },
   "peerDependencies": {
@@ -66,6 +67,7 @@
     "@storybook/theming": "^7.0.20",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "@types/react-transition-group": "^4.4.6",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "@vitejs/plugin-react-swc": "^3.0.0",
