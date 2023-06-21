@@ -1,14 +1,8 @@
-import { BUITheme } from "../../types/component";
+import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
 import { DividerVariants } from "./styles";
 
-export interface DividerProps {
-  /**
-   * BUI theme
-   */
-  theme?: BUITheme;
-}
-
-export const Divider = ({ theme = "light" }: DividerProps) => {
+export const Divider = () => {
+  const { theme } = useTheme();
   return <hr className={`${cn(DividerVariants({ theme }))}`} />;
 };

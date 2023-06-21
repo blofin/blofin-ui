@@ -1,8 +1,6 @@
 import { Meta } from "@storybook/react";
-import { Toast, useToast } from "../components/Toast/Toast";
-import useTheme from "../hooks/useTheme";
 import { Button } from "../components/Button";
-import { ThemeProvider } from "../provider/ThemeProvider";
+import { Toast, useToast } from "../components/Toast/Toast";
 
 const meta: Meta<typeof Toast> = {
   title: "Components/Toast",
@@ -13,8 +11,6 @@ export default meta;
 
 export const Primary = {
   render: () => {
-    const mode = useTheme();
-
     const { methods, context } = useToast();
 
     const info = () => {
@@ -32,15 +28,13 @@ export const Primary = {
     };
 
     return (
-      <ThemeProvider value={{theme:mode}}>
-        <div style={{ display: "flex", gap: "10px" }}>
-          {context}
-          <Button label="Info" size="medium" onClick={info} />
-          <Button label="Warning" size="medium" onClick={warning} />
-          <Button label="Success" size="medium" onClick={success} />
-          <Button label="Danger" size="medium" onClick={danger} />
-        </div>
-      </ThemeProvider>
+      <div style={{ display: "flex", gap: "10px" }}>
+        {context}
+        <Button label="Info" size="medium" onClick={info} />
+        <Button label="Warning" size="medium" onClick={warning} />
+        <Button label="Success" size="medium" onClick={success} />
+        <Button label="Danger" size="medium" onClick={danger} />
+      </div>
     );
   }
 };

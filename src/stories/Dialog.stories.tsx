@@ -2,12 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { Button } from "../components/Button/Button";
 import { Dialog } from "../components/Dialog/Dialog";
-import { ThemeProvider } from "../provider/ThemeProvider";
-import useTheme from "../hooks/useTheme";
+import useTheme from "../hooks/useMode";
 
 const meta: Meta<typeof Dialog> = {
   title: "Components/Dialog",
-  component: Dialog,
+  component: Dialog
 };
 
 export default meta;
@@ -29,12 +28,8 @@ export const Primary: Story = {
     };
 
     return (
-      <ThemeProvider value={{theme:mode}}>
-        <Button
-          size="medium"
-          label="Open Dialog"
-          onClick={() => setOpen(true)}
-        ></Button>
+      <>
+        <Button size="medium" label="Open Dialog" onClick={() => setOpen(true)}></Button>
         <Dialog
           open={open}
           title="Dialog Title"
@@ -45,7 +40,7 @@ export const Primary: Story = {
           cancel={cancel}
           confirm={confirm}
         />
-      </ThemeProvider>
+      </>
     );
-  },
+  }
 };

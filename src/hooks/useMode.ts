@@ -1,9 +1,9 @@
 import { useDarkMode } from "storybook-dark-mode";
 
-const useTheme = () => {
+const useMode = () => {
   const mode = useDarkMode() ? "dark" : "light";
 
   return mode;
 };
 
-export default useTheme;
+export default useMode;

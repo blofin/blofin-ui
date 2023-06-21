@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useEffect, useState } from "react";
 import { Slider } from "../components/Slider/Slider";
 import { Typography } from "../components/Typography/Typography";
-import useTheme from "../hooks/useTheme";
+import useTheme from "../hooks/useMode";
 
 const meta: Meta<typeof Slider> = {
   /* 👇 The title prop is optional.
