@@ -13,6 +13,8 @@ export default meta;
 
 export const Primary = {
   render: () => {
+    const mode = useTheme();
+
     const { methods, context } = useToast();
 
     const info = () => {
@@ -30,7 +32,7 @@ export const Primary = {
     };
 
     return (
-      <ThemeProvider value={{theme:"dark"}}>
+      <ThemeProvider value={{theme:mode}}>
         <div style={{ display: "flex", gap: "10px" }}>
           {context}
           <Button label="Info" size="medium" onClick={info} />

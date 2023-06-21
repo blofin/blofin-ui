@@ -5,6 +5,7 @@ import { BUIComponentSize, BUITheme } from "../../types/component";
 import CloseIcon from "../../assets/icons/close.svg";
 import { Button } from "../Button/Button";
 import { dialogVariants, textStyles } from "./styles";
+import useTheme from "../../provider/useTheme";
 
 interface DialogProps {
   title: string | React.ReactNode;
@@ -29,9 +30,9 @@ export const Dialog: FC<DialogProps> = (props) => {
     footer,
     cancel,
     confirm,
-    theme = "light",
     open
   } = props;
+  const { theme } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
 

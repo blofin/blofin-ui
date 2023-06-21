@@ -3,6 +3,7 @@ import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";
 import buttonVariants from "./styles";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./types";
+import useTheme from "../../provider/useTheme";
 
 export interface ButtonProps extends Base {
   /**
@@ -41,7 +42,6 @@ export const Button = ({
   size = "large",
   disabled = false,
   variant = "primary",
-  theme = "light",
   label,
   startIcon,
   endIcon,
@@ -56,6 +56,8 @@ export const Button = ({
       onClick();
     }
   };
+
+  const { theme } = useTheme();
 
   return (
     <button
