@@ -1,13 +1,14 @@
+import { ThemeProvider } from "@storybook/theming";
 import { Badge } from "./components/Badge/Badge";
 import { Button } from "./components/Button/Button";
 import { Dialog } from "./components/Dialog/Dialog";
 import { Popover } from "./components/Popover/Popover";
 import { Typography } from "./components/Typography/Typography";
-import { BUITheme, BUIComponentSize, BUIComponentColor } from "./types/component";
-import { ThemeProvider } from "@storybook/theming";
+import "./scss/base.scss";
+import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component";
 
-export { Button, Popover, Typography, Badge, Dialog };
+export { Badge, Button, Dialog, Popover, Typography };
 
-export type { BUITheme, BUIComponentSize, BUIComponentColor };
+export type { BUIComponentColor, BUIComponentSize, BUITheme };
 
 export { ThemeProvider };
