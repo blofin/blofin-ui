@@ -1,0 +1,1 @@
+export type ToastType = "info" | "success" | "warning" | "danger";
