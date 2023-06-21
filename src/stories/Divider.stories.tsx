@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Divider } from "../components/Divider/Divider";
-import useTheme from "../hooks/useTheme";
+import useTheme from "../hooks/useMode";
 
 const meta: Meta<typeof Divider> = {
   /* 👇 The title prop is optional.
@@ -8,7 +8,7 @@ const meta: Meta<typeof Divider> = {
    * to learn how to generate automatic titles
    */
   title: "Components/Divider",
-  component: Divider,
+  component: Divider
 };
 
 export default meta;
@@ -25,5 +25,5 @@ export const Primary: Story = {
     const mode = useTheme();
 
     return <Divider theme={mode} />;
-  },
+  }
 };

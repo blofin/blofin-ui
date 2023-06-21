@@ -1,12 +1,9 @@
+import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
 import BadgeVariants, { BadgeColor } from "./styles";
 
 export interface BadgeProps {
-  /**
-   * BUI theme
-   */
-  theme?: BUITheme;
   /**
    * Badge color
    */
@@ -21,12 +18,8 @@ export interface BadgeProps {
   label: string;
 }
 
-export const Badge = ({
-  theme = "light",
-  color = "primary",
-  decoration = true,
-  label,
-}: BadgeProps) => {
+export const Badge = ({ color = "primary", decoration = true, label }: BadgeProps) => {
+  const { theme } = useTheme();
   return (
     <span className={`${cn(BadgeVariants({ theme, color }))}`}>
       {decoration && `• `}
