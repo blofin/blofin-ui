@@ -55,7 +55,7 @@ module.exports = {
         background: "#FFFFFF",
         label: {
           DEFAULT: "#0A0A0A",
-          70: "rgba(10, 10, 10, 0.7)",
+          70: "rgba(10, 10, 10, 0.6)",
           40: "rgba(10, 10, 10, 0.4)",
           20: "rgba(10, 10, 10, 0.2)"
         },
@@ -65,8 +65,8 @@ module.exports = {
           tertiary: "#ABADB2"
         },
         line: {
-          primary: "#E6E8EB",
-          secondary: "#D2D3D6"
+          primary: "#F5F6FA",
+          secondary: "#E6E7EB"
         },
         hover: {
           primary: "#3D63FF",
@@ -127,7 +127,7 @@ module.exports = {
           DEFAULT: "#F2465D",
           alpha: "rgba(242, 70, 93, 0.14)"
         },
-        background: "#010105",
+        background: "#101014",
         label: {
           DEFAULT: "#FCFDFF",
           70: "rgba(235, 236, 245, 0.6)",
