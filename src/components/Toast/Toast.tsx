@@ -88,7 +88,7 @@ const ToastContainer = React.forwardRef((props, ref) => {
   };
 
   return (
-    <TransitionGroup className="fixed left-[50%] top-0 translate-x-[-50%] text-center">
+    <TransitionGroup className="fixed left-[50%] top-[20px] translate-x-[-50%] text-center">
       {toastList.map(({ node, id, type }) => {
         return (
           <CSSTransition
