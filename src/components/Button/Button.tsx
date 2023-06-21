@@ -49,6 +49,7 @@ export const Button = ({
   onClick,
   shape = "normal",
   className = "",
+  theme: mode,
   ...props
 }: ButtonProps) => {
   const handleClick = () => {
@@ -64,11 +65,10 @@ export const Button = ({
       type="button"
       onClick={handleClick}
       className={`${cn(
-        buttonVariants({ variant, size, theme, shape, disabled })
+        buttonVariants({ variant, size, theme: mode ? mode : theme, shape, disabled })
       )} ${className}`}
       disabled={disabled}
-      {...props}
-    >
+      {...props}>
       {startIcon && <span className="mr-[9.5px]">{startIcon}</span>}
       {label}
       {endIcon && <span className="ml-[9.5px]">{endIcon}</span>}

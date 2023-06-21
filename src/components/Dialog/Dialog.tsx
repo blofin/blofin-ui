@@ -30,11 +30,16 @@ export const Dialog: FC<DialogProps> = (props) => {
     footer,
     cancel,
     confirm,
+    theme: mode,
     open
   } = props;
   const { theme } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const getTheme = () => {
+    return mode ? mode : theme;
+  };
 
   const handleCancel = () => {
     if (cancel) {
@@ -52,17 +57,17 @@ export const Dialog: FC<DialogProps> = (props) => {
     setIsOpen(open);
   }, [open]);
 
-  console.log(theme);
-
   return isOpen
     ? ReactDOM.createPortal(
         <div className="fixed bottom-0 left-0 right-0 top-0 z-[9999] bg-black/[.6]">
-          <div className={dialogVariants({ size, theme })}>
+          <div className={dialogVariants({ size, theme: getTheme() })}>
             <CloseIcon
-              className={`absolute right-[20px] h-[24px] w-[24px] cursor-pointer ${textStyles({ theme })}`}
+              className={`absolute right-[20px] h-[24px] w-[24px] cursor-pointer ${textStyles({
+                theme: getTheme()
+              })}`}
               onClick={handleCancel}
             />
-            <div className={textStyles({ theme })}>
+            <div className={textStyles({ theme: getTheme() })}>
               {!isEmpty(title) ? (
                 <div className="mb-[23px] text-[18px] font-medium leading-[26px] tracking-[-0.2px]">
                   {title}
@@ -84,14 +89,14 @@ export const Dialog: FC<DialogProps> = (props) => {
                       size="small"
                       variant="primary"
                       label={confirmText}
-                      theme={theme}
+                      theme={getTheme()}
                       onClick={handleConfirm}></Button>
                     <Button
                       className="ml-[16px]"
                       size="small"
                       variant="ghost"
                       label={cancelText}
-                      theme={theme}
+                      theme={getTheme()}
                       onClick={handleCancel}></Button>
                   </div>
                 )}
