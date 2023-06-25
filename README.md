@@ -1,3 +1,5 @@
 # Welcome to Blofin-UI
 
-UI library for crypto exchanges.
+![cover](./src/assets/cover.png)
+
+**UI library for crypto exchanges.**
