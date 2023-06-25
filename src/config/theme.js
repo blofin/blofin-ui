@@ -55,7 +55,7 @@ module.exports = {
         background: "#FFFFFF",
         label: {
           DEFAULT: "#0A0A0A",
-          70: "rgba(10, 10, 10, 0.6)",
+          60: "rgba(10, 10, 10, 0.6)",
           40: "rgba(10, 10, 10, 0.4)",
           20: "rgba(10, 10, 10, 0.2)"
         },
@@ -130,7 +130,7 @@ module.exports = {
         background: "#101014",
         label: {
           DEFAULT: "#FCFDFF",
-          70: "rgba(235, 236, 245, 0.6)",
+          60: "rgba(235, 236, 245, 0.6)",
           40: "rgba(235, 236, 245, 0.4)",
           20: "rgba(235, 236, 245, 0.2)"
         },
