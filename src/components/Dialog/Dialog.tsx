@@ -1,11 +1,11 @@
-import isEmpty from "lodash/isEmpty";
 import React, { FC, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BUIComponentSize, BUITheme } from "../../types/component";
 import CloseIcon from "../../assets/icons/close.svg";
 import { Button } from "../Button/Button";
-import { dialogVariants, textStyles } from "./styles";
+import { dialogVariants, footerStyles, textStyles } from "./styles";
 import useTheme from "../../provider/useTheme";
+import { ButtonSize } from "../Button/types";
 
 interface DialogProps {
   title: string | React.ReactNode;
@@ -18,6 +18,10 @@ interface DialogProps {
   confirm?: () => void;
   open: boolean;
   theme?: BUITheme;
+  footerLayout?: "right" | "left" | "center";
+  footerSize?: ButtonSize;
+  hideCancel?: Boolean;
+  hideConfirm?: Boolean;
 }
 
 export const Dialog: FC<DialogProps> = (props) => {
@@ -31,6 +35,10 @@ export const Dialog: FC<DialogProps> = (props) => {
     cancel,
     confirm,
     theme: mode,
+    footerLayout,
+    footerSize = "small",
+    hideCancel = true,
+    hideConfirm = true,
     open
   } = props;
   const { theme } = useTheme();
@@ -68,13 +76,9 @@ export const Dialog: FC<DialogProps> = (props) => {
               onClick={handleCancel}
             />
             <div className={textStyles({ theme: getTheme() })}>
-              {!isEmpty(title) ? (
-                <div className="mb-[23px] text-[18px] font-medium leading-[26px] tracking-[-0.2px]">
-                  {title}
-                </div>
-              ) : (
-                <div>{title}</div>
-              )}
+              <div className="mb-[23px] text-[18px] font-medium leading-[26px] tracking-[-0.2px]">
+                {title}
+              </div>
               <div className="mb-[48px] text-[14px] font-normal leading-[20px] tracking-[-0.2px]">
                 {content}
               </div>
@@ -84,20 +88,27 @@ export const Dialog: FC<DialogProps> = (props) => {
                 {footer ? (
                   <>{footer}</>
                 ) : (
-                  <div className="flex justify-end">
-                    <Button
-                      size="small"
-                      variant="primary"
-                      label={confirmText}
-                      theme={getTheme()}
-                      onClick={handleConfirm}></Button>
-                    <Button
-                      className="ml-[16px]"
-                      size="small"
-                      variant="ghost"
-                      label={cancelText}
-                      theme={getTheme()}
-                      onClick={handleCancel}></Button>
+                  <div className={footerStyles({ footerLayout })}>
+                    {hideConfirm && (
+                      <Button
+                        size={footerSize}
+                        variant="primary"
+                        theme={getTheme()}
+                        onClick={handleConfirm}>
+                        {confirmText}
+                      </Button>
+                    )}
+
+                    {hideCancel && (
+                      <Button
+                        className="ml-[16px]"
+                        size={footerSize}
+                        variant="ghost"
+                        theme={getTheme()}
+                        onClick={handleCancel}>
+                        {cancelText}
+                      </Button>
+                    )}
                   </div>
                 )}
               </>

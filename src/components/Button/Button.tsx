@@ -11,10 +11,6 @@ export interface ButtonProps extends Base {
    */
   variant?: ButtonVariant;
   /**
-   * Button contents
-   */
-  label?: string;
-  /**
    * Optional click handler
    */
   onClick?: () => void;
@@ -36,13 +32,15 @@ export interface ButtonProps extends Base {
   size: ButtonSize;
 
   shape?: ButtonShape;
+
+  children?: React.ReactNode;
 }
 
 export const Button = ({
   size = "large",
   disabled = false,
   variant = "primary",
-  label,
+  children,
   startIcon,
   endIcon,
   icon,
@@ -60,6 +58,8 @@ export const Button = ({
 
   const { theme } = useTheme();
 
+  console.log(children)
+
   return (
     <button
       type="button"
@@ -70,7 +70,7 @@ export const Button = ({
       disabled={disabled}
       {...props}>
       {startIcon && <span className="mr-[9.5px]">{startIcon}</span>}
-      {label}
+      {children}
       {endIcon && <span className="ml-[9.5px]">{endIcon}</span>}
       {icon}
     </button>

@@ -29,16 +29,18 @@ export const Primary: Story = {
 
     return (
       <>
-        <Button size="medium" label="Open Dialog" onClick={() => setOpen(true)}></Button>
+        <Button size="medium" onClick={() => setOpen(true)}>Open Dialog</Button>
         <Dialog
           open={open}
-          title="Dialog Title"
+          title=""
           content="Dialog Content"
           cancelText="Cancel"
           confirmText="Confirm"
           size="large"
           cancel={cancel}
           confirm={confirm}
+          footerLayout="right"
+          footerSize="medium"
         />
       </>
     );
