@@ -41,6 +41,7 @@ export const Primary: Story = {
           confirm={confirm}
           footerLayout="right"
           footerSize="medium"
+          hideCancel={true}
         />
       </>
     );
