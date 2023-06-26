@@ -25,3 +25,13 @@ export const textStyles = cva("", {
     }
   }
 });
+
+export const footerStyles=cva("flex", {
+  variants: {
+    footerLayout: {
+      right:"justify-end",
+      left: "justify-start",
+      center:"justify-center"
+    }
+  }
+});
