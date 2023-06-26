@@ -37,8 +37,8 @@ export const Dialog: FC<DialogProps> = (props) => {
     theme: mode,
     footerLayout,
     footerSize = "small",
-    hideCancel = true,
-    hideConfirm = true,
+    hideCancel = false,
+    hideConfirm = false,
     open
   } = props;
   const { theme } = useTheme();
@@ -89,7 +89,7 @@ export const Dialog: FC<DialogProps> = (props) => {
                   <>{footer}</>
                 ) : (
                   <div className={footerStyles({ footerLayout })}>
-                    {hideConfirm && (
+                    {!hideConfirm && (
                       <Button
                         size={footerSize}
                         variant="primary"
@@ -99,7 +99,7 @@ export const Dialog: FC<DialogProps> = (props) => {
                       </Button>
                     )}
 
-                    {hideCancel && (
+                    {!hideCancel && (
                       <Button
                         className="ml-[16px]"
                         size={footerSize}
