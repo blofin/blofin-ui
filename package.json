@@ -7,7 +7,7 @@
   "version": "0.2.45",
   "module": "./dist/index.es.js",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.es.js",
     "./blofin.css": "./dist/blofin.css",
