@@ -30,10 +30,18 @@ export const Primary = {
     return (
       <div style={{ display: "flex", gap: "10px" }}>
         {context}
-        <Button label="Info" size="medium" onClick={info} />
-        <Button label="Warning" size="medium" onClick={warning} />
-        <Button label="Success" size="medium" onClick={success} />
-        <Button label="Danger" size="medium" onClick={danger} />
+        <Button size="medium" onClick={info}>
+          Info
+        </Button>
+        <Button size="medium" onClick={warning}>
+          Warning
+        </Button>
+        <Button size="medium" onClick={success}>
+          Success
+        </Button>
+        <Button size="medium" onClick={danger}>
+          Danger
+        </Button>
       </div>
     );
   }
