@@ -8,16 +8,6 @@
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      ".": [
-        "./dist/index.d.ts"
-      ],
-      "*": [
-        "./dist/*"
-      ]
-    }
-  },
   "exports": {
     ".": "./dist/index.es.js",
     "./blofin.css": "./dist/blofin.css",
