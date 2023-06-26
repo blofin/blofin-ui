@@ -5,7 +5,7 @@ module.exports = {
     "7xl": "48px",
     "6xl": "36px",
     "5xl": "32px",
-    "4xl": "24px",
+    "4xl": "28px",
     "3xl": "22px",
     "2xl": "20px",
     xl: "18px",
