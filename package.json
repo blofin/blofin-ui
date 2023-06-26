@@ -4,12 +4,15 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "0.2.43",
+  "version": "0.2.42",
   "module": "./dist/index.es.js",
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
+      ".": [
+        "./dist/index.d.ts"
+      ],
       "*": [
         "./dist/*"
       ]
