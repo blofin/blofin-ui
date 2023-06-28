@@ -8,7 +8,7 @@ import useTheme from "../../provider/useTheme";
 import { ButtonSize } from "../Button/types";
 
 interface DialogProps {
-  title: string | React.ReactNode;
+  title: null | string | React.ReactNode;
   size: BUIComponentSize;
   content: string | React.ReactNode;
   cancelText?: string;
@@ -76,9 +76,12 @@ export const Dialog: FC<DialogProps> = (props) => {
               onClick={handleCancel}
             />
             <div className={textStyles({ theme: getTheme() })}>
-              <div className="mb-[23px] text-[18px] font-medium leading-[26px] tracking-[-0.2px]">
-                {title}
-              </div>
+              {title !== null && (
+                <div className="mb-[23px] text-[18px] font-medium leading-[26px] tracking-[-0.2px]">
+                  {title}
+                </div>
+              )}
+
               <div className="mb-[48px] text-[14px] font-normal leading-[20px] tracking-[-0.2px]">
                 {content}
               </div>

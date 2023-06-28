@@ -32,7 +32,7 @@ export const Primary: Story = {
         <Button size="medium" onClick={() => setOpen(true)}>Open Dialog</Button>
         <Dialog
           open={open}
-          title=""
+          title={null}
           content="Dialog Content"
           cancelText="Cancel"
           confirmText="Confirm"
