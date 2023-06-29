@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BUIComponentSize, BUITheme } from "../../types/component";
 import CloseIcon from "../../assets/icons/close.svg";
 import { Button } from "../Button/Button";
-import { dialogVariants, footerStyles, textStyles } from "./styles";
+import { dialogVariants, footerStyles, iconStyles, textStyles } from "./styles";
 import useTheme from "../../provider/useTheme";
 import { ButtonSize } from "../Button/types";
 
@@ -73,7 +73,7 @@ export const Dialog: FC<DialogProps> = (props) => {
           <div className={dialogVariants({ size, theme: getTheme() })}>
             {!hideIcon && (
               <CloseIcon
-                className={`absolute right-[20px] h-[24px] w-[24px] cursor-pointer ${textStyles({
+                className={`absolute right-[20px] h-[24px] w-[24px] cursor-pointer ${iconStyles({
                   theme: getTheme()
                 })}`}
                 onClick={handleCancel}
@@ -82,7 +82,7 @@ export const Dialog: FC<DialogProps> = (props) => {
 
             <div className={textStyles({ theme: getTheme() })}>
               {title !== null && (
-                <div className="mb-[23px] text-[18px] font-medium leading-[26px] tracking-[-0.2px]">
+                <div className="mb-[23px] text-[16px] font-medium leading-[26px] tracking-[-0.2px]">
                   {title}
                 </div>
               )}

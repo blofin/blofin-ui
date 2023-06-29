@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const dialogVariants = cva(
-  "absolute left-[50%] top-[50%] flex translate-x-[-50%] translate-y-[-50%] flex-col justify-between rounded-[10px] px-[24px] py-[32px]",
+  "absolute left-[50%] top-[50%] flex translate-x-[-50%] translate-y-[-50%] flex-col justify-between rounded-[10px] px-[24px] pt-[24px] pb-[32px]",
   {
     variants: {
       size: {
@@ -22,6 +22,15 @@ export const textStyles = cva("", {
     theme: {
       dark: "text-dark-label",
       light: "text-light-label"
+    }
+  }
+});
+
+export const iconStyles = cva("", {
+  variants: {
+    theme: {
+      dark: "text-dark-label",
+      light: "text-light-label-40"
     }
   }
 });
