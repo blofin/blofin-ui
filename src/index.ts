@@ -7,6 +7,7 @@ import { useToast } from "./components/Toast/Toast";
 import "./scss/base.scss";
 import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component";
 import { ThemeProvider } from "./provider/ThemeProvider";
+import useTheme from "./provider/useTheme";
 
 export { Badge, Button, Dialog, Popover, Typography };
 
@@ -14,4 +15,4 @@ export type { BUIComponentColor, BUIComponentSize, BUITheme };
 
 export { ThemeProvider };
 
-export { useToast };
+export { useToast, useTheme };
