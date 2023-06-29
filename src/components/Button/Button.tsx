@@ -58,8 +58,6 @@ export const Button = ({
 
   const { theme } = useTheme();
 
-  console.log(children)
-
   return (
     <button
       type="button"
