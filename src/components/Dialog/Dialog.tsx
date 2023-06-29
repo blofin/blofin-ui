@@ -22,6 +22,7 @@ interface DialogProps {
   footerSize?: ButtonSize;
   hideCancel?: Boolean;
   hideConfirm?: Boolean;
+  hideIcon?: Boolean;
 }
 
 export const Dialog: FC<DialogProps> = (props) => {
@@ -39,6 +40,7 @@ export const Dialog: FC<DialogProps> = (props) => {
     footerSize = "small",
     hideCancel = false,
     hideConfirm = false,
+    hideIcon = false,
     open
   } = props;
   const { theme } = useTheme();
@@ -69,12 +71,15 @@ export const Dialog: FC<DialogProps> = (props) => {
     ? ReactDOM.createPortal(
         <div className="fixed bottom-0 left-0 right-0 top-0 z-[9999] bg-black/[.6]">
           <div className={dialogVariants({ size, theme: getTheme() })}>
-            <CloseIcon
-              className={`absolute right-[20px] h-[24px] w-[24px] cursor-pointer ${textStyles({
-                theme: getTheme()
-              })}`}
-              onClick={handleCancel}
-            />
+            {!hideIcon && (
+              <CloseIcon
+                className={`absolute right-[20px] h-[24px] w-[24px] cursor-pointer ${textStyles({
+                  theme: getTheme()
+                })}`}
+                onClick={handleCancel}
+              />
+            )}
+
             <div className={textStyles({ theme: getTheme() })}>
               {title !== null && (
                 <div className="mb-[23px] text-[18px] font-medium leading-[26px] tracking-[-0.2px]">
