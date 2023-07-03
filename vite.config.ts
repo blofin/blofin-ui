@@ -19,24 +19,21 @@ function addEntryFiles() {
 
   // Initialize entry object with index.ts entry
   const entry = {
-    index: path.resolve(__dirname, "src/index.ts"),
+    index: path.resolve(__dirname, "src/index.ts")
   };
 
   // Initialize exports object
   const exports = {
     ".": "./dist/index.es.js",
     "./blofin.css": "./dist/blofin.css",
-    "./theme": "./dist/config/theme.js",
+    "./theme": "./dist/config/theme.js"
   };
 
   // Check each component directory for an index.ts file
   for (const componentDir of componentDirs) {
     const indexPath = path.join(componentsDir, componentDir, "index.ts");
     if (fs.existsSync(indexPath)) {
-      entry[componentDir] = path.resolve(
-        __dirname,
-        `src/components/${componentDir}/index.ts`
-      );
+      entry[componentDir] = path.resolve(__dirname, `src/components/${componentDir}/index.ts`);
       exports[`./${componentDir}`] = `./dist/${componentDir}.es.js`;
     }
   }
@@ -56,7 +53,7 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
-      skipDiagnostics:true
+      skipDiagnostics: true
       // beforeWriteFile: (filePath, content) => {
       //   console.log(filePath);
       // },
@@ -75,18 +72,18 @@ export default defineConfig({
     //   },
     // }),
     svgr({
-      exportAsDefault: true,
-    }),
+      exportAsDefault: true
+    })
   ],
   css: {
     postcss: {
-      plugins: [tailwindcss],
-    },
+      plugins: [tailwindcss]
+    }
   },
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: ["./src/setup.ts"],
+    setupFiles: ["./src/setup.ts"]
   },
   build: {
     sourcemap: false,
@@ -97,7 +94,7 @@ export default defineConfig({
       // the proper extensions will be added
       // formats: ["es", "umd"],
       formats: ["es"],
-      fileName: (format) => `[name].${format}.js`,
+      fileName: (format) => `[name].${format}.js`
       // fileName: (format, entryName) => {
       //   if (entryName === "index") {
       //     return `index.${format}.js`;
@@ -109,7 +106,7 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ["react", "react-dom", "tailwindcss"],
+      external: ["react", "react-dom", "tailwindcss", "react-hook-form", "zod"],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
@@ -117,12 +114,14 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
           tailwindcss: "tailwindcss",
+          "react-hook-form": "react-hook-form",
+          zod: "zod"
         },
-        assetFileNames: "blofin.css",
+        assetFileNames: "blofin.css"
         // chunkFileNames: "[name].js",
         // manualChunks: undefined,
         // inlineDynamicImports: false,
-      },
-    },
-  },
+      }
+    }
+  }
 });
