@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";
 import buttonVariants from "./styles";
@@ -74,3 +74,17 @@ export const Button = ({
     </button>
   );
 };
+
+const WhiteButton: FC<ButtonProps> = (props) => {
+  const { theme } = useTheme();
+  return (
+    <Button
+      {...props}
+      variant="ghost"
+      className={`border-white text-white ${
+        theme === "light" ? "hover:text-light-primary" : "hover:text-dark-primary"
+      }  font-medium hover:bg-light-background`}></Button>
+  );
+};
+
+Button.WhiteButton = WhiteButton;

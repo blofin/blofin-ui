@@ -1,5 +1,7 @@
 import { Meta } from "@storybook/react";
 import { Button } from "../components/Button/Button";
+import { ThemeProvider } from "..";
+import useMode from "../hooks/useMode";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
@@ -31,37 +33,44 @@ export const Primary = {
     label: "Button",
     variant: "primary",
     size: "medium",
-    children:"Button"
+    children: "Button"
   }
 };
 
 export const All = {
   render: () => {
+    const mode = useMode();
+
     return (
-      <div style={{ display: "flex", gap: "10px" }}>
-        <Button variant="primary" size="medium">
-          Button
-        </Button>
-        <Button variant="secondary" size="medium">
-          Button
-        </Button>
-        <Button variant="tertiary" size="medium">
-          Button
-        </Button>
-        <Button variant="ghost" size="medium">
-          Button
-        </Button>
-        <Button variant="text" size="medium">
-          Button
-        </Button>
-        <Button variant="primary" size="medium" startIcon="111">
-          Button
-        </Button>
-        <Button variant="primary" size="medium" endIcon={<i>222</i>}>
-          Button
-        </Button>
-        <Button variant="primary" size="medium" shape="circle" icon={<i>2</i>}></Button>
-      </div>
+      <ThemeProvider value={{ theme: mode }}>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <Button variant="primary" size="medium">
+            Button
+          </Button>
+          <Button variant="secondary" size="medium">
+            Button
+          </Button>
+          <Button variant="tertiary" size="medium">
+            Button
+          </Button>
+          <Button variant="ghost" size="medium">
+            Button
+          </Button>
+          <Button variant="text" size="medium">
+            Button
+          </Button>
+          <Button variant="primary" size="medium" startIcon="111">
+            Button
+          </Button>
+          <Button variant="primary" size="medium" endIcon={<i>222</i>}>
+            Button
+          </Button>
+          <Button variant="primary" size="medium" shape="circle" icon={<i>2</i>}></Button>
+          <Button.WhiteButton variant="primary" size="medium">
+            White Button
+          </Button.WhiteButton>
+        </div>
+      </ThemeProvider>
     );
   }
 };

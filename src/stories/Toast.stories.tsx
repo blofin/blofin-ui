@@ -30,6 +30,7 @@ export const Primary = {
     return (
       <div style={{ display: "flex", gap: "10px" }}>
         {context}
+        {context}
         <Button size="medium" onClick={info}>
           Info
         </Button>

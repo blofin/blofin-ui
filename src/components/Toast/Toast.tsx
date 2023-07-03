@@ -88,7 +88,7 @@ const ToastContainer = React.forwardRef((props, ref) => {
   };
 
   return (
-    <TransitionGroup className="fixed left-[50%] z-[9999] top-[32px] translate-x-[-50%] text-center">
+    <TransitionGroup className="fixed left-[50%] top-[32px] z-[9999] translate-x-[-50%] text-center">
       {toastList.map(({ node, id, type }) => {
         return (
           <CSSTransition
@@ -116,7 +116,20 @@ const ToastContainer = React.forwardRef((props, ref) => {
 });
 
 export const Toast = React.forwardRef((props, ref) => {
-  return ReactDOM.createPortal(<ToastContainer ref={ref} />, document.body);
+  const [iseRender, setIsRender] = useState(false);
+
+  const node = React.useMemo(() => document.createElement("div"), []);
+
+  useEffect(() => {
+    node.id='blofin-toast'
+    const toastContainer=document.getElementById("blofin-toast");
+    if(!toastContainer){
+      document.body.appendChild(node);
+      setIsRender(true);
+    }
+  }, []);
+
+  return iseRender ? ReactDOM.createPortal(<ToastContainer ref={ref} />, node) : null;
 });
 
 export const useToast = () => {
