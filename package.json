@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "0.2.48",
+  "version": "0.2.53",
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -44,7 +44,9 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.20",
