@@ -12,7 +12,13 @@
 
 **UI library for crypto exchanges.**
 
-Introducing our exquisite and sophisticated UI library tailored specifically for discerning crypto exchanges. Immerse yourself in a world of luxury and elegance as our meticulously crafted design elements seamlessly integrate with the cutting-edge technology of the cryptocurrency industry. Elevate your user experience to new heights with our high-end interface components, meticulously curated to ensure a seamless and visually stunning trading environment. With our UI library, you can confidently offer your users a truly elevated and refined trading experience, solidifying your position as a premier destination for secure and stylish cryptocurrency transactions.
+Introducing our exquisite and sophisticated UI library tailored specifically for discerning crypto exchanges.
+
+Immerse yourself in a world of luxury and elegance as our meticulously crafted design elements seamlessly integrate with the cutting-edge technology of the cryptocurrency industry.
+
+Elevate your user experience to new heights with our high-end interface components, meticulously curated to ensure a seamless and visually stunning trading environment.
+
+With our UI library, you can confidently offer your users a truly elevated and refined trading experience, solidifying your position as a premier destination for secure and stylish cryptocurrency transactions.
 
 ## Installation
 
