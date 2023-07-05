@@ -1,4 +1,6 @@
 import React from "react";
+import { BUITheme } from "../..";
+import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
 import TypographyVariants, { TypographyTagType } from "./styles";
 
@@ -17,26 +19,19 @@ const TYPEOGRAPHY_TAGS = {
   body4: "p"
 };
 
+export type TypographyTag = keyof typeof TYPEOGRAPHY_TAGS;
+
+export type TypographyWeight = "regular" | "medium" | "bold";
+
 export interface TypographyProps {
   /**
    * Typography type
    */
-  variant:
-    | "h1"
-    | "h2"
-    | "h3"
-    | "h4"
-    | "h5"
-    | "h6"
-    | "subtitle1"
-    | "subtitle2"
-    | "body1"
-    | "body2"
-    | "body3"
-    | "body4";
-  weight?: "regular" | "medium" | "bold";
+  variant: TypographyTag;
+  weight?: TypographyWeight;
   className?: string;
   children?: React.ReactNode;
+  theme?: BUITheme;
 }
 
 /**
@@ -47,13 +42,18 @@ export const Typography = ({
   weight = "regular",
   className = "",
   children,
+  theme: mode,
   ...props
 }: TypographyProps) => {
+  const { theme } = useTheme();
+
   const TypographyTag = TYPEOGRAPHY_TAGS[variant] as TypographyTagType;
 
   return (
     <TypographyTag
-      className={`${cn(TypographyVariants({ variant, weight }))} ${className}`}
+      className={`${cn(
+        TypographyVariants({ variant, weight, theme: mode ? mode : theme })
+      )} ${className}`}
       {...props}>
       {children}
     </TypographyTag>

@@ -16,12 +16,14 @@ export interface BadgeProps {
    * Badge contents
    */
   label: string;
+
+  theme?: BUITheme;
 }
 
-export const Badge = ({ color = "primary", decoration = true, label }: BadgeProps) => {
+export const Badge = ({ color = "primary", decoration = true, label, theme: mode }: BadgeProps) => {
   const { theme } = useTheme();
   return (
-    <span className={`${cn(BadgeVariants({ theme, color }))}`}>
+    <span className={`${cn(BadgeVariants({ theme: mode ? mode : theme, color }))}`}>
       {decoration && `• `}
       {label}
     </span>

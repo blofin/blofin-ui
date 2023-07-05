@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "../components/Badge/Badge";
 import { BadgeColor } from "../components/Badge/styles";
+import useMode from "../hooks/useMode";
+import { ThemeProvider } from "../provider/ThemeProvider";
 
 const meta: Meta<typeof Badge> = {
   /* 👇 The title prop is optional.
@@ -21,6 +23,10 @@ const meta: Meta<typeof Badge> = {
     decoration: {
       control: { type: "boolean" },
       defaultValue: true
+    },
+    theme: {
+      options: ["light", "dark"],
+      control: { type: "radio" }
     }
   },
   parameters: { controls: { sort: "requiredFirst" } }
@@ -71,8 +77,12 @@ const BadgeWithHooks = ({
   decoration?: boolean;
 }) => {
   // Sets the hooks for both the label and primary props
-
-  return <Badge color={color} label={label} decoration={decoration} />;
+  const mode = useMode();
+  return (
+    <ThemeProvider value={{ theme: mode }}>
+      <Badge color={color} label={label} decoration={decoration} />
+    </ThemeProvider>
+  );
 };
 
 export const WithTheme: Story = {
@@ -84,15 +94,18 @@ export const All: Story = {
     controls: { include: ["decoration"] }
   },
   render: ({ decoration }) => {
+    const mode = useMode();
     return (
-      <div style={{ display: "flex", gap: "10px" }}>
-        <Badge decoration={decoration} label="primary" />
-        <Badge decoration={decoration} color="secondary" label="secondary" />
-        <Badge decoration={decoration} color="success" label="success" />
-        <Badge decoration={decoration} color="warning" label="warning" />
-        <Badge decoration={decoration} color="danger" label="danger" />
-        <Badge decoration={decoration} color="info" label="info" />
-      </div>
+      <ThemeProvider value={{ theme: mode }}>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <Badge decoration={decoration} label="primary" />
+          <Badge decoration={decoration} color="secondary" label="secondary" />
+          <Badge decoration={decoration} color="success" label="success" />
+          <Badge decoration={decoration} color="warning" label="warning" />
+          <Badge decoration={decoration} color="danger" label="danger" />
+          <Badge decoration={decoration} color="info" label="info" />
+        </div>
+      </ThemeProvider>
     );
   }
 };

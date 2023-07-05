@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import { Button } from "../components/Button/Button";
-import { ThemeProvider } from "..";
 import useMode from "../hooks/useMode";
+import { ThemeProvider } from "../provider/ThemeProvider";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
