@@ -8,15 +8,15 @@ import Danger from "../../assets/icons/danger.svg";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styles from "./toast.module.scss";
 import useTheme from "../../provider/useTheme";
-import { ToastType } from "./types";
+import { BUIComponentType } from "../../types/component";
 
 interface ToastMsgProps {
   children: React.ReactNode;
-  type: ToastType;
+  type: BUIComponentType;
   remove: () => void;
 }
 
-type Methods = (msg: string, type: ToastType) => void;
+type Methods = (msg: string, type: BUIComponentType) => void;
 
 interface ToastRef {
   info: Methods;
@@ -25,7 +25,7 @@ interface ToastRef {
   danger: Methods;
 }
 
-const Icon: FC<{ type: ToastType }> = ({ type }) => {
+const Icon: FC<{ type: BUIComponentType }> = ({ type }) => {
   const { theme } = useTheme();
   const icons = {
     info: <Info className={iconstyles(type, theme)} />,
@@ -40,9 +40,13 @@ const Icon: FC<{ type: ToastType }> = ({ type }) => {
 const ToastMsg: FC<ToastMsgProps> = ({ children, type, remove }) => {
   const { theme } = useTheme();
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       remove();
     }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -57,12 +61,12 @@ const ToastMsg: FC<ToastMsgProps> = ({ children, type, remove }) => {
 
 const ToastContainer = React.forwardRef((props, ref) => {
   const [toastList, setToastList] = useState<
-    { node: React.ReactNode; id: number; type: ToastType }[]
+    { node: React.ReactNode; id: number; type: BUIComponentType }[]
   >([]);
 
   const key = useRef(0);
 
-  const open = (msg: React.ReactNode, type: ToastType) => {
+  const open = (msg: React.ReactNode, type: BUIComponentType) => {
     setToastList((list) => [
       ...list,
       {
@@ -121,9 +125,9 @@ export const Toast = React.forwardRef((props, ref) => {
   const node = React.useMemo(() => document.createElement("div"), []);
 
   useEffect(() => {
-    node.id='blofin-toast'
-    const toastContainer=document.getElementById("blofin-toast");
-    if(!toastContainer){
+    node.id = "blofin-toast";
+    const toastContainer = document.getElementById("blofin-toast");
+    if (!toastContainer) {
       document.body.appendChild(node);
       setIsRender(true);
     }

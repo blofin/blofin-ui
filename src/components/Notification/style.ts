@@ -1,17 +1,5 @@
 import { cva } from "class-variance-authority";
-import { BUITheme } from "../..";
-import { BUIComponentType } from "../../types/component";
-
-const toastVariants = cva("flex rounded-[6px] px-[18px] py-[8px] text-[16px]", {
-  variants: {
-    type: {
-      info: "bg-light-primary-14",
-      success: "bg-light-success-14",
-      warning: "bg-light-warning-14",
-      danger: "bg-light-danger-14"
-    }
-  }
-});
+import { BUIComponentType, BUITheme } from "../../types/component";
 
 const bgStyles = cva("", {
   variants: {
@@ -22,7 +10,16 @@ const bgStyles = cva("", {
   }
 });
 
-const textStyles = cva("", {
+const textStyles = cva("w-[296px] break-words text-[14px] font-normal leading-[20px]", {
+  variants: {
+    theme: {
+      light: "text-light-label",
+      dark: "text-dark-label"
+    }
+  }
+});
+
+const textbg = cva("", {
   variants: {
     theme: {
       light: "text-light-label",
@@ -47,14 +44,23 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
     }
   };
 
-  return cva("mr-[16px] h-[24px] w-[24px", {
+  return cva("w-[24px mr-[16px] h-[24px]", {
     variants: {
       theme: {
         light: colors[theme][type],
         dark: colors[theme][type]
       }
     }
-  })({theme});
+  })({ theme });
 };
 
-export { toastVariants, bgStyles, textStyles, iconstyles };
+const closeIconStyles = cva("shrink-0 cursor-pointer", {
+  variants: {
+    theme: {
+      dark: "text-dark-label",
+      light: "text-light-label-40"
+    }
+  }
+});
+
+export { iconstyles, bgStyles, textStyles, closeIconStyles, textbg };
