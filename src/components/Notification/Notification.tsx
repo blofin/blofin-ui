@@ -61,12 +61,12 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
   };
 
   return (
-    <div className={`mb-[24px] w-full rounded-[6px] shadow-toast ${bgStyles({ theme })}`}>
-      <div className="flex rounded-[6px] px-[24px] py-[16px]">
+    <div className={`bu-mb-[24px] bu-w-full bu-rounded-[6px] bu-shadow-toast ${bgStyles({ theme })}`}>
+      <div className="bu-flex bu-rounded-[6px] bu-px-[24px] bu-py-[16px]">
         <Icon type={type} />
-        <div className="flex w-full  flex-col">
-          <div className="mb-[8px] flex justify-between">
-            <span className={`w-[250px] break-words text-[16px] font-medium leading-[24px] tracking-[-0.2px] ${textbg({ theme })}`}>
+        <div className="bu-flex w-full bu-flex-col">
+          <div className="bu-mb-[8px] bu-flex bu-justify-between">
+            <span className={`bu-w-[250px] bu-break-words bu-text-[16px] bu-font-medium bu-leading-[24px] bu-tracking-[-0.2px] ${textbg({ theme })}`}>
               {title}
             </span>
             <CloseIcon onClick={close} className={closeIconStyles({ theme })} />
@@ -113,7 +113,7 @@ const NotificationContainer = React.forwardRef((props, ref) => {
   };
 
   return (
-    <TransitionGroup className="fixed bottom-[32px] left-[32px] z-[9999] w-[384px]">
+    <TransitionGroup className="bu-fixed bu-bottom-[32px] bu-left-[32px] bu-z-[9999] bu-w-[384px]">
       {notificationList.map(({ title, node, id, type }) => {
         return (
           <CSSTransition

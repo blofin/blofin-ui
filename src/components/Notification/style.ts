@@ -4,17 +4,17 @@ import { BUIComponentType, BUITheme } from "../../types/component";
 const bgStyles = cva("", {
   variants: {
     theme: {
-      light: "bg-light-background",
-      dark: "bg-dark-background"
+      light: "bu-bg-light-background",
+      dark: "bu-bg-dark-background"
     }
   }
 });
 
-const textStyles = cva("w-[296px] break-words text-[14px] font-normal leading-[20px]", {
+const textStyles = cva("bu-w-[296px] bu-break-words bu-text-[14px] bu-font-normal bu-leading-[20px]", {
   variants: {
     theme: {
-      light: "text-light-label",
-      dark: "text-dark-label"
+      light: "bu-text-light-label",
+      dark: "bu-text-dark-label"
     }
   }
 });
@@ -22,8 +22,8 @@ const textStyles = cva("w-[296px] break-words text-[14px] font-normal leading-[2
 const textbg = cva("", {
   variants: {
     theme: {
-      light: "text-light-label",
-      dark: "text-dark-label"
+      light: "bu-text-light-label",
+      dark: "bu-text-dark-label"
     }
   }
 });
@@ -31,20 +31,20 @@ const textbg = cva("", {
 const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
   const colors = {
     light: {
-      info: "text-light-primary",
-      warning: "text-light-warning",
-      success: "text-light-success",
-      danger: "text-light-danger"
+      info: "bu-text-light-primary",
+      warning: "bu-text-light-warning",
+      success: "bu-text-light-success",
+      danger: "bu-text-light-danger"
     },
     dark: {
-      info: "text-dark-primary",
-      warning: "text-dark-warning",
-      success: "text-dark-success",
-      danger: "text-dark-danger"
+      info: "bu-text-dark-primary",
+      warning: "bu-text-dark-warning",
+      success: "bu-text-dark-success",
+      danger: "bu-text-dark-danger"
     }
   };
 
-  return cva("w-[24px mr-[16px] h-[24px]", {
+  return cva("bu-w-[24px bu-mr-[16px] bu-h-[24px]", {
     variants: {
       theme: {
         light: colors[theme][type],
@@ -54,11 +54,11 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
   })({ theme });
 };
 
-const closeIconStyles = cva("shrink-0 cursor-pointer", {
+const closeIconStyles = cva("bu-shrink-0 bu-cursor-pointer", {
   variants: {
     theme: {
-      dark: "text-dark-label",
-      light: "text-light-label-40"
+      dark: "bu-text-dark-label",
+      light: "bu-text-light-label-40"
     }
   }
 });

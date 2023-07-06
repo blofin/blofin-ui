@@ -69,11 +69,11 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   return isOpen
     ? ReactDOM.createPortal(
-        <div className="fixed bottom-0 left-0 right-0 top-0 z-[9999] bg-black/[.6]">
+        <div className="bu-fixed bu-bottom-0 bu-left-0 bu-right-0 bu-top-0 bu-z-[9999] bu-bg-black/[.6]">
           <div className={dialogVariants({ size, theme: getTheme() })}>
             {!hideIcon && (
               <CloseIcon
-                className={`absolute right-[20px] h-[24px] w-[24px] cursor-pointer ${iconStyles({
+                className={`bu-absolute bu-right-[20px] bu-h-[24px] bu-w-[24px] bu-cursor-pointer ${iconStyles({
                   theme: getTheme()
                 })}`}
                 onClick={handleCancel}
@@ -82,12 +82,12 @@ export const Dialog: FC<DialogProps> = (props) => {
 
             <div className={textStyles({ theme: getTheme() })}>
               {title !== null && (
-                <div className="mb-[23px] text-[16px] font-medium leading-[26px] tracking-[-0.2px]">
+                <div className="bu-mb-[23px] bu-text-[16px] bu-font-medium bu-leading-[26px] bu-tracking-[-0.2px]">
                   {title}
                 </div>
               )}
 
-              <div className="mb-[48px] text-[14px] font-normal leading-[20px] tracking-[-0.2px]">
+              <div className="bu-mb-[48px] bu-text-[14px] bu-font-normal bu-leading-[20px] bu-tracking-[-0.2px]">
                 {content}
               </div>
             </div>
@@ -109,7 +109,7 @@ export const Dialog: FC<DialogProps> = (props) => {
 
                     {!hideCancel && (
                       <Button
-                        className="ml-[16px]"
+                        className="bu-ml-[16px]"
                         size={footerSize}
                         variant="ghost"
                         theme={getTheme()}
