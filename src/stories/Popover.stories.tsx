@@ -7,7 +7,7 @@ const meta: Meta<typeof Popover> = {
    * to learn how to generate automatic titles
    */
   title: "Components/Popover",
-  component: Popover,
+  component: Popover
 };
 
 export default meta;
@@ -25,7 +25,7 @@ export const Primary: Story = {
       label="Popover"
       content={
         <>
-          <ul className="w-48 px-2">
+          <ul className="bu-w-48 bu-px-2">
             <li>1</li>
             <li>2</li>
             <li>3</li>
@@ -33,5 +33,5 @@ export const Primary: Story = {
         </>
       }
     />
-  ),
+  )
 };

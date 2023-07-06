@@ -1,26 +1,26 @@
 const InputClassName = {
-  input: 'border-none focus:outline-none text-sm w-full h-full',
+  input: "bu-border-none focus:bu-outline-none bu-text-sm bu-w-full bu-h-full",
   light: {
     small: {
       inputWrapper:
-        'h-[36px] w-[320px] border-solid border rounded-[4px] inline-flex px-[12px] transition-[border-color] duration-100 ease-linear',
-      default: 'border-light-input-gray ',
-      focus: 'focuse:border-light-input-primary',
-      hover: 'hover:border-light-input-primary'
+        "bu-h-[36px] bu-w-[320px] bu-border-solid bu-border bu-rounded-[4px] bu-inline-flex bu-px-[12px] bu-transition-[border-color] bu-duration-100 bu-ease-linear",
+      default: "bu-border-light-input-gray",
+      focus: "focus:bu-border-light-input-primary",
+      hover: "hover:bu-border-light-input-primary"
     },
     medium: {
       inputWrapper:
-        'h-[40px] w-[380px] border-solid border rounded-[6px] inline-flex px-[14px] transition-[border-color] duration-100 ease-linear',
-      default: 'border-light-input-gray ',
-      focus: 'focuse:border-light-input-primary',
-      hover: 'hover:border-light-input-primary'
+        "bu-h-[40px] bu-w-[380px] bu-border-solid bu-border bu-rounded-[6px] bu-inline-flex bu-px-[14px] bu-transition-[border-color] bu-duration-100 bu-ease-linear",
+      default: "bu-border-light-input-gray",
+      focus: "focus:bu-border-light-input-primary",
+      hover: "hover:bu-border-light-input-primary"
     },
     large: {
       inputWrapper:
-        'h-[50px] w-[440px] border-solid border rounded-[8px] inline-flex px-[14px] transition-[border-color] duration-100 ease-linear',
-      default: 'border-light-input-gray ',
-      focus: 'focuse:border-light-input-primary',
-      hover: 'hover:border-light-input-primary'
+        "bu-h-[50px] bu-w-[440px] bu-border-solid bu-border bu-rounded-[8px] bu-inline-flex bu-px-[14px] bu-transition-[border-color] bu-duration-100 bu-ease-linear",
+      default: "bu-border-light-input-gray",
+      focus: "focus:bu-border-light-input-primary",
+      hover: "hover:bu-border-light-input-primary"
     }
   },
   dark: {}

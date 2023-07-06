@@ -1,64 +1,64 @@
 .slider-container {
-  @apply flex w-full;
+  @apply bu-flex bu-w-full;
   .slider-content {
-    @apply relative w-full;
+    @apply bu-relative bu-w-full;
     .rail {
-      @apply absolute;
-      @apply w-full;
-      @apply h-1;
-      @apply bg-gray-300;
-      @apply rounded-full;
-      @apply top-1/2;
-      @apply -translate-y-1/2 transform;
+      @apply bu-absolute;
+      @apply bu-w-full;
+      @apply bu-h-1;
+      @apply bu-bg-gray-300;
+      @apply bu-rounded-full;
+      @apply bu-top-1/2;
+      @apply -bu-translate-y-1/2 bu-transform;
     }
     .track {
-      @apply absolute;
-      @apply h-1;
-      @apply bg-blue-500;
-      @apply rounded-full;
-      @apply top-1/2;
-      @apply -translate-y-1/2 transform;
+      @apply bu-absolute;
+      @apply bu-h-1;
+      @apply bu-bg-blue-500;
+      @apply bu-rounded-full;
+      @apply bu-top-1/2;
+      @apply -bu-translate-y-1/2 bu-transform;
     }
     .mark-container {
-      @apply absolute;
-      @apply flex;
-      @apply justify-between;
-      @apply w-full;
-      @apply top-1/2;
-      @apply -translate-y-1/2 transform;
+      @apply bu-absolute;
+      @apply bu-flex;
+      @apply bu-justify-between;
+      @apply bu-w-full;
+      @apply bu-top-1/2;
+      @apply -bu-translate-y-1/2 bu-transform;
       .mark {
-        @apply w-2;
-        @apply h-2;
-        @apply rounded-full;
-        @apply border border-gray-300;
-        @apply cursor-pointer;
+        @apply bu-w-2;
+        @apply bu-h-2;
+        @apply bu-rounded-full;
+        @apply bu-border bu-border-gray-300;
+        @apply bu-cursor-pointer;
         .mark-label {
-          @apply absolute;
-          @apply text-xs;
-          @apply text-gray-500;
-          @apply top-3;
+          @apply bu-absolute;
+          @apply bu-text-xs;
+          @apply bu-text-gray-500;
+          @apply bu-top-3;
         }
       }
       .mark:first-of-type {
         .mark-label {
-          @apply left-0;
+          @apply bu-left-0;
         }
       }
       .mark:last-of-type {
         .mark-label {
-          @apply right-0;
+          @apply bu-right-0;
         }
       }
     }
     .thumb {
-      @apply absolute;
-      @apply w-4;
-      @apply h-4;
-      @apply bg-blue-500;
-      @apply rounded-full;
-      @apply top-1/2;
-      @apply -translate-x-2 -translate-y-1/2 transform;
-      @apply cursor-pointer;
+      @apply bu-absolute;
+      @apply bu-w-4;
+      @apply bu-h-4;
+      @apply bu-bg-blue-500;
+      @apply bu-rounded-full;
+      @apply bu-top-1/2;
+      @apply -bu-translate-x-2 -bu-translate-y-1/2 bu-transform;
+      @apply bu-cursor-pointer;
     }
   }
 }

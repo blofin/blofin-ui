@@ -1,11 +1,11 @@
 .popover-container {
-  @apply relative max-w-fit;
+  @apply bu-relative bu-max-w-fit;
   .popover {
-    @apply hidden absolute top-6 left-0 z-10 shadow;
+    @apply bu-absolute bu-left-0 bu-top-6 bu-z-10 bu-hidden bu-shadow;
   }
   &:hover {
     .popover {
-      @apply flex;
+      @apply bu-flex;
     }
   }
 }

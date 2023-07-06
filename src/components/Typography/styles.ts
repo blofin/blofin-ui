@@ -27,27 +27,27 @@ const TypographyVariants = (props: {
   return cva("", {
     variants: {
       variant: {
-        h1: `text-9xl`,
-        h2: `text-8xl`,
-        h3: `text-7xl`,
-        h4: `text-6xl`,
-        h5: `text-5xl`,
-        h6: `text-4xl`,
-        subtitle1: `text-3xl`,
-        subtitle2: `text-2xl`,
-        body1: `text-xl`,
-        body2: `text-lg`,
-        body3: `text-base`,
-        body4: `text-sm`
+        h1: `bu-text-9xl`,
+        h2: `bu-text-8xl`,
+        h3: `bu-text-7xl`,
+        h4: `bu-text-6xl`,
+        h5: `bu-text-5xl`,
+        h6: `bu-text-4xl`,
+        subtitle1: `bu-text-3xl`,
+        subtitle2: `bu-text-2xl`,
+        body1: `bu-text-xl`,
+        body2: `bu-text-lg`,
+        body3: `bu-text-base`,
+        body4: `bu-text-sm`
       },
       weight: {
-        bold: "font-bold",
-        medium: "font-medium",
-        regular: "font-normal"
+        bold: "bu-font-bold",
+        medium: "bu-font-medium",
+        regular: "bu-font-normal"
       },
       theme: {
-        light: "text-black",
-        dark: "text-white"
+        light: "bu-text-black",
+        dark: "bu-text-white"
       }
     },
     defaultVariants: {
