@@ -7,7 +7,7 @@ const meta: Meta<typeof SVGLogo> = {
    * to learn how to generate automatic titles
    */
   title: "Components/SVG",
-  component: SVGLogo,
+  component: SVGLogo
 };
 
 export default meta;
@@ -26,5 +26,5 @@ export const Primary: Story = {
         <SVGLogo />
       </div>
     );
-  },
+  }
 };

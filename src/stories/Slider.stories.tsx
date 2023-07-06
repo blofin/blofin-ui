@@ -32,8 +32,8 @@ export const Primary: Story = {
     }, [value]);
 
     return (
-      <div className="py-10">
-        <Typography variant="body1" className="mb-4">
+      <div className="bu-py-10">
+        <Typography variant="body1" className="bu-mb-4">
           Value: {value}
         </Typography>
         <Slider value={value} onSliderChange={setValue} theme={mode} />
@@ -49,10 +49,10 @@ export const OuterWidth: Story = {
 
     return (
       <>
-        <Typography variant="body1" className="mb-4">
+        <Typography variant="body1" className="bu-mb-4">
           Value: {value}
         </Typography>
-        <div className="mx-auto flex w-96 items-center justify-center py-10">
+        <div className="bu-mx-auto bu-flex bu-w-96 bu-items-center bu-justify-center bu-py-10">
           <Slider value={value} onSliderChange={setValue} theme={mode} />
         </div>
       </>
