@@ -2,13 +2,13 @@ import { cva } from "class-variance-authority";
 import { BUITheme } from "../..";
 import { BUIComponentType } from "../../types/component";
 
-const toastVariants = cva("flex rounded-[6px] px-[18px] py-[8px] text-[16px]", {
+const toastVariants = cva("bu-flex bu-rounded-[6px] bu-px-[18px] bu-py-[8px] bu-text-[16px]", {
   variants: {
     type: {
-      info: "bg-light-primary-14",
-      success: "bg-light-success-14",
-      warning: "bg-light-warning-14",
-      danger: "bg-light-danger-14"
+      info: "bu-bg-light-primary-14",
+      success: "bu-bg-light-success-14",
+      warning: "bu-bg-light-warning-14",
+      danger: "bu-bg-light-danger-14"
     }
   }
 });
@@ -16,8 +16,8 @@ const toastVariants = cva("flex rounded-[6px] px-[18px] py-[8px] text-[16px]", {
 const bgStyles = cva("", {
   variants: {
     theme: {
-      light: "bg-light-background",
-      dark: "bg-dark-background"
+      light: "bu-bg-light-background",
+      dark: "bu-bg-dark-background"
     }
   }
 });
@@ -34,20 +34,20 @@ const textStyles = cva("", {
 const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
   const colors = {
     light: {
-      info: "text-light-primary",
-      warning: "text-light-warning",
-      success: "text-light-success",
-      danger: "text-light-danger"
+      info: "bu-text-light-primary",
+      warning: "bu-text-light-warning",
+      success: "bu-text-light-success",
+      danger: "bu-text-light-danger"
     },
     dark: {
-      info: "text-dark-primary",
-      warning: "text-dark-warning",
-      success: "text-dark-success",
-      danger: "text-dark-danger"
+      info: "bu-text-dark-primary",
+      warning: "bu-text-dark-warning",
+      success: "bu-text-dark-success",
+      danger: "bu-text-dark-danger"
     }
   };
 
-  return cva("mr-[16px] h-[24px] w-[24px", {
+  return cva("bu-mr-[16px] bu-h-[24px] bu-w-[24px", {
     variants: {
       theme: {
         light: colors[theme][type],

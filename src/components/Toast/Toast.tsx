@@ -50,7 +50,7 @@ const ToastMsg: FC<ToastMsgProps> = ({ children, type, remove }) => {
   }, []);
 
   return (
-    <div className={`mx-auto mb-[24px] w-fit rounded-[6px] shadow-toast ${bgStyles({ theme })}`}>
+    <div className={`bu-mx-auto bu-mb-[24px] bu-w-fit bu-rounded-[6px] bu-shadow-toast ${bgStyles({ theme })}`}>
       <div className={toastVariants({ type })}>
         <Icon type={type} />
         <span className={textStyles({ theme })}>{children}</span>
@@ -92,7 +92,7 @@ const ToastContainer = React.forwardRef((props, ref) => {
   };
 
   return (
-    <TransitionGroup className="fixed left-[50%] top-[32px] z-[9999] translate-x-[-50%] text-center">
+    <TransitionGroup className="bu-fixed bu-left-[50%] bu-top-[32px] bu-z-[9999] bu-translate-x-[-50%] bu-text-center">
       {toastList.map(({ node, id, type }) => {
         return (
           <CSSTransition
