@@ -2,20 +2,20 @@ import { cva } from "class-variance-authority";
 import { BUITheme } from "../../types/component";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./types";
 
-const primaryStyles = cva("text-white", {
+const primaryStyles = cva("bu-text-white", {
   variants: {
     theme: {
-      light: ["bg-light-primary", "hover:bg-light-hover-primary"],
-      dark: ["bg-dark-primary", "hover:bg-dark-hover-primary"]
+      light: ["bu-bg-light-primary", "hover:bu-bg-light-hover-primary"],
+      dark: ["bu-bg-dark-primary", "hover:bu-bg-dark-hover-primary"]
     }
   }
 });
 
-const primaryDisabledStyles = cva("text-white", {
+const primaryDisabledStyles = cva("bu-text-white", {
   variants: {
     theme: {
-      light: ["bg-light-primary-40", "hover:bg-light-primary-40"],
-      dark: ["bg-dark-primary-40", "hover:bg-dark-primary-40"]
+      light: ["bu-bg-light-primary-40", "hover:bu-bg-light-primary-40"],
+      dark: ["bu-bg-dark-primary-40", "hover:bu-bg-dark-primary-40"]
     }
   }
 });
@@ -23,8 +23,8 @@ const primaryDisabledStyles = cva("text-white", {
 const secondaryStyles = cva("", {
   variants: {
     theme: {
-      light: ["bg-light-primary-14", "hover:bg-light-hover-primary-10", "text-light-primary"],
-      dark: ["bg-dark-primary-14", "hover:bg-dark-hover-primary-10", "text-dark-primary"]
+      light: ["bu-bg-light-primary-14", "hover:bu-bg-light-hover-primary-10", "bu-text-light-primary"],
+      dark: ["bu-bg-dark-primary-14", "hover:bu-bg-dark-hover-primary-10", "bu-text-dark-primary"]
     }
   }
 });
@@ -32,8 +32,8 @@ const secondaryStyles = cva("", {
 const secondaryDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bg-light-primary-14", "hover:bg-light-primary-14", "text-light-primary-60"],
-      dark: ["bg-dark-primary-14", "hover:bg-dark-primary-14", "text-dark-primary-60"]
+      light: ["bu-bg-light-primary-14", "hover:bu-bg-light-primary-14", "bu-text-light-primary-60"],
+      dark: ["bu-bg-dark-primary-14", "hover:bu-bg-dark-primary-14", "bu-text-dark-primary-60"]
     }
   }
 });
@@ -41,8 +41,8 @@ const secondaryDisabledStyles = cva("", {
 const tertiaryStyles = cva("", {
   variants: {
     theme: {
-      light: ["bg-light-fill-primary", "hover:bg-light-hover-fill-primary", "text-light-label-60"],
-      dark: ["bg-dark-fill-primary", "hover:bg-dark-hover-fill-primary", "text-dark-label-60"]
+      light: ["bu-bg-light-fill-primary", "hover:bu-bg-light-hover-fill-primary", "bu-text-light-label-60"],
+      dark: ["bu-bg-dark-fill-primary", "hover:bu-bg-dark-hover-fill-primary", "bu-text-dark-label-60"]
     }
   }
 });
@@ -50,8 +50,8 @@ const tertiaryStyles = cva("", {
 const tertiaryDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bg-light-fill-primary", "hover:bg-light-fill-primary", "text-light-label-40"],
-      dark: ["bg-dark-fill-primary", "hover:bg-dark-fill-primary", "text-dark-label-60"]
+      light: ["bu-bg-light-fill-primary", "hover:bu-bg-light-fill-primary", "bu-text-light-label-40"],
+      dark: ["bu-bg-dark-fill-primary", "hover:bu-bg-dark-fill-primary", "bu-text-dark-label-60"]
     }
   }
 });
@@ -59,8 +59,8 @@ const tertiaryDisabledStyles = cva("", {
 const textStyles = cva("", {
   variants: {
     theme: {
-      light: ["text-light-label", "hover:text-light-primary"],
-      dark: ["text-dark-label", "hover:text-dark-primary"]
+      light: ["bu-text-light-label", "hover:bu-text-light-primary"],
+      dark: ["bu-text-dark-label", "hover:bu-text-dark-primary"]
     }
   }
 });
@@ -68,8 +68,8 @@ const textStyles = cva("", {
 const textDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["text-light-label-40", "hover:text-light-label-40"],
-      dark: ["text-dark-label-40", "hover:text-dark-label-40"]
+      light: ["bu-text-light-label-40", "hover:bu-text-light-label-40"],
+      dark: ["bu-text-dark-label-40", "hover:bu-text-dark-label-40"]
     }
   }
 });
@@ -78,43 +78,43 @@ const ghostStyles = cva("", {
   variants: {
     theme: {
       light: [
-        "text-light-primary",
-        "hover:text-light-hover-primary",
-        "border",
-        "border-solid",
-        "border-light-primary",
-        "hover:bg-light-primary-10"
+        "bu-text-light-primary",
+        "hover:bu-text-light-hover-primary",
+        "bu-border",
+        "bu-border-solid",
+        "bu-border-light-primary",
+        "hover:bu-bg-light-primary-10"
       ],
       dark: [
-        "text-dark-primary",
-        "hover:text-dark-hover-primary",
-        "border",
-        "border-solid",
-        "border-dark-primary",
-        "hover:bg-dark-primary-10"
+        "bu-text-dark-primary",
+        "hover:bu-text-dark-hover-primary",
+        "bu-border",
+        "bu-border-solid",
+        "bu-border-dark-primary",
+        "hover:bu-bg-dark-primary-10"
       ]
     }
   }
 });
 
-const ghostDisabledStyles = cva("text-white", {
+const ghostDisabledStyles = cva("bu-text-white", {
   variants: {
     theme: {
       light: [
-        "text-light-primary-60",
-        "hover:text-light-primary-60",
-        "border",
-        "border-solid",
-        "border-light-primary-60",
-        "hover:bg-transparent"
+        "bu-text-light-primary-60",
+        "hover:bu-text-light-primary-60",
+        "bu-border",
+        "bu-border-solid",
+        "bu-border-light-primary-60",
+        "hover:bu-bg-transparent"
       ],
       dark: [
-        "text-dark-primary-60",
-        "hover:text-dark-primary-60",
-        "border",
-        "border-solid",
-        "border-dark-primary-60",
-        "hover:bg-transparent"
+        "bu-text-dark-primary-60",
+        "hover:bu-text-dark-primary-60",
+        "bu-border",
+        "bu-border-solid",
+        "bu-border-dark-primary-60",
+        "hover:bu-bg-transparent"
       ]
     }
   }
@@ -152,7 +152,7 @@ const buttonVariants = (props: {
 }) => {
   const { theme, variant } = props;
 
-  return cva("box-border inline-flex items-center justify-center rounded-[5px]", {
+  return cva("bu-box-border bu-inline-flex bu-items-center bu-justify-center bu-rounded-[5px]", {
     variants: {
       variant: {
         primary: styles[variant].variant({ theme }),
@@ -162,14 +162,14 @@ const buttonVariants = (props: {
         ghost: styles[variant].variant({ theme })
       },
       size: {
-        small: `h-[30px]  min-w-[30px] px-[12px] text-[14px] leading-[24px]`,
-        medium: `h-[40px] min-w-[40px] px-[16px] text-[14px] leading-[24px]`,
-        large: `h-[48px] min-w-[48px] px-[24px] text-[16px] leading-[28px]`,
-        max: `h-[56px] min-w-[56px] px-[24px] text-[18px] leading-[30px]`
+        small: `bu-h-[30px] bu- bu-min-w-[30px] bu-px-[12px] bu-text-[14px] bu-leading-[24px]`,
+        medium: `bu-h-[40px] bu-min-w-[40px] bu-px-[16px] bu-text-[14px] bu-leading-[24px]`,
+        large: `bu-h-[48px] bu-min-w-[48px] bu-px-[24px] bu-text-[16px] bu-leading-[28px]`,
+        max: `bu-h-[56px] bu-min-w-[56px] bu-px-[24px] bu-text-[18px] bu-leading-[30px]`
       },
       shape: {
         normal: "",
-        circle: "rounded-[50%] px-[0px] py-[0px]"
+        circle: "bu-rounded-[50%] bu-px-[0px] bu-py-[0px]"
       },
       disabled: {
         true: styles[variant].disabled({ theme })

@@ -67,9 +67,9 @@ export const Button = ({
       )} ${className}`}
       disabled={disabled}
       {...props}>
-      {startIcon && <span className="mr-[9.5px]">{startIcon}</span>}
+      {startIcon && <span className="bu-mr-[9.5px]">{startIcon}</span>}
       {children}
-      {endIcon && <span className="ml-[9.5px]">{endIcon}</span>}
+      {endIcon && <span className="bu-ml-[9.5px]">{endIcon}</span>}
       {icon}
     </button>
   );
@@ -81,9 +81,9 @@ const WhiteButton: FC<ButtonProps> = (props) => {
     <Button
       {...props}
       variant="ghost"
-      className={`border-white text-white ${
-        theme === "light" ? "hover:text-light-primary" : "hover:text-dark-primary"
-      }  font-medium hover:bg-light-background`}></Button>
+      className={`bu-border-light-background bu-text-light-background ${
+        theme === "light" ? "hover:!bu-text-light-primary" : "hover:!bu-text-dark-primary"
+      }  bu-font-medium hover:!bu-bg-light-background`}></Button>
   );
 };
 
