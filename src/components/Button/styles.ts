@@ -41,8 +41,8 @@ const secondaryDisabledStyles = cva("", {
 const tertiaryStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-fill-primary", "hover:bu-bg-light-hover-fill-primary", "bu-text-light-label-60"],
-      dark: ["bu-bg-dark-fill-primary", "hover:bu-bg-dark-hover-fill-primary", "bu-text-dark-label-60"]
+      light: ["bu-bg-light-fill-secondary", "hover:bu-bg-light-hover-fill-secondary", "bu-text-light-label"],
+      dark: ["bu-bg-dark-fill-secondary", "hover:bu-bg-dark-hover-fill-secondary", "bu-text-dark-label"]
     }
   }
 });
@@ -152,7 +152,7 @@ const buttonVariants = (props: {
 }) => {
   const { theme, variant } = props;
 
-  return cva("bu-box-border bu-inline-flex bu-items-center bu-justify-center bu-rounded-[5px]", {
+  return cva("bu-box-border bu-inline-flex bu-items-center bu-justify-center bu-rounded-[4px]", {
     variants: {
       variant: {
         primary: styles[variant].variant({ theme }),
@@ -162,7 +162,7 @@ const buttonVariants = (props: {
         ghost: styles[variant].variant({ theme })
       },
       size: {
-        small: `bu-h-[30px] bu- bu-min-w-[30px] bu-px-[12px] bu-text-[14px] bu-leading-[24px]`,
+        small: `bu-h-[30px] bu-min-w-[30px] bu-px-[12px] bu-text-[14px] bu-leading-[24px]`,
         medium: `bu-h-[40px] bu-min-w-[40px] bu-px-[16px] bu-text-[14px] bu-leading-[24px]`,
         large: `bu-h-[48px] bu-min-w-[48px] bu-px-[24px] bu-text-[16px] bu-leading-[28px]`,
         max: `bu-h-[56px] bu-min-w-[56px] bu-px-[24px] bu-text-[18px] bu-leading-[30px]`
