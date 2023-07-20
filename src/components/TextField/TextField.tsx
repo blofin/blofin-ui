@@ -1,15 +1,20 @@
-import { ForwardedRef, LegacyRef, forwardRef } from "react";
+import { ForwardedRef, LegacyRef, ReactNode, forwardRef } from "react";
+import { Typography } from "../..";
 import { cn } from "../../utils/utils";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
 }
 
 const TextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { label, type, className, ...otherProps } = props;
   return (
     <label>
-      {label}
+      <Typography variant="body2" className="bu-mb-1">
+        {label}
+      </Typography>
       <input
         type={type}
         {...otherProps}

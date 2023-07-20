@@ -1,21 +1,27 @@
 import { forwardRef, LegacyRef } from "react";
 import { cn } from "../../utils/utils";
 import { InputProps } from "../TextField/TextField";
+import { Typography } from "../Typography/Typography";
 
 const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { label, type, className, ...otherProps } = props;
+  const { label, startAdornment, endAdornment, type, className, ...otherProps } = props;
   return (
     <label>
-      {label}
-      <input
-        type={type}
-        {...otherProps}
-        ref={ref as LegacyRef<HTMLInputElement>}
-        className={cn(
-          "bu-order-input bu-bg-background bu-ring-offset-background placeholder:bu-text-muted-foreground focus-visible:bu-ring-ring bu-flex bu-h-10 bu-w-full bu-rounded-md bu-border bu-px-3 bu-py-2 bu-text-sm file:bu-border-0 file:bu-bg-transparent file:bu-text-sm file:bu-font-medium focus-visible:bu-outline-none focus-visible:bu-ring-2 focus-visible:bu-ring-offset-2 disabled:bu-cursor-not-allowed disabled:bu-opacity-50",
-          className
-        )}
-      />
+      <Typography variant="body4" className="bu-mb-1 bu-text-light-label-60">
+        {label}
+      </Typography>
+      <div className="bu-rounded bu-bg-light-fill-secondary">
+        <div className="bu-flex bu-h-[40px] bu-w-full bu-items-center bu-justify-center">
+          <span className="bu-px-2">{startAdornment}</span>
+          <input
+            type={type}
+            {...otherProps}
+            ref={ref as LegacyRef<HTMLInputElement>}
+            className={cn("bu-flex-1 bu-bg-transparent focus-visible:bu-outline-0", className)}
+          />
+          <span className="bu-px-2">{endAdornment}</span>
+        </div>
+      </div>
     </label>
   );
 });
