@@ -1,0 +1,9 @@
+.tab{
+    @apply bu-flex;
+    li{
+        @apply bu-mr-[16px] bu-flex bu-flex-col bu-items-center;
+    }
+    li:last-child{
+        @apply bu-mr-[0];
+    }
+}
