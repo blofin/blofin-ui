@@ -3,8 +3,9 @@ import { BUIComponentSize } from "../..";
 import styles from "./index.module.scss";
 import { borderSyles, defaultActStyles, itemActStyles, itemStyles, noActStyles, noSmallActStyles, smallActStyles } from "./styles";
 import useTheme from "../../provider/useTheme";
+import { Base } from "../../types/component";
 
-interface TabProps {
+interface TabProps extends Base {
   items: {
     key: string;
     label: string;
@@ -30,7 +31,7 @@ const Tab: FC<TabProps> = ({ items, size, change }) => {
     } else {
       return `${itemActStyles()} ${defaultActStyles({ theme })}`;
     }
-  }, [size]);
+  }, [size,theme]);
 
   const noAct=useMemo(()=>{
     if(size==='small'){
@@ -38,7 +39,7 @@ const Tab: FC<TabProps> = ({ items, size, change }) => {
     }else{
         return noActStyles({theme})
     }
-  },[size])
+  },[size,theme])
 
   return (
     <div className="bu-inline-flex bu-flex-col">
