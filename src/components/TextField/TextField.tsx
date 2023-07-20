@@ -1,15 +1,11 @@
 import { ForwardedRef, LegacyRef, forwardRef } from "react";
 import { cn } from "../../utils/utils";
 
-type TextFieldProps = {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  [key: string]: any;
-};
+}
 
-const TextField = forwardRef(function TextField(
-  props: TextFieldProps,
-  ref: ForwardedRef<HTMLInputElement>
-) {
+const TextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { label, type, className, ...otherProps } = props;
   return (
     <label>
