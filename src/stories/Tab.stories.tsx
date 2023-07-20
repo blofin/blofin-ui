@@ -9,7 +9,18 @@ const meta: Meta<typeof Tab> = {
    * to learn how to generate automatic titles
    */
   title: "Components/Tab",
-  component: Tab
+  component: Tab,
+  argTypes: {
+    size: {
+      options: ["large", "medium", "small"],
+      control: { type: "radio" }
+    },
+    theme: {
+      options: ["light", "dark"],
+      control: { type: "radio" }
+    },
+
+  }
 };
 
 export default meta;
