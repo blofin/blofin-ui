@@ -50,7 +50,7 @@ export const Primary: Story = {
 
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <Tab items={items} size="small" change={change} />
+        <Tab items={items} size="medium" change={change} />
       </ThemeProvider>
     );
   }

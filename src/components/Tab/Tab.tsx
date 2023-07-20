@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useState } from "react";
 import { BUIComponentSize } from "../..";
 import styles from "./index.module.scss";
-import { defaultActStyles, itemActStyles, itemStyles, noActStyles, noSmallActStyles, smallActStyles } from "./styles";
+import { borderSyles, defaultActStyles, itemActStyles, itemStyles, noActStyles, noSmallActStyles, smallActStyles } from "./styles";
 import useTheme from "../../provider/useTheme";
 
 interface TabProps {
@@ -41,8 +41,8 @@ const Tab: FC<TabProps> = ({ items, size, change }) => {
   },[size])
 
   return (
-    <div>
-      <ul className={styles.tab}>
+    <div className="bu-inline-flex bu-flex-col">
+      <ul className={`${styles.tab} ${borderSyles({theme})}`}>
         {items.map((item) => {
           return (
             <li

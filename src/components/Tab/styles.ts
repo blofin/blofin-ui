@@ -40,12 +40,29 @@ const noActStyles = cva("", {
 });
 
 const noSmallActStyles = cva("", {
-    variants: {
-        theme: {
-          light: "bu-text-light-label",
-          dark: "bu-text-dark-label",
-        }
-      }
-})
+  variants: {
+    theme: {
+      light: "bu-text-light-label",
+      dark: "bu-text-dark-label"
+    }
+  }
+});
 
-export { itemStyles, itemActStyles, defaultActStyles, smallActStyles,noActStyles,noSmallActStyles };
+const borderSyles = cva("bu-border-b-[1px]", {
+  variants: {
+    theme: {
+      light: "bu-border-light-line-primary",
+      dark: "bu-border-dark-line-primary",
+    }
+  }
+});
+
+export {
+  itemStyles,
+  itemActStyles,
+  defaultActStyles,
+  smallActStyles,
+  noActStyles,
+  noSmallActStyles,
+  borderSyles
+};
