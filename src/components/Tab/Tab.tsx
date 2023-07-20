@@ -1,7 +1,15 @@
 import React, { FC, useMemo, useState } from "react";
 import { BUIComponentSize } from "../..";
 import styles from "./index.module.scss";
-import { borderSyles, defaultActStyles, itemActStyles, itemStyles, noActStyles, noSmallActStyles, smallActStyles } from "./styles";
+import {
+  borderSyles,
+  defaultActStyles,
+  itemActStyles,
+  itemStyles,
+  noActStyles,
+  noSmallActStyles,
+  smallActStyles
+} from "./styles";
 import useTheme from "../../provider/useTheme";
 import { Base } from "../../types/component";
 
@@ -31,19 +39,19 @@ const Tab: FC<TabProps> = ({ items, size, change }) => {
     } else {
       return `${itemActStyles()} ${defaultActStyles({ theme })}`;
     }
-  }, [size,theme]);
+  }, [size, theme]);
 
-  const noAct=useMemo(()=>{
-    if(size==='small'){
-        return noSmallActStyles({theme})
-    }else{
-        return noActStyles({theme})
+  const noAct = useMemo(() => {
+    if (size === "small") {
+      return noSmallActStyles({ theme });
+    } else {
+      return noActStyles({ theme });
     }
-  },[size,theme])
+  }, [size, theme]);
 
   return (
     <div className="bu-inline-flex bu-flex-col">
-      <ul className={`${styles.tab} ${borderSyles({theme})}`}>
+      <ul className={`${styles.tab} ${borderSyles({ theme })}`}>
         {items.map((item) => {
           return (
             <li
@@ -55,8 +63,8 @@ const Tab: FC<TabProps> = ({ items, size, change }) => {
           );
         })}
       </ul>
-      {items.map((item) => {
-        return active === item.key ? item.children : null;
+      {items.map((item, index) => {
+        return <div key={index}>{active === item.key ? item.children : null}</div>;
       })}
     </div>
   );
