@@ -1,16 +1,27 @@
 import { forwardRef, LegacyRef } from "react";
+import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
 import { InputProps } from "../TextField/TextField";
 import { Typography } from "../Typography/Typography";
+import { InputBgVariants, LabelVariants } from "./styles";
 
 const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { label, startAdornment, endAdornment, type, className, ...otherProps } = props;
+  const {
+    label,
+    startAdornment,
+    endAdornment,
+    type,
+    className,
+    theme: mode,
+    ...otherProps
+  } = props;
+  const { theme } = useTheme();
   return (
     <label>
-      <Typography variant="body4" className="bu-mb-1 bu-text-light-label-60">
+      <Typography variant="body4" className={cn(LabelVariants({ theme: mode ? mode : theme }))}>
         {label}
       </Typography>
-      <div className="bu-rounded bu-bg-light-fill-secondary">
+      <div className={cn(InputBgVariants({ theme: mode ? mode : theme }))}>
         <div className="bu-flex bu-h-[40px] bu-w-full bu-items-center bu-justify-center">
           <span className="bu-px-2">{startAdornment}</span>
           <input

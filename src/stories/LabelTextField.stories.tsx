@@ -21,6 +21,10 @@ const meta: Meta<typeof LabelTextField> = {
     color: {
       options: ["primary", "secondary", "success", "warning", "danger", "info"],
       control: { type: "select" }
+    },
+    theme: {
+      options: ["light", "dark"],
+      control: { type: "select" }
     }
   },
   parameters: { controls: { sort: "requiredFirst" } }
