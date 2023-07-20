@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { LabelTextField } from "../components/LabelTextField";
 import { TextField } from "../components/TextField";
 
 type Inputs = {
@@ -36,6 +37,11 @@ type Story = StoryObj<typeof TextField>;
  * See https://storybook.js.org/docs/react/api/csf
  * to learn how to use render functions.
  */
+export const Primary: Story = {
+  args: {
+    label: "Label"
+  }
+};
 
 export const All: Story = {
   render: () => {
