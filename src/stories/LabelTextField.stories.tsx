@@ -71,6 +71,12 @@ const LabelTextFieldWithTheme = ({
         error={true}
         helperText="This is an error"
       />
+      <LabelTextField
+        label={label}
+        startAdornment={startAdornment}
+        endAdornment={endAdornment}
+        disabled={true}
+      />
     </ThemeProvider>
   );
 };

@@ -19,7 +19,24 @@ const InputErrorStyles = cva("", {
   }
 });
 
-const InputBgVariants = ({ theme, error = false }: { theme: BUITheme; error?: boolean }) => {
+const InputDisabledStyles = cva("", {
+  variants: {
+    theme: {
+      light: ["!bu-text-light-label-60"],
+      dark: ["!bu-text-dark-label-60"]
+    }
+  }
+});
+
+const InputBgVariants = ({
+  theme,
+  error = false,
+  disabled = false
+}: {
+  theme: BUITheme;
+  error?: boolean;
+  disabled?: boolean;
+}) => {
   return cva("bu-rounded bu-border bu-border-transparent", {
     variants: {
       theme: {
@@ -30,16 +47,19 @@ const InputBgVariants = ({ theme, error = false }: { theme: BUITheme; error?: bo
       },
       error: {
         true: InputErrorStyles({ theme })
+      },
+      disabled: {
+        true: InputDisabledStyles({ theme })
       }
     }
-  })({ theme, error });
+  })({ theme, error, disabled });
 };
 
 const HelperTextVariants = cva("", {
   variants: {
     theme: {
-      light: ["bu-text-light-danger"],
-      dark: ["bu-text-dark-danger"]
+      light: ["!bu-text-light-danger"],
+      dark: ["!bu-text-dark-danger"]
     }
   }
 });

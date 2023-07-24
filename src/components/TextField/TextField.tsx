@@ -9,6 +9,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   endAdornment?: ReactNode;
   error?: boolean;
   helperText?: string;
+  disabled?: boolean;
 }
 
 const TextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
