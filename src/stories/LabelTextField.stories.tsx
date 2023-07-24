@@ -64,6 +64,12 @@ const LabelTextFieldWithTheme = ({
   return (
     <ThemeProvider value={{ theme: mode }}>
       <LabelTextField label={label} startAdornment={startAdornment} endAdornment={endAdornment} />
+      <LabelTextField
+        label={label}
+        startAdornment={startAdornment}
+        endAdornment={endAdornment}
+        error={true}
+      />
     </ThemeProvider>
   );
 };

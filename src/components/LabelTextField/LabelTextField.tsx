@@ -13,6 +13,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
     type,
     className,
     theme: mode,
+    error,
     ...otherProps
   } = props;
   const { theme } = useTheme();
@@ -21,7 +22,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
       <Typography variant="body4" className={cn(LabelVariants({ theme: mode ? mode : theme }))}>
         {label}
       </Typography>
-      <div className={cn(InputBgVariants({ theme: mode ? mode : theme }))}>
+      <div className={cn(InputBgVariants({ theme: mode ? mode : theme, error }))}>
         <div className="bu-flex bu-h-[40px] bu-w-full bu-items-center bu-justify-center">
           <span className="bu-px-2">{startAdornment}</span>
           <input
