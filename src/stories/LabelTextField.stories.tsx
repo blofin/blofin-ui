@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { ReactNode } from "react";
 import { LabelTextField } from "../components/LabelTextField";
+import useMode from "../hooks/useMode";
+import { ThemeProvider } from "../provider/ThemeProvider";
 
 type Inputs = {
   example: string;
@@ -45,4 +48,26 @@ export const Primary: Story = {
     startAdornment: "https://",
     endAdornment: ".com"
   }
+};
+
+const LabelTextFieldWithTheme = ({
+  label = "Label",
+  startAdornment = "https://",
+  endAdornment = ".com"
+}: {
+  label?: string;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
+}) => {
+  // Sets the hooks for both the label and primary props
+  const mode = useMode();
+  return (
+    <ThemeProvider value={{ theme: mode }}>
+      <LabelTextField label={label} startAdornment={startAdornment} endAdornment={endAdornment} />
+    </ThemeProvider>
+  );
+};
+
+export const WithTheme: Story = {
+  render: ({ ...args }) => <LabelTextFieldWithTheme {...args} />
 };

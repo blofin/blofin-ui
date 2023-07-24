@@ -24,8 +24,8 @@ export const parameters = {
     current: "light",
     classTarget: "html",
     stylePreview: true,
-    lightClass: "light",
-    darkClass: "dark",
+    lightClass: "bu-light",
+    darkClass: "bu-dark",
     dark: { ...themes.dark },
     light: { ...themes.light }
   },
