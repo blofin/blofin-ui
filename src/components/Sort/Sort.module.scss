@@ -1,0 +1,18 @@
+.sort-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 10px;
+  .icon {
+    width: 8px;
+    height: 4px;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    color: #BDBDBF;
+  }
+  .sort-active {
+      @apply bu-text-light-primary;
+  }
+}

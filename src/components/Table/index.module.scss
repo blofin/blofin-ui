@@ -1,0 +1,152 @@
+.container {
+  width: 100%;
+  // height: 100%;
+  margin: 0 auto;
+  overflow-y: scroll;
+  // box-shadow: 0px 0px 24px rgba(240, 242, 250, 0.6);
+  border-radius: 10px;
+}
+
+.shadow {
+  box-shadow: 0px 0px 24px rgba(240, 242, 250, 0.6);
+}
+
+.table {
+  table-layout: fixed;
+}
+
+.table-col-fixed-left {
+  position: sticky;
+  z-index: 1;
+}
+
+.table-col-fixed-left-last {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    width: 10px;
+    pointer-events: none;
+    transform: translateX(-100%);
+    transition: box-shadow 0.1s linear;
+    left: unset;
+    transform: translateX(100%);
+    right: 10px;
+    box-shadow: inset 6px 0 8px -3px rgb(0 0 0 / 5%);
+  }
+}
+
+.th {
+  width: auto;
+  font-weight: 300;
+  color: #bdbdbf;
+  @apply bu-bg-light-background;
+}
+
+.th:first-child {
+  padding-left: 20px;
+}
+.th:last-child {
+  padding-right: 20px;
+}
+
+.thead {
+  height: 64px;
+  @apply bu-order-1 bu-border-light-line-primary bu-text-light-label;
+}
+
+.td {
+  height: 80px;
+  overflow: hidden;
+  word-break: keep-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  &:first-child {
+    padding-left: 20px;
+  }
+  &:last-child {
+    padding-right: 20px;
+  }
+  @apply bu-order-1 bu-border-light-line-primary bu-bg-light-background;
+}
+
+tr:last-child {
+  .td {
+    border-bottom: none;
+  }
+}
+
+.hover {
+  &:hover {
+    td {
+      background: #f8f9fc;
+      transition: 0.1s linear;
+    }
+  }
+}
+
+.pagination-container {
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+}
+
+.pagination {
+  @apply bu-flex;
+  .prev {
+    @apply bu-w-[100px] bu-mr-[10px];
+  }
+  .next{
+    @apply bu-w-[100px];
+  }
+  .arrow {
+    width: 5px;
+    height: 10px;
+    margin-top: -1px;
+  }
+
+  .previcon {
+    path {
+      @apply bu-text-light-label;
+    }
+  }
+
+  .nexticon {
+    path {
+      @apply bu-text-light-label;
+    }
+  }
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+}
+
+.pageBtn {
+  height: 24px;
+  width: 24px;
+  padding: 5px;
+  min-width: 24px;
+}
+
+.priamry {
+  path {
+    @apply bu-text-light-label;
+  }
+}
+
+.disabled {
+  path {
+    @apply bu-text-light-label;
+  }
+}
+
+.empty-wrapper {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dcdcdd;
+}
