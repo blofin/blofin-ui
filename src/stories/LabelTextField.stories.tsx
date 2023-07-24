@@ -63,8 +63,14 @@ const LabelTextFieldWithTheme = ({
   const mode = useMode();
   return (
     <ThemeProvider value={{ theme: mode }}>
-      <LabelTextField label={label} startAdornment={startAdornment} endAdornment={endAdornment} />
       <LabelTextField
+        variant="filled"
+        label={label}
+        startAdornment={startAdornment}
+        endAdornment={endAdornment}
+      />
+      <LabelTextField
+        variant="filled"
         label={label}
         startAdornment={startAdornment}
         endAdornment={endAdornment}
@@ -72,10 +78,17 @@ const LabelTextFieldWithTheme = ({
         helperText="This is an error"
       />
       <LabelTextField
+        variant="filled"
         label={label}
         startAdornment={startAdornment}
         endAdornment={endAdornment}
         disabled={true}
+      />
+      <LabelTextField
+        variant="outlined"
+        label={label}
+        startAdornment={startAdornment}
+        endAdornment={endAdornment}
       />
     </ThemeProvider>
   );

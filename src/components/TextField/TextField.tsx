@@ -1,9 +1,11 @@
 import { ForwardedRef, LegacyRef, ReactNode, forwardRef } from "react";
 import { BUITheme, Typography } from "../..";
 import { cn } from "../../utils/utils";
+import { InputVariant } from "../LabelTextField/styles";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  variant: InputVariant;
   theme?: BUITheme;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
