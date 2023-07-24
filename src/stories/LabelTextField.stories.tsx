@@ -55,7 +55,7 @@ const LabelTextFieldWithTheme = ({
   startAdornment = "https://",
   endAdornment = ".com"
 }: {
-  label?: string;
+  label?: ReactNode;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
 }) => {

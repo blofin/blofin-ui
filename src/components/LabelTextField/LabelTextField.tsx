@@ -1,9 +1,20 @@
-import { forwardRef, LegacyRef } from "react";
+import { forwardRef, LegacyRef, ReactNode } from "react";
+import { BUITheme } from "../..";
 import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
-import { InputProps } from "../TextField/TextField";
 import { Typography } from "../Typography/Typography";
-import { HelperTextVariants, InputBgVariants, LabelVariants } from "./styles";
+import { HelperTextVariants, InputBgVariants, InputVariant, LabelVariants } from "./styles";
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: ReactNode;
+  variant: InputVariant;
+  theme?: BUITheme;
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
+  error?: boolean;
+  helperText?: string;
+  disabled?: boolean;
+}
 
 const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
