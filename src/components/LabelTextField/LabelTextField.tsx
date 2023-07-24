@@ -3,7 +3,7 @@ import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
 import { InputProps } from "../TextField/TextField";
 import { Typography } from "../Typography/Typography";
-import { InputBgVariants, LabelVariants } from "./styles";
+import { HelperTextVariants, InputBgVariants, LabelVariants } from "./styles";
 
 const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
@@ -14,6 +14,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
     className,
     theme: mode,
     error,
+    helperText,
     ...otherProps
   } = props;
   const { theme } = useTheme();
@@ -33,6 +34,13 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
           />
           <span className="bu-px-2">{endAdornment}</span>
         </div>
+      </div>
+      <div className="bu-mt-1">
+        <Typography
+          variant="body4"
+          className={cn(HelperTextVariants({ theme: mode ? mode : theme }))}>
+          {helperText}
+        </Typography>
       </div>
     </label>
   );

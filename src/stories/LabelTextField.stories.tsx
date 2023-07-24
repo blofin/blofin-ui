@@ -69,6 +69,7 @@ const LabelTextFieldWithTheme = ({
         startAdornment={startAdornment}
         endAdornment={endAdornment}
         error={true}
+        helperText="This is an error"
       />
     </ThemeProvider>
   );

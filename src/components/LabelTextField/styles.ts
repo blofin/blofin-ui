@@ -35,4 +35,13 @@ const InputBgVariants = ({ theme, error = false }: { theme: BUITheme; error?: bo
   })({ theme, error });
 };
 
-export { InputBgVariants, LabelVariants };
+const HelperTextVariants = cva("", {
+  variants: {
+    theme: {
+      light: ["bu-text-light-danger"],
+      dark: ["bu-text-dark-danger"]
+    }
+  }
+});
+
+export { HelperTextVariants, InputBgVariants, LabelVariants };
