@@ -11,8 +11,8 @@ hero:
       text: Components
       link: https://6487efa5fadd1ab4d229302f-zbyfpnevwp.chromatic.com/
     - theme: alt
-      text: Examples
-      link: /examples
+      text: Live Preview
+      link: https://blofin.com/trade/futures/BTC-USDT
 
 features:
   - title: High Performance
