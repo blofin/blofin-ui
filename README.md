@@ -34,14 +34,35 @@ npm install blofin-ui
 yarn add blofin-ui
 ```
 
+## Usage
+
+```jsx
+import "src/styles/globals.css";
+import { ThemeProvider } from "blofin-ui";
+import { Button } from "blofin-ui";
+
+<ThemeProvider value={{ theme: "light" }}>
+  <Component {...pageProps}></Component>
+</ThemeProvider>;
+```
+
+```css
+/** global.css */
+@import "blofin-ui/blofin.css";
+@import "./tailwind.css";
+
+/** tailwind.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
 ## Components
 
 - [x] Button
 - [x] Checkbox
 - [x] Input
-- [x] Radio
 - [x] Select
-- [x] Switch
 - [x] Textarea
 - [x] Tooltip
 - [x] Modal
@@ -49,13 +70,12 @@ yarn add blofin-ui
 - [x] Tabs
 - [x] Table
 - [x] Pagination
-- [x] Progress
 - [x] Loader
 - [x] Alert
 - [x] Badge
 - [x] Card
-- [x] Collapse
 - [x] Divider
+- [x] Silder
 - [x] List
 - [x] Tag
 - [x] Typography
