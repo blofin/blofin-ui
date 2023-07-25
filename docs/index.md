@@ -15,10 +15,10 @@ hero:
       link: /examples
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: High Performance
+    details: Our UI library is optimized for high performance, ensuring smooth and seamless user experience even during peak trading hours.
+  - title: Customization Options
+    details: With a wide range of customization options, our UI library allows exchange developers to create unique and branded trading platforms that align with their business identity.
+  - title: Responsive Design
+    details: Our UI library is built with responsive design principles, ensuring that the trading platform adapts seamlessly to different screen sizes and devices, providing a consistent user experience across platforms.
 ---
