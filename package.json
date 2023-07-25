@@ -34,7 +34,10 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "chromatic": "npx chromatic --project-token=chpt_d1d6e61f4152403 --auto-accept-changes"
+    "chromatic": "npx chromatic --project-token=chpt_d1d6e61f4152403 --auto-accept-changes",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "class-variance-authority": "^0.6.0",
@@ -88,6 +91,7 @@
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-svgr": "^3.2.0",
+    "vitepress": "^1.0.0-beta.6",
     "vitest": "^0.32.0"
   },
   "bugs": {
