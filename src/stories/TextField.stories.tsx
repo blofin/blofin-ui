@@ -16,10 +16,6 @@ const meta: Meta<typeof TextField> = {
   title: "Components/TextField",
   component: TextField,
   argTypes: {
-    label: {
-      control: { type: "text" },
-      defaultValue: "TextField"
-    },
     color: {
       options: ["primary", "secondary", "success", "warning", "danger", "info"],
       control: { type: "select" }
@@ -39,7 +35,7 @@ type Story = StoryObj<typeof TextField>;
  */
 export const Primary: Story = {
   args: {
-    label: "Label"
+    type: "text"
   }
 };
 
@@ -57,15 +53,15 @@ export const All: Story = {
       /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
       <form className="bu-flex bu-max-w-sm bu-flex-col bu-gap-4" onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
-        <TextField label="test" defaultValue="test" {...register("example")} />
+        <TextField defaultValue="test" {...register("example")} />
 
         {/* include validation with required or other standard HTML validation rules */}
-        <TextField label="example" {...register("exampleRequired", { required: true })} />
+        <TextField {...register("exampleRequired", { required: true })} />
 
         {/* errors will return when field validation fails  */}
         {errors.exampleRequired && <span>This field is required</span>}
 
-        <TextField label="submit" type="submit" />
+        <TextField type="submit" />
       </form>
     );
   }

@@ -5,6 +5,8 @@ export default defineConfig({
   title: "Blofin UI",
   description: "User interface for crypto exchange.",
   themeConfig: {
+    siteTitle: false,
+    logo: "/logo.svg",
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
