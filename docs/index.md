@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "Blofin UI Docs"
-  text: "Official docs for Blofin UI library."
-  tagline: "Introducing our exquisite and sophisticated UI library tailored specifically for discerning crypto exchanges."
+  name: "Blofin UI"
+  text: "User interface for crypto exchange."
+  tagline: "Exquisite and sophisticated UI library tailored specifically for discerning crypto exchanges."
   actions:
     - theme: brand
       text: Components

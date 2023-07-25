@@ -2,8 +2,8 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Blofin UI Docs",
-  description: "Official docs for Blofin UI library.",
+  title: "Blofin UI",
+  description: "User interface for crypto exchange.",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
