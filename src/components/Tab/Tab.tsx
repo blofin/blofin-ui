@@ -64,7 +64,7 @@ const Tab: FC<TabProps> = ({ items, size, change }) => {
         })}
       </ul>
       {items.map((item, index) => {
-        return <div key={index}>{active === item.key ? item.children : null}</div>;
+        return <div className="bu-h-[100%]" key={index}>{active === item.key ? item.children : null}</div>;
       })}
     </div>
   );
