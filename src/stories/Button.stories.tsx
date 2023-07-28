@@ -2,6 +2,7 @@ import { Meta } from "@storybook/react";
 import { Button } from "../components/Button/Button";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
+import DemoIcon from '../assets/icons/demo.svg'
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
@@ -47,7 +48,7 @@ export const All = {
           <Button variant="primary" size="medium">
             Button
           </Button>
-          <Button variant="secondary" size="medium">
+          <Button variant="secondary" size="medium" endIcon={<DemoIcon className="bu-w-[18px] bu-h-[18px]" />}>
             Button
           </Button>
           <Button variant="tertiary" size="medium">
@@ -62,7 +63,7 @@ export const All = {
           <Button variant="primary" size="medium" startIcon="111">
             Button
           </Button>
-          <Button variant="primary" size="medium" endIcon={<i>222</i>}>
+          <Button variant="primary" size="medium">
             Button
           </Button>
           <Button variant="primary" size="medium" shape="circle" icon={<i>2</i>}></Button>
