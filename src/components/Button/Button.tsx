@@ -69,7 +69,7 @@ export const Button = ({
       {...props}>
       {startIcon && <span className="bu-mr-[9.5px]">{startIcon}</span>}
       {children}
-      {endIcon && <span className="bu-ml-[9.5px]">{endIcon}</span>}
+      {endIcon && <span className="bu-ml-[9.5px] bu-flex bu-items-center">{endIcon}</span>}
       {icon}
     </button>
   );
