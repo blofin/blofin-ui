@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, Fragment, useMemo, useState } from "react";
 import { BUIComponentSize } from "../..";
 import styles from "./index.module.scss";
 import {
@@ -63,9 +63,15 @@ const Tab: FC<TabProps> = ({ items, size, change }) => {
           );
         })}
       </ul>
-      {items.map((item, index) => {
-        return <div className="bu-h-[100%]" key={index}>{active === item.key ? item.children : null}</div>;
-      })}
+      <div className="bu-h-[100%]">
+        {items.map((item, index) => {
+          return (
+            <Fragment key={index}>
+              {active === item.key ? item.children : null}
+            </Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 };
