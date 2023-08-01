@@ -1,11 +1,6 @@
 import { BUIComponentSize } from "../../types/component";
 
-export type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "tertiary"
-  | "text"
-  | "ghost";
+export type ButtonVariant = "primary" | "secondary" | "tertiary" | "text" | "ghost" | "info";
 
 export type ButtonSize = BUIComponentSize | "max";
 
