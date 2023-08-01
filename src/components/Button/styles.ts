@@ -74,6 +74,24 @@ const textDisabledStyles = cva("", {
   }
 });
 
+const infoStyles = cva("", {
+  variants: {
+    theme: {
+      light: ["bu-text-light-label-40", "hover:bu-text-light-primary"],
+      dark: ["bu-text-dark-label-40", "hover:bu-text-dark-primary"]
+    }
+  }
+});
+
+const infoDisabledStyles = cva("", {
+  variants: {
+    theme: {
+      light: ["bu-text-light-label-40", "hover:bu-text-light-label-40"],
+      dark: ["bu-text-dark-label-40", "hover:bu-text-dark-label-40"]
+    }
+  }
+});
+
 const ghostStyles = cva("", {
   variants: {
     theme: {
@@ -140,6 +158,10 @@ const styles = {
   ghost: {
     variant: ghostStyles,
     disabled: ghostDisabledStyles
+  },
+  info:{
+    variant:infoStyles,
+    disabled: infoDisabledStyles
   }
 };
 
@@ -159,7 +181,8 @@ const buttonVariants = (props: {
         secondary: styles[variant].variant({ theme }),
         tertiary: styles[variant].variant({ theme }),
         text: styles[variant].variant({ theme }),
-        ghost: styles[variant].variant({ theme })
+        ghost: styles[variant].variant({ theme }),
+        info:styles[variant].variant({ theme })
       },
       size: {
         small: `bu-h-[30px] bu-min-w-[80px] bu-px-[12px] bu-text-[14px] bu-leading-[24px]`,

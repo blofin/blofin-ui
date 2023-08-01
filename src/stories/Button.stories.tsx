@@ -60,6 +60,9 @@ export const All = {
           <Button variant="text" size="medium">
             Button
           </Button>
+          <Button variant="info" size="medium" disabled>
+            Button
+          </Button>
           <Button variant="primary" size="medium" startIcon="111">
             Button
           </Button>
