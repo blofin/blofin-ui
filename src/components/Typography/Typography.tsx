@@ -53,9 +53,7 @@ export const Typography = ({
 
   return (
     <TypographyTag
-      className={`${cn(
-        TypographyVariants({ variant, weight, theme: mode ? mode : theme })
-      )} ${className}`}
+      className={cn(TypographyVariants({ variant, weight, theme: mode ? mode : theme }), className)}
       {...props}>
       {children}
     </TypographyTag>
