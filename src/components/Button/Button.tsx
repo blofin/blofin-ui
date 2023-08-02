@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React, { ButtonHTMLAttributes, FC } from "react";
 import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";
 import buttonVariants from "./styles";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./types";
 import useTheme from "../../provider/useTheme";
 
-export interface ButtonProps extends Base {
+export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button type
    */
