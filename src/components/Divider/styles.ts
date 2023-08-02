@@ -9,4 +9,13 @@ const DividerVariants = cva("", {
   }
 });
 
-export { DividerVariants };
+const VerticalDividerVariants = cva("bu-h-full bu-w-px bu-border bu-border-r", {
+  variants: {
+    theme: {
+      light: "bu-border-light-label-20 bu-bg-light-label-20",
+      dark: "bu-bg-dark-light-label-20 bu-border-dark-label-20"
+    }
+  }
+});
+
+export { DividerVariants, VerticalDividerVariants };

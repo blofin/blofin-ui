@@ -1,6 +1,7 @@
 import { Badge } from "./components/Badge/Badge";
 import { Button } from "./components/Button/Button";
 import { Dialog } from "./components/Dialog/Dialog";
+import { Divider } from "./components/Divider";
 import { LabelTextField } from "./components/LabelTextField";
 import { useNotification } from "./components/Notification/Notification";
 import { Popover } from "./components/Popover/Popover";
@@ -21,6 +22,7 @@ export {
   Badge,
   Button,
   Dialog,
+  Divider,
   LabelTextField,
   Popover,
   SortButton,

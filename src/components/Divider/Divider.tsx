@@ -1,8 +1,20 @@
 import useTheme from "../../provider/useTheme";
+import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
-import { DividerVariants } from "./styles";
+import { DividerVariants, VerticalDividerVariants } from "./styles";
 
-export const Divider = () => {
+type DividerDirection = "vertical" | "horizontal";
+
+export interface DividerProps {
+  direction: DividerDirection;
+  theme?: BUITheme;
+}
+
+export const Divider = ({ direction = "horizontal", theme: mode }: DividerProps) => {
   const { theme } = useTheme();
-  return <hr className={`${cn(DividerVariants({ theme }))}`} />;
+  if (direction === "horizontal") {
+    return <hr className={`${cn(DividerVariants({ theme: theme ? theme : mode }))}`} />;
+  } else {
+    return <div className={`${cn(VerticalDividerVariants({ theme: theme ? theme : mode }))}`} />;
+  }
 };
