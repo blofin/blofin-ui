@@ -22,6 +22,7 @@ export {
   Badge,
   Button,
   Dialog,
+  Divider,
   LabelTextField,
   Popover,
   SortButton,
@@ -32,7 +33,7 @@ export {
   Typography
 };
 
-export type { BUIComponentColor, BUIComponentSize, BUITheme, Divider, TableColumnProps, TextAlign };
+export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, TextAlign };
 
 export { ThemeProvider };
 
