@@ -12,6 +12,7 @@ import {
 } from "./styles";
 import useTheme from "../../provider/useTheme";
 import { Base } from "../../types/component";
+import { cn } from "../../utils/utils";
 
 interface TabProps extends Base {
   items: {
@@ -23,7 +24,7 @@ interface TabProps extends Base {
   change: (key: string) => void;
 }
 
-const Tab: FC<TabProps> = ({ items, size, change }) => {
+const Tab: FC<TabProps> = ({ items, size, change,className }) => {
   const [active, setActive] = useState(items[0].key);
 
   const { theme } = useTheme();
@@ -51,7 +52,7 @@ const Tab: FC<TabProps> = ({ items, size, change }) => {
 
   return (
     <div className="bu-inline-flex bu-flex-col">
-      <ul className={`${styles.tab} ${borderSyles({ theme })}`}>
+      <ul className={`${styles.tab} ${size !== "small" ? borderSyles({ theme }) : ""}`}>
         {items.map((item) => {
           return (
             <li
@@ -63,13 +64,9 @@ const Tab: FC<TabProps> = ({ items, size, change }) => {
           );
         })}
       </ul>
-      <div className="bu-h-[100%]">
+      <div className={cn('bu-h-full',className)}>
         {items.map((item, index) => {
-          return (
-            <Fragment key={index}>
-              {active === item.key ? item.children : null}
-            </Fragment>
-          );
+          return <Fragment key={index}>{active === item.key ? item.children : null}</Fragment>;
         })}
       </div>
     </div>
