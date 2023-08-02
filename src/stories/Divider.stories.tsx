@@ -21,6 +21,16 @@ type Story = StoryObj<typeof Divider>;
  */
 export const Primary: Story = {
   render: () => {
-    return <Divider />;
+    return <Divider direction="horizontal" />;
+  }
+};
+
+export const Vertical: Story = {
+  render: () => {
+    return (
+      <div className="bu-h-[24px] bu-w-full">
+        <Divider direction="vertical" />
+      </div>
+    );
   }
 };

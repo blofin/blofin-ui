@@ -1,6 +1,7 @@
 import { Badge } from "./components/Badge/Badge";
 import { Button } from "./components/Button/Button";
 import { Dialog } from "./components/Dialog/Dialog";
+import { Divider } from "./components/Divider";
 import { LabelTextField } from "./components/LabelTextField";
 import { useNotification } from "./components/Notification/Notification";
 import { Popover } from "./components/Popover/Popover";
@@ -31,7 +32,7 @@ export {
   Typography
 };
 
-export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, TextAlign };
+export type { BUIComponentColor, BUIComponentSize, BUITheme, Divider, TableColumnProps, TextAlign };
 
 export { ThemeProvider };
 
