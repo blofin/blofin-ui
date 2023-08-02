@@ -53,15 +53,15 @@ export const All: Story = {
       /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
       <form className="bu-flex bu-max-w-sm bu-flex-col bu-gap-4" onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
-        <TextField defaultValue="test" {...register("example")} />
+        <TextField variant="outlined" defaultValue="test" {...register("example")} />
 
         {/* include validation with required or other standard HTML validation rules */}
-        <TextField {...register("exampleRequired", { required: true })} />
+        <TextField variant="outlined" {...register("exampleRequired", { required: true })} />
 
         {/* errors will return when field validation fails  */}
         {errors.exampleRequired && <span>This field is required</span>}
 
-        <TextField type="submit" />
+        <TextField variant="filled" type="submit" />
       </form>
     );
   }
