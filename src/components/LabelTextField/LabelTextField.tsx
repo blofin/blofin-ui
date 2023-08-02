@@ -14,6 +14,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   error?: boolean;
   helperText?: string;
   disabled?: boolean;
+  inputClassName?: string;
 }
 
 const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -23,6 +24,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
     endAdornment,
     type,
     className,
+    inputClassName,
     variant,
     theme: mode,
     error,
@@ -32,22 +34,37 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
   } = props;
   const { theme } = useTheme();
   return (
-    <label>
+    <div>
       {label && (
-        <Typography variant="body4" className={cn(LabelVariants({ theme: mode ? mode : theme }))}>
-          {label}
-        </Typography>
+        <label htmlFor={`bui-${label}`}>
+          <Typography variant="body4" className={cn(LabelVariants({ theme: mode ? mode : theme }))}>
+            {label}
+          </Typography>
+        </label>
       )}
       <div
-        className={cn(InputBgVariants({ variant, theme: mode ? mode : theme, error, disabled }))}>
-        <div className="bu-flex bu-h-[40px] bu-w-full bu-items-center bu-justify-center">
+        className={cn(
+          InputBgVariants({
+            variant,
+            theme: mode ? mode : theme,
+            error,
+            disabled,
+            noClassName: !className
+          }),
+          className
+        )}>
+        <div className="bu-flex bu-h-full bu-w-full bu-items-center bu-justify-center">
           <span className="bu-px-2">{startAdornment}</span>
           <input
+            id={`bui-${label}`}
             disabled={disabled}
             type={type}
             {...otherProps}
             ref={ref as LegacyRef<HTMLInputElement>}
-            className={cn("bu-flex-1 bu-bg-transparent focus-visible:bu-outline-0", className)}
+            className={cn(
+              "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent focus-visible:bu-outline-0",
+              inputClassName
+            )}
           />
           <span className="bu-px-2">{endAdornment}</span>
         </div>
@@ -59,7 +76,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
           {helperText}
         </Typography>
       </div>
-    </label>
+    </div>
   );
 });
 

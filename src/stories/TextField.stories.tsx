@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { ReactNode } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { LabelTextField } from "../components/LabelTextField";
 import { TextField } from "../components/TextField";
+import useMode from "../hooks/useMode";
+import { ThemeProvider } from "../provider/ThemeProvider";
 
 type Inputs = {
   example: string;
@@ -39,6 +42,42 @@ export const Primary: Story = {
   }
 };
 
+const TextFieldWithTheme = ({
+  startAdornment = "https://",
+  endAdornment = ".com"
+}: {
+  startAdornment?: ReactNode;
+  endAdornment?: ReactNode;
+}) => {
+  // Sets the hooks for both the and primary props
+  const mode = useMode();
+  return (
+    <ThemeProvider value={{ theme: mode }}>
+      <div className="bu-flex bu-flex-col bu-gap-2">
+        <TextField variant="filled" startAdornment={startAdornment} endAdornment={endAdornment} />
+        <TextField
+          variant="filled"
+          startAdornment={startAdornment}
+          endAdornment={endAdornment}
+          error={true}
+        />
+        <TextField
+          variant="filled"
+          startAdornment={startAdornment}
+          endAdornment={endAdornment}
+          disabled={true}
+        />
+        <TextField variant="outlined" startAdornment={startAdornment} endAdornment={endAdornment} />
+        <TextField variant="outlined" className="bu-h-[30px] bu-w-24" />
+      </div>
+    </ThemeProvider>
+  );
+};
+
+export const WithTheme: Story = {
+  render: ({ ...args }) => <TextFieldWithTheme {...args} />
+};
+
 export const All: Story = {
   render: () => {
     const {
@@ -53,15 +92,15 @@ export const All: Story = {
       /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
       <form className="bu-flex bu-max-w-sm bu-flex-col bu-gap-4" onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
-        <TextField defaultValue="test" {...register("example")} />
+        <TextField variant="outlined" defaultValue="test" {...register("example")} />
 
         {/* include validation with required or other standard HTML validation rules */}
-        <TextField {...register("exampleRequired", { required: true })} />
+        <TextField variant="outlined" {...register("exampleRequired", { required: true })} />
 
         {/* errors will return when field validation fails  */}
         {errors.exampleRequired && <span>This field is required</span>}
 
-        <TextField type="submit" />
+        <TextField variant="filled" type="submit" />
       </form>
     );
   }

@@ -52,14 +52,16 @@ const InputBgVariants = ({
   variant,
   theme,
   error = false,
-  disabled = false
+  disabled = false,
+  noClassName = true
 }: {
   variant: InputVariant;
   theme: BUITheme;
   error?: boolean;
   disabled?: boolean;
+  noClassName?: boolean;
 }) => {
-  return cva("bu-rounded bu-border", {
+  return cva("bu-w-full bu-rounded bu-border", {
     variants: {
       variant: {
         filled: InputFilledStyles({ theme }),
@@ -74,9 +76,12 @@ const InputBgVariants = ({
       },
       disabled: {
         true: InputDisabledStyles({ theme })
+      },
+      noClassName: {
+        true: "bu-h-[40px]"
       }
     }
-  })({ variant, theme, error, disabled });
+  })({ variant, theme, error, disabled, noClassName });
 };
 
 const HelperTextVariants = cva("", {

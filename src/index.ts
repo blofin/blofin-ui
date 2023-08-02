@@ -8,6 +8,7 @@ import SortButton, { TextAlign } from "./components/Sort/SortButton";
 import SortGroup from "./components/Sort/SortGroup";
 import { Tab } from "./components/Tab/Tab";
 import Table, { TableColumnProps } from "./components/Table";
+import { TextField } from "./components/TextField";
 import { useToast } from "./components/Toast/Toast";
 import { Typography } from "./components/Typography/Typography";
 
@@ -26,6 +27,7 @@ export {
   SortGroup,
   Tab,
   Table,
+  TextField,
   Typography
 };
 
