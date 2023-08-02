@@ -6,7 +6,7 @@ import { Typography } from "../Typography/Typography";
 import { HelperTextVariants, InputBgVariants, InputVariant, LabelVariants } from "./styles";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: ReactNode;
+  label?: ReactNode;
   variant: InputVariant;
   theme?: BUITheme;
   startAdornment?: ReactNode;
@@ -33,9 +33,11 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
   const { theme } = useTheme();
   return (
     <label>
-      <Typography variant="body4" className={cn(LabelVariants({ theme: mode ? mode : theme }))}>
-        {label}
-      </Typography>
+      {label && (
+        <Typography variant="body4" className={cn(LabelVariants({ theme: mode ? mode : theme }))}>
+          {label}
+        </Typography>
+      )}
       <div
         className={cn(InputBgVariants({ variant, theme: mode ? mode : theme, error, disabled }))}>
         <div className="bu-flex bu-h-[40px] bu-w-full bu-items-center bu-justify-center">
