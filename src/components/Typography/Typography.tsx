@@ -32,6 +32,7 @@ export interface TypographyProps {
   className?: string;
   children?: React.ReactNode;
   theme?: BUITheme;
+  component?: React.ElementType;
 }
 
 /**
@@ -43,17 +44,16 @@ export const Typography = ({
   className = "",
   children,
   theme: mode,
+  component,
   ...props
 }: TypographyProps) => {
   const { theme } = useTheme();
 
-  const TypographyTag = TYPEOGRAPHY_TAGS[variant] as TypographyTagType;
+  const TypographyTag = component ? component : (TYPEOGRAPHY_TAGS[variant] as TypographyTagType);
 
   return (
     <TypographyTag
-      className={`${cn(
-        TypographyVariants({ variant, weight, theme: mode ? mode : theme })
-      )} ${className}`}
+      className={cn(TypographyVariants({ variant, weight, theme: mode ? mode : theme }), className)}
       {...props}>
       {children}
     </TypographyTag>
