@@ -38,12 +38,12 @@ yarn add blofin-ui
 
 ```jsx
 import "src/styles/globals.css";
-import { ThemeProvider } from "blofin-ui";
+import { BlofinUiProvider } from "blofin-ui";
 import { Button } from "blofin-ui";
 
-<ThemeProvider value={{ theme: "light" }}>
+<BlofinUiProvider value={{ theme: "light" }}>
   <Component {...pageProps}></Component>
-</ThemeProvider>;
+</BlofinUiProvider>;
 ```
 
 ```css

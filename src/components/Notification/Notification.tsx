@@ -1,4 +1,13 @@
-import React, { FC, useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, {
+  FC,
+  Fragment,
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import ReactDOM from "react-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styles from "./notification.module.scss";
@@ -10,26 +19,12 @@ import Danger from "../../assets/icons/danger.svg";
 import { BUIComponentType } from "../../types/component";
 import { bgStyles, closeIconStyles, iconstyles, textStyles, textbg } from "./style";
 import CloseIcon from "../../assets/icons/close.svg";
-
+import { NoticeContext } from "../../provider/NoticeProvider";
 interface NotificationMsgProps {
   title: string;
   children: React.ReactNode;
   type: BUIComponentType;
   remove: () => void;
-}
-
-type configType = {
-  title: string;
-  msg: string;
-};
-
-type Methods = (config: configType, type: BUIComponentType) => void;
-
-interface NotificationRef {
-  info: Methods;
-  success: Methods;
-  warning: Methods;
-  danger: Methods;
 }
 
 const Icon: FC<{ type: BUIComponentType }> = ({ type }) => {
@@ -61,12 +56,16 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
   };
 
   return (
-    <div className={`bu-mb-[24px] bu-w-full bu-rounded-[6px] bu-shadow-toast ${bgStyles({ theme })}`}>
+    <div
+      className={`bu-mb-[24px] bu-w-full bu-rounded-[6px] bu-shadow-toast ${bgStyles({ theme })}`}>
       <div className="bu-flex bu-rounded-[6px] bu-px-[24px] bu-py-[16px]">
         <Icon type={type} />
-        <div className="bu-flex w-full bu-flex-col">
+        <div className="w-full bu-flex bu-flex-col">
           <div className="bu-mb-[8px] bu-flex bu-justify-between">
-            <span className={`bu-w-[250px] bu-break-words bu-text-[16px] bu-font-medium bu-leading-[24px] bu-tracking-[-0.2px] ${textbg({ theme })}`}>
+            <span
+              className={`bu-w-[250px] bu-break-words bu-text-[16px] bu-font-medium bu-leading-[24px] bu-tracking-[-0.2px] ${textbg(
+                { theme }
+              )}`}>
               {title}
             </span>
             <CloseIcon onClick={close} className={closeIconStyles({ theme })} />
@@ -79,38 +78,8 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
   );
 };
 
-const NotificationContainer = React.forwardRef((props, ref) => {
-  const [notificationList, setNotificationList] = useState<
-    { title: string; node: React.ReactNode; id: number; type: BUIComponentType }[]
-  >([]);
-
-  const key = useRef(0);
-
-  const open = (config: configType, type: BUIComponentType) => {
-    setNotificationList((list) => [
-      ...list,
-      {
-        title: config.title,
-        node: config.msg,
-        id: key.current,
-        type: type
-      }
-    ]);
-    key.current += 1;
-  };
-
-  useImperativeHandle(ref, () => {
-    return {
-      info: open,
-      success: open,
-      warning: open,
-      danger: open
-    };
-  });
-
-  const remove = (id: number) => {
-    setNotificationList((val) => val.filter((item) => item.id !== id));
-  };
+const NotificationContainer = () => {
+  const { notificationList, remove } = useContext(NoticeContext);
 
   return (
     <TransitionGroup className="bu-fixed bu-bottom-[32px] bu-left-[32px] bu-z-[9999] bu-w-[384px]">
@@ -139,51 +108,8 @@ const NotificationContainer = React.forwardRef((props, ref) => {
       })}
     </TransitionGroup>
   );
-});
+};
 
-export const Notification = React.forwardRef((props, ref) => {
-  const [iseRender, setIsRender] = useState(false);
-
-  const node = React.useMemo(() => document.createElement("div"), []);
-
-  useEffect(() => {
-    node.id = "blofin-notification";
-    const notificationContainer = document.getElementById("blofin-notification");
-    if (!notificationContainer) {
-      document.body.appendChild(node);
-      setIsRender(true);
-    }
-  }, []);
-
-  return iseRender ? ReactDOM.createPortal(<NotificationContainer ref={ref} />, node) : null;
-});
-
-export const useNotification = () => {
-  const NotificationRef = useRef<NotificationRef>(null);
-
-  const info = (config: configType) => {
-    NotificationRef.current?.info(config, "info");
-  };
-
-  const success = (config: configType) => {
-    NotificationRef.current?.success(config, "success");
-  };
-
-  const warning = (config: configType) => {
-    NotificationRef.current?.warning(config, "warning");
-  };
-
-  const danger = (config: configType) => {
-    NotificationRef.current?.danger(config, "danger");
-  };
-
-  return {
-    methods: {
-      info,
-      success,
-      warning,
-      danger
-    },
-    context: <Notification ref={NotificationRef} />
-  };
+export const Notification = () => {
+  return ReactDOM.createPortal(<NotificationContainer />, document.body);
 };

@@ -3,7 +3,6 @@ import { Button } from "./components/Button/Button";
 import { Dialog } from "./components/Dialog/Dialog";
 import { Divider } from "./components/Divider";
 import { LabelTextField } from "./components/LabelTextField";
-import { useNotification } from "./components/Notification/Notification";
 import { Popover } from "./components/Popover/Popover";
 import SortButton, { TextAlign } from "./components/Sort/SortButton";
 import SortGroup from "./components/Sort/SortGroup";
@@ -37,4 +36,4 @@ export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, T
 
 export { ThemeProvider };
 
-export { useNotification, useTheme, useToast };
+export { useTheme, useToast };
