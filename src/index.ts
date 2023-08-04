@@ -11,9 +11,10 @@ import Table, { TableColumnProps } from "./components/Table";
 import { TextField } from "./components/TextField";
 import { useToast } from "./components/Toast/Toast";
 import { Typography } from "./components/Typography/Typography";
-
+import { NoticeProvider } from "./provider/NoticeProvider";
 import { ThemeProvider } from "./provider/ThemeProvider";
 import useTheme from "./provider/useTheme";
+import useNotification from "./hooks/useNotification";
 import "./scss/base.scss";
 import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component";
 
@@ -34,6 +35,6 @@ export {
 
 export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, TextAlign };
 
-export { ThemeProvider };
+export { ThemeProvider, NoticeProvider };
 
-export { useTheme, useToast };
+export { useTheme, useToast, useNotification };

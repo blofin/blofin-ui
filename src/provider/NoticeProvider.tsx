@@ -9,13 +9,6 @@ export interface NotificationType {
   type: BUIComponentType;
 }
 
-interface NotificationRef {
-  info: Methods;
-  success: Methods;
-  warning: Methods;
-  danger: Methods;
-}
-
 export type configType = {
   title: string;
   msg: string;
