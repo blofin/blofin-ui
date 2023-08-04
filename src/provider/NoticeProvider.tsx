@@ -1,4 +1,4 @@
-import { FC, createContext, useRef, useState } from "react";
+import { FC, createContext, useEffect, useRef, useState } from "react";
 import { BUIComponentType } from "../types/component";
 import { Notification } from "../components/Notification/Notification";
 
@@ -20,21 +20,22 @@ interface NoticeContextProps {
   notificationList: NotificationType[];
   setNotificationList: (item: NotificationType[]) => void;
   open: Methods;
-  remove:(id:number)=>void
+  remove: (id: number) => void;
 }
 
 const NoticeContext = createContext<NoticeContextProps>({
   notificationList: [],
   setNotificationList: () => {},
-  open:()=>{
-    console.warn("not methods")
+  open: () => {
+    console.warn("not methods");
   },
-  remove:()=>{}
+  remove: () => {}
 });
 
 const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [notificationList, setNotificationList] = useState<NotificationType[]>([]);
 
+  const [visible, setVisible] = useState(false);
 
   const key = useRef(0);
 
@@ -55,6 +56,10 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
     setNotificationList((val) => val.filter((item) => item.id !== id));
   };
 
+  useEffect(() => {
+    setVisible(true);
+  }, []);
+
   return (
     <NoticeContext.Provider
       value={{
@@ -64,7 +69,7 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
         remove
       }}>
       {children}
-      <Notification />
+      {visible && <Notification />}
     </NoticeContext.Provider>
   );
 };
