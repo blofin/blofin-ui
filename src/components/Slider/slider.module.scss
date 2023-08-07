@@ -6,7 +6,6 @@
       @apply bu-absolute;
       @apply bu-w-full;
       @apply bu-h-1;
-      @apply bu-bg-gray-300;
       @apply bu-rounded-full;
       @apply bu-top-1/2;
       @apply -bu-translate-y-1/2 bu-transform;
@@ -14,7 +13,6 @@
     .track {
       @apply bu-absolute;
       @apply bu-h-1;
-      @apply bu-bg-blue-500;
       @apply bu-rounded-full;
       @apply bu-top-1/2;
       @apply -bu-translate-y-1/2 bu-transform;
@@ -30,12 +28,11 @@
         @apply bu-w-2;
         @apply bu-h-2;
         @apply bu-rounded-full;
-        @apply bu-border bu-border-gray-300;
+        @apply bu-border;
         @apply bu-cursor-pointer;
         .mark-label {
           @apply bu-absolute;
           @apply bu-text-xs;
-          @apply bu-text-gray-500;
           @apply bu-top-3;
         }
       }
@@ -50,15 +47,38 @@
         }
       }
     }
+    .thumb-container {
+      @apply bu-relative;
+    }
+    .thumb-container:hover .tooltip {
+      @apply bu-opacity-100;
+      @apply bu-pointer-events-auto;
+    }
     .thumb {
       @apply bu-absolute;
       @apply bu-w-4;
       @apply bu-h-4;
-      @apply bu-bg-blue-500;
       @apply bu-rounded-full;
+      @apply bu-border-2;
       @apply bu-top-1/2;
       @apply -bu-translate-x-2 -bu-translate-y-1/2 bu-transform;
       @apply bu-cursor-pointer;
+    }
+
+    .tooltip {
+      @apply bu-absolute;
+      @apply bu-text-xs;
+      @apply bu-rounded;
+      @apply bu-text-white;
+      @apply bu-px-3;
+      @apply bu-py-2;
+      @apply bu-top-[-10px];
+      @apply bu-left-[-24px];
+      @apply -bu-translate-y-full bu-transform;
+      @apply bu-transition-all;
+      @apply bu-opacity-0;
+      @apply bu-pointer-events-none;
+      @apply bu-z-10;
     }
   }
 }

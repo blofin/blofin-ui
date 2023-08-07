@@ -1,8 +1,15 @@
-import { useCallback, useRef, useState } from "react";
+import { forwardRef, useCallback, useRef, useState } from "react";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
 import styles from "./slider.module.scss";
-import { SliderMarkVariants } from "./styles";
+import {
+  MarkLabelVariants,
+  RailVariants,
+  SliderMarkVariants,
+  SliderThumbVariants,
+  SliderTooltipVariants,
+  TrackVariants
+} from "./styles";
 
 export interface SliderProps {
   /**
@@ -22,7 +29,8 @@ export interface SliderProps {
   theme?: BUITheme;
 }
 
-export const Slider = ({ value, onSliderChange, theme = "light" }: SliderProps) => {
+export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
+  const { value, onSliderChange, theme = "light" } = props;
   const railRef = useRef<HTMLDivElement>(null);
   const [thumbLocation, setThumbLocation] = useState<number>(value);
 
@@ -83,13 +91,15 @@ export const Slider = ({ value, onSliderChange, theme = "light" }: SliderProps) 
   return (
     <div className={styles["slider-container"]}>
       <div className={styles["slider-content"]}>
-        <div ref={railRef} className={styles["rail"]}></div>
-        <div className={styles["track"]}></div>
+        <div ref={railRef} className={`${styles["rail"]} ${cn(RailVariants({ theme }))}`}></div>
+        <div
+          className={`${styles["track"]} ${cn(TrackVariants({ theme }))}`}
+          style={{ width: `${value}%` }}></div>
         <div className={styles["mark-container"]}>
           <div
             className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme }))}`}
             onClick={() => handleMarkClick(0)}>
-            <span className={styles["mark-label"]}>0</span>
+            <span className={`${styles["mark-label"]} ${cn(MarkLabelVariants({ theme }))}`}>0</span>
           </div>
           <div
             className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme }))}`}
@@ -103,16 +113,25 @@ export const Slider = ({ value, onSliderChange, theme = "light" }: SliderProps) 
           <div
             className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme }))}`}
             onClick={() => handleMarkClick(100)}>
-            <span className={styles["mark-label"]}>100%</span>
+            <span className={`${styles["mark-label"]} ${cn(MarkLabelVariants({ theme }))}`}>
+              100%
+            </span>
           </div>
         </div>
         <div
-          className={styles["thumb"]}
+          className={styles["thumb-container"]}
           style={{
             left: `${thumbLocation}%`
-          }}
-          onMouseDown={handleMouseDown}></div>
+          }}>
+          <div className={`${styles["tooltip"]} ${cn(SliderTooltipVariants({ theme }))}`}>
+            {value}%
+          </div>
+          <div
+            className={`${styles["thumb"]} ${cn(SliderThumbVariants({ theme }))}`}
+            onMouseDown={handleMouseDown}></div>
+        </div>
       </div>
+      <input type="hidden" value={value} ref={ref} />
     </div>
   );
-};
+});
