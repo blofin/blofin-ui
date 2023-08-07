@@ -45,11 +45,15 @@ const SliderThumbVariants = cva("", {
   }
 });
 
-const SliderTooltipVariants = cva("", {
+const SliderTooltipVariants = cva("after:border", {
   variants: {
     theme: {
-      light: ["bu-bg-light-fill-tertiary"],
-      dark: ["bu-bg-dark-fill-tertiary"]
+      light: [
+        "bu-bg-light-fill-tertiary after:bu-border-light-fill-tertiary after:bu-border-x-transparent after:bu-border-b-transparent"
+      ],
+      dark: [
+        "bu-bg-dark-fill-tertiary after:bu-border-dark-fill-tertiary after:bu-border-x-transparent after:bu-border-b-transparent"
+      ]
     }
   }
 });

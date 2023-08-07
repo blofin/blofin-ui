@@ -72,13 +72,22 @@
       @apply bu-text-white;
       @apply bu-px-3;
       @apply bu-py-2;
-      @apply bu-top-[-10px];
-      @apply bu-left-[-24px];
+      @apply bu-top-[-14px];
+      @apply bu-left-[-26px];
       @apply -bu-translate-y-full bu-transform;
       @apply bu-transition-all;
       @apply bu-opacity-0;
       @apply bu-pointer-events-none;
       @apply bu-z-10;
+    }
+
+    .tooltip::after {
+      content: " ";
+      position: absolute;
+      top: 100%; /* At the bottom of the tooltip */
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
     }
   }
 }
