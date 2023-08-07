@@ -4,8 +4,8 @@ import { BUITheme } from "../..";
 const CheckboxCheckedStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-text-light-primary"],
-      dark: ["bu-text-dark-primary"]
+      light: ["!bu-text-light-primary"],
+      dark: ["!bu-text-dark-primary"]
     }
   }
 });
