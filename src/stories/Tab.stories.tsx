@@ -18,8 +18,7 @@ const meta: Meta<typeof Tab> = {
     theme: {
       options: ["light", "dark"],
       control: { type: "radio" }
-    },
-
+    }
   }
 };
 
@@ -37,7 +36,7 @@ const items = [
   {
     key: "1",
     label: `OrderBook`,
-    children: `Content of Tab Pane 1`
+    children: <div>Content of Tab Pane 1</div>
   },
   {
     key: "2",
@@ -61,7 +60,9 @@ export const Primary: Story = {
 
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <Tab items={items} size="small" change={change} />
+        <div className="bu-w-full">
+          <Tab items={items} size="medium" change={change}><input type="checkbox" /></Tab>
+        </div>
       </ThemeProvider>
     );
   }

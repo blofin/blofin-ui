@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useMemo, useState } from "react";
+import React, { Children, FC, Fragment, useMemo, useState } from "react";
 import { BUIComponentSize } from "../..";
 import styles from "./index.module.scss";
 import {
@@ -22,9 +22,10 @@ interface TabProps extends Base {
   }[];
   size: BUIComponentSize;
   change: (key: string) => void;
+  children?: React.ReactNode;
 }
 
-const Tab: FC<TabProps> = ({ items, size, change,className }) => {
+const Tab: FC<TabProps> = ({ items, size, change, className, children }) => {
   const [active, setActive] = useState(items[0].key);
 
   const { theme } = useTheme();
@@ -52,19 +53,22 @@ const Tab: FC<TabProps> = ({ items, size, change,className }) => {
 
   return (
     <div className="bu-inline-flex bu-flex-col">
-      <ul className={`${styles.tab} ${size !== "small" ? borderSyles({ theme }) : ""}`}>
-        {items.map((item) => {
-          return (
-            <li
-              className={`${itemStyles({ size })} ${active === item.key ? act : noAct}`}
-              onClick={() => toggle(item.key)}
-              key={item.key}>
-              {item.label}
-            </li>
-          );
-        })}
-      </ul>
-      <div className={cn('bu-h-full',className)}>
+      <div className="bu-flex bu-justify-between">
+        <ul className={`${styles.tab} ${size !== "small" ? borderSyles({ theme }) : ""}`}>
+          {items.map((item) => {
+            return (
+              <li
+                className={`${itemStyles({ size })} ${active === item.key ? act : noAct}`}
+                onClick={() => toggle(item.key)}
+                key={item.key}>
+                {item.label}
+              </li>
+            );
+          })}
+        </ul>
+        {children}
+      </div>
+      <div className={cn("bu-h-full", className)}>
         {items.map((item, index) => {
           return <Fragment key={index}>{active === item.key ? item.children : null}</Fragment>;
         })}
