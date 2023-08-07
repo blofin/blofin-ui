@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Components
-      link: https://6487efa5fadd1ab4d229302f-zbyfpnevwp.chromatic.com/
+      link: https://6487efa5fadd1ab4d229302f-jlfhfbliov.chromatic.com/
     - theme: alt
       text: Live Preview
       link: https://blofin.com/trade/futures/BTC-USDT
