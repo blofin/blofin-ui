@@ -53,8 +53,8 @@ const Tab: FC<TabProps> = ({ items, size, change, className, children }) => {
 
   return (
     <div className="bu-inline-flex bu-flex-col">
-      <div className="bu-flex bu-justify-between">
-        <ul className={`${styles.tab} ${size !== "small" ? borderSyles({ theme }) : ""}`}>
+      <div className={`bu-flex bu-justify-between ${size !== "small" ? borderSyles({ theme }) : ""}`}>
+        <ul className={`${styles.tab}`}>
           {items.map((item) => {
             return (
               <li
