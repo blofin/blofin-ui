@@ -72,9 +72,7 @@
       @apply bu-text-white;
       @apply bu-px-3;
       @apply bu-py-2;
-      @apply bu-top-[-14px];
-      @apply bu-left-[-26px];
-      @apply -bu-translate-y-full bu-transform;
+      @apply -bu-translate-x-[50%] -bu-translate-y-[150%] bu-transform;
       @apply bu-transition-all;
       @apply bu-opacity-0;
       @apply bu-pointer-events-none;
