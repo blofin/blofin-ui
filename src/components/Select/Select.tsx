@@ -1,4 +1,4 @@
-import { forwardRef, useLayoutEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BUITheme, Typography, useTheme } from "../..";
 import SelectArrow from "../../assets/icons/select-arrow.svg";
@@ -81,8 +81,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
     setShowMenu(false);
   };
 
-  useLayoutEffect(() => {
-    document.body.style.overflow = showMenu ? "hidden" : "";
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.body.style.overflow = showMenu ? "hidden" : "";
+    }
   }, [showMenu]);
 
   return (
