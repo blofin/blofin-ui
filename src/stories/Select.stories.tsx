@@ -42,16 +42,30 @@ export const Controlled: Story = {
     const [selectedValue, setSelectedValue] = useState("gtc");
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <div className="bu-flex bu-h-[24px] bu-w-full bu-flex-col bu-gap-4">
-          <label htmlFor="select">{selectedValue}</label>
-          <Select
-            selectItems={[
-              { label: "Good Till Cancel", value: "gtc" },
-              { label: "Bob", value: "bob" }
-            ]}
-            value={selectedValue}
-            handleChange={(value) => setSelectedValue(value)}
-          />
+        <div className="bu-flex">
+          <div className="bu-flex bu-h-[24px] bu-w-full bu-flex-col bu-gap-4">
+            <label htmlFor="select">{selectedValue}</label>
+            <Select
+              selectItems={[
+                { label: "Good Till Cancel", value: "gtc" },
+                { label: "Bob", value: "bob" }
+              ]}
+              value={selectedValue}
+              handleChange={(value) => setSelectedValue(value)}
+            />
+          </div>
+          <div className="bu-flex bu-h-[24px] bu-w-full bu-flex-col bu-gap-4">
+            <label htmlFor="select">{selectedValue}</label>
+            <Select
+              align="right"
+              selectItems={[
+                { label: "gtc", value: "gtc" },
+                { label: "Bob", value: "bob" }
+              ]}
+              value={selectedValue}
+              handleChange={(value) => setSelectedValue(value)}
+            />
+          </div>
         </div>
       </ThemeProvider>
     );
