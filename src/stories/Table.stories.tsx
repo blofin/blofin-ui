@@ -108,7 +108,7 @@ export const Primary: Story = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-[100%]">
-          <Table columns={items} data={data} rowKey="id" onChange={onChange} customPagination={true} />
+          <Table columns={items} data={data} hideShadow rowKey="id" onChange={onChange} customPagination={true} />
         </div>
       </ThemeProvider>
     );
