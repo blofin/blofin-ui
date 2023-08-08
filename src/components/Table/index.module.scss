@@ -20,6 +20,11 @@
   z-index: 1;
 }
 
+.table-col-fixed-right {
+  position: sticky;
+  z-index: 1;
+}
+
 .table-col-fixed-left-last {
   &::after {
     content: "";
@@ -28,12 +33,27 @@
     bottom: -1px;
     width: 10px;
     pointer-events: none;
-    transform: translateX(-100%);
     transition: box-shadow 0.1s linear;
     left: unset;
     transform: translateX(100%);
     right: 10px;
     box-shadow: inset 6px 0 8px -3px rgb(0 0 0 / 5%);
+  }
+}
+
+.table-col-fixed-right-last {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    width: 10px;
+    pointer-events: none;
+    transition: box-shadow 0.1s linear;
+    left: unset;
+    transform: translateX(100%);
+    left: 10px;
+    box-shadow: inset -6px 0 8px -3px rgb(0 0 0 / 5%);
   }
 }
 
