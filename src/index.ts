@@ -7,6 +7,7 @@ import { Dropdown } from "./components/Dropdown/Dropdown";
 import { LabelTextField } from "./components/LabelTextField";
 import { Popover } from "./components/Popover/Popover";
 import { Select } from "./components/Select";
+import { Slider } from "./components/Slider";
 import SortButton, { TextAlign } from "./components/Sort/SortButton";
 import SortGroup from "./components/Sort/SortGroup";
 import { Tab } from "./components/Tab/Tab";
@@ -31,6 +32,7 @@ export {
   LabelTextField,
   Popover,
   Select,
+  Slider,
   SortButton,
   SortGroup,
   Tab,
