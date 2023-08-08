@@ -54,7 +54,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
           className
         )}>
         <div className="bu-flex bu-h-full bu-w-full bu-items-center bu-justify-center">
-          <span className="bu-px-2">{startAdornment}</span>
+          {startAdornment && <span className="bu-px-2">{startAdornment}</span>}
           <input
             id={`bui-${label}`}
             disabled={disabled}
@@ -63,10 +63,12 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             ref={ref as LegacyRef<HTMLInputElement>}
             className={cn(
               "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent focus-visible:bu-outline-0",
-              inputClassName
+              inputClassName,
+              `${!startAdornment && "bu-pl-2"}`,
+              `${!endAdornment && "bu-pr-2"}`
             )}
           />
-          <span className="bu-px-2">{endAdornment}</span>
+          {endAdornment && <span className="bu-px-2">{endAdornment}</span>}
         </div>
       </div>
       <div className="bu-mt-1">
