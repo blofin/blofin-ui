@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BUITheme, Typography, useTheme } from "../..";
 import SelectArrow from "../../assets/icons/select-arrow.svg";
@@ -27,7 +27,9 @@ const SelectMenu = ({
   const { theme } = useTheme();
 
   return createPortal(
-    <div className="bu-absolute bu-left-0 bu-top-0 bu-h-screen bu-w-screen" onClick={handleClose}>
+    <div
+      className="bu-absolute bu-left-0 bu-top-0 bu-h-full bu-w-screen bu-overflow-hidden"
+      onClick={handleClose}>
       <div
         className={`bu-absolute bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
           { theme }
@@ -79,10 +81,8 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
     setShowMenu(false);
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      document.body.style.overflow = showMenu ? "hidden" : "";
-    }
+  useLayoutEffect(() => {
+    document.body.style.overflow = showMenu ? "hidden" : "";
   }, [showMenu]);
 
   return (
