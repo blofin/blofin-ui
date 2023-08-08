@@ -185,10 +185,10 @@ const buttonVariants = (props: {
         info:styles[variant].variant({ theme })
       },
       size: {
-        small: `bu-h-[30px] bu-min-w-[80px] bu-px-[12px] bu-text-[14px] bu-leading-[24px]`,
-        medium: `bu-h-[40px] bu-min-w-[100px] bu-px-[16px] bu-text-[14px] bu-leading-[24px]`,
-        large: `bu-h-[48px] bu-min-w-[140px] bu-px-[24px] bu-text-[16px] bu-leading-[28px]`,
-        max: `bu-h-[56px] bu-min-w-[180px] bu-px-[24px] bu-text-[18px] bu-leading-[30px]`
+        small: `bu-h-[30px] bu-min-w-[80px] bu-px-[12px] bu-text-[14px] bu-leading-[20px]`,
+        medium: `bu-h-[40px] bu-min-w-[100px] bu-px-[16px] bu-text-[14px] bu-leading-[20px]`,
+        large: `bu-h-[48px] bu-min-w-[140px] bu-px-[24px] bu-text-[16px] bu-leading-[24px]`,
+        max: `bu-h-[56px] bu-min-w-[180px] bu-px-[24px] bu-text-[18px] bu-leading-[26px]`
       },
       shape: {
         normal: "",
