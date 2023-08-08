@@ -12,15 +12,19 @@ export type SelectItem = { label: string; value: string };
 const SelectMenu = ({
   value,
   items,
-  offsetX,
+  align,
   offsetY,
+  offsetLeft,
+  offsetRight,
   handleSelect,
   handleClose
 }: {
   value: string;
   items: SelectItem[];
-  offsetX: number;
+  align: "left" | "right";
   offsetY: number;
+  offsetLeft: number;
+  offsetRight: number;
   handleSelect: (value: string) => void;
   handleClose: () => void;
 }) => {
@@ -34,7 +38,11 @@ const SelectMenu = ({
         className={`bu-absolute bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
           { theme }
         )}`}
-        style={{ left: offsetX + "px", top: offsetY + 18 + "px" }}>
+        style={{
+          left: `${align === "left" ? offsetLeft + "px" : ""}`,
+          right: `${align === "right" ? offsetRight + "px" : ""}`,
+          top: offsetY + 18 + "px"
+        }}>
         <ul>
           {items?.map((item) => {
             return (
@@ -57,10 +65,20 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLSelectElement
   selectItems: SelectItem[];
   theme?: BUITheme;
   handleChange?: (value: string) => void;
+  align?: "left" | "right";
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
-  const { name, value, selectItems, theme: mode, onChange, handleChange, ...otherProps } = props;
+  const {
+    name,
+    value,
+    selectItems,
+    theme: mode,
+    align = "left",
+    onChange,
+    handleChange,
+    ...otherProps
+  } = props;
 
   const { theme } = useTheme();
 
@@ -68,7 +86,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const { offsetX, offsetY } = useAlign(selectRef.current);
+  const { offsetY, offsetLeft, offsetRight } = useAlign(selectRef.current);
 
   const keyByItems = keyBy(selectItems, "value");
 
@@ -104,8 +122,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
         <SelectMenu
           value={String(value)}
           items={selectItems}
-          offsetX={offsetX}
+          align={align}
           offsetY={offsetY}
+          offsetLeft={offsetLeft}
+          offsetRight={offsetRight}
           handleSelect={handleSelect}
           handleClose={handleClose}
         />
