@@ -1,3 +1,4 @@
+import { cva } from 'class-variance-authority';
 import { TableColumnProps } from './interface';
 
 export const cssFixed = (item: TableColumnProps) => {
@@ -35,3 +36,22 @@ export const cssPosition = (item: TableColumnProps, position: number) => {
 
   return style;
 };
+
+
+export const bgStyles = cva("", {
+  variants: {
+    theme: {
+      dark: "!bu-bg-dark-background",
+      light: "!bu-bg-light-background",
+    }
+  }
+});
+
+export const textStyles = cva("", {
+  variants: {
+    theme: {
+      dark: "!bu-text-dark-label",
+      light: "!bu-text-light-label"
+    }
+  }
+});

@@ -1,11 +1,12 @@
 import SortButton, { TextAlign } from '../../Sort/SortButton';
 import SortGroup from '../../Sort/SortGroup';
 import { FC } from 'react';
-import { cssPosition } from '../css';
+import { bgStyles, cssPosition, textStyles } from '../css';
 import useStickyClassName from '../hooks/useStickyClassName';
 import useStickyOffset from '../hooks/useStickyOffset';
 import styles from '../index.module.scss';
 import { SortProps, TableColumnProps } from '../interface';
+import { useTheme } from '../../..';
 
 const Thead: FC<{
   columns: TableColumnProps[];
@@ -13,6 +14,8 @@ const Thead: FC<{
   theadClass?:string
 }> = (props) => {
   const { columns } = props;
+
+  const { theme } = useTheme();
 
   const getClass = useStickyClassName(columns);
 
@@ -31,7 +34,7 @@ const Thead: FC<{
           {columns.map((item, index) => {
             return (
               <th
-                className={`${getClass(item, index).join(' ')} ${styles.th}`}
+                className={`${getClass(item, index).join(' ')} ${styles.th} ${bgStyles({theme})}`}
                 style={cssPosition(item, offets[index].offset)}
                 key={item.key}
               >

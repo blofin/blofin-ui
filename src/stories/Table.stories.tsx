@@ -31,10 +31,10 @@ const items: TableColumnProps<ColumnProps>[] = [
   {
     key: "uid",
     title: `uid`,
-    width: "300px",
+    width: "100px",
     fixed: "left",
     align: "flex-start",
-    filter:true,
+    filter: true,
     render: (record) => {
       return <div>uid: {record.uid}</div>;
     }
@@ -42,9 +42,10 @@ const items: TableColumnProps<ColumnProps>[] = [
   {
     key: "id",
     title: `id`,
-    width: "300px",
+    width: "100px",
     align: "flex-start",
-    filter:true,
+    filter: true,
+    fixed: "left",
   },
   {
     key: "name",
@@ -74,13 +75,15 @@ const items: TableColumnProps<ColumnProps>[] = [
     key: "name4",
     title: `name`,
     width: "150px",
-    align: "flex-end"
+    align: "flex-end",
+    fixed: "right"
   },
   {
     key: "address",
     title: `address`,
     width: "150px",
-    align: "flex-end"
+    align: "flex-end",
+    fixed: "right"
   }
 ];
 
@@ -101,14 +104,21 @@ export const Primary: Story = {
   render: () => {
     const mode = useMode();
 
-    const onChange=(data:any)=>{
+    const onChange = (data: any) => {
       console.log(data);
-    }
+    };
 
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-[100%]">
-          <Table columns={items} data={data} hideShadow rowKey="id" onChange={onChange} customPagination={true} />
+          <Table
+            columns={items}
+            data={data}
+            hideShadow
+            rowKey="id"
+            onChange={onChange}
+            customPagination={true}
+          />
         </div>
       </ThemeProvider>
     );
