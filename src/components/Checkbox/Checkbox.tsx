@@ -1,5 +1,5 @@
 import { ReactNode, forwardRef } from "react";
-import { BUITheme } from "../..";
+import { BUITheme, useTheme } from "../..";
 import { cn } from "../../utils/utils";
 import { CheckboxLabelVariants } from "./styles";
 
@@ -9,7 +9,8 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const { label, theme = "light", checked, onChange, ...otherProps } = props;
+  const { label, theme: mode, checked, onChange, ...otherProps } = props;
+  const { theme } = useTheme();
   return (
     <div className="bu-flex bu-items-center bu-gap-2">
       <input
@@ -22,7 +23,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       />
       <label
         htmlFor={`bui-checkbox-${label}`}
-        className={cn(CheckboxLabelVariants({ theme, checked: !!checked }))}>
+        className={cn(CheckboxLabelVariants({ theme: mode || theme, checked: !!checked }))}>
         {label}
       </label>
     </div>
