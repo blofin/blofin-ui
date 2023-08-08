@@ -3,6 +3,7 @@ import { Button } from "./components/Button/Button";
 import { Checkbox } from "./components/Checkbox";
 import { Dialog } from "./components/Dialog/Dialog";
 import { Divider } from "./components/Divider";
+import { Dropdown } from "./components/Dropdown/Dropdown";
 import { LabelTextField } from "./components/LabelTextField";
 import { Popover } from "./components/Popover/Popover";
 import SortButton, { TextAlign } from "./components/Sort/SortButton";
@@ -25,6 +26,7 @@ export {
   Checkbox,
   Dialog,
   Divider,
+  Dropdown,
   LabelTextField,
   Popover,
   SortButton,
