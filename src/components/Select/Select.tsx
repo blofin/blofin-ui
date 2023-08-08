@@ -27,9 +27,7 @@ const SelectMenu = ({
   const { theme } = useTheme();
 
   return createPortal(
-    <div
-      className="bu-absolute bu-left-0 bu-top-0 bu-h-screen bu-w-screen bu-overflow-hidden"
-      onClick={handleClose}>
+    <div className="bu-absolute bu-left-0 bu-top-0 bu-h-full bu-w-screen" onClick={handleClose}>
       <div
         className={`bu-absolute bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
           { theme }
