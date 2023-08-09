@@ -58,13 +58,19 @@ export const Button = ({
 
   const { theme } = useTheme();
 
+  const buttonProps = {
+    variant,
+    size,
+    theme: mode ? mode : theme,
+    shape,
+    disabled
+  };
+
   return (
     <button
       type="button"
       onClick={handleClick}
-      className={`${cn(
-        buttonVariants({ variant, size, theme: mode ? mode : theme, shape, disabled })
-      )} ${className}`}
+      className={`${cn(buttonVariants(buttonProps))} ${className}`}
       disabled={disabled}
       {...props}>
       {startIcon && <span className="bu-mr-[9.5px]">{startIcon}</span>}

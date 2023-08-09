@@ -23,7 +23,11 @@ const primaryDisabledStyles = cva("bu-text-white", {
 const secondaryStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-primary-14", "hover:bu-bg-light-hover-primary-10", "bu-text-light-primary"],
+      light: [
+        "bu-bg-light-primary-14",
+        "hover:bu-bg-light-hover-primary-10",
+        "bu-text-light-primary"
+      ],
       dark: ["bu-bg-dark-primary-14", "hover:bu-bg-dark-hover-primary-10", "bu-text-dark-primary"]
     }
   }
@@ -41,8 +45,16 @@ const secondaryDisabledStyles = cva("", {
 const tertiaryStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-fill-secondary", "hover:bu-bg-light-hover-fill-secondary", "bu-text-light-label"],
-      dark: ["bu-bg-dark-fill-secondary", "hover:bu-bg-dark-hover-fill-secondary", "bu-text-dark-label"]
+      light: [
+        "bu-bg-light-fill-secondary",
+        "hover:bu-bg-light-hover-fill-secondary",
+        "bu-text-light-label"
+      ],
+      dark: [
+        "bu-bg-dark-fill-secondary",
+        "hover:bu-bg-dark-hover-fill-secondary",
+        "bu-text-dark-label"
+      ]
     }
   }
 });
@@ -50,7 +62,11 @@ const tertiaryStyles = cva("", {
 const tertiaryDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-fill-primary", "hover:bu-bg-light-fill-primary", "bu-text-light-label-40"],
+      light: [
+        "bu-bg-light-fill-primary",
+        "hover:bu-bg-light-fill-primary",
+        "bu-text-light-label-40"
+      ],
       dark: ["bu-bg-dark-fill-primary", "hover:bu-bg-dark-fill-primary", "bu-text-dark-label-60"]
     }
   }
@@ -138,6 +154,42 @@ const ghostDisabledStyles = cva("", {
   }
 });
 
+const buyStyles = cva("bu-text-white", {
+  variants: {
+    theme: {
+      light: ["bu-bg-light-green", "hover:bu-bg-light-hover-green"],
+      dark: ["bu-bg-dark-green", "hover:bu-bg-dark-hover-green"]
+    }
+  }
+});
+
+const buyDisabledStyles = cva("bu-text-white", {
+  variants: {
+    theme: {
+      light: ["bu-bg-light-label-20", "hover:bu-bg-light-label-20"],
+      dark: ["bu-bg-dark-label-20", "hover:bu-bg-dark-label-20"]
+    }
+  }
+});
+
+const sellStyles = cva("bu-text-white", {
+  variants: {
+    theme: {
+      light: ["bu-bg-light-red", "hover:bu-bg-light-hover-red"],
+      dark: ["bu-bg-dark-red", "hover:bu-bg-dark-hover-red"]
+    }
+  }
+});
+
+const sellDisabledStyles = cva("bu-text-white", {
+  variants: {
+    theme: {
+      light: ["bu-bg-light-label-20", "hover:bu-bg-light-label-20"],
+      dark: ["bu-bg-dark-label-20", "hover:bu-bg-dark-label-20"]
+    }
+  }
+});
+
 const styles = {
   primary: {
     variant: primaryStyles,
@@ -159,9 +211,17 @@ const styles = {
     variant: ghostStyles,
     disabled: ghostDisabledStyles
   },
-  info:{
-    variant:infoStyles,
+  info: {
+    variant: infoStyles,
     disabled: infoDisabledStyles
+  },
+  buy: {
+    variant: buyStyles,
+    disabled: buyDisabledStyles
+  },
+  sell: {
+    variant: sellStyles,
+    disabled: sellDisabledStyles
   }
 };
 
@@ -172,17 +232,21 @@ const buttonVariants = (props: {
   shape: ButtonShape;
   disabled: boolean;
 }) => {
-  const { theme, variant } = props;
+  const { theme, variant, disabled } = props;
+
+  const style = disabled ? "" : styles[variant].variant({ theme });
 
   return cva("bu-box-border bu-inline-flex bu-items-center bu-justify-center bu-rounded-[4px]", {
     variants: {
       variant: {
-        primary: styles[variant].variant({ theme }),
-        secondary: styles[variant].variant({ theme }),
-        tertiary: styles[variant].variant({ theme }),
-        text: styles[variant].variant({ theme }),
-        ghost: styles[variant].variant({ theme }),
-        info:styles[variant].variant({ theme })
+        primary: style,
+        secondary: style,
+        tertiary: style,
+        text: style,
+        ghost: style,
+        info: style,
+        buy: style,
+        sell: style
       },
       size: {
         small: `bu-h-[30px] bu-min-w-[80px] bu-px-[12px] bu-text-[14px] bu-leading-[20px]`,
