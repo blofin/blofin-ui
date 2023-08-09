@@ -97,6 +97,75 @@ const data = [
     name2: "HLy2",
     name3: "HLy2",
     name4: "HLy2"
+  },
+  {
+    uid: "nini",
+    id: "2255522",
+    name: "HLY",
+    address: "Beijing",
+    name1: "HLY1",
+    name2: "HLy2",
+    name3: "HLy2",
+    name4: "HLy2"
+  },
+  {
+    uid: "nini",
+    id: "33",
+    name: "HLY",
+    address: "Beijing",
+    name1: "HLY1",
+    name2: "HLy2",
+    name3: "HLy2",
+    name4: "HLy2"
+  },
+  {
+    uid: "nini",
+    id: "6",
+    name: "HLY",
+    address: "Beijing",
+    name1: "HLY1",
+    name2: "HLy2",
+    name3: "HLy2",
+    name4: "HLy2"
+  },
+  {
+    uid: "nini",
+    id: "5",
+    name: "HLY",
+    address: "Beijing",
+    name1: "HLY1",
+    name2: "HLy2",
+    name3: "HLy2",
+    name4: "HLy2"
+  },{
+    uid: "nini",
+    id: "4",
+    name: "HLY",
+    address: "Beijing",
+    name1: "HLY1",
+    name2: "HLy2",
+    name3: "HLy2",
+    name4: "HLy2"
+  },
+  {
+    uid: "nini",
+    id: "3",
+    name: "HLY",
+    address: "Beijing",
+    name1: "HLY1",
+    name2: "HLy2",
+    name3: "HLy2",
+    name4: "HLy2"
+  },
+  {
+    uid: "nini",
+    id: "1",
+    name: "HLY",
+    address: "Beijing",
+    name1: "HLY1",
+    name2: "HLy2",
+    name3: "HLy2",
+    name4: "HLy2"
   }
 ];
 
@@ -110,9 +179,10 @@ export const Primary: Story = {
 
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <div className="bu-w-[100%]">
+        <div className="bu-w-[100%] bu-h-[400px]">
           <Table
             columns={items}
+            scroll
             data={data}
             hideShadow
             rowKey="id"
