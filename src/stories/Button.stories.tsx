@@ -69,6 +69,12 @@ export const All = {
           <Button variant="primary" size="medium">
             Button
           </Button>
+          <Button variant="buy" disabled size="medium">
+            Button
+          </Button>
+          <Button variant="sell"  size="medium">
+            Button
+          </Button>
           <Button variant="primary" size="medium" shape="circle" icon={<i>2</i>}></Button>
           <Button.WhiteButton variant="primary" size="medium">
             White Button
