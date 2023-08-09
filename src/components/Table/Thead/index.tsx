@@ -6,15 +6,16 @@ import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
 import styles from "../index.module.scss";
 import { SortProps, TableColumnProps } from "../interface";
-import { useTheme } from "../../..";
+import { BUITheme, useTheme } from "../../..";
 
 const Thead: FC<{
   columns: TableColumnProps[];
   scroll?: boolean;
   onChange?: SortProps;
   theadClass?: string;
+  customeTheme?: BUITheme;
 }> = (props) => {
-  const { columns } = props;
+  const { columns, customeTheme } = props;
 
   const { theme } = useTheme();
 
@@ -37,7 +38,9 @@ const Thead: FC<{
           {columns.map((item, index) => {
             return (
               <th
-                className={`${getClass(item, index).join(" ")} ${styles.th} ${bgStyles({ theme })}`}
+                className={`${getClass(item, index).join(" ")} ${styles.th} ${bgStyles({
+                  theme: customeTheme ? customeTheme : theme
+                })}`}
                 style={cssPosition(item, offets[index].offset)}
                 key={item.key}>
                 <SortButton

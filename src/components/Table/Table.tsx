@@ -74,6 +74,7 @@ const Table: FC<TableProps> = (props) => {
               theadClass={props.theadClass ? props.theadClass : ""}
               onChange={props.onChange}
               scroll={props.scroll}
+              customeTheme={props.theme}
             />
             <Tbody
               data={data}
@@ -81,6 +82,7 @@ const Table: FC<TableProps> = (props) => {
               tdClass={props.tdClass ? props.tdClass : ""}
               rowKey={props.rowKey || "key"}
               rowClick={props.rowClick}
+              customeTheme={props.theme}
             />
           </table>
           {data.length === 0 ? renderEmpty ? renderEmpty : <Empty /> : ""}
