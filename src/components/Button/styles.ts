@@ -232,7 +232,7 @@ const buttonVariants = (props: {
   shape: ButtonShape;
   disabled: boolean;
 }) => {
-  const { theme, variant, disabled } = props;
+  const { theme, variant, disabled, shape } = props;
 
   const style = disabled ? "" : styles[variant].variant({ theme });
 
@@ -249,10 +249,18 @@ const buttonVariants = (props: {
         sell: style
       },
       size: {
-        small: `bu-h-[30px] bu-min-w-[80px] bu-px-[12px] bu-text-[14px] bu-leading-[20px]`,
-        medium: `bu-h-[40px] bu-min-w-[100px] bu-px-[16px] bu-text-[14px] bu-leading-[20px]`,
-        large: `bu-h-[48px] bu-min-w-[140px] bu-px-[24px] bu-text-[16px] bu-leading-[24px]`,
-        max: `bu-h-[56px] bu-min-w-[180px] bu-px-[24px] bu-text-[18px] bu-leading-[26px]`
+        small: `${
+          shape === "circle" ? "bu-h-[30px] bu-min-w-[30px]" : "bu-h-[30px] bu-min-w-[80px]"
+        } bu-px-[12px] bu-text-[14px] bu-leading-[20px]`,
+        medium: `${
+          shape === "circle" ? "bu-h-[40px] bu-min-w-[40px]" : "bu-h-[40px] bu-min-w-[100px]"
+        } bu-px-[16px] bu-text-[14px] bu-leading-[20px]`,
+        large: `${
+          shape === "circle" ? "bu-h-[48px] bu-min-w-[48px]" : "bu-h-[48px] bu-min-w-[140px]"
+        }  bu-px-[24px] bu-text-[16px] bu-leading-[24px]`,
+        max: `${
+          shape === "circle" ? "bu-h-[56px] bu-min-w-[56px]" : "bu-h-[56px] bu-min-w-[180px]"
+        } bu-px-[24px] bu-text-[18px] bu-leading-[26px]`
       },
       shape: {
         normal: "",
