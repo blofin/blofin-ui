@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from 'react';
+import { BUITheme } from '../..';
 interface TableColumnProps<T = any> {
   key?: string;
   title?: string;
@@ -32,6 +33,7 @@ interface TableProps<T = any> {
   tdClass?: string;
   scroll?: boolean;
   hideShadow?: boolean;
+  theme?:BUITheme
 }
 
 type SortProps = (data: { sort: 'asc' | 'desc' | 'default'; sortKey: string }) => void;
