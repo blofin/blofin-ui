@@ -22,12 +22,12 @@ export const Primary = {
 
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <div className="bu-flex bu-w-[100px]">
-          <div>1111</div>
-          <div>1111</div>
-          <div>1111</div>
-          <div>1111</div>
-          <div>1111</div>
+        <div className="bu-flex bu-flex-col bu-w-[500px]">
+          <div className="bu-h-[100px]">1111</div>
+          <div className="bu-h-[100px]">1111</div>
+          <div className="bu-h-[100px]">1111</div>
+          <div className="bu-h-[100px]">1111</div>
+          <div className="bu-h-[100px]">1111</div>
           <div className="bu-relative">
             <Dropdown
               menus={[

@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 const useAlign = (target: HTMLDivElement | null) => {
   const [offset, setOffset] = useState({
@@ -10,17 +10,27 @@ const useAlign = (target: HTMLDivElement | null) => {
     offsetRight: 0
   });
 
-  useLayoutEffect(() => {
+  const getElementPosition = (element: HTMLDivElement) => {
+    const rect = element.getBoundingClientRect();
+    const scrollLeft = document.documentElement.scrollLeft;
+    const scrollTop = document.documentElement.scrollTop;
+    const left = rect.left + scrollLeft;
+    const top = rect.top + scrollTop;
+    return { left: left, top: top };
+  };
+
+  useEffect(() => {
     const wrapper = target;
     if (wrapper) {
-      const { bottom, height, left, right, top, width, x, y }=wrapper.getBoundingClientRect()
+      const { height, width} = wrapper.getBoundingClientRect();
+      const { left, top } = getElementPosition(wrapper);
       setOffset({
-        offsetX: x,
-        offsetY: y,
+        offsetX: left,
+        offsetY: top,
         clientWidth: width,
         clientHeight: height,
         offsetLeft: left,
-        offsetRight: document.body.clientWidth - x - width
+        offsetRight: document.body.clientWidth - left - width
       });
     }
   }, [target]);

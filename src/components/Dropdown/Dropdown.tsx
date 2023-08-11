@@ -15,26 +15,29 @@ interface DropdownProps {
   children: React.ReactNode;
 }
 
-const DropMenu: FC<{ menus: Menus[]; offsetX: number; offsetY: number }> = ({
+const DropMenu: FC<{ menus: Menus[]; offsetX: number; offsetY: number; close: () => void }> = ({
   menus,
   offsetX,
-  offsetY
+  offsetY,
+  close
 }) => {
   const { theme } = useTheme();
 
   return ReactDOM.createPortal(
-    <div
-      className="bu-py-[8px] bu-absolute bu-shadow-card bu-rounded-[4px] bu-overflow-hidden bu-min-w-[80px]"
-      style={{ left: offsetX + "px", top: offsetY + 18 + "px" }}>
-      <ul>
-        {menus?.map((item) => {
-          return (
-            <li className={menuItemStyles({ theme })} key={item.key}>
-              {item.label}
-            </li>
-          );
-        })}
-      </ul>
+    <div className="bu-absolute bu-bottom-0 bu-left-0 bu-right-0 bu-top-0" onClick={close}>
+      <div
+        className="bu-absolute bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] bu-shadow-card"
+        style={{ left: offsetX + "px", top: offsetY + 18 + "px" }}>
+        <ul>
+          {menus?.map((item) => {
+            return (
+              <li className={menuItemStyles({ theme })} key={item.key}>
+                {item.label}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>,
     document.body
   );
@@ -47,32 +50,40 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const [node, setNode] = useState<HTMLDivElement | null>(null);
-
   const { offsetX, offsetY } = useAlign(targetRef.current);
 
   const { theme } = useTheme();
-
-  useEffect(() => {
-    setNode(targetRef.current);
-  }, []);
 
   const changeDropdown = () => {
     setHide(!hide);
   };
 
+  useEffect(() => {
+    document.body.style.overflow = hide ? "hidden" : "";
+  }, [hide]);
+
   return (
     <div>
       <div
+        id="dropDown"
         ref={targetRef}
         className="bu-inline-flex bu-cursor-pointer bu-items-center"
         onClick={changeDropdown}>
-        <span className={`dropdown bu-text-[12px] bu-leading-[18px] bu-tracking-[-0.2px] ${labelStyles({theme})}`}>
+        <span
+          className={`dropdown bu-text-[12px] bu-leading-[18px] bu-tracking-[-0.2px] ${labelStyles({
+            theme
+          })}`}>
           {children}
         </span>
-        <Arrow className={`bu-h-[16px] bu-w-[16px] ${!hide ? "bu-rotate-180" : ""} ${labelStyles({theme})}`} />
+        <Arrow
+          className={`bu-h-[16px] bu-w-[16px] ${!hide ? "bu-rotate-180" : ""} ${labelStyles({
+            theme
+          })}`}
+        />
       </div>
-      {hide && <DropMenu menus={menus} offsetX={offsetX} offsetY={offsetY} />}
+      {hide && (
+        <DropMenu menus={menus} offsetX={offsetX} offsetY={offsetY + 10} close={changeDropdown} />
+      )}
     </div>
   );
 };
