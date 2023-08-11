@@ -13,6 +13,7 @@ interface Menus {
 interface DropdownProps {
   menus: Menus[];
   children: React.ReactNode;
+  hideIcon?: boolean;
 }
 
 const DropMenu: FC<{ menus: Menus[]; offsetX: number; offsetY: number; close: () => void }> = ({
@@ -44,7 +45,7 @@ const DropMenu: FC<{ menus: Menus[]; offsetX: number; offsetY: number; close: ()
 };
 
 const Dropdown: FC<DropdownProps> = (props) => {
-  const { menus, children } = props;
+  const { menus, children, hideIcon = false } = props;
 
   const [hide, setHide] = useState(false);
 
@@ -75,11 +76,13 @@ const Dropdown: FC<DropdownProps> = (props) => {
           })}`}>
           {children}
         </span>
-        <Arrow
-          className={`bu-h-[16px] bu-w-[16px] ${!hide ? "bu-rotate-180" : ""} ${labelStyles({
-            theme
-          })}`}
-        />
+        {!hideIcon && (
+          <Arrow
+            className={`bu-h-[16px] bu-w-[16px] ${!hide ? "bu-rotate-180" : ""} ${labelStyles({
+              theme
+            })}`}
+          />
+        )}
       </div>
       {hide && (
         <DropMenu menus={menus} offsetX={offsetX} offsetY={offsetY + 10} close={changeDropdown} />
