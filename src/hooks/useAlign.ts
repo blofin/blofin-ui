@@ -13,18 +13,19 @@ const useAlign = (target: HTMLDivElement | null) => {
   useLayoutEffect(() => {
     const wrapper = target;
     if (wrapper) {
+      const { bottom, height, left, right, top, width, x, y }=wrapper.getBoundingClientRect()
       setOffset({
-        offsetX: wrapper.offsetLeft,
-        offsetY: wrapper.offsetTop,
-        clientWidth: wrapper.clientWidth,
-        clientHeight: wrapper.clientHeight,
-        offsetLeft: wrapper.offsetLeft,
-        offsetRight: document.body.clientWidth - wrapper.offsetLeft - wrapper.clientWidth
+        offsetX: x,
+        offsetY: y,
+        clientWidth: width,
+        clientHeight: height,
+        offsetLeft: left,
+        offsetRight: document.body.clientWidth - x - width
       });
     }
   }, [target]);
 
-  return offset
+  return offset;
 };
 
 export default useAlign;

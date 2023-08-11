@@ -9,8 +9,8 @@ const meta: Meta<typeof Dropdown> = {
   argTypes: {
     menus: {
       options: [true, false],
-      defaultValue:[]
-    },
+      defaultValue: []
+    }
   }
 };
 
@@ -22,24 +22,33 @@ export const Primary = {
 
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <Dropdown
-          menus={[
-            {
-              key: "1",
-              label: "Text1"
-            },
-            {
-              key: "2",
-              label: "Text2"
-            },
-            {
-              key: "3",
-              label: "Text3"
-            }
-          ]}>
-          {" "}
-          Here me
-        </Dropdown>
+        <div className="bu-flex bu-w-[100px]">
+          <div>1111</div>
+          <div>1111</div>
+          <div>1111</div>
+          <div>1111</div>
+          <div>1111</div>
+          <div className="bu-relative">
+            <Dropdown
+              menus={[
+                {
+                  key: "1",
+                  label: "Text1"
+                },
+                {
+                  key: "2",
+                  label: "Text2"
+                },
+                {
+                  key: "3",
+                  label: "Text3"
+                }
+              ]}>
+              {" "}
+              Here me
+            </Dropdown>
+          </div>
+        </div>
       </ThemeProvider>
     );
   }
