@@ -17,7 +17,8 @@
     "./Dialog": "./dist/Dialog.es.js",
     "./Divider": "./dist/Divider.es.js",
     "./Form": "./dist/Form.es.js",
-    "./Slider": "./dist/Slider.es.js"
+    "./Slider": "./dist/Slider.es.js",
+    "./Tooltip": "./dist/Tooltip.es.js"
   },
   "files": [
     "dist"
