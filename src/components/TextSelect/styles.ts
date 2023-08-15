@@ -19,7 +19,7 @@ const itemStyles = cva("", {
   }
 });
 
-const iconStyles = cva("bu-w-[16px] bu-h-[16px]", {
+const iconStyles = cva("bu-h-[16px] bu-w-[16px]", {
   variants: {
     theme: {
       light: "bu-text-dark-background",
@@ -28,4 +28,13 @@ const iconStyles = cva("bu-w-[16px] bu-h-[16px]", {
   }
 });
 
-export { bgStyles, itemStyles,iconStyles };
+const disabledStyles = cva("", {
+  variants: {
+    theme: {
+      light: "bu-text-light-label-20",
+      dark: "bu-text-dark-label-20"
+    }
+  }
+});
+
+export { bgStyles, itemStyles, iconStyles, disabledStyles };

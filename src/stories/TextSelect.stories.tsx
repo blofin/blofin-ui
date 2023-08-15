@@ -27,22 +27,26 @@ export const Primary: Story = {
   render: () => {
     const mode = useMode();
 
-    const options=[
+    const accountOptions = [
       {
-        label:'1',
-        value:'1'
+        label: 'fundingAccount',
+        value: 'funding',
       },
       {
-        label:'2',
-        value:'2'
+        label: 'derivativesAccount',
+        value: 'derivatives',
       },
       {
-        label:'3',
-        value:'3'
-      }
-    ]
+        label: 'copyTradingAccount',
+        value: 'copy_trading',
+      },
+      {
+        label: 'earnAccount',
+        value: 'earn',
+      },
+    ];
 
-    const [value,setValue]=useState(options[0].value)
+    const [value,setValue]=useState(accountOptions[0].value)
 
     const change=(value:string)=>{
       console.log(value);
@@ -52,7 +56,7 @@ export const Primary: Story = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-full">
-          <TextSelect placeholder="Select a person" defaultValue={value} options={options} onChange={change} />
+          <TextSelect placeholder="Select a person" disabled="funding" defaultValue={value} options={accountOptions} onChange={change} />
         </div>
       </ThemeProvider>
     );

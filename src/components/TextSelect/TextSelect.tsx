@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
 import { TextField, useTheme } from "../..";
 import useAlign from "../../hooks/useAlign";
-import { bgStyles, iconStyles, itemStyles } from "./styles";
+import { bgStyles, disabledStyles, iconStyles, itemStyles } from "./styles";
 import SelectArrow from "../../assets/icons/text-arrow.svg";
 
 interface Options {
@@ -16,14 +16,15 @@ interface TextSelectProps {
   onChange: (value: string) => void;
   placeholder?: string;
   defaultValue?: string;
+  disabled?: string;
 }
 
-const Options: FC<{
+type OptionsProps = Omit<TextSelectProps, "placeholder" | "defaultValue"> & {
   className?: string;
   parent: HTMLDivElement | null;
-  options: Options[];
-  onChange: (value: string) => void;
-}> = ({ parent, options, onChange, className }) => {
+};
+
+const Options: FC<OptionsProps> = ({ parent, options, onChange, className, disabled }) => {
   const { theme } = useTheme();
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -33,19 +34,24 @@ const Options: FC<{
   const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
   const handleClick = (value: string) => {
+    if(disabled===value){
+      return
+    }
     onChange(value);
   };
 
   return ReactDOM.createPortal(
     <div
-      className={`${styles.options} ${className} ${bgStyles({theme})}`}
+      className={`${styles.options} ${className} ${bgStyles({ theme })}`}
       style={{ top: offsetY + height + "px", left: offsetX + "px" }}
       ref={targetRef}>
       {options.map((item) => {
         return (
           <div
             onClick={() => handleClick(item.value)}
-            className={`${styles.item} ${itemStyles({theme})}`}
+            className={`${styles.item}  ${
+              disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
+            }`}
             style={{ width: width + "px" }}
             key={item.value}>
             {item.label}
@@ -58,7 +64,7 @@ const Options: FC<{
 };
 
 const TextSelect: FC<TextSelectProps> = (props) => {
-  const { placeholder, defaultValue, options, onChange } = props;
+  const { placeholder, defaultValue, options, onChange, disabled } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
@@ -83,13 +89,14 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         onBlur={hide}
         placeholder={placeholder}
         value={defaultValue}
-        endAdornment={<SelectArrow className={`${iconStyles({theme})}`} />}
+        endAdornment={<SelectArrow className={`${iconStyles({ theme })}`} />}
       />
       <Options
         className={!show ? "bu-hidden" : ""}
         parent={targetRef.current}
         options={options}
         onChange={onChange}
+        disabled={disabled}
       />
     </div>
   );
