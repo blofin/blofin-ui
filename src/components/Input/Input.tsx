@@ -1,16 +1,18 @@
-import { FC, useEffect, useState } from "react";
+import { FC, InputHTMLAttributes, useEffect, useState } from "react";
 import styles from "./styles";
 
-interface InputProps {
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "prefix" | "type" | "onChange"> {
   width?: string;
   height?: string;
   defaultValue?: string;
   size?: "small" | "medium" | "large";
   onChange?: (value: string) => void;
+  placeholder?: string;
 }
 
 const Input: FC<InputProps> = (props) => {
-  const { width, height, size = "medium" } = props;
+  const { width, height, size = "medium", placeholder } = props;
 
   const [value, setValue] = useState("");
 
@@ -37,13 +39,13 @@ const Input: FC<InputProps> = (props) => {
 
   return (
     <span
-      className={`${styles.light[size].inputWrapper} ${
-        styles.light.large.hover
-      } ${focus ? styles.light.large.focus : styles.light.large.default}`}
-      style={{ width, height }}
-    >
+      className={`${styles.light[size].inputWrapper} ${styles.light.large.hover} ${
+        focus ? styles.light.large.focus : styles.light.large.default
+      }`}
+      style={{ width, height }}>
       <input
         className={styles.input}
+        placeholder={placeholder}
         onFocus={onFocus}
         onBlur={onBlur}
         value={value}

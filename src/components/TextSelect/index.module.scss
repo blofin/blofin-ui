@@ -1,0 +1,11 @@
+.selector {
+  @apply bu-inline-block;
+}
+
+.options {
+  @apply bu-absolute bu-rounded-[4px] bu-bg-light-fill-secondary bu-py-[8px];
+}
+
+.item {
+  @apply bu-flex bu-h-[34px] bu-cursor-pointer bu-items-center bu-px-[14px] bu-text-[12px] bu-text-light-label hover:bu-bg-light-hover-fill-secondary hover:bu-text-light-primary;
+}
