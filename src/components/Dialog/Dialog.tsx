@@ -7,7 +7,7 @@ import { dialogVariants, footerStyles, iconStyles, textStyles } from "./styles";
 import useTheme from "../../provider/useTheme";
 import { ButtonSize } from "../Button/types";
 
-interface DialogProps{
+interface DialogProps {
   title: null | string | React.ReactNode;
   size: BUIComponentSize;
   content: string | React.ReactNode;
@@ -23,7 +23,7 @@ interface DialogProps{
   hideCancel?: Boolean;
   hideConfirm?: Boolean;
   hideIcon?: Boolean;
-  className?:string
+  className?: string;
 }
 
 export const Dialog: FC<DialogProps> = (props) => {
@@ -66,12 +66,12 @@ export const Dialog: FC<DialogProps> = (props) => {
   };
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
     setIsOpen(open);
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
-
-  useEffect(()=>{
-    document.body.style.overflow = isOpen ? "hidden" : "";
-  },[isOpen])
 
   return isOpen
     ? ReactDOM.createPortal(
@@ -79,9 +79,11 @@ export const Dialog: FC<DialogProps> = (props) => {
           <div className={`${dialogVariants({ size, theme: getTheme() })} ${className}`}>
             {!hideIcon && (
               <CloseIcon
-                className={`bu-absolute bu-right-[20px] bu-h-[24px] bu-w-[24px] bu-cursor-pointer ${iconStyles({
-                  theme: getTheme()
-                })}`}
+                className={`bu-absolute bu-right-[20px] bu-h-[24px] bu-w-[24px] bu-cursor-pointer ${iconStyles(
+                  {
+                    theme: getTheme()
+                  }
+                )}`}
                 onClick={handleCancel}
               />
             )}
