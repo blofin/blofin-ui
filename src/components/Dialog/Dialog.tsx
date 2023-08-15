@@ -66,9 +66,12 @@ export const Dialog: FC<DialogProps> = (props) => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
     setIsOpen(open);
   }, [open]);
+
+  useEffect(()=>{
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  },[isOpen])
 
   return isOpen
     ? ReactDOM.createPortal(
