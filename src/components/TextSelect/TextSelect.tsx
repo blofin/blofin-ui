@@ -79,6 +79,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         onFocus={() => {
           setShow(true);
         }}
+        readOnly
         onBlur={hide}
         placeholder={placeholder}
         value={defaultValue}
