@@ -73,7 +73,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
   };
 
   return (
-    <div ref={targetRef} className={styles.selector}>
+    <div ref={targetRef}>
       <TextField
         variant="outlined"
         onFocus={() => {
