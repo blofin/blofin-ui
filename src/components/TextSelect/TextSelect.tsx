@@ -1,4 +1,4 @@
-import { FC, ReactNode, useRef, useState } from "react";
+import { FC, ReactNode, useMemo, useRef, useState } from "react";
 import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
 import { TextField, useTheme } from "../..";
@@ -34,8 +34,8 @@ const Options: FC<OptionsProps> = ({ parent, options, onChange, className, disab
   const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
   const handleClick = (value: string) => {
-    if(disabled===value){
-      return
+    if (disabled === value) {
+      return;
     }
     onChange(value);
   };
@@ -72,15 +72,24 @@ const TextSelect: FC<TextSelectProps> = (props) => {
 
   const { theme } = useTheme();
 
+  const label = useMemo(() => {
+    const option=options.find((item) => {
+      return item.value === defaultValue;
+    });
+    return option?.label || ''
+  }, [defaultValue]);
+
   const hide = () => {
     setTimeout(() => {
       setShow(false);
-    }, 100);
+    }, 150);
   };
 
   return (
-    <div ref={targetRef}>
+    <div className="bu-relative bu-cursor-pointer" ref={targetRef} onClick={()=>setShow(true)}>
+      <span className="bu-absolute bu-text-14px bu-top-[50%] bu-translate-y-[-50%] bu-left-[8px]">{label}</span>
       <TextField
+        inputClassName={styles.input}
         variant="outlined"
         onFocus={() => {
           setShow(true);

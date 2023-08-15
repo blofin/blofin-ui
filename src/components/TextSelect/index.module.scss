@@ -5,3 +5,7 @@
 .item {
   @apply bu-flex bu-h-[34px] bu-cursor-pointer bu-items-center bu-px-[14px] bu-text-[12px];
 }
+
+.input{
+  @apply bu-text-[0px] bu-cursor-pointer;
+}
