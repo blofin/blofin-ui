@@ -46,17 +46,27 @@ export const Primary: Story = {
       },
     ];
 
-    const [value,setValue]=useState(accountOptions[0].value)
+    const [from,setFrom]=useState(accountOptions[0].value)
+
+    const [to,setTo]=useState(accountOptions[1].value)
 
     const change=(value:string)=>{
       console.log(value);
-      setValue(value);
+      setFrom(value);
+    }
+
+    const changeTo=(value:string)=>{
+      console.log(value);
+      setTo(value);
     }
 
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-full">
-          <TextSelect placeholder="Select a person" disabled="funding" defaultValue={value} options={accountOptions} onChange={change} />
+          <TextSelect placeholder="Select a person" disabled={to} defaultValue={from} options={accountOptions} onChange={change} />
+        </div>
+        <div className="bu-w-full">
+          <TextSelect placeholder="Select a person" disabled={from} defaultValue={to} options={accountOptions} onChange={changeTo} />
         </div>
       </ThemeProvider>
     );

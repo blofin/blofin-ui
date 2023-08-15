@@ -7,7 +7,7 @@ import { bgStyles, disabledStyles, iconStyles, itemStyles } from "./styles";
 import SelectArrow from "../../assets/icons/text-arrow.svg";
 
 interface Options {
-  label: ReactNode;
+  label: string;
   value: string;
 }
 
@@ -73,21 +73,20 @@ const TextSelect: FC<TextSelectProps> = (props) => {
   const { theme } = useTheme();
 
   const label = useMemo(() => {
-    const option=options.find((item) => {
+    const option = options.find((item) => {
       return item.value === defaultValue;
     });
-    return option?.label || ''
+    return option ? option.label : "";
   }, [defaultValue]);
 
   const hide = () => {
     setTimeout(() => {
       setShow(false);
-    }, 150);
+    }, 100);
   };
 
   return (
-    <div className="bu-relative bu-cursor-pointer" ref={targetRef} onClick={()=>setShow(true)}>
-      <span className="bu-absolute bu-text-14px bu-top-[50%] bu-translate-y-[-50%] bu-left-[8px]">{label}</span>
+    <div className="bu-relative bu-cursor-pointer" ref={targetRef}>
       <TextField
         inputClassName={styles.input}
         variant="outlined"
@@ -97,7 +96,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         readOnly
         onBlur={hide}
         placeholder={placeholder}
-        value={defaultValue}
+        value={label}
         endAdornment={<SelectArrow className={`${iconStyles({ theme })}`} />}
       />
       <Options
