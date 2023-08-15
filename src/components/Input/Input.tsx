@@ -2,12 +2,17 @@ import { FC, InputHTMLAttributes, useEffect, useState } from "react";
 import styles from "./styles";
 
 export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "prefix" | "type" | "onChange"> {
+  extends Omit<
+    InputHTMLAttributes<HTMLInputElement>,
+    "size" | "prefix" | "type" | "onChange" | "onFocus" | "onBlur"
+  > {
   width?: string;
   height?: string;
   defaultValue?: string;
   size?: "small" | "medium" | "large";
   onChange?: (value: string) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
   placeholder?: string;
 }
 
@@ -19,10 +24,12 @@ const Input: FC<InputProps> = (props) => {
   const [focus, setFocus] = useState(false);
 
   const onFocus = () => {
+    props.onFocus && props.onFocus();
     setFocus(true);
   };
 
   const onBlur = () => {
+    props.onBlur && props.onBlur();
     setFocus(false);
   };
 

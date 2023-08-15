@@ -23,7 +23,6 @@ const useAlign = (target: HTMLDivElement | null) => {
     const wrapper = target;
     if (wrapper) {
       const { height, width} = wrapper.getBoundingClientRect();
-      console.log(wrapper.getBoundingClientRect())
       const { left, top } = getElementPosition(wrapper);
       setOffset({
         offsetX: left,

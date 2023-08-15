@@ -12,6 +12,7 @@ import SortButton, { TextAlign } from "./components/Sort/SortButton";
 import SortGroup from "./components/Sort/SortGroup";
 import { Tab } from "./components/Tab/Tab";
 import Table, { TableColumnProps } from "./components/Table";
+import { TextSelect } from "./components/TextSelect/TextSelect";
 import { TextField } from "./components/TextField";
 import { useToast } from "./components/Toast/Toast";
 import { Typography } from "./components/Typography/Typography";
@@ -38,7 +39,8 @@ export {
   Tab,
   Table,
   TextField,
-  Typography
+  Typography,
+  TextSelect
 };
 
 export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, TextAlign };

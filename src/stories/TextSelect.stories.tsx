@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { TextSelect } from "../components/TextSelect/TextSelect";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
+import { useState } from "react";
 
 const meta: Meta<typeof TextSelect> = {
   /* 👇 The title prop is Tab.
@@ -26,10 +27,6 @@ export const Primary: Story = {
   render: () => {
     const mode = useMode();
 
-    const change = (key: string) => {
-      console.log(key);
-    };
-
     const options=[
       {
         label:'1',
@@ -45,10 +42,17 @@ export const Primary: Story = {
       }
     ]
 
+    const [value,setValue]=useState(options[0].value)
+
+    const change=(value:string)=>{
+      console.log(value);
+      setValue(value);
+    }
+
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-full">
-          <TextSelect placeholder="Select a person" defaultValue={options[0].value} options={options} />
+          <TextSelect placeholder="Select a person" defaultValue={value} options={options} onChange={change} />
         </div>
       </ThemeProvider>
     );
