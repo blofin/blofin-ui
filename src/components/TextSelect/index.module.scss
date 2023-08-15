@@ -1,9 +1,9 @@
 .selector {
-  @apply bu-inline-block bu-z-[99999];
+  @apply bu-inline-block;
 }
 
 .options {
-  @apply bu-absolute bu-rounded-[4px] bu-py-[8px];
+  @apply bu-absolute bu-rounded-[4px] bu-py-[8px] bu-z-[99999];
 }
 
 .item {
