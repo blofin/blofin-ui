@@ -32,7 +32,7 @@ const SelectMenu = ({
 
   return createPortal(
     <div
-      className="bu-absolute bu-left-0 bu-top-0 bu-h-full bu-w-screen bu-overflow-hidden bu-z-[99999]"
+      className="bu-absolute bu-left-0 bu-top-0 bu-z-[99999] bu-h-full bu-w-screen bu-overflow-hidden"
       onClick={handleClose}>
       <div
         className={`bu-absolute bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
@@ -66,6 +66,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLSelectElement
   theme?: BUITheme;
   handleChange?: (value: string) => void;
   align?: "left" | "right";
+  labelClassName?: string;
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
@@ -77,6 +78,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
     align = "left",
     onChange,
     handleChange,
+    labelClassName,
     ...otherProps
   } = props;
 
@@ -107,7 +109,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
     <div className="bu-flex">
       <div
         ref={selectRef}
-        className="bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center bu-gap-2"
+        className={cn(
+          "bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center bu-gap-2",
+          labelClassName
+        )}
         onClick={() => setShowMenu(!showMenu)}>
         <Typography variant="body4">{keyByItems[String(value)].label}</Typography>
         <SelectArrow
