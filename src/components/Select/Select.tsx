@@ -32,7 +32,7 @@ const SelectMenu = ({
 
   return createPortal(
     <div
-      className="bu-absolute bu-left-0 bu-top-0 bu-h-full bu-w-screen bu-overflow-hidden"
+      className="bu-absolute bu-left-0 bu-top-0 bu-h-full bu-w-screen bu-overflow-hidden bu-z-[99999]"
       onClick={handleClose}>
       <div
         className={`bu-absolute bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(

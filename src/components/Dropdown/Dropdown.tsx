@@ -25,7 +25,7 @@ const DropMenu: FC<{ menus: Menus[]; offsetX: number; offsetY: number; close: ()
   const { theme } = useTheme();
 
   return ReactDOM.createPortal(
-    <div className="bu-absolute bu-bottom-0 bu-left-0 bu-right-0 bu-top-0" onClick={close}>
+    <div className="bu-absolute bu-bottom-0 bu-left-0 bu-right-0 bu-top-0 bu-z-[99999]" onClick={close}>
       <div
         className="bu-absolute bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] bu-shadow-card"
         style={{ left: offsetX + "px", top: offsetY + 18 + "px" }}>
