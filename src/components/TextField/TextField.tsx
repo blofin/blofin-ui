@@ -41,7 +41,11 @@ const TextField = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
         className
       )}>
       <div className="bu-flex bu-h-full bu-w-full bu-items-center bu-justify-center">
-        {startAdornment && <span className="bu-px-2">{startAdornment}</span>}
+        {startAdornment && (
+          <span className={typeof startAdornment === "string" ? "bu-px-2" : ""}>
+            {startAdornment}
+          </span>
+        )}
         <input
           disabled={disabled}
           type={type}
@@ -54,7 +58,9 @@ const TextField = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
             `${!endAdornment && "bu-pr-2"}`
           )}
         />
-        {endAdornment && <span className="bu-px-2">{endAdornment}</span>}
+        {endAdornment && (
+          <span className={typeof endAdornment === "string" ? "bu-px-2" : ""}>{endAdornment}</span>
+        )}
       </div>
     </div>
   );
