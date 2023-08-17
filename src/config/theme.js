@@ -86,12 +86,12 @@ module.exports = {
           blue: "rgba(47, 84, 235, 0.4)"
         },
         badge: {
-          "primary-bg": "rgba(47, 84, 235, 0.12)",
-          "secondary-bg": "rgba(255, 102, 0, 0.12)",
-          "success-bg": "rgba(15, 204, 113, 0.12)",
-          "warning-bg": "rgba(245, 205, 18, 0.12)",
-          "danger-bg": "rgba(214, 32, 53, 0.12)",
-          "info-bg": "rgba(10, 10, 10, 0.14)"
+          "primary-bg": "rgba(47, 84, 235, 0.14)",
+          "secondary-bg": "rgba(255, 102, 0, 0.14)",
+          "success-bg": "rgba(15, 204, 113, 0.14)",
+          "warning-bg": "rgba(245, 205, 18, 0.14)",
+          "danger-bg": "rgba(214, 32, 53, 0.14)",
+          "info-bg": "#F0F1F5"
         },
         pagination: {
           primary: "#2F54EB",
@@ -166,7 +166,7 @@ module.exports = {
           "success-bg": "rgba(15, 204, 113, 0.14)",
           "warning-bg": "rgba(245, 205, 18, 0.14)",
           "danger-bg": "rgba(214, 32, 53, 0.14)",
-          "info-bg": "rgba(235, 236, 245, 0.2)"
+          "info-bg": "#232429"
         },
         pagination: {
           primary: "#2F54EB",
