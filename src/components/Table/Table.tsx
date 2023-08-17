@@ -88,7 +88,7 @@ const Table: FC<TableProps> = (props) => {
           {data.length === 0 ? renderEmpty ? renderEmpty : <Empty /> : ""}
         </div>
 
-        {props.scroll && data.length === 0 ? renderEmpty ? renderEmpty : <Empty /> : ""}
+        {/* {props.scroll && data.length === 0 ? renderEmpty ? renderEmpty : <Empty /> : ""} */}
       </div>
       {!hidePagination ? (
         <div
