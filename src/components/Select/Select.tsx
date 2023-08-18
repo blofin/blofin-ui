@@ -109,12 +109,11 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
     <div className="bu-flex">
       <div
         ref={selectRef}
-        className={cn(
-          "bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center bu-gap-2",
-          labelClassName
-        )}
+        className="bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center bu-gap-2"
         onClick={() => setShowMenu(!showMenu)}>
-        <Typography variant="body4">{keyByItems[String(value)].label}</Typography>
+        <Typography variant="body4" className={labelClassName}>
+          {keyByItems[String(value)].label}
+        </Typography>
         <SelectArrow
           className={`bu-h-[10px] bu-w-[10px] ${showMenu ? "bu-rotate-180" : ""} ${cn(
             labelStyles({
