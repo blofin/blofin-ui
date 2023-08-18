@@ -19,10 +19,10 @@ const useAlign = (target: HTMLDivElement | null) => {
     return { left: left, top: top };
   };
 
-  useEffect(() => {
+  const resize = () => {
     const wrapper = target;
     if (wrapper) {
-      const { height, width} = wrapper.getBoundingClientRect();
+      const { height, width } = wrapper.getBoundingClientRect();
       const { left, top } = getElementPosition(wrapper);
       setOffset({
         offsetX: left,
@@ -33,7 +33,18 @@ const useAlign = (target: HTMLDivElement | null) => {
         offsetRight: document.body.clientWidth - left - width
       });
     }
+  };
+
+  useEffect(() => {
+    resize();
   }, [target]);
+
+  useEffect(() => {
+    window.addEventListener("resize", resize);
+    return () => {
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
 
   return offset;
 };
