@@ -61,7 +61,7 @@ const SelectMenu = ({
   );
 };
 
-export interface SelectProps extends React.InputHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   selectItems: SelectItem[];
   theme?: BUITheme;
   handleChange?: (value: string) => void;
@@ -69,14 +69,13 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLSelectElement
   labelClassName?: string;
 }
 
-const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
+const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   const {
     name,
     value,
     selectItems,
     theme: mode,
     align = "left",
-    onChange,
     handleChange,
     labelClassName,
     ...otherProps
@@ -134,21 +133,15 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
           handleClose={handleClose}
         />
       )}
-      <select
+      <input
         className="bu-hidden"
-        ref={ref}
         name={name}
-        id={`bul-select-${name}`}
+        id={`bu-select-${name}`}
+        type="hidden"
+        ref={ref}
         value={value}
-        onChange={onChange}
-        {...otherProps}>
-        <option value=""></option>
-        {selectItems.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.label}
-          </option>
-        ))}
-      </select>
+        {...otherProps}
+      />
     </div>
   );
 });
