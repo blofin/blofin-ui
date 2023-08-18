@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
 const useAlign = (target: HTMLDivElement | null) => {
   const [offset, setOffset] = useState({
@@ -19,7 +19,7 @@ const useAlign = (target: HTMLDivElement | null) => {
     return { left: left, top: top };
   };
 
-  const resize = () => {
+  const resize = useCallback(() => {
     const wrapper = target;
     if (wrapper) {
       const { height, width } = wrapper.getBoundingClientRect();
@@ -33,14 +33,16 @@ const useAlign = (target: HTMLDivElement | null) => {
         offsetRight: document.body.clientWidth - left - width
       });
     }
-  };
+  },[target]);
 
   useEffect(() => {
+    if(target){
+      window.addEventListener("resize", resize);
+    }
     resize();
   }, [target]);
 
   useEffect(() => {
-    window.addEventListener("resize", resize);
     return () => {
       window.removeEventListener("resize", resize);
     };
