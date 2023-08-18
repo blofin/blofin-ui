@@ -35,13 +35,14 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
   const { theme } = useTheme();
   return (
     <div>
-      {label && (
+      {label && typeof label === "string" && (
         <label htmlFor={`bui-${label}`}>
           <Typography variant="body4" className={cn(LabelVariants({ theme: mode ? mode : theme }))}>
             {label}
           </Typography>
         </label>
       )}
+      {label && typeof label !== "string" && <div>{label}</div>}
       <div
         className={cn(
           InputBgVariants({
