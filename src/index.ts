@@ -16,6 +16,7 @@ import { TextSelect } from "./components/TextSelect/TextSelect";
 import { TextField } from "./components/TextField";
 import { Typography } from "./components/Typography/Typography";
 import useNotification from "./hooks/useNotification";
+import useToast from "./hooks/useToast";
 import { NoticeProvider } from "./provider/NoticeProvider";
 import { ThemeProvider } from "./provider/ThemeProvider";
 import useTheme from "./provider/useTheme";
@@ -46,4 +47,4 @@ export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, T
 
 export { NoticeProvider, ThemeProvider };
 
-export { useNotification, useTheme };
+export { useNotification, useTheme, useToast };
