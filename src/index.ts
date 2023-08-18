@@ -14,7 +14,6 @@ import { Tab } from "./components/Tab/Tab";
 import Table, { TableColumnProps } from "./components/Table";
 import { TextSelect } from "./components/TextSelect/TextSelect";
 import { TextField } from "./components/TextField";
-import { useToast } from "./components/Toast/Toast";
 import { Typography } from "./components/Typography/Typography";
 import useNotification from "./hooks/useNotification";
 import { NoticeProvider } from "./provider/NoticeProvider";
@@ -47,4 +46,4 @@ export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, T
 
 export { NoticeProvider, ThemeProvider };
 
-export { useNotification, useTheme, useToast };
+export { useNotification, useTheme };

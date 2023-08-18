@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, { FC, useContext, useEffect, useImperativeHandle, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { bgStyles, iconstyles, textStyles, toastVariants } from "./styles";
 import Info from "../../assets/icons/info.svg";
@@ -9,6 +9,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styles from "./toast.module.scss";
 import useTheme from "../../provider/useTheme";
 import { BUIComponentType } from "../../types/component";
+import { NoticeContext } from "../../provider/NoticeProvider";
 
 interface ToastMsgProps {
   children: React.ReactNode;
@@ -59,37 +60,8 @@ const ToastMsg: FC<ToastMsgProps> = ({ children, type, remove }) => {
   );
 };
 
-const ToastContainer = React.forwardRef((props, ref) => {
-  const [toastList, setToastList] = useState<
-    { node: React.ReactNode; id: number; type: BUIComponentType }[]
-  >([]);
-
-  const key = useRef(0);
-
-  const open = (msg: React.ReactNode, type: BUIComponentType) => {
-    setToastList((list) => [
-      ...list,
-      {
-        node: msg,
-        id: key.current,
-        type: type
-      }
-    ]);
-    key.current += 1;
-  };
-
-  useImperativeHandle(ref, () => {
-    return {
-      info: open,
-      success: open,
-      warning: open,
-      danger: open
-    };
-  });
-
-  const remove = (id: number) => {
-    setToastList((val) => val.filter((item) => item.id !== id));
-  };
+const ToastContainer = () => {
+  const { toastList, removeToast } = useContext(NoticeContext);
 
   return (
     <TransitionGroup className="bu-fixed bu-left-[50%] bu-top-[32px] bu-z-[9999] bu-translate-x-[-50%] bu-text-center">
@@ -108,7 +80,7 @@ const ToastContainer = React.forwardRef((props, ref) => {
             <ToastMsg
               type={type}
               remove={() => {
-                remove(id);
+                removeToast(id);
               }}>
               {node}
             </ToastMsg>
@@ -117,51 +89,8 @@ const ToastContainer = React.forwardRef((props, ref) => {
       })}
     </TransitionGroup>
   );
-});
+};
 
-export const Toast = React.forwardRef((props, ref) => {
-  const [iseRender, setIsRender] = useState(false);
-
-  const node = React.useMemo(() => document.createElement("div"), []);
-
-  useEffect(() => {
-    node.id = "blofin-toast";
-    const toastContainer = document.getElementById("blofin-toast");
-    if (!toastContainer) {
-      document.body.appendChild(node);
-      setIsRender(true);
-    }
-  }, []);
-
-  return iseRender ? ReactDOM.createPortal(<ToastContainer ref={ref} />, node) : null;
-});
-
-export const useToast = () => {
-  const ToastRef = useRef<ToastRef>(null);
-
-  const info = (msg: string) => {
-    ToastRef.current?.info(msg, "info");
-  };
-
-  const success = (msg: string) => {
-    ToastRef.current?.success(msg, "success");
-  };
-
-  const warning = (msg: string) => {
-    ToastRef.current?.warning(msg, "warning");
-  };
-
-  const danger = (msg: string) => {
-    ToastRef.current?.danger(msg, "danger");
-  };
-
-  return {
-    methods: {
-      info,
-      success,
-      warning,
-      danger
-    },
-    context: <Toast ref={ToastRef} />
-  };
+export const Toast = () => {
+  return  ReactDOM.createPortal(<ToastContainer />, document.body)
 };

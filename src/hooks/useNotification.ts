@@ -5,7 +5,6 @@ const useNotification = () => {
   const { open } = useContext(NoticeContext);
 
   const info = (config: configType) => {
-    console.log(open);
     open(config, "info");
   };
 
