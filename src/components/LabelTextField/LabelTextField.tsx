@@ -42,7 +42,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
           </Typography>
         </label>
       )}
-      {label && typeof label !== "string" && <div>{label}</div>}
+      {label && typeof label !== "string" && <div className="bu-mb-1">{label}</div>}
       <div
         className={cn(
           InputBgVariants({
