@@ -91,6 +91,8 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     handleSliderChange(percentage);
   };
 
+  const trackWidth = `${value}%`;
+
   return (
     <div className={styles["slider-container"]}>
       <div className={styles["slider-content"]}>
@@ -99,7 +101,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           className={`${styles["rail"]} ${cn(RailVariants({ theme: mode || theme }))}`}></div>
         <div
           className={`${styles["track"]} ${cn(TrackVariants({ theme: mode || theme }))}`}
-          style={{ width: `${value}%` }}></div>
+          style={{ width: trackWidth }}></div>
         <div className={styles["mark-container"]}>
           <div
             className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
