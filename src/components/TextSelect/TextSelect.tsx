@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
 import { TextField, useTheme } from "../..";
 import useAlign from "../../hooks/useAlign";
-import { bgStyles, disabledStyles, iconStyles, itemStyles } from "./styles";
+import { activeStyles, bgStyles, disabledStyles, iconStyles, itemStyles } from "./styles";
 import SelectArrow from "../../assets/icons/text-arrow.svg";
 
 interface Options {
@@ -19,12 +19,19 @@ interface TextSelectProps {
   disabled?: string;
 }
 
-type OptionsProps = Omit<TextSelectProps, "placeholder" | "defaultValue"> & {
+type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
   className?: string;
   parent: HTMLDivElement | null;
 };
 
-const Options: FC<OptionsProps> = ({ parent, options, onChange, className, disabled }) => {
+const Options: FC<OptionsProps> = ({
+  parent,
+  options,
+  onChange,
+  className,
+  disabled,
+  defaultValue
+}) => {
   const { theme } = useTheme();
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -37,7 +44,9 @@ const Options: FC<OptionsProps> = ({ parent, options, onChange, className, disab
     if (disabled === value) {
       return;
     }
-    onChange(value);
+    if (value !== defaultValue) {
+      onChange(value);
+    }
   };
 
   return ReactDOM.createPortal(
@@ -51,7 +60,7 @@ const Options: FC<OptionsProps> = ({ parent, options, onChange, className, disab
             onClick={() => handleClick(item.value)}
             className={`${styles.item}  ${
               disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
-            }`}
+            } ${defaultValue === item.value ? activeStyles({ theme }) : ""} `}
             style={{ width: width + "px" }}
             key={item.value}>
             {item.label}
@@ -105,6 +114,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
           options={options}
           onChange={onChange}
           disabled={disabled}
+          defaultValue={defaultValue}
         />
       )}
     </div>

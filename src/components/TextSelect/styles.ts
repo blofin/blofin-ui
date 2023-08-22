@@ -19,6 +19,15 @@ const itemStyles = cva("", {
   }
 });
 
+const activeStyles = cva("", {
+  variants: {
+    theme: {
+      light: " bu-bg-light-hover-fill-secondary bu-text-light-primary",
+      dark: " bu-bg-dark-hover-fill-secondary bu-text-dark-primary"
+    }
+  }
+});
+
 const iconStyles = cva("bu-h-[16px] bu-w-[16px]", {
   variants: {
     theme: {
@@ -37,4 +46,4 @@ const disabledStyles = cva("", {
   }
 });
 
-export { bgStyles, itemStyles, iconStyles, disabledStyles };
+export { bgStyles, itemStyles, iconStyles, disabledStyles,activeStyles };

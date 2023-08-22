@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const dialogVariants = cva(
-  "bu-absolute bu-left-[50%] bu-top-[50%] bu-flex bu-translate-x-[-50%] bu-translate-y-[-50%] bu-flex-col bu-justify-between bu-rounded-[10px] bu-px-[24px] bu-pb-[32px] bu-pt-[24px]",
+  "bu-absolute bu-left-[50%] bu-top-[50%] bu-flex bu-translate-x-[-50%] bu-translate-y-[-50%] bu-flex-col bu-justify-between bu-rounded-[10px] bu-pb-[32px] bu-pt-[24px]",
   {
     variants: {
       size: {
@@ -38,7 +38,7 @@ export const iconStyles = cva(
   }
 );
 
-export const footerStyles = cva("bu-flex", {
+export const footerStyles = cva("bu-flex bu-px-[24px]", {
   variants: {
     footerLayout: {
       right: "bu-justify-end",
