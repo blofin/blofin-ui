@@ -28,7 +28,7 @@ const activeStyles = cva("", {
   }
 });
 
-const iconStyles = cva("bu-h-[16px] bu-w-[16px]", {
+const iconStyles = cva("bu-h-[16px] bu-w-[16px] bu-mr-[8px]", {
   variants: {
     theme: {
       light: "bu-text-dark-background",
