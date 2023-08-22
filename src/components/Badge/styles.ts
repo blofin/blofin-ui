@@ -25,7 +25,7 @@ const BadgeVariants = (props: { theme: BUITheme; color: BadgeColor }) => {
 
   const { theme } = props;
 
-  return cva("bu-h-[22px] bu-rounded bu-px-[8px] bu-py-[2px] bu-text-[12px]", {
+  return cva("bu-h-[22px] bu-rounded bu-px-[8px] bu-py-[2px] bu-text-[12px] bu-leading-[18px]", {
     variants: {
       color: {
         primary: color[theme].primary,
