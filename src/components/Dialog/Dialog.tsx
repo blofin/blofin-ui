@@ -76,7 +76,7 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   return isOpen
     ? ReactDOM.createPortal(
-        <div className={styles.dialog}>
+        <div className={styles.mock}>
           <div className={`${styles.dialog} ${dialogVariants({ size, theme: getTheme() })} ${className}`}>
             {!hideIcon && (
               <CloseIcon
