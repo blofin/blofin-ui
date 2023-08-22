@@ -35,12 +35,6 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
   const { theme } = useTheme();
 
   const railRef = useRef<HTMLDivElement>(null);
-  const [thumbLocation, setThumbLocation] = useState<number>(value);
-
-  const handleSliderChange = (newValue: number) => {
-    setThumbLocation(newValue);
-    onSliderChange(newValue);
-  };
 
   const handleDrag = (e: MouseEvent) => {
     e.stopPropagation();
@@ -50,11 +44,11 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
       right: 0
     };
     if (e.clientX >= min && e.clientX <= max) {
-      handleSliderChange(Math.ceil(((e.clientX - min) / (max - min)) * 100));
+      onSliderChange(Math.ceil(((e.clientX - min) / (max - min)) * 100));
     } else if (e.clientX < min && e.clientX > 0) {
-      handleSliderChange(0);
+      onSliderChange(0);
     } else if (e.clientX > max) {
-      handleSliderChange(100);
+      onSliderChange(100);
     }
   };
 
@@ -88,7 +82,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
   );
 
   const handleMarkClick = (percentage: number) => {
-    handleSliderChange(percentage);
+    onSliderChange(percentage);
   };
 
   return (
@@ -134,7 +128,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
         <div
           className={styles["thumb-container"]}
           style={{
-            left: `${thumbLocation}%`
+            left: `${value}%`
           }}>
           <div
             className={`${styles["tooltip"]} ${cn(
