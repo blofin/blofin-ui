@@ -6,8 +6,8 @@ export type InputVariant = "filled" | "outlined";
 const LabelVariants = cva("bu-mb-1", {
   variants: {
     theme: {
-      light: ["bu-text-light-label-60"],
-      dark: ["bu-text-dark-label-60"]
+      light: ["!bu-text-light-label-60"],
+      dark: ["!bu-text-dark-label-60"]
     }
   }
 });
