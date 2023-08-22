@@ -96,9 +96,11 @@ export const Dialog: FC<DialogProps> = (props) => {
             </div>
             <div className={styles.content}>{content}</div>
             <div className={footerStyles({ footerLayout })}>
-              {footer !== null && footer
-                ? footer
-                : !hideConfirm && (
+              {footer !== null && footer ? (
+                footer
+              ) : (
+                <>
+                  {!hideConfirm && (
                     <Button
                       size={footerSize}
                       variant="primary"
@@ -107,16 +109,17 @@ export const Dialog: FC<DialogProps> = (props) => {
                       {confirmText}
                     </Button>
                   )}
-
-              {!hideCancel && (
-                <Button
-                  className="bu-ml-[16px]"
-                  size={footerSize}
-                  variant="ghost"
-                  theme={getTheme()}
-                  onClick={handleCancel}>
-                  {cancelText}
-                </Button>
+                  {!hideCancel && (
+                    <Button
+                      className="bu-ml-[16px]"
+                      size={footerSize}
+                      variant="ghost"
+                      theme={getTheme()}
+                      onClick={handleCancel}>
+                      {cancelText}
+                    </Button>
+                  )}
+                </>
               )}
             </div>
           </div>
