@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const dialogVariants = cva(
-  "bu-absolute bu-left-[50%] bu-top-[50%] bu-flex bu-translate-x-[-50%] bu-translate-y-[-50%] bu-flex-col bu-justify-between bu-rounded-[10px] bu-px-[24px] bu-pt-[24px] bu-pb-[32px]",
+  "bu-absolute bu-left-[50%] bu-top-[50%] bu-flex bu-translate-x-[-50%] bu-translate-y-[-50%] bu-flex-col bu-justify-between bu-rounded-[10px] bu-px-[24px] bu-pb-[32px] bu-pt-[24px]",
   {
     variants: {
       size: {
@@ -11,7 +11,7 @@ export const dialogVariants = cva(
       },
       theme: {
         dark: "bu-bg-dark-background",
-        light: "bu-bg-light-background",
+        light: "bu-bg-light-background"
       }
     }
   }
@@ -26,21 +26,24 @@ export const textStyles = cva("", {
   }
 });
 
-export const iconStyles = cva("", {
-  variants: {
-    theme: {
-      dark: "bu-text-dark-label",
-      light: "bu-text-light-label-40"
+export const iconStyles = cva(
+  "bu-absolute bu-right-[20px] bu-h-[24px] bu-w-[24px] bu-cursor-pointer",
+  {
+    variants: {
+      theme: {
+        dark: "bu-text-dark-label",
+        light: "bu-text-light-label-40"
+      }
     }
   }
-});
+);
 
-export const footerStyles=cva("bu-flex", {
+export const footerStyles = cva("bu-flex", {
   variants: {
     footerLayout: {
-      right:"bu-justify-end",
+      right: "bu-justify-end",
       left: "bu-justify-start",
-      center:"bu-justify-center"
+      center: "bu-justify-center"
     }
   }
 });

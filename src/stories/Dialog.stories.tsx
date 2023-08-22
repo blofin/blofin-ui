@@ -12,6 +12,20 @@ const meta: Meta<typeof Dialog> = {
 export default meta;
 type Story = StoryObj<typeof Dialog>;
 
+const Content = () => {
+  return (
+    <div className="bu-flex bu-flex-col">
+      <div className="bu-h-[100px]">1111</div>
+      <div className="bu-h-[100px]">1111</div>
+      <div className="bu-h-[100px]">1111</div>
+      <div className="bu-h-[100px]">1111</div>
+      <div className="bu-h-[100px]">1111</div>
+      <div className="bu-h-[100px]">1111</div>
+      <div className="bu-h-[100px]">1111</div>
+    </div>
+  );
+};
+
 export const Primary: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
@@ -29,11 +43,13 @@ export const Primary: Story = {
 
     return (
       <>
-        <Button size="medium" onClick={() => setOpen(true)}>Open Dialog</Button>
+        <Button size="medium" onClick={() => setOpen(true)}>
+          Open Dialog
+        </Button>
         <Dialog
           open={open}
-          title='Hello'
-          content="Dialog Content"
+          title="Hello"
+          content={<Content />}
           cancelText="Cancel"
           confirmText="Confirm"
           size="large"

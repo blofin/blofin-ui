@@ -99,13 +99,14 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         value={label}
         endAdornment={<SelectArrow className={`${iconStyles({ theme })}`} />}
       />
-      <Options
-        className={!show ? "bu-hidden" : ""}
-        parent={targetRef.current}
-        options={options}
-        onChange={onChange}
-        disabled={disabled}
-      />
+      {show && (
+        <Options
+          parent={targetRef.current}
+          options={options}
+          onChange={onChange}
+          disabled={disabled}
+        />
+      )}
     </div>
   );
 };

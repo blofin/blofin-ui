@@ -6,6 +6,7 @@ import { Button } from "../Button/Button";
 import { dialogVariants, footerStyles, iconStyles, textStyles } from "./styles";
 import useTheme from "../../provider/useTheme";
 import { ButtonSize } from "../Button/types";
+import styles from './index.module.scss'
 
 interface DialogProps {
   title: null | string | React.ReactNode;
@@ -75,11 +76,11 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   return isOpen
     ? ReactDOM.createPortal(
-        <div className="bu-fixed bu-bottom-0 bu-left-0 bu-right-0 bu-top-0 bu-z-[9999] bu-bg-black/[.6]">
-          <div className={`${dialogVariants({ size, theme: getTheme() })} ${className}`}>
+        <div className={styles.dialog}>
+          <div className={`${styles.dialog} ${dialogVariants({ size, theme: getTheme() })} ${className}`}>
             {!hideIcon && (
               <CloseIcon
-                className={`bu-absolute bu-right-[20px] bu-h-[24px] bu-w-[24px] bu-cursor-pointer ${iconStyles(
+                className={`${iconStyles(
                   {
                     theme: getTheme()
                   }
@@ -90,14 +91,13 @@ export const Dialog: FC<DialogProps> = (props) => {
 
             <div className={textStyles({ theme: getTheme() })}>
               {title !== null && (
-                <div className="bu-mb-[23px] bu-text-[16px] bu-font-medium bu-leading-[26px] bu-tracking-[-0.2px]">
+                <div className={styles.title}>
                   {title}
                 </div>
               )}
-
-              <div className="bu-mb-[48px] bu-text-[14px] bu-font-normal bu-leading-[20px] bu-tracking-[-0.2px]">
-                {content}
-              </div>
+            </div>
+            <div className={styles.content}>
+              {content}
             </div>
             {footer !== null && (
               <>
