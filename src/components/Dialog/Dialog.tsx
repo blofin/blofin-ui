@@ -6,7 +6,7 @@ import { Button } from "../Button/Button";
 import { dialogVariants, footerStyles, iconStyles, textStyles } from "./styles";
 import useTheme from "../../provider/useTheme";
 import { ButtonSize } from "../Button/types";
-import styles from './index.module.scss'
+import styles from "./index.module.scss";
 
 interface DialogProps {
   title: null | string | React.ReactNode;
@@ -77,58 +77,48 @@ export const Dialog: FC<DialogProps> = (props) => {
   return isOpen
     ? ReactDOM.createPortal(
         <div className={styles.mock}>
-          <div className={`${styles.dialog} ${dialogVariants({ size, theme: getTheme() })} ${className}`}>
+          <div
+            className={`${styles.dialog} ${dialogVariants({
+              size,
+              theme: getTheme()
+            })} ${className}`}>
             {!hideIcon && (
               <CloseIcon
-                className={`${iconStyles(
-                  {
-                    theme: getTheme()
-                  }
-                )}`}
+                className={`${iconStyles({
+                  theme: getTheme()
+                })}`}
                 onClick={handleCancel}
               />
             )}
 
             <div className={textStyles({ theme: getTheme() })}>
-              {title !== null && (
-                <div className={styles.title}>
-                  {title}
-                </div>
+              {title !== null && <div className={styles.title}>{title}</div>}
+            </div>
+            <div className={styles.content}>{content}</div>
+            <div className={footerStyles({ footerLayout })}>
+              {footer !== null && footer
+                ? footer
+                : !hideConfirm && (
+                    <Button
+                      size={footerSize}
+                      variant="primary"
+                      theme={getTheme()}
+                      onClick={handleConfirm}>
+                      {confirmText}
+                    </Button>
+                  )}
+
+              {!hideCancel && (
+                <Button
+                  className="bu-ml-[16px]"
+                  size={footerSize}
+                  variant="ghost"
+                  theme={getTheme()}
+                  onClick={handleCancel}>
+                  {cancelText}
+                </Button>
               )}
             </div>
-            <div className={styles.content}>
-              {content}
-            </div>
-            {footer !== null && (
-              <>
-                {footer ? (
-                  <>{footer}</>
-                ) : (
-                  <div className={footerStyles({ footerLayout })}>
-                    {!hideConfirm && (
-                      <Button
-                        size={footerSize}
-                        variant="primary"
-                        theme={getTheme()}
-                        onClick={handleConfirm}>
-                        {confirmText}
-                      </Button>
-                    )}
-
-                    {!hideCancel && (
-                      <Button
-                        className="bu-ml-[16px]"
-                        size={footerSize}
-                        variant="ghost"
-                        theme={getTheme()}
-                        onClick={handleCancel}>
-                        {cancelText}
-                      </Button>
-                    )}
-                  </div>
-                )}
-              </>
-            )}
           </div>
         </div>,
         document.body
