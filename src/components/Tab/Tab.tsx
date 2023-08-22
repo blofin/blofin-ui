@@ -1,5 +1,8 @@
 import React, { Children, FC, Fragment, useMemo, useState } from "react";
 import { BUIComponentSize } from "../..";
+import useTheme from "../../provider/useTheme";
+import { Base } from "../../types/component";
+import { cn } from "../../utils/utils";
 import styles from "./index.module.scss";
 import {
   borderSyles,
@@ -10,9 +13,6 @@ import {
   noSmallActStyles,
   smallActStyles
 } from "./styles";
-import useTheme from "../../provider/useTheme";
-import { Base } from "../../types/component";
-import { cn } from "../../utils/utils";
 
 interface TabProps extends Base {
   items: {
@@ -52,8 +52,9 @@ const Tab: FC<TabProps> = ({ items, size, change, className, children }) => {
   }, [size, theme]);
 
   return (
-    <div className="bu-inline-flex bu-flex-col">
-      <div className={`bu-flex bu-justify-between ${size !== "small" ? borderSyles({ theme }) : ""}`}>
+    <div className="bu-flex bu-flex-col">
+      <div
+        className={`bu-flex bu-justify-between ${size !== "small" ? borderSyles({ theme }) : ""}`}>
         <ul className={`${styles.tab}`}>
           {items.map((item) => {
             return (
