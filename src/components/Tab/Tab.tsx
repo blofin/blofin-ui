@@ -68,7 +68,7 @@ const Tab: FC<TabProps> = ({ items, size, change, className, children }) => {
         </ul>
         {children}
       </div>
-      <div className={cn("bu-h-full", className)}>
+      <div className={cn("bu-h-full bu-w-full", className)}>
         {items.map((item, index) => {
           return <Fragment key={index}>{active === item.key ? item.children : null}</Fragment>;
         })}
