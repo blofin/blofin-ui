@@ -1,6 +1,7 @@
 import { Badge } from "./components/Badge/Badge";
 import { Button } from "./components/Button/Button";
 import { Checkbox } from "./components/Checkbox";
+import { CssDropdown } from "./components/CssDropdown/CssDropdown";
 import { Dialog } from "./components/Dialog/Dialog";
 import { Divider } from "./components/Divider";
 import { Dropdown } from "./components/Dropdown/Dropdown";
@@ -12,8 +13,8 @@ import SortButton, { TextAlign } from "./components/Sort/SortButton";
 import SortGroup from "./components/Sort/SortGroup";
 import { Tab } from "./components/Tab/Tab";
 import Table, { TableColumnProps } from "./components/Table";
-import { TextSelect } from "./components/TextSelect/TextSelect";
 import { TextField } from "./components/TextField";
+import { TextSelect } from "./components/TextSelect/TextSelect";
 import { Typography } from "./components/Typography/Typography";
 import useNotification from "./hooks/useNotification";
 import useToast from "./hooks/useToast";
@@ -27,6 +28,7 @@ export {
   Badge,
   Button,
   Checkbox,
+  CssDropdown,
   Dialog,
   Divider,
   Dropdown,
@@ -39,8 +41,8 @@ export {
   Tab,
   Table,
   TextField,
-  Typography,
-  TextSelect
+  TextSelect,
+  Typography
 };
 
 export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, TextAlign };
