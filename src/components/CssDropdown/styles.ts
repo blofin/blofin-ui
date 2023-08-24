@@ -10,7 +10,7 @@ const labelStyles = cva("", {
 });
 
 const menuStyles = cva(
-  "bu-absolute bu-left-0 bu-mt-2 bu-w-[300px] bu-origin-top-left bu-rounded bu-shadow-lg bu-outline-none",
+  "bu-absolute bu-left-0 bu-mt-2 bu-w-[320px] bu-origin-top-left bu-rounded bu-shadow-lg bu-outline-none",
   {
     variants: {
       theme: {
