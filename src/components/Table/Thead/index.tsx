@@ -33,7 +33,7 @@ const Thead: FC<{
     <SortGroup>
       <thead
         className={`${styles.thead} ${props.theadClass}`}
-        style={props.scroll ? { position: "sticky", zIndex: "999", top: 0 } : {}}>
+        style={props.scroll ? { position: "sticky", zIndex: "999", top: '-1px' } : {}}>
         <tr>
           {columns.map((item, index) => {
             return (
