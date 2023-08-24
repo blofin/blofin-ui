@@ -55,6 +55,7 @@ export const Primary: Story = {
           size="large"
           cancel={cancel}
           confirm={confirm}
+          footer={null}
           footerLayout="right"
           footerSize="medium"
           hideCancel={true}

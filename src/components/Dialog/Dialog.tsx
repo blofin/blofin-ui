@@ -96,7 +96,7 @@ export const Dialog: FC<DialogProps> = (props) => {
             </div>
             <div className={styles.content}>{content}</div>
             <div className={footerStyles({ footerLayout })}>
-              {footer !== null && footer ? (
+              {footer === null ? null : footer ? (
                 footer
               ) : (
                 <>
