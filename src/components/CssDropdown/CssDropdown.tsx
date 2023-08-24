@@ -22,7 +22,7 @@ interface CssDropdownProps {
 export const CssDropdown = ({ label, content, theme: mode }: CssDropdownProps) => {
   const { theme } = useTheme();
   return (
-    <div className="bu-group bu-relative bu-inline-block bu-text-left" tabIndex={-1}>
+    <div className="bu-group bu-relative bu-text-left" tabIndex={-1}>
       <span className="bu-cursor-pointer">{label}</span>
       <div className="bu-invisible bu-origin-top-left -bu-translate-y-2 bu-scale-95 bu-transform bu-opacity-0 bu-transition-all bu-duration-300 group-focus-within:bu-visible group-focus-within:bu-translate-y-0 group-focus-within:bu-scale-100 group-focus-within:bu-opacity-100">
         <div
