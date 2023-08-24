@@ -67,7 +67,7 @@ export const Dialog: FC<DialogProps> = (props) => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = open ? "hidden" : "";
     setIsOpen(open);
     return () => {
       document.body.style.overflow = "";
