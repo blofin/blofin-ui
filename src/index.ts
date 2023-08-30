@@ -15,6 +15,7 @@ import { Tab } from "./components/Tab/Tab";
 import Table, { TableColumnProps } from "./components/Table";
 import { TextField } from "./components/TextField";
 import { TextSelect } from "./components/TextSelect/TextSelect";
+import { Tooltip } from "./components/Tooltip/Tooltip";
 import { Typography } from "./components/Typography/Typography";
 import useNotification from "./hooks/useNotification";
 import useToast from "./hooks/useToast";
@@ -42,6 +43,7 @@ export {
   Table,
   TextField,
   TextSelect,
+  Tooltip,
   Typography
 };
 
