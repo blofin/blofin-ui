@@ -77,7 +77,7 @@ const NotificationContainer = () => {
   const { notificationList, remove } = useContext(NoticeContext);
 
   return (
-    <TransitionGroup className="bu-fixed bu-bottom-[32px] bu-left-[32px] bu-z-[9999] bu-w-[384px]">
+    <TransitionGroup className="bu-fixed bu-bottom-[32px] bu-left-[32px] bu-z-[99999] bu-w-[384px]">
       {notificationList.map(({ title, node, id, type }) => {
         return (
           <CSSTransition
