@@ -28,8 +28,8 @@ const bgStyles = cva("", {
 const textStyles = cva("", {
   variants: {
     theme: {
-      light: "text-light-label",
-      dark: "text-dark-label"
+      light: "bu-text-light-label",
+      dark: "bu-text-dark-label"
     }
   }
 });
