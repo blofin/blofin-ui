@@ -14,6 +14,7 @@ export type TypographyVariantsType =
   | "h6"
   | "subtitle1"
   | "subtitle2"
+  | "subtitle3"
   | "body1"
   | "body2"
   | "body3"
@@ -35,8 +36,9 @@ const TypographyVariants = (props: {
         h6: `bu-text-4xl`,
         subtitle1: `bu-text-3xl`,
         subtitle2: `bu-text-2xl`,
-        body1: `bu-text-xl`,
-        body2: `bu-text-lg`,
+        subtitle3: `bu-text-xl`,
+        body1: `bu-text-lg`,
+        body2: `bu-text-md`,
         body3: `bu-text-base`,
         body4: `bu-text-sm`
       },

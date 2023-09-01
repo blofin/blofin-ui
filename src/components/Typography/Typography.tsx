@@ -13,6 +13,7 @@ const TYPEOGRAPHY_TAGS = {
   h6: "h6",
   subtitle1: "p",
   subtitle2: "p",
+  subtitle3: "p",
   body1: "p",
   body2: "p",
   body3: "p",

@@ -22,6 +22,7 @@ const meta: Meta<typeof Typography> = {
         "h6",
         "subtitle1",
         "subtitle2",
+        "subtitle3",
         "body1",
         "body2",
         "body3",
