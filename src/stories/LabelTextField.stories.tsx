@@ -90,6 +90,11 @@ const LabelTextFieldWithTheme = ({
         startAdornment={startAdornment}
         endAdornment={endAdornment}
       />
+      <LabelTextField
+        variant="filled"
+        label={label}
+        endAdornment={<div className="bu-w-[1150px]">X</div>}
+      />
     </ThemeProvider>
   );
 };
