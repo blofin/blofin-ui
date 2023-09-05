@@ -56,9 +56,9 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
         )}>
         <div className="bu-flex bu-h-full bu-w-full bu-items-center bu-justify-center">
           {startAdornment && (
-            <span className={typeof startAdornment === "string" ? "bu-px-2" : ""}>
+            <div className={typeof startAdornment === "string" ? "bu-px-2" : ""}>
               {startAdornment}
-            </span>
+            </div>
           )}
           <input
             id={typeof label === "string" ? `bui-${label}` : undefined}
@@ -74,9 +74,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             )}
           />
           {endAdornment && (
-            <span className={typeof endAdornment === "string" ? "bu-px-2" : ""}>
-              {endAdornment}
-            </span>
+            <div className={typeof endAdornment === "string" ? "bu-px-2" : ""}>{endAdornment}</div>
           )}
         </div>
       </div>
