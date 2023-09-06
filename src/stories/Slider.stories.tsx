@@ -53,6 +53,12 @@ export const OuterWidth: Story = {
           Value: {value}
         </Typography>
         <button onClick={() => setValue(0)}>set to 0</button>
+        <input
+          className="bu-border bu-border-lime-500"
+          type="text"
+          value={value}
+          onChange={(e) => setValue(Number(e.target.value))}
+        />
         <div className="bu-mx-auto bu-flex bu-w-96 bu-items-center bu-justify-center bu-py-10">
           <Slider value={value} onSliderChange={setValue} theme={mode} />
         </div>

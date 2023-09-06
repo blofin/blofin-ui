@@ -57,6 +57,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     e.preventDefault();
+    (document.activeElement as HTMLElement).blur();
 
     mouseDown.current = true;
 
