@@ -49,27 +49,29 @@ const Options: FC<OptionsProps> = ({
     }
   };
 
-  return ReactDOM.createPortal(
-    <div
-      className={`${styles.options} ${className} ${bgStyles({ theme })}`}
-      style={{ top: offsetY + height + "px", left: offsetX + "px" }}
-      ref={targetRef}>
-      {options.map((item) => {
-        return (
-          <div
-            onClick={() => handleClick(item.value)}
-            className={`${styles.item}  ${
-              disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
-            } ${defaultValue === item.value ? activeStyles({ theme }) : ""} `}
-            style={{ width: width + "px" }}
-            key={item.value}>
-            {item.label}
-          </div>
-        );
-      })}
-    </div>,
-    document.body
-  );
+  return offsetX !== 0 && offsetY !== 0
+    ? ReactDOM.createPortal(
+        <div
+          className={`${styles.options} ${className} ${bgStyles({ theme })}`}
+          style={{ top: offsetY + height + "px", left: offsetX + "px" }}
+          ref={targetRef}>
+          {options.map((item) => {
+            return (
+              <div
+                onClick={() => handleClick(item.value)}
+                className={`${styles.item}  ${
+                  disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
+                } ${defaultValue === item.value ? activeStyles({ theme }) : ""} `}
+                style={{ width: width + "px" }}
+                key={item.value}>
+                {item.label}
+              </div>
+            );
+          })}
+        </div>,
+        document.body
+      )
+    : null;
 };
 
 const TextSelect: FC<TextSelectProps> = (props) => {
