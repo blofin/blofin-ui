@@ -136,8 +136,8 @@ module.exports = {
         },
         fill: {
           primary: "#000000",
-          secondary: "#232429",
-          tertiary: "#46484D"
+          secondary: "#1A1A1A",
+          tertiary: "#323234"
         },
         line: {
           primary: "#2F3033",
@@ -154,7 +154,7 @@ module.exports = {
           fill: {
             primary: "#111214",
             secondary: "#34363D",
-            tertiary: "#5C5F66"
+            tertiary: "#3E3F41"
           }
         },
         disabled: {
