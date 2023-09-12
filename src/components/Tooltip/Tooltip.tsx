@@ -5,6 +5,7 @@ import useAlign from "../../hooks/useAlign";
 import { arrowPositionStyles, bgStyles } from "./styles";
 import { useTheme } from "../..";
 import ArrowIcon from "../../assets/icons/arrow.svg";
+import ArrowDarkIcon from "../../assets/icons/arrow-dark.svg";
 
 interface TooltipProps {
   placement: "top" | "bottom" | "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
@@ -99,7 +100,7 @@ const Content: FC<ContentProps> = ({ title, content, placement, parent }) => {
       {title && content && <div className={styles.line}></div>}
       {content && <span className={styles.content}>{content}</span>}
       <div className={arrowPositionStyles({ placement })}>
-        <ArrowIcon />
+        {theme === "dark" ? <ArrowDarkIcon /> : <ArrowIcon />}
       </div>
     </div>,
     document.body
