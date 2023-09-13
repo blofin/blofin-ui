@@ -1,17 +1,18 @@
 import { FC, useRef, useState } from "react";
-import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
-import useAlign from "../../hooks/useAlign";
-import { arrowPositionStyles, bgStyles } from "./styles";
 import { useTheme } from "../..";
-import ArrowIcon from "../../assets/icons/arrow.svg";
 import ArrowDarkIcon from "../../assets/icons/arrow-dark.svg";
+import ArrowIcon from "../../assets/icons/arrow.svg";
+import useAlign from "../../hooks/useAlign";
+import styles from "./index.module.scss";
+import { arrowPositionStyles, bgStyles } from "./styles";
 
 interface TooltipProps {
   placement: "top" | "bottom" | "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
   title?: string;
   content?: string;
   children?: React.ReactNode;
+  isShow?: boolean;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
@@ -107,7 +108,7 @@ const Content: FC<ContentProps> = ({ title, content, placement, parent }) => {
   );
 };
 
-const Tooltip: FC<TooltipProps> = ({ children, ...props }) => {
+const Tooltip: FC<TooltipProps> = ({ children, isShow, ...props }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const [enter, setEnter] = useState(false);
@@ -127,7 +128,7 @@ const Tooltip: FC<TooltipProps> = ({ children, ...props }) => {
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}>
       {children}
-      {enter && <Content {...props} parent={targetRef.current} />}
+      {(enter || isShow) && <Content {...props} parent={targetRef.current} />}
     </div>
   );
 };
