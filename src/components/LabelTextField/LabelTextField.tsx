@@ -70,7 +70,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             {...otherProps}
             ref={ref as LegacyRef<HTMLInputElement>}
             className={cn(
-              "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-outline-none focus:bu-outline-0 focus-visible:bu-outline-0",
+              "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-text-base bu-outline-none focus:bu-outline-0 focus-visible:bu-outline-0",
               inputClassName,
               `${!startAdornment && "bu-pl-2"}`,
               `${!endAdornment && "bu-pr-2"}`
