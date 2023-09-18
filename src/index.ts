@@ -17,6 +17,7 @@ import { TextField } from "./components/TextField";
 import { TextSelect } from "./components/TextSelect/TextSelect";
 import { Tooltip } from "./components/Tooltip/Tooltip";
 import { Typography } from "./components/Typography/Typography";
+import { Pagination } from "./components/Pagination/Pagination";
 import useNotification from "./hooks/useNotification";
 import useToast from "./hooks/useToast";
 import { NoticeProvider } from "./provider/NoticeProvider";
@@ -44,7 +45,8 @@ export {
   TextField,
   TextSelect,
   Tooltip,
-  Typography
+  Typography,
+  Pagination
 };
 
 export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, TextAlign };
