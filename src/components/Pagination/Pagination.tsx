@@ -1,20 +1,19 @@
-import { FC, useLayoutEffect, useState } from "react";
-import { Icon } from "../Icon/Icon";
-import styles from "./styles";
+import { useEffect, useRef, useState } from "react";
+import clsx from "clsx";
+import useTheme from "../../provider/useTheme";
+import Arrow from "../../assets/icons/text-arrow.svg";
+import { BUITheme } from "../../types/component";
+import { paginationVariants, arrowVariants } from "./styles";
 
 export interface PaginationProps {
   /**
    * Current page number
    */
-  defaultCurrent?: number;
+  currentPage: number;
   /**
-   * Total number of data
+   * Total page number
    */
-  total: number;
-  /**
-   * Number of data per page
-   */
-  pageSize: number;
+  totalPages: number;
   /**
    * Current data items is smaller than pageSize to hide pagination
    */
@@ -22,138 +21,98 @@ export interface PaginationProps {
   /**
    * Called when the page number is changed
    */
-  onChange?: (page: number, pageSize: number) => void;
+  onChange: (pageNum: number) => void;
+  /**
+   * Called when the page number is changed
+   */
+  className?: string;
+  theme?: BUITheme;
 }
 
-const LIMIT = 5;
+export function Pagination({
+  totalPages,
+  currentPage,
+  onChange,
+  className,
+  theme
+}: PaginationProps) {
+  const [pageList, setPageList] = useState(() => calcPageList(currentPage, totalPages));
+  const isFirstRendering = useRef(true);
 
-export const Pagination: FC<PaginationProps> = (props) => {
-  const {
-    total,
-    pageSize,
-    defaultCurrent = 1,
-    hideOnSinglePage,
-    onChange,
-  } = props;
+  const { theme: defaultTheme } = useTheme();
 
-  const [current, setCurrent] = useState(defaultCurrent);
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === totalPages;
 
-  const [pagers, setPagers] = useState<number[]>([]);
+  const handlePageChange = (target: number | "prev" | "next") => () => {
+    if (target === "prev") {
+      return currentPage > 1 && onChange(currentPage - 1);
+    }
+    if (target === "next") {
+      return currentPage < totalPages && onChange(currentPage + 1);
+    }
+    target !== currentPage && onChange(target);
+  };
 
-  const getPager = () => {
-    const list: number[] = [];
-    if (current < LIMIT) {
-      for (let i = 2; i <= LIMIT; i++) {
-        list.push(i);
-      }
-    } else if (total - current < LIMIT) {
-      for (let i = total - LIMIT; i < total; i++) {
-        list.push(i);
-      }
+  useEffect(() => {
+    if (isFirstRendering.current) {
+      isFirstRendering.current = false;
     } else {
-      for (let i = current - 2; i <= current + 2; i++) {
-        list.push(i);
-      }
+      setPageList(calcPageList(currentPage, totalPages));
     }
-    setPagers(list);
-  };
+  }, [totalPages, currentPage]);
 
-  useLayoutEffect(() => {
-    getPager();
-  }, [current]);
-
-  const changeCurrent = (current: number) => {
-    setCurrent(current);
-    if (onChange) {
-      onChange(current, pageSize);
-    }
-  };
-
-  const isActive = (active = 1) => {
-    return current === active ? styles.light.active : "";
-  };
-
-  const isHover = (active = 1) => {
-    return isActive(active) === "" ? styles.light.hover : "";
-  };
-
-  const prevPage = () => {
-    changeCurrent(current - 1 <= 1 ? 1 : current - 1);
-  };
-
-  const nextPage = () => {
-    changeCurrent(current + 1 >= total ? total : current + 1);
-  };
-
-  const isHide = () => {
-    if (hideOnSinglePage) {
-      return !(total < pageSize);
-    } else {
-      return true;
-    }
-  };
+  if (!currentPage || !totalPages || totalPages < currentPage) {
+    return null;
+  }
 
   return (
-    <>
-      {isHide() && (
-        <ul className="flex">
+    <ul
+      className={clsx(
+        "bu-flex bu-items-center bu-justify-center bu-gap-[16px] bu-text-dark-label md:bu-gap-[24px]",
+        className
+      )}>
+      <li
+        className={arrowVariants({ theme: theme || defaultTheme })}
+        data-disabled={isFirstPage}
+        onClick={handlePageChange("prev")}>
+        <Arrow className="bu-h-[24px] bu-w-[24px] bu-rotate-90" />
+      </li>
+      {pageList.map((pageNum, i) => {
+        return (
           <li
-            className={`mr-[10px] ${styles.light.border} ${styles.light.pagination}`}
-            onClick={prevPage}
-          >
-            <Icon name="bui-prev" />
+            key={`${pageNum}-${i}`}
+            data-current={currentPage === pageNum}
+            className={paginationVariants({ theme: theme || defaultTheme })}>
+            {typeof pageNum === "string" ? (
+              <span>{pageNum}</span>
+            ) : (
+              <button onClick={handlePageChange(pageNum)}>{pageNum}</button>
+            )}
           </li>
-          <li
-            className={`${styles.light.border} ${isActive()} ${isHover()}`}
-            onClick={() => {
-              changeCurrent(1);
-            }}
-          >
-            1
-          </li>
-          {current - LIMIT >= 0 && (
-            <li className={`ml-[10px] flex items-center`}>
-              <Icon name="bui-more" />
-            </li>
-          )}
-          {pagers.map((item, index) => {
-            return (
-              <li
-                className={`ml-[10px] ${styles.light.border} ${isActive(
-                  item
-                )}  ${isHover(item)}`}
-                onClick={() => {
-                  changeCurrent(item);
-                }}
-                key={index}
-              >
-                {item}
-              </li>
-            );
-          })}
-          {total - current >= LIMIT && (
-            <li className={`ml-[10px] flex items-center`}>
-              <Icon name="bui-more" />
-            </li>
-          )}
-          <li
-            onClick={() => {
-              changeCurrent(total);
-            }}
-            className={`ml-[10px] ${styles.light.border} ${isActive(
-              total
-            )} ${isHover(total)}`}
-          >
-            {total}
-          </li>
-          <li
-            onClick={nextPage}
-            className={`ml-[10px] ${styles.light.border} ${styles.light.pagination}`}
-          >
-            <Icon name="bui-next" />
-          </li>
-        </ul>
-      )}
-    </>
+        );
+      })}
+
+      <li
+        className={arrowVariants({ theme: theme || defaultTheme })}
+        data-disabled={isLastPage}
+        onClick={handlePageChange("next")}>
+        <Arrow className="bu-h-[24px] bu-w-[24px] -bu-rotate-90" />
+      </li>
+    </ul>
   );
-};
+}
+
+function calcPageList(current: number, total: number) {
+  if (total <= 4) return Array.from({ length: total }, (_, i) => i + 1);
+  if (current === 1) return [1, 2, 3, "...", total];
+  if (current === total) return [1, "...", total - 2, total - 1, total];
+
+  const arr = Array.from({ length: 3 }, (_, i) => current + i - 1).filter(
+    (i) => i > 1 && i < total
+  );
+  const sp = current - 2 > 1 ? [1, "..."] : [1];
+  const ep = current + 2 >= total ? [total] : ["...", total];
+
+  return [...sp, ...arr, ...ep];
+}

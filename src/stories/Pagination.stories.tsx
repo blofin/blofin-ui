@@ -1,27 +1,35 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-
+import { useState } from "react";
 import { Pagination } from "../components/Pagination/Pagination";
+import { ThemeProvider } from "..";
+import useMode from "../hooks/useMode";
 
 export default {
   title: "Components/Pagination",
   component: Pagination,
   argTypes: {
-    total: {
-      defaultValue: { summary: 0 },
+    totalPages: {
+      defaultValue: { summary: 0 }
     },
-    pageSize: {
-      defaultValue: { summary: 10 },
-    },
-  },
-} as ComponentMeta<typeof Pagination>;
+    currentPage: {
+      defaultValue: { summary: 1 }
+    }
+  }
+};
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Pagination> = (args) => (
-  <Pagination {...args} />
-);
+export const Example = () => {
+  const [page, setPage] = useState({
+    totalPages: 10,
+    currentPage: 1
+  });
 
-export const Example = Template.bind({});
-Example.args = {
-  total: 50,
-  pageSize: 10,
+  function handleChange(pageNum: number) {
+    setPage((prevState) => ({ ...prevState, currentPage: pageNum }));
+  }
+
+  const mode = useMode();
+  return (
+    <ThemeProvider value={{ theme: mode }}>
+      <Pagination {...page} onChange={handleChange} />
+    </ThemeProvider>
+  );
 };
