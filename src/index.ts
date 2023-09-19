@@ -6,6 +6,7 @@ import { Dialog } from "./components/Dialog/Dialog";
 import { Divider } from "./components/Divider";
 import { Dropdown } from "./components/Dropdown/Dropdown";
 import { LabelTextField } from "./components/LabelTextField";
+import { Pagination } from "./components/Pagination/Pagination";
 import { Popover } from "./components/Popover/Popover";
 import { Select } from "./components/Select";
 import { Slider } from "./components/Slider";
@@ -17,7 +18,6 @@ import { TextField } from "./components/TextField";
 import { TextSelect } from "./components/TextSelect/TextSelect";
 import { Tooltip } from "./components/Tooltip/Tooltip";
 import { Typography } from "./components/Typography/Typography";
-import { Pagination } from "./components/Pagination/Pagination";
 import useNotification from "./hooks/useNotification";
 import useToast from "./hooks/useToast";
 import { NoticeProvider } from "./provider/NoticeProvider";
@@ -35,6 +35,7 @@ export {
   Divider,
   Dropdown,
   LabelTextField,
+  Pagination,
   Popover,
   Select,
   Slider,
@@ -45,8 +46,7 @@ export {
   TextField,
   TextSelect,
   Tooltip,
-  Typography,
-  Pagination
+  Typography
 };
 
 export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, TextAlign };
