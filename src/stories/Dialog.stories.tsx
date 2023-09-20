@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "../components/Button/Button";
 import { Dialog } from "../components/Dialog/Dialog";
 import useTheme from "../hooks/useMode";
+import { ThemeProvider } from "..";
 
 const meta: Meta<typeof Dialog> = {
   title: "Components/Dialog",
@@ -42,7 +43,7 @@ export const Primary: Story = {
     };
 
     return (
-      <>
+      <ThemeProvider value={{ theme: mode }}>
         <Button size="medium" onClick={() => setOpen(true)}>
           Open Dialog
         </Button>
@@ -60,7 +61,7 @@ export const Primary: Story = {
           footerSize="medium"
           hideCancel={true}
         />
-      </>
+      </ThemeProvider>
     );
   }
 };

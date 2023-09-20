@@ -10,7 +10,7 @@ export const dialogVariants = cva(
         small: `max-[600px]:bu-w-[80%] min-[600px]:bu-min-h-[210px] min-[600px]:bu-w-[520px]`
       },
       theme: {
-        dark: "bu-bg-dark-background",
+        dark: "bu-bg-dark-fill-secondary",
         light: "bu-bg-light-background"
       }
     }
