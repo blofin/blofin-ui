@@ -86,13 +86,15 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
           )}
         </div>
       </div>
-      <div className="bu-mt-1">
-        <Typography
-          variant="body4"
-          className={cn(HelperTextVariants({ theme: mode ? mode : theme }))}>
-          {helperText}
-        </Typography>
-      </div>
+      {helperText && (
+        <div className="bu-mt-1">
+          <Typography
+            variant="body4"
+            className={cn(HelperTextVariants({ theme: mode ? mode : theme }))}>
+            {helperText}
+          </Typography>
+        </div>
+      )}
     </div>
   );
 });
