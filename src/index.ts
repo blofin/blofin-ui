@@ -8,6 +8,7 @@ import { Dropdown } from "./components/Dropdown/Dropdown";
 import { LabelTextField } from "./components/LabelTextField";
 import { Pagination } from "./components/Pagination/Pagination";
 import { Popover } from "./components/Popover/Popover";
+import { RadioButton } from "./components/RadioButton";
 import { Select } from "./components/Select";
 import { Slider } from "./components/Slider";
 import SortButton, { TextAlign } from "./components/Sort/SortButton";
@@ -46,7 +47,8 @@ export {
   TextField,
   TextSelect,
   Tooltip,
-  Typography
+  Typography,
+  RadioButton
 };
 
 export type { BUIComponentColor, BUIComponentSize, BUITheme, TableColumnProps, TextAlign };
