@@ -46,6 +46,7 @@ const Content = () => {
         handleChange={(value) => {
           setTPTriggerPriceType(value);
         }}
+        scrollable={true}
       /> */}
       <div className="bu-h-[100px]">1111</div>
       <div className="bu-h-[100px]">1111</div>
@@ -67,12 +68,6 @@ export const Primary: Story = {
       alert("Confirm");
       setOpen(false);
     };
-
-    // useEffect(() => {
-    //   return () => {
-    //     document.body.style.overflow = "";
-    //   };
-    // }, []);
 
     return (
       <ThemeProvider value={{ theme: mode }}>

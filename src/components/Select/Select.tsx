@@ -65,6 +65,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   handleChange?: (value: string) => void;
   align?: "left" | "right";
   labelClassName?: string;
+  scrollable?: boolean;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -76,6 +77,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     align = "left",
     handleChange,
     labelClassName,
+    scrollable = false,
     ...otherProps
   } = props;
 
@@ -97,8 +99,10 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = showMenu ? "hidden" : "";
-  }, [showMenu]);
+    if (!scrollable) {
+      document.body.style.overflow = showMenu ? "hidden" : "";
+    }
+  }, [showMenu, scrollable]);
 
   return (
     <div className="bu-flex">
