@@ -13,22 +13,20 @@ const SelectMenu = ({
   value,
   items,
   align,
-  offsetY,
-  offsetLeft,
-  offsetRight,
   handleSelect,
-  handleClose
+  handleClose,
+  targetRef
 }: {
   value: string;
   items: SelectItem[];
   align: "left" | "right";
-  offsetY: number;
-  offsetLeft: number;
-  offsetRight: number;
   handleSelect: (value: string) => void;
   handleClose: () => void;
+  targetRef: React.RefObject<HTMLDivElement | null>;
 }) => {
   const { theme } = useTheme();
+
+  const { offsetY, offsetLeft, offsetRight } = useAlign(targetRef.current);
 
   return createPortal(
     <div
@@ -87,8 +85,6 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const { offsetY, offsetLeft, offsetRight } = useAlign(selectRef.current);
-
   const keyByItems = keyBy(selectItems, "value");
 
   const handleSelect = (value: string) => {
@@ -126,11 +122,9 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           value={String(value)}
           items={selectItems}
           align={align}
-          offsetY={offsetY}
-          offsetLeft={offsetLeft}
-          offsetRight={offsetRight}
           handleSelect={handleSelect}
           handleClose={handleClose}
+          targetRef={selectRef}
         />
       )}
       <input
