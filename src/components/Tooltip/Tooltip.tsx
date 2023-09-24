@@ -13,13 +13,14 @@ interface TooltipProps {
   content?: string;
   children?: React.ReactNode;
   isShow?: boolean;
+  className?: string;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
   parent: HTMLDivElement | null;
 };
 
-const Content: FC<ContentProps> = ({ title, content, placement, parent }) => {
+const Content: FC<ContentProps> = ({ title, content, placement, parent, className }) => {
   const { theme } = useTheme();
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -95,7 +96,7 @@ const Content: FC<ContentProps> = ({ title, content, placement, parent }) => {
   return ReactDOM.createPortal(
     <div
       ref={targetRef}
-      className={`${styles["tooltip-wrapper"]} ${bgStyles({ theme })}`}
+      className={`${styles["tooltip-wrapper"]} ${bgStyles({ theme })} ${className || ""}`}
       style={positions()}>
       {title && <span className={styles.title}>{title}</span>}
       {title && content && <div className={styles.line}></div>}
