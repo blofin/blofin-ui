@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Select } from "../components/Select";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
+import { Tooltip } from "..";
 
 const meta: Meta<typeof Select> = {
   /* 👇 The title prop is optional.
@@ -31,6 +32,13 @@ export const Primary: Story = {
           { label: "Alice", value: "alice" },
           { label: "Bob", value: "bob" }
         ]}
+        wrapper={(children: ReactNode) => {
+          return (
+            <Tooltip placement="top" content="111">
+              {children}
+            </Tooltip>
+          );
+        }}
       />
     );
   }

@@ -1,6 +1,6 @@
-import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ReactNode, forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { BUITheme, Typography, useTheme } from "../..";
+import { BUITheme, Tooltip, Typography, useTheme } from "../..";
 import SelectArrow from "../../assets/icons/select-arrow.svg";
 import useAlign from "../../hooks/useAlign";
 import { keyBy } from "../../utils/helper";
@@ -66,6 +66,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   align?: "left" | "right";
   labelClassName?: string;
   scrollable?: boolean;
+  wrapper?: (children: ReactNode) => ReactNode;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -78,6 +79,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     handleChange,
     labelClassName,
     scrollable = false,
+    wrapper,
     ...otherProps
   } = props;
 
@@ -110,9 +112,18 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
         ref={selectRef}
         className="bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center bu-gap-2"
         onClick={() => setShowMenu(!showMenu)}>
-        <Typography variant="body4" className={labelClassName}>
-          {keyByItems[String(value)].label}
-        </Typography>
+        {wrapper ? (
+          wrapper(
+            <Typography variant="body4" className={labelClassName}>
+              {keyByItems[String(value)].label}
+            </Typography>
+          )
+        ) : (
+          <Typography variant="body4" className={labelClassName}>
+            {keyByItems[String(value)].label}
+          </Typography>
+        )}
+
         <SelectArrow
           className={`bu-h-[10px] bu-w-[10px] ${showMenu ? "bu-rotate-180" : ""} ${cn(
             labelStyles({
