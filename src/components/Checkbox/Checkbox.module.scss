@@ -18,25 +18,6 @@
   width: 0;
 }
 
-/* Create a custom checkbox */
-.checkmark {
-  height: 12px;
-  width: 12px;
-  background-color: transparent;
-  @apply bu-flex bu-items-center bu-justify-center;
-  @apply bu-border bu-border-light-label-60 dark:bu-border-dark-label-60;
-}
-
-/* On mouse-over, add a grey background color */
-// .container:hover input ~ .checkmark {
-//   @apply bu-bg-light-label-20 dark:bu-bg-dark-label-20;
-// }
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-  @apply bu-bg-light-primary dark:bu-bg-dark-primary;
-}
-
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";

@@ -10,6 +10,32 @@ const CheckboxCheckedStyles = cva("", {
   }
 });
 
+const CheckMarkCheckedStyles = cva("", {
+  variants: {
+    theme: {
+      light: ["!bu-bg-light-primary"],
+      dark: ["!bu-bg-dark-primary"]
+    }
+  }
+});
+
+const CheckMarkVariants = ({ theme, checked }: { theme: BUITheme; checked: boolean }) => {
+  return cva(
+    "bu-flex bu-h-3 bu-w-3 bu-items-center bu-justify-center bu-border bu-bg-transparent",
+    {
+      variants: {
+        theme: {
+          light: ["!bu-border-light-label-60"],
+          dark: ["!bu-border-dark-label-60"]
+        },
+        checked: {
+          true: CheckMarkCheckedStyles({ theme })
+        }
+      }
+    }
+  )({ theme, checked });
+};
+
 const CheckboxLabelVariants = ({ theme, checked }: { theme: BUITheme; checked: boolean }) => {
   return cva("bu-select-none bu-text-sm", {
     variants: {
@@ -24,4 +50,4 @@ const CheckboxLabelVariants = ({ theme, checked }: { theme: BUITheme; checked: b
   })({ theme, checked });
 };
 
-export { CheckboxLabelVariants };
+export { CheckMarkVariants, CheckboxLabelVariants };
