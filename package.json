@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "0.4.47",
+  "version": "0.4.48",
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "./dist/index.d.ts",
