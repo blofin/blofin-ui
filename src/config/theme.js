@@ -66,7 +66,8 @@ module.exports = {
         },
         line: {
           primary: "#F5F6FA",
-          secondary: "#E6E7EB"
+          secondary: "#E6E7EB",
+          tertiary: "#D5D6DB"
         },
         hover: {
           primary: "#3D63FF",
@@ -141,7 +142,8 @@ module.exports = {
         },
         line: {
           primary: "#2F3033",
-          secondary: "#47484D"
+          secondary: "#47484D",
+          tertiary: "#575961"
         },
         hover: {
           primary: "#4869F0",
@@ -149,8 +151,8 @@ module.exports = {
           success: "#13BA6A",
           warning: "#E8C317",
           danger: "#BF1D30",
-          green: "#63DBB7",
-          red: "#FF8A98",
+          green: "#0BB87E",
+          red: "#E03A51",
           fill: {
             primary: "#111214",
             secondary: "#34363D",

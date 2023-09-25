@@ -68,8 +68,12 @@ const InputBgVariants = ({
         outlined: InputOutlinedStyles({ theme })
       },
       theme: {
-        light: ["bu-text-light-label focus-within:bu-border-light-primary"],
-        dark: ["bu-text-dark-label focus-within:bu-border-dark-primary"]
+        light: [
+          "bu-text-light-label focus-within:bu-border-light-primary hover:bu-border-light-line-tertiary"
+        ],
+        dark: [
+          "bu-text-dark-label focus-within:bu-border-dark-primary hover:bu-border-dark-line-tertiary"
+        ]
       },
       error: {
         true: InputErrorStyles({ theme })
