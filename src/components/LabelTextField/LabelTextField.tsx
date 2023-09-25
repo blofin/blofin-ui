@@ -19,6 +19,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
+    id,
     label,
     startAdornment,
     endAdornment,
@@ -36,7 +37,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
   return (
     <div>
       {label && typeof label === "string" && (
-        <label htmlFor={`bui-${label}`}>
+        <label htmlFor={id ? id : `bui-${label}`}>
           <Typography variant="body4" className={cn(LabelVariants({ theme: mode ? mode : theme }))}>
             {label}
           </Typography>
@@ -64,7 +65,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             </div>
           )}
           <input
-            id={typeof label === "string" ? `bui-${label}` : undefined}
+            id={typeof label === "string" ? (id ? id : `bui-${label}`) : undefined}
             disabled={disabled}
             type={type}
             {...otherProps}
