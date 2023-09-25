@@ -24,30 +24,22 @@ const RadioButtonLabelVariants = ({ theme, checked }: { theme: BUITheme; checked
   })({ theme, checked });
 };
 
-const RadioButtonInputCheckedStyles = cva("", {
-  variants: {
-    theme: {
-      light: ["checked:after:!bu-bg-light-primary"],
-      dark: ["checked:after:!bu-bg-dark-primary"]
-    }
-  }
-});
-
-const RadioButtonInputVariants = ({ theme, checked }: { theme: BUITheme; checked: boolean }) => {
+const RadioButtonInputVariants = ({ theme }: { theme: BUITheme }) => {
   return cva(
-    "bu-relative bu-h-4 bu-w-4 bu-appearance-none bu-rounded-full bu-border checked:after:bu-absolute checked:after:bu-left-1/2 checked:after:bu-top-1/2 checked:after:bu-block checked:after:bu-h-2.5 checked:after:bu-w-2.5 checked:after:bu--translate-x-1/2 checked:after:bu--translate-y-1/2 checked:after:bu-transform checked:after:bu-rounded-full",
+    "bu-relative bu-h-4 bu-w-4 bu-appearance-none bu-rounded-full bu-border-2 checked:after:bu-absolute checked:after:bu-left-1/2 checked:after:bu-top-1/2 checked:after:bu-block checked:after:bu-h-2.5 checked:after:bu-w-2.5 checked:after:bu--translate-x-1/2 checked:after:bu--translate-y-1/2 checked:after:bu-transform checked:after:bu-rounded-full",
     {
       variants: {
         theme: {
-          light: ["!bu-border-light-label-60"],
-          dark: ["!bu-border-dark-label-60"]
-        },
-        checked: {
-          true: RadioButtonInputCheckedStyles({ theme })
+          light: [
+            "!bu-border-light-label-60 checked:!bu-border-light-primary checked:after:!bu-bg-light-primary"
+          ],
+          dark: [
+            "!bu-border-dark-label-60 checked:!bu-border-dark-primary checked:after:!bu-bg-dark-primary"
+          ]
         }
       }
     }
-  )({ theme, checked });
+  )({ theme });
 };
 
 export { RadioButtonInputVariants, RadioButtonLabelVariants };

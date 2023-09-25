@@ -13,8 +13,8 @@ const CheckboxCheckedStyles = cva("", {
 const CheckMarkCheckedStyles = cva("", {
   variants: {
     theme: {
-      light: ["!bu-bg-light-primary"],
-      dark: ["!bu-bg-dark-primary"]
+      light: ["!bu-border-light-primary !bu-bg-light-primary"],
+      dark: ["!bu-border-dark-primary !bu-bg-dark-primary"]
     }
   }
 });
