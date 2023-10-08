@@ -23,9 +23,10 @@ interface TabProps extends Base {
   size: BUIComponentSize;
   change: (key: string) => void;
   children?: React.ReactNode;
+  tabWrapperClass?: string;
 }
 
-const Tab: FC<TabProps> = ({ items, size, change, className, children }) => {
+const Tab: FC<TabProps> = ({ items, size, change, className, children, tabWrapperClass }) => {
   const [active, setActive] = useState(items[0].key);
 
   const { theme } = useTheme();
@@ -54,7 +55,9 @@ const Tab: FC<TabProps> = ({ items, size, change, className, children }) => {
   return (
     <div className="bu-flex bu-flex-col">
       <div
-        className={`bu-flex bu-justify-between ${size !== "small" ? borderSyles({ theme }) : ""}`}>
+        className={`bu-flex bu-justify-between ${size !== "small" ? borderSyles({ theme }) : ""} ${
+          tabWrapperClass || ""
+        }`}>
         <ul className={`${styles.tab}`}>
           {items.map((item) => {
             return (
