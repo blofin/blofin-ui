@@ -33,7 +33,7 @@ export const Dialog: FC<DialogProps> = (props) => {
     size,
     title,
     content,
-    maskClosable = true,
+    maskClosable = false,
     cancelText = "",
     confirmText = "",
     footer,
@@ -58,7 +58,7 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   const handleCancel = () => {
     if (cancel) {
-      !maskClosable && cancel();
+      maskClosable && cancel();
     }
   };
 
