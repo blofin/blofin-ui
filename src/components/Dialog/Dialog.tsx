@@ -12,6 +12,7 @@ interface DialogProps {
   title: null | string | React.ReactNode;
   size: BUIComponentSize;
   content: string | React.ReactNode;
+  maskClosable?: boolean;
   cancelText?: string;
   confirmText?: string;
   footer?: null | React.ReactNode;
@@ -32,6 +33,7 @@ export const Dialog: FC<DialogProps> = (props) => {
     size,
     title,
     content,
+    maskClosable = true,
     cancelText = "",
     confirmText = "",
     footer,
@@ -56,7 +58,7 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   const handleCancel = () => {
     if (cancel) {
-      cancel();
+      !maskClosable && cancel();
     }
   };
 
@@ -76,7 +78,7 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   return isOpen
     ? ReactDOM.createPortal(
-        <div className={styles.mock}>
+        <div className={styles.mock} onClick={handleCancel}>
           <div
             className={`${styles.dialog} ${dialogVariants({
               size,
