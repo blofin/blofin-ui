@@ -58,9 +58,13 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   const handleCancel = () => {
     if (cancel) {
-      maskClosable && cancel();
+       cancel();
     }
   };
+
+  const closeMask=()=>{
+    maskClosable && handleCancel();
+  }
 
   const handleConfirm = () => {
     if (confirm) {
@@ -78,7 +82,7 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   return isOpen
     ? ReactDOM.createPortal(
-        <div className={styles.mock} onClick={handleCancel}>
+        <div className={styles.mock} onClick={closeMask}>
           <div
             className={`${styles.dialog} ${dialogVariants({
               size,
