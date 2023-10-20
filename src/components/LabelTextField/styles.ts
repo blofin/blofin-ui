@@ -69,10 +69,10 @@ const InputBgVariants = ({
       },
       theme: {
         light: [
-          "bu-text-light-label focus-within:bu-border-light-primary hover:bu-border-light-line-tertiary"
+          "bu-text-light-label focus-within:bu-border-light-primary hover:bu-border-light-primary"
         ],
         dark: [
-          "bu-text-dark-label focus-within:bu-border-dark-primary hover:bu-border-dark-line-tertiary"
+          "bu-text-dark-label focus-within:bu-border-dark-primary hover:bu-border-dark-primary"
         ]
       },
       error: {
