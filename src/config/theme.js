@@ -53,6 +53,7 @@ module.exports = {
           alpha: "rgba(242, 70, 93, 0.12)"
         },
         background: "#FFFFFF",
+        second:'#050505',
         label: {
           DEFAULT: "#0A0A0A",
           60: "rgba(10, 10, 10, 0.6)",
@@ -129,6 +130,7 @@ module.exports = {
           alpha: "rgba(242, 70, 93, 0.14)"
         },
         background: "#101014",
+        second:'#050505',
         label: {
           DEFAULT: "#FCFDFF",
           60: "rgba(235, 236, 245, 0.6)",
