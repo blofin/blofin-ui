@@ -82,8 +82,13 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     [mouseDown.current]
   );
 
-  const handleMarkClick = (percentage: number) => {
+  const handleMarkClick = (e: React.MouseEvent<HTMLDivElement>, percentage: number) => {
+    e.stopPropagation();
     onSliderChange(percentage);
+  };
+
+  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    handleDrag(e as any);
   };
 
   return (
@@ -95,10 +100,10 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
         <div
           className={`${styles["track"]} ${cn(TrackVariants({ theme: mode || theme }))}`}
           style={{ width: `${value}%` }}></div>
-        <div className={styles["mark-container"]}>
+        <div className={styles["mark-container"]} onClick={(e) => handleContainerClick(e)}>
           <div
             className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
-            onClick={() => handleMarkClick(0)}>
+            onClick={(e) => handleMarkClick(e, 0)}>
             <span
               className={`${styles["mark-label"]} ${cn(
                 MarkLabelVariants({ theme: mode || theme })
@@ -108,16 +113,16 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           </div>
           <div
             className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
-            onClick={() => handleMarkClick(25)}></div>
+            onClick={(e) => handleMarkClick(e, 25)}></div>
           <div
             className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
-            onClick={() => handleMarkClick(50)}></div>
+            onClick={(e) => handleMarkClick(e, 50)}></div>
           <div
             className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
-            onClick={() => handleMarkClick(75)}></div>
+            onClick={(e) => handleMarkClick(e, 75)}></div>
           <div
             className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
-            onClick={() => handleMarkClick(100)}>
+            onClick={(e) => handleMarkClick(e, 100)}>
             <span
               className={`${styles["mark-label"]} ${cn(
                 MarkLabelVariants({ theme: mode || theme })
