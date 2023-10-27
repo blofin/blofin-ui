@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { BUITheme } from "../../types/component";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./types";
 
-const primaryStyles = cva("bu-text-white", {
+const primaryStyles = cva("bu-text-second", {
   variants: {
     theme: {
       light: ["bu-bg-light-primary", "hover:bu-bg-light-hover-primary"],
@@ -11,7 +11,7 @@ const primaryStyles = cva("bu-text-white", {
   }
 });
 
-const primaryDisabledStyles = cva("bu-text-white", {
+const primaryDisabledStyles = cva("bu-text-second", {
   variants: {
     theme: {
       light: ["bu-bg-light-primary-40", "hover:bu-bg-light-primary-40"],

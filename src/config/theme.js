@@ -25,13 +25,13 @@ module.exports = {
     colors: {
       light: {
         primary: {
-          DEFAULT: "#2F54EB",
-          60: "rgba(47, 84, 235, 0.6)",
-          40: "rgba(47, 84, 235, 0.4)",
-          14: "rgba(47, 84, 235, 0.12)",
-          10: "rgba(47, 84, 235, 0.1)"
+          DEFAULT: "#F80",
+          60: "rgba(255, 136, 0, 0.60)",
+          40: "rgba(255, 136, 0, 0.40)",
+          14: "rgba(255, 136, 0, 0.14)",
+          10: "rgba(255, 136, 0, 0.1)"
         },
-        secondary: "#FF6600",
+        secondary: "#F80",
         success: {
           DEFAULT: "#0FCC71",
           14: "rgba(15, 204, 113, 0.14)"
@@ -53,6 +53,7 @@ module.exports = {
           alpha: "rgba(242, 70, 93, 0.12)"
         },
         background: "#FFFFFF",
+        second:'#050505',
         label: {
           DEFAULT: "#0A0A0A",
           60: "rgba(10, 10, 10, 0.6)",
@@ -70,8 +71,8 @@ module.exports = {
           tertiary: "#D5D6DB"
         },
         hover: {
-          primary: "#3D63FF",
-          secondary: "#FF7B24",
+          primary: "#F90",
+          secondary: "rgba(255, 136, 0, 0.14)",
           success: "#1AD97D",
           warning: "#FFD305",
           danger: "#EB1730",
@@ -87,7 +88,7 @@ module.exports = {
           blue: "rgba(47, 84, 235, 0.4)"
         },
         badge: {
-          "primary-bg": "rgba(47, 84, 235, 0.14)",
+          "primary-bg": "rgba(255, 136, 0, 0.14)",
           "secondary-bg": "rgba(255, 102, 0, 0.14)",
           "success-bg": "rgba(15, 204, 113, 0.14)",
           "warning-bg": "rgba(245, 205, 18, 0.14)",
@@ -109,14 +110,14 @@ module.exports = {
       },
       dark: {
         primary: {
-          DEFAULT: "#5C7CFF",
-          60: "rgba(92, 124, 255, 0.6)",
-          40: "rgba(92, 124, 255, 0.4)",
-          14: "rgba(92, 124, 255, 0.16)",
-          10: "rgba(92, 124, 255, 0.1)",
-          4: "rgba(92, 124, 255, 0.04)"
+          DEFAULT: "#F80",
+          60: "rgba(255, 136, 0, 0.60)",
+          40: "rgba(255, 136, 0, 0.40)",
+          14: "rgba(255, 136, 0, 0.16)",
+          10: "rgba(255, 136, 0, 0.1)",
+          4: "rgba(255, 136, 0, 0.04)"
         },
-        secondary: "#FF7D20",
+        secondary: "#F80",
         success: "#0FCC71",
         warning: "#F5CD12",
         danger: "#D62035",
@@ -129,6 +130,7 @@ module.exports = {
           alpha: "rgba(242, 70, 93, 0.14)"
         },
         background: "#101014",
+        second:'#050505',
         label: {
           DEFAULT: "#FCFDFF",
           60: "rgba(235, 236, 245, 0.6)",
@@ -146,8 +148,8 @@ module.exports = {
           tertiary: "#575961"
         },
         hover: {
-          primary: "#4869F0",
-          secondary: "#FA6800",
+          primary: "#FA7500",
+          secondary: "rgba(255, 136, 0, 0.14)",
           success: "#13BA6A",
           warning: "#E8C317",
           danger: "#BF1D30",
