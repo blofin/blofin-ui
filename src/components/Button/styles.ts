@@ -120,8 +120,8 @@ const ghostStyles = cva("", {
         "hover:bu-bg-light-primary-10"
       ],
       dark: [
-        "bu-text-dark-second",
-        "hover:bu-text-dark-second",
+        "bu-text-dark-label",
+        "hover:bu-text-dark-label",
         "bu-border",
         "bu-border-solid",
         "bu-border-dark-primary",
