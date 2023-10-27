@@ -45,6 +45,9 @@ export const All = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div style={{ display: "flex", gap: "10px" }}>
+        <Button variant="ghost" size="small" disabled>
+            Button
+          </Button>
           <Button variant="primary" size="small" type='submit'>
             Button
           </Button>

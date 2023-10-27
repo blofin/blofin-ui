@@ -112,16 +112,16 @@ const ghostStyles = cva("", {
   variants: {
     theme: {
       light: [
-        "bu-text-light-primary",
-        "hover:bu-text-light-hover-primary",
+        "bu-text-second",
+        "hover:bu-text-second",
         "bu-border",
         "bu-border-solid",
         "bu-border-light-primary",
         "hover:bu-bg-light-primary-10"
       ],
       dark: [
-        "bu-text-dark-primary",
-        "hover:bu-text-dark-hover-primary",
+        "bu-text-second",
+        "hover:bu-text-second",
         "bu-border",
         "bu-border-solid",
         "bu-border-dark-primary",
@@ -135,16 +135,16 @@ const ghostDisabledStyles = cva("", {
   variants: {
     theme: {
       light: [
-        "bu-text-light-primary-60",
-        "hover:bu-text-light-primary-60",
+        "bu-text-light-label-40",
+        "hover:bu-text-light-label-40",
         "bu-border",
         "bu-border-solid",
         "bu-border-light-primary-60",
         "hover:bu-bg-transparent"
       ],
       dark: [
-        "bu-text-dark-primary-60",
-        "hover:bu-text-dark-primary-60",
+        "bu-text-dark-label-40",
+        "hover:bu-text-dark-label-40",
         "bu-border",
         "bu-border-solid",
         "bu-border-dark-primary-60",
