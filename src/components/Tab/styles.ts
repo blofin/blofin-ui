@@ -15,8 +15,8 @@ const itemActStyles = cva("after:bu-mt-[8px] after:bu-block after:bu-h-[2px] aft
 const smallActStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-text-light-label",
-      dark: "bu-text-dark-label"
+      light: "bu-text-light-primary",
+      dark: "bu-text-dark-primary"
     }
   }
 });
