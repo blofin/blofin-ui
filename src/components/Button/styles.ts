@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { BUITheme } from "../../types/component";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./types";
 
-const primaryStyles = cva("bu-text-second", {
+const primaryStyles = cva("bu-text-light-second", {
   variants: {
     theme: {
       light: ["bu-bg-light-primary", "hover:bu-bg-light-hover-primary"],
@@ -11,7 +11,7 @@ const primaryStyles = cva("bu-text-second", {
   }
 });
 
-const primaryDisabledStyles = cva("bu-text-second", {
+const primaryDisabledStyles = cva("bu-text-light-second", {
   variants: {
     theme: {
       light: ["bu-bg-light-primary-40", "hover:bu-bg-light-primary-40"],
@@ -112,16 +112,16 @@ const ghostStyles = cva("", {
   variants: {
     theme: {
       light: [
-        "bu-text-second",
-        "hover:bu-text-second",
+        "bu-text-light-second",
+        "hover:bu-text-light-second",
         "bu-border",
         "bu-border-solid",
         "bu-border-light-primary",
         "hover:bu-bg-light-primary-10"
       ],
       dark: [
-        "bu-text-second",
-        "hover:bu-text-second",
+        "bu-text-dark-second",
+        "hover:bu-text-dark-second",
         "bu-border",
         "bu-border-solid",
         "bu-border-dark-primary",
