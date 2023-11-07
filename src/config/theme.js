@@ -172,7 +172,7 @@ module.exports = {
           red: "#E03A51",
           fill: {
             primary: "#111214",
-            secondary: "#34363D",
+            secondary: "#242424",
             tertiary: "#3E3F41"
           }
         },
