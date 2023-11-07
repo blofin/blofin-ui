@@ -31,7 +31,10 @@ module.exports = {
           14: "rgba(255, 136, 0, 0.14)",
           10: "rgba(255, 136, 0, 0.1)"
         },
-        secondary: "#F80",
+        secondary: {
+          DEFAULT: "#0A6CFF",
+          14: "rgba(10, 108, 255, 0.14)"
+        },
         success: {
           DEFAULT: "#0FCC71",
           14: "rgba(15, 204, 113, 0.14)"
@@ -72,7 +75,7 @@ module.exports = {
         },
         hover: {
           primary: "#F90",
-          secondary: "rgba(255, 136, 0, 0.14)",
+          secondary: "rgba(20, 114, 255, 1)",
           success: "#1AD97D",
           warning: "#FFDA18",
           danger: "#EB1730",
@@ -117,7 +120,10 @@ module.exports = {
           10: "rgba(255, 136, 0, 0.1)",
           4: "rgba(255, 136, 0, 0.04)"
         },
-        secondary: "#F80",
+        secondary: {
+          DEFAULT: "#0A6CFF",
+          14: "rgba(10, 108, 255, 0.14)"
+        },
         success: {
           DEFAULT: "#0FCC71",
           14: "rgba(15, 204, 113, 0.14)"
@@ -158,7 +164,7 @@ module.exports = {
         },
         hover: {
           primary: "#FA7500",
-          secondary: "rgba(255, 136, 0, 0.14)",
+          secondary: "rgba(9, 97, 229, 1)",
           success: "#13BA6A",
           warning: "#FFC908",
           danger: "#BF1D30",
