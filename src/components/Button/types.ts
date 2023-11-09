@@ -8,7 +8,8 @@ export type ButtonVariant =
   | "ghost"
   | "info"
   | "buy"
-  | "sell";
+  | "sell"
+  | "function";
 
 export type ButtonSize = BUIComponentSize | "max";
 

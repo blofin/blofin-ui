@@ -5,16 +5,16 @@ export const paginationVariants = cva(
   {
     variants: {
       theme: {
-        dark: "bu-text-dark-label data-[current='true']:bu-bg-dark-primary data-[current='true']:bu-text-white",
+        dark: "data-[current='true']:bu-text-second bu-text-dark-label data-[current='true']:bu-bg-dark-primary",
         light:
-          "bu-text-light-label data-[current='true']:bu-bg-light-primary data-[current='true']:bu-text-white"
+          "data-[current='true']:bu-text-second bu-text-light-label data-[current='true']:bu-bg-light-primary"
       }
     }
   }
 );
 
 export const arrowVariants = cva(
-  "data-[disabled='true']:bu-cursor-not-allowed bu-h-[24px] bu-cursor-pointer",
+  "bu-h-[24px] bu-cursor-pointer data-[disabled='true']:bu-cursor-not-allowed",
   {
     variants: {
       theme: {

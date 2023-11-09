@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import { Button } from "../components/Button/Button";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import DemoIcon from '../assets/icons/demo.svg'
+import DemoIcon from "../assets/icons/demo.svg";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
@@ -45,13 +45,16 @@ export const All = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div style={{ display: "flex", gap: "10px" }}>
-        <Button variant="ghost" size="small">
+          <Button variant="ghost" size="small">
             Button
           </Button>
-          <Button variant="primary" size="small" type='submit'>
+          <Button variant="primary" size="small" type="submit">
             Button
           </Button>
-          <Button variant="secondary" size="medium" endIcon={<DemoIcon className="bu-w-[18px] bu-h-[18px]" />}>
+          <Button
+            variant="secondary"
+            size="medium"
+            endIcon={<DemoIcon className="bu-h-[18px] bu-w-[18px]" />}>
             Button
           </Button>
           <Button variant="tertiary" size="medium">
@@ -75,13 +78,17 @@ export const All = {
           <Button variant="buy" disabled size="medium">
             Button
           </Button>
-          <Button variant="sell"  size="medium">
+          <Button variant="sell" size="medium">
             Button
           </Button>
           <Button variant="primary" size="small" shape="circle" icon={<i>2</i>}></Button>
           <Button.WhiteButton variant="primary" size="medium">
             White Button
           </Button.WhiteButton>
+
+          <Button variant="function" size="medium">
+            Button
+          </Button>
         </div>
       </ThemeProvider>
     );

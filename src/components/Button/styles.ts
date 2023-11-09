@@ -190,6 +190,21 @@ const sellDisabledStyles = cva("bu-text-white", {
   }
 });
 
+const functionStyles = cva("bu-border bu-border-solid bu-font-medium", {
+  variants: {
+    theme: {
+      light: [
+        "bu-border-light-text bu-bg-transparent bu-text-light-text",
+        "hover:bu-bg-light-text hover:bu-text-light-primary"
+      ],
+      dark: [
+        "bu-border-dark-text bu-bg-transparent bu-text-dark-text",
+        "hover:bu-bg-dark-text hover:bu-text-dark-primary"
+      ]
+    }
+  }
+});
+
 const styles = {
   primary: {
     variant: primaryStyles,
@@ -222,6 +237,10 @@ const styles = {
   sell: {
     variant: sellStyles,
     disabled: sellDisabledStyles
+  },
+  function: {
+    variant: functionStyles,
+    disabled: functionStyles //this not have disabled
   }
 };
 
@@ -246,7 +265,8 @@ const buttonVariants = (props: {
         ghost: style,
         info: style,
         buy: style,
-        sell: style
+        sell: style,
+        function: style
       },
       size: {
         small: `${
