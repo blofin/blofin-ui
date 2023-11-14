@@ -80,7 +80,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
           {endAdornment && (
             <div
               className={
-                typeof endAdornment === "string" ? "bu-px-2 bu-text-base bu-font-medium" : ""
+                typeof endAdornment === "string" ? "bu-px-2 bu-text-sm bu-font-medium" : ""
               }>
               {endAdornment}
             </div>

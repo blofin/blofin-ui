@@ -31,10 +31,10 @@
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
+  @apply bu-border-solid bu-border-light-background dark:bu-border-dark-background;
   width: 5px;
   height: 8px;
   margin-bottom: 2px;
-  border: solid white;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(35deg);
   -ms-transform: rotate(35deg);
