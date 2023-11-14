@@ -31,7 +31,7 @@ export const Vertical: Story = {
     const [isChecked, setIsChecked] = useState(false);
     return (
       <div className="bu-h-[24px] bu-w-full">
-        <Checkbox label="TP/SL" checked={isChecked} theme="dark" onChange={() => setIsChecked(!isChecked)} />
+        <Checkbox label="TP/SL" checked={isChecked} theme="light" onChange={() => setIsChecked(!isChecked)} />
       </div>
     );
   }

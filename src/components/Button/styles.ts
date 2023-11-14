@@ -67,7 +67,7 @@ const tertiaryDisabledStyles = cva("", {
         "hover:bu-bg-light-fill-primary",
         "bu-text-light-label-40"
       ],
-      dark: ["bu-bg-dark-fill-primary", "hover:bu-bg-dark-fill-primary", "bu-text-dark-label-60"]
+      dark: ["bu-bg-dark-fill-secondary", "hover:bu-bg-dark-fill-secondary", "bu-text-dark-label-60"]
     }
   }
 });
