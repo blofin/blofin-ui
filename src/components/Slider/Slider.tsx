@@ -9,7 +9,8 @@ import {
   SliderMarkVariants,
   SliderThumbVariants,
   SliderTooltipVariants,
-  TrackVariants
+  TrackVariants,
+  SliderActivityMarkVariants
 } from "./styles";
 
 export interface SliderProps {
@@ -102,7 +103,10 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           style={{ width: `${value}%` }}></div>
         <div className={styles["mark-container"]} onClick={(e) => handleContainerClick(e)}>
           <div
-            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
+            className={`${styles["mark"]} ${cn(
+              SliderMarkVariants({ theme: mode || theme }),
+              value >= 0 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+            )}`}
             onClick={(e) => handleMarkClick(e, 0)}>
             <span
               className={`${styles["mark-label"]} ${cn(
@@ -112,16 +116,28 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
             </span>
           </div>
           <div
-            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
+            className={`${styles["mark"]} ${cn(
+              SliderMarkVariants({ theme: mode || theme }),
+              value >= 25 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+            )}`}
             onClick={(e) => handleMarkClick(e, 25)}></div>
           <div
-            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
+            className={`${styles["mark"]} ${cn(
+              SliderMarkVariants({ theme: mode || theme }),
+              value >= 50 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+            )}`}
             onClick={(e) => handleMarkClick(e, 50)}></div>
           <div
-            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
+            className={`${styles["mark"]} ${cn(
+              SliderMarkVariants({ theme: mode || theme }),
+              value >= 75 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+            )}`}
             onClick={(e) => handleMarkClick(e, 75)}></div>
           <div
-            className={`${styles["mark"]} ${cn(SliderMarkVariants({ theme: mode || theme }))}`}
+            className={`${styles["mark"]} ${cn(
+              SliderMarkVariants({ theme: mode || theme }),
+              value >= 100 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+            )}`}
             onClick={(e) => handleMarkClick(e, 100)}>
             <span
               className={`${styles["mark-label"]} ${cn(

@@ -27,6 +27,15 @@ const SliderMarkVariants = cva("", {
   }
 });
 
+const SliderActivityMarkVariants = cva("", {
+  variants: {
+    theme: {
+      light: ["bu-border-light-primary"],
+      dark: ["bu-border-dark-primary"]
+    }
+  }
+});
+
 const MarkLabelVariants = cva("", {
   variants: {
     theme: {
@@ -64,5 +73,6 @@ export {
   SliderMarkVariants,
   SliderThumbVariants,
   SliderTooltipVariants,
-  TrackVariants
+  TrackVariants,
+  SliderActivityMarkVariants
 };
