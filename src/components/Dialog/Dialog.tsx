@@ -8,7 +8,7 @@ import useTheme from "../../provider/useTheme";
 import { ButtonSize } from "../Button/types";
 import styles from "./index.module.scss";
 
-interface DialogProps {
+export interface DialogProps {
   title: null | string | React.ReactNode;
   size: BUIComponentSize;
   content: string | React.ReactNode;
