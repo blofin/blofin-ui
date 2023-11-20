@@ -2,7 +2,13 @@ import { ReactNode, forwardRef } from "react";
 import { BUITheme, useTheme } from "../..";
 import { cn } from "../../utils/utils";
 import styles from "./Checkbox.module.scss";
-import { CheckMarkVariants, CheckboxLabelVariants } from "./styles";
+import {
+  CheckMarkCheckedStyles,
+  CheckMarkVariants,
+  CheckboxCheckedStyles,
+  CheckboxLabelVariants,
+  disabledMarkStyles
+} from "./styles";
 
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: ReactNode;
@@ -10,7 +16,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const { label, theme: mode, id, checked, onChange, ...otherProps } = props;
+  const { label, theme: mode, id, checked, onChange, disabled, ...otherProps } = props;
   const { theme } = useTheme();
   return (
     <label htmlFor={id ? id : `bui-checkbox-${label}`} className={styles.container}>
@@ -25,12 +31,24 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       <span
         className={cn(
           styles.checkmark,
-          CheckMarkVariants({
-            theme: mode || theme,
-            checked: !!checked
-          })
+          checked
+            ? disabled
+              ? disabledMarkStyles()
+              : CheckMarkCheckedStyles({
+                  theme: mode || theme
+                })
+            : CheckMarkVariants({
+                theme: mode || theme
+              })
         )}></span>
-      <span className={cn(CheckboxLabelVariants({ theme: mode || theme, checked: !!checked }))}>
+      <span
+        className={
+          checked
+            ? disabled
+              ? CheckboxLabelVariants({ theme: mode || theme })
+              : CheckboxCheckedStyles({ theme: mode || theme })
+            : CheckboxLabelVariants({ theme: mode || theme })
+        }>
         {label}
       </span>
     </label>

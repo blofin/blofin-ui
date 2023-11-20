@@ -22,16 +22,17 @@ type Story = StoryObj<typeof Checkbox>;
  */
 export const Primary: Story = {
   render: () => {
-    return <Checkbox label="Reduce Only" />;
+    const [isChecked, setIsChecked] = useState(false);
+    return <Checkbox label="Reduce Only" checked={isChecked} onChange={() => setIsChecked(!isChecked)} />;
   }
 };
 
 export const Vertical: Story = {
   render: () => {
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(true);
     return (
       <div className="bu-h-[24px] bu-w-full">
-        <Checkbox label="TP/SL" checked={isChecked} theme="light" onChange={() => setIsChecked(!isChecked)} />
+        <Checkbox label="TP/SL" checked={isChecked} theme="light" disabled onChange={() => setIsChecked(!isChecked)} />
       </div>
     );
   }
