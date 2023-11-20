@@ -25,7 +25,7 @@ const Content: FC<ContentProps> = ({ title, content, placement, parent, classNam
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const { offsetX, offsetY, clientWidth, clientHeight, offsetLeft, offsetRight } = useAlign(parent);
+  const { offsetX, offsetY, clientWidth, clientHeight, offsetLeft, offsetRight } = useAlign(parent).offset;
 
   const positions = () => {
     if (!targetRef.current) {

@@ -55,7 +55,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const { offsetX, offsetY } = useAlign(targetRef.current);
+  const { offsetX, offsetY } = useAlign(targetRef.current).offset;
 
   const { theme } = useTheme();
 

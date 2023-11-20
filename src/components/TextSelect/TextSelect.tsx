@@ -36,7 +36,7 @@ const Options: FC<OptionsProps> = ({
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const { offsetX, offsetY, clientWidth, clientHeight, offsetLeft, offsetRight } = useAlign(parent);
+  const { offsetX, offsetY, clientWidth, clientHeight, offsetLeft, offsetRight } = useAlign(parent).offset;
 
   const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 

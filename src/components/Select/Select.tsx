@@ -15,18 +15,22 @@ const SelectMenu = ({
   align,
   handleSelect,
   handleClose,
-  targetRef
+  offset
 }: {
   value: string;
   items: SelectItem[];
   align: "left" | "right";
   handleSelect: (value: string) => void;
   handleClose: () => void;
-  targetRef: React.RefObject<HTMLDivElement | null>;
+  offset: {
+    offsetLeft: number;
+    offsetRight: number;
+    offsetY: number;
+  };
 }) => {
   const { theme } = useTheme();
 
-  const { offsetY, offsetLeft, offsetRight } = useAlign(targetRef.current);
+  const { offsetLeft, offsetRight, offsetY } = offset;
 
   return createPortal(
     <div
@@ -87,6 +91,14 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
 
   const selectRef = useRef<HTMLDivElement | null>(null);
 
+  const { getOffset } = useAlign(selectRef.current);
+
+  const [offset, setOffset] = useState({
+    offsetLeft: 0,
+    offsetRight: 0,
+    offsetY: 0
+  });
+
   const [showMenu, setShowMenu] = useState(false);
 
   const keyByItems = keyBy(selectItems, "value");
@@ -105,6 +117,17 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
       document.body.style.overflow = showMenu ? "hidden" : "";
     }
   }, [showMenu, scrollable]);
+
+  useEffect(() => {
+    if (selectRef.current) {
+      const { offsetY, offsetLeft, offsetRight } = getOffset(selectRef.current);
+      setOffset({
+        offsetY,
+        offsetLeft,
+        offsetRight
+      });
+    }
+  }, [selectRef]);
 
   return (
     <div className="bu-flex">
@@ -139,7 +162,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           align={align}
           handleSelect={handleSelect}
           handleClose={handleClose}
-          targetRef={selectRef}
+          offset={offset}
         />
       )}
       <input

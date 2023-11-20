@@ -19,7 +19,7 @@ const useAlign = (target: HTMLDivElement | null) => {
     return { left: left, top: top };
   };
 
-  const resize = useCallback(() => {
+  const resize = () => {
     const wrapper = target;
     if (wrapper) {
       const { height, width } = wrapper.getBoundingClientRect();
@@ -33,7 +33,20 @@ const useAlign = (target: HTMLDivElement | null) => {
         offsetRight: document.body.clientWidth - left - width
       });
     }
-  }, [target]);
+  };
+
+  const getOffset = (wrapper: HTMLDivElement) => {
+    const { height, width } = wrapper.getBoundingClientRect();
+    const { left, top } = getElementPosition(wrapper);
+    return {
+      offsetX: left,
+      offsetY: top,
+      clientWidth: width,
+      clientHeight: height,
+      offsetLeft: left,
+      offsetRight: document.body.clientWidth - left - width
+    };
+  };
 
   useEffect(() => {
     if (target) {
@@ -45,7 +58,7 @@ const useAlign = (target: HTMLDivElement | null) => {
     };
   }, [target]);
 
-  return offset;
+  return { offset, getOffset };
 };
 
 export default useAlign;
