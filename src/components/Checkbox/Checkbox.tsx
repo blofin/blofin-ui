@@ -18,6 +18,13 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const { label, theme: mode, id, checked, onChange, disabled, ...otherProps } = props;
   const { theme } = useTheme();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange && !disabled) {
+      onChange(e);
+    }
+  };
+
   return (
     <label htmlFor={id ? id : `bui-checkbox-${label}`} className={styles.container}>
       <input
@@ -26,7 +33,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         ref={ref}
         {...otherProps}
         checked={checked}
-        onChange={onChange}
+        onChange={handleChange}
       />
       <span
         className={cn(
