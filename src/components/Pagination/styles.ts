@@ -5,9 +5,9 @@ export const paginationVariants = cva(
   {
     variants: {
       theme: {
-        dark: "data-[current='true']:bu-text-second bu-text-dark-label data-[current='true']:bu-bg-dark-primary",
+        dark: "data-[current='true']:bu-text-light-second bu-text-dark-label data-[current='true']:bu-bg-dark-primary",
         light:
-          "data-[current='true']:bu-text-second bu-text-light-label data-[current='true']:bu-bg-light-primary"
+          "data-[current='true']:bu-text-dark-second bu-text-light-label data-[current='true']:bu-bg-light-primary"
       }
     }
   }
