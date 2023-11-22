@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, ReactNode, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { useTheme } from "../..";
 import ArrowDarkIcon from "../../assets/icons/arrow-dark.svg";
@@ -10,17 +10,25 @@ import { arrowPositionStyles, bgStyles } from "./styles";
 interface TooltipProps {
   placement: "top" | "bottom" | "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
   title?: string;
-  content?: string;
+  content?: ReactNode;
   children?: React.ReactNode;
   isShow?: boolean;
   className?: string;
+  hideArrow?: boolean;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
   parent: HTMLDivElement | null;
 };
 
-const Content: FC<ContentProps> = ({ title, content, placement, parent, className }) => {
+const Content: FC<ContentProps> = ({
+  title,
+  content,
+  placement,
+  parent,
+  className,
+  hideArrow = false
+}) => {
   const { theme } = useTheme();
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -100,10 +108,18 @@ const Content: FC<ContentProps> = ({ title, content, placement, parent, classNam
       style={positions()}>
       {title && <span className={styles.title}>{title}</span>}
       {title && content && <div className={styles.line}></div>}
-      {content && <span className={styles.content}>{content}</span>}
-      <div className={arrowPositionStyles({ placement })}>
-        {theme === "dark" ? <ArrowDarkIcon /> : <ArrowIcon />}
-      </div>
+      {content ? (
+        typeof content === "string" ? (
+          <span className={styles.content}>{content}</span>
+        ) : (
+          content
+        )
+      ) : null}
+      {!hideArrow && (
+        <div className={arrowPositionStyles({ placement })}>
+          {theme === "dark" ? <ArrowDarkIcon /> : <ArrowIcon />}
+        </div>
+      )}
     </div>,
     document.body
   );
