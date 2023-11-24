@@ -3,7 +3,7 @@ import { ReactNode, useState } from "react";
 import { Select } from "../components/Select";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import { Tooltip } from "..";
+import { Button, Dialog, Tooltip } from "..";
 
 const meta: Meta<typeof Select> = {
   /* 👇 The title prop is optional.
@@ -26,20 +26,36 @@ type Story = StoryObj<typeof Select>;
 export const Primary: Story = {
   render: () => {
     return (
-      <Select
-        value={"alice"}
-        selectItems={[
-          { label: "Alice", value: "alice" },
-          { label: "Bob", value: "bob" }
-        ]}
-        wrapper={(children: ReactNode) => {
-          return (
-            <Tooltip placement="top" content="111">
-              {children}
-            </Tooltip>
-          );
-        }}
-      />
+      <>
+        <Button variant="primary" size="medium">
+          333
+        </Button>
+        <Dialog
+          open={true}
+          title="111"
+          size="medium"
+          footer={null}
+          content={
+            <div>
+              <div className="bu-h-[100px] bu-w-full"></div>
+              <Select
+                value={"alice"}
+                selectItems={[
+                  { label: "Alice", value: "alice" },
+                  { label: "Bob", value: "bob" }
+                ]}
+                wrapper={(children: ReactNode) => {
+                  return (
+                    <Tooltip placement="top" content="111">
+                      {children}
+                    </Tooltip>
+                  );
+                }}
+              />
+              <div className="bu-h-[600px] bu-w-full"></div>
+            </div>
+          }></Dialog>
+      </>
     );
   }
 };

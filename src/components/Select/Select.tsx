@@ -127,7 +127,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
         offsetRight
       });
     }
-  }, [selectRef]);
+  }, [selectRef,showMenu]);
 
   return (
     <div className="bu-flex">
