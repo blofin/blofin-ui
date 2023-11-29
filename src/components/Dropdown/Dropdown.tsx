@@ -76,10 +76,12 @@ const Dropdown: FC<DropdownProps> = (props) => {
       <div
         id="dropDown"
         ref={targetRef}
-        className="bu-inline-flex bu-cursor-pointer bu-items-center"
+        className={`bu-inline-flex bu-cursor-pointer bu-select-none bu-items-center${
+          variant === "line" ? " bu-gap-[4px]" : ""
+        }`}
         onClick={changeDropdown}>
         <span
-          className={`dropdown bu-tracking-[-0.2px] ${labelStyles({
+          className={`dropdown bu-select-none bu-tracking-[-0.2px] ${labelStyles({
             intent: variant,
             theme
           })}`}>
