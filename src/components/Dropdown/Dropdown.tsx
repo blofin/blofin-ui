@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
-import Arrow from "../../assets/icons/arrow-fill.svg";
+import ArrowFill from "../../assets/icons/arrow-fill.svg";
+import ArrowLine from "../../assets/icons/arrow-line.svg";
 import useAlign from "../../hooks/useAlign";
 import ReactDOM from "react-dom";
 import { labelStyles, menuItemStyles } from "./style";
@@ -14,14 +15,17 @@ interface DropdownProps {
   menus: Menus[];
   children: React.ReactNode;
   hideIcon?: boolean;
+  variant?: "fill" | "line";
 }
 
-const DropMenu: FC<{ menus: Menus[]; offsetX: number; offsetY: number; close: () => void }> = ({
-  menus,
-  offsetX,
-  offsetY,
-  close
-}) => {
+const DropMenu: FC<{
+  menus: Menus[];
+  offsetX: number;
+  offsetY: number;
+  close: () => void;
+  variant: "fill" | "line";
+  placement?: "top" | "bottom";
+}> = ({ menus, offsetX, offsetY, close, variant }) => {
   const { theme } = useTheme();
 
   return ReactDOM.createPortal(
@@ -36,7 +40,7 @@ const DropMenu: FC<{ menus: Menus[]; offsetX: number; offsetY: number; close: ()
         <ul>
           {menus?.map((item) => {
             return (
-              <li className={menuItemStyles({ theme })} key={item.key}>
+              <li className={menuItemStyles({ theme, intent: variant })} key={item.key}>
                 {item.label}
               </li>
             );
@@ -49,7 +53,7 @@ const DropMenu: FC<{ menus: Menus[]; offsetX: number; offsetY: number; close: ()
 };
 
 const Dropdown: FC<DropdownProps> = (props) => {
-  const { menus, children, hideIcon = false } = props;
+  const { menus, children, hideIcon = false, variant = "fill" } = props;
 
   const [hide, setHide] = useState(false);
 
@@ -75,21 +79,38 @@ const Dropdown: FC<DropdownProps> = (props) => {
         className="bu-inline-flex bu-cursor-pointer bu-items-center"
         onClick={changeDropdown}>
         <span
-          className={`dropdown bu-text-[12px] bu-leading-[18px] bu-tracking-[-0.2px] ${labelStyles({
+          className={`dropdown bu-tracking-[-0.2px] ${labelStyles({
+            intent: variant,
             theme
           })}`}>
           {children}
         </span>
-        {!hideIcon && (
-          <Arrow
-            className={`bu-h-[16px] bu-w-[16px] ${!hide ? "bu-rotate-180" : ""} ${labelStyles({
-              theme
-            })}`}
-          />
-        )}
+        {!hideIcon ? (
+          variant === "fill" ? (
+            <ArrowFill
+              className={`bu-h-[16px] bu-w-[16px] ${!hide ? "bu-rotate-180" : ""} ${labelStyles({
+                intent: variant,
+                theme
+              })}`}
+            />
+          ) : (
+            <ArrowLine
+              className={`bu-h-[18px] bu-w-[18px] ${!hide ? "bu-rotate-180" : ""} ${labelStyles({
+                intent: variant,
+                theme
+              })}`}
+            />
+          )
+        ) : null}
       </div>
       {hide && (
-        <DropMenu menus={menus} offsetX={offsetX} offsetY={offsetY + 10} close={changeDropdown} />
+        <DropMenu
+          menus={menus}
+          offsetX={offsetX}
+          offsetY={offsetY + 10}
+          close={changeDropdown}
+          variant={variant}
+        />
       )}
     </div>
   );

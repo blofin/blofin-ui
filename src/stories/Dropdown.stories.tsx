@@ -43,8 +43,9 @@ export const Primary = {
                   key: "3",
                   label: "Text3"
                 }
-              ]}>
-              {" "}
+              ]}
+              variant="line"
+              >
               Here me
             </Dropdown>
           </div>
