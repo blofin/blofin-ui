@@ -16,6 +16,7 @@ interface DropdownProps {
   children: React.ReactNode;
   hideIcon?: boolean;
   variant?: "fill" | "line";
+  scrollable?: boolean;
 }
 
 const DropMenu: FC<{
@@ -53,7 +54,7 @@ const DropMenu: FC<{
 };
 
 const Dropdown: FC<DropdownProps> = (props) => {
-  const { menus, children, hideIcon = false, variant = "fill" } = props;
+  const { menus, children, hideIcon = false, variant = "fill", scrollable } = props;
 
   const [hide, setHide] = useState(false);
 
@@ -68,7 +69,9 @@ const Dropdown: FC<DropdownProps> = (props) => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = hide ? "hidden" : "";
+    if (!scrollable) {
+      document.body.style.overflow = hide ? "hidden" : "";
+    }
   }, [hide]);
 
   return (

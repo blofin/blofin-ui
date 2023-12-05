@@ -73,9 +73,9 @@ export const Button = ({
       className={`${cn(buttonVariants(buttonProps))} ${className}`}
       disabled={disabled}
       {...props}>
-      {startIcon && <span className="bu-mr-[9.5px]">{startIcon}</span>}
+      {startIcon && <span className="bu-mr-[9px]">{startIcon}</span>}
       {children}
-      {endIcon && <span className="bu-ml-[9.5px] bu-flex bu-items-center">{endIcon}</span>}
+      {endIcon && <span className="bu-ml-[9px] bu-flex bu-items-center">{endIcon}</span>}
       {icon}
     </button>
   );
