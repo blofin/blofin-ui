@@ -60,7 +60,12 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const { offsetX, offsetY } = useAlign(targetRef.current).offset;
+  const { getOffset } = useAlign(targetRef.current);
+
+  const [offset, setOffset] = useState({
+    offsetX: 0,
+    offsetY: 0
+  });
 
   const { theme } = useTheme();
 
@@ -73,6 +78,16 @@ const Dropdown: FC<DropdownProps> = (props) => {
       document.body.style.overflow = hide ? "hidden" : "";
     }
   }, [hide]);
+
+  useEffect(() => {
+    if (targetRef.current) {
+      const { offsetY, offsetX } = getOffset(targetRef.current);
+      setOffset({
+        offsetY,
+        offsetX,
+      });
+    }
+  }, [targetRef,hide]);
 
   return (
     <div>
@@ -111,8 +126,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
       {hide && (
         <DropMenu
           menus={menus}
-          offsetX={offsetX}
-          offsetY={offsetY + 10}
+          offsetX={offset.offsetX}
+          offsetY={offset.offsetY + 10}
           close={changeDropdown}
           variant={variant}
         />
