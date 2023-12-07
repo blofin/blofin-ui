@@ -1,4 +1,4 @@
-import { FC, ReactNode, useMemo, useRef, useState } from "react";
+import { FC, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
 import { TextField, useTheme } from "../..";
@@ -36,7 +36,8 @@ const Options: FC<OptionsProps> = ({
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const { offsetX, offsetY, clientWidth, clientHeight, offsetLeft, offsetRight } = useAlign(parent).offset;
+  const { offsetX, offsetY, clientWidth, clientHeight, offsetLeft, offsetRight } =
+    useAlign(parent).offset;
 
   const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
@@ -79,6 +80,10 @@ const TextSelect: FC<TextSelectProps> = (props) => {
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const [isFocus, setIsFocus] = useState(false);
+
   const [show, setShow] = useState(false);
 
   const { theme } = useTheme();
@@ -93,12 +98,23 @@ const TextSelect: FC<TextSelectProps> = (props) => {
   const hide = () => {
     setTimeout(() => {
       setShow(false);
+      setIsFocus(false);
     }, 100);
   };
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.addEventListener("focus", () => {
+        setShow(true);
+        setIsFocus(true);
+      });
+    }
+  }, []);
 
   return (
     <div className="bu-relative bu-cursor-pointer" ref={targetRef}>
       <TextField
+        ref={inputRef}
         inputClassName={styles.input}
         variant="outlined"
         onFocus={() => {
@@ -108,7 +124,14 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         onBlur={hide}
         placeholder={placeholder}
         value={label}
-        endAdornment={<SelectArrow className={`${iconStyles({ theme })}`} />}
+        endAdornment={
+          <SelectArrow
+            onClick={() => {
+              !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+            }}
+            className={`${iconStyles({ theme })} ${isFocus?styles.roate:''}`}
+          />
+        }
       />
       {show && (
         <Options
