@@ -10,6 +10,15 @@ const labelStyles = cva("", {
   }
 });
 
+const outlinedStyles = cva("", {
+  variants: {
+    theme: {
+      light: "bu-text-light-label-60",
+      dark: "bu-text-white"
+    }
+  }
+});
+
 const menuStyles = cva("", {
   variants: {
     theme: {
@@ -38,11 +47,12 @@ const menuItemStyles = ({ theme, active }: { theme: BUITheme; active: boolean })
           dark: "bu-bg-dark-fill-secondary bu-text-dark-label hover:bu-bg-dark-hover-fill-secondary"
         },
         active: {
-          true: activeItemStyles({ theme })
+          true: activeItemStyles({ theme }),
+          false:''
         }
       }
     }
   )({ theme, active });
 };
 
-export { labelStyles, menuItemStyles, menuStyles };
+export { labelStyles, menuItemStyles, menuStyles,outlinedStyles };

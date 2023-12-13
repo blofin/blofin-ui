@@ -24,14 +24,17 @@ type Story = StoryObj<typeof Select>;
  * to learn how to use render functions.
  */
 export const Primary: Story = {
+
   render: () => {
+    const [open,setOpen]=useState(false);
+
     return (
-      <>
-        <Button variant="primary" size="medium">
+      <ThemeProvider value={{theme:"dark"}}>
+        <Button variant="primary" onClick={()=>setOpen(true)} size="medium">
           333
         </Button>
         <Dialog
-          open={true}
+          open={open}
           title="111"
           size="medium"
           footer={null}
@@ -40,6 +43,8 @@ export const Primary: Story = {
               <div className="bu-h-[100px] bu-w-full"></div>
               <Select
                 value={"alice"}
+                selectType='outlined'
+                activeColor={false}
                 selectItems={[
                   { label: "Alice", value: "alice" },
                   { label: "Bob", value: "bob" }
@@ -55,7 +60,7 @@ export const Primary: Story = {
               <div className="bu-h-[600px] bu-w-full"></div>
             </div>
           }></Dialog>
-      </>
+      </ThemeProvider>
     );
   }
 };

@@ -1,11 +1,12 @@
-import { ReactNode, forwardRef, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { ReactNode, forwardRef, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { BUITheme, Tooltip, Typography, useTheme } from "../..";
+import { BUITheme, Typography, useTheme } from "../..";
 import SelectArrow from "../../assets/icons/select-arrow.svg";
+import ArrowFill from "../../assets/icons/arrow-fill.svg";
 import useAlign from "../../hooks/useAlign";
 import { keyBy } from "../../utils/helper";
 import { cn } from "../../utils/utils";
-import { labelStyles, menuItemStyles, menuStyles } from "./styles";
+import { labelStyles, menuItemStyles, menuStyles, outlinedStyles } from "./styles";
 
 export type SelectItem = { label: string; value: string };
 
@@ -15,7 +16,8 @@ const SelectMenu = ({
   align,
   handleSelect,
   handleClose,
-  offset
+  offset,
+  activeColor
 }: {
   value: string;
   items: SelectItem[];
@@ -27,6 +29,7 @@ const SelectMenu = ({
     offsetRight: number;
     offsetY: number;
   };
+  activeColor: boolean;
 }) => {
   const { theme } = useTheme();
 
@@ -49,7 +52,10 @@ const SelectMenu = ({
           {items?.map((item) => {
             return (
               <li
-                className={menuItemStyles({ theme, active: value === item.value })}
+                className={menuItemStyles({
+                  theme,
+                  active: activeColor ? value === item.value : activeColor
+                })}
                 key={item.value}
                 onClick={() => handleSelect(item.value)}>
                 {item.label}
@@ -65,12 +71,14 @@ const SelectMenu = ({
 
 export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   selectItems: SelectItem[];
+  selectType?: "filled" | "outlined";
   theme?: BUITheme;
   handleChange?: (value: string) => void;
   align?: "left" | "right";
   labelClassName?: string;
   scrollable?: boolean;
   wrapper?: (children: ReactNode) => ReactNode;
+  activeColor?: boolean;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -80,12 +88,16 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     selectItems,
     theme: mode,
     align = "left",
+    selectType = "filled",
     handleChange,
     labelClassName,
     scrollable = false,
     wrapper,
+    activeColor = true,
     ...otherProps
   } = props;
+
+  console.log(selectType);
 
   const { theme } = useTheme();
 
@@ -127,7 +139,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
         offsetRight
       });
     }
-  }, [selectRef,showMenu]);
+  }, [selectRef, showMenu]);
 
   return (
     <div className="bu-flex">
@@ -146,14 +158,23 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
             {keyByItems[String(value)].label}
           </Typography>
         )}
-
-        <SelectArrow
-          className={`bu-h-[10px] bu-w-[10px] ${showMenu ? "bu-rotate-180" : ""} ${cn(
-            labelStyles({
-              theme: mode || theme
-            })
-          )}`}
-        />
+        {selectType === "filled" ? (
+          <ArrowFill
+            className={`bu-h-[16px] bu-w-[16px] ${!showMenu ? "bu-rotate-180" : ""} ${cn(
+              labelStyles({
+                theme: mode || theme
+              })
+            )}`}
+          />
+        ) : (
+          <SelectArrow
+            className={`bu-h-[10px] bu-w-[10px] ${showMenu ? "bu-rotate-180" : ""} ${cn(
+              outlinedStyles({
+                theme: mode || theme
+              })
+            )}`}
+          />
+        )}
       </div>
       {showMenu && (
         <SelectMenu
@@ -163,6 +184,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           handleSelect={handleSelect}
           handleClose={handleClose}
           offset={offset}
+          activeColor={activeColor}
         />
       )}
       <input
