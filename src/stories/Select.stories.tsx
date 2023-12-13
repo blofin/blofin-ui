@@ -45,6 +45,7 @@ export const Primary: Story = {
                 value={"alice"}
                 selectType='outlined'
                 activeColor={false}
+                align='right'
                 selectItems={[
                   { label: "Alice", value: "alice" },
                   { label: "Bob", value: "bob" }

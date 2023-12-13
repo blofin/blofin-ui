@@ -145,7 +145,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     <div className="bu-flex">
       <div
         ref={selectRef}
-        className="bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center bu-gap-2"
+        className="bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center"
         onClick={() => setShowMenu(!showMenu)}>
         {wrapper ? (
           wrapper(
@@ -168,7 +168,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           />
         ) : (
           <SelectArrow
-            className={`bu-h-[10px] bu-w-[10px] ${showMenu ? "bu-rotate-180" : ""} ${cn(
+            className={`bu-h-[10px] bu-w-[10px] bu-ml-[4px] ${showMenu ? "bu-rotate-180" : ""} ${cn(
               outlinedStyles({
                 theme: mode || theme
               })
