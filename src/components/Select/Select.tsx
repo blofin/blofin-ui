@@ -97,8 +97,6 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     ...otherProps
   } = props;
 
-  console.log(selectType);
-
   const { theme } = useTheme();
 
   const selectRef = useRef<HTMLDivElement | null>(null);
