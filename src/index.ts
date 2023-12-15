@@ -26,6 +26,7 @@ import { ThemeProvider } from "./provider/ThemeProvider";
 import useTheme from "./provider/useTheme";
 import "./scss/base.scss";
 import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component";
+import TextArea from "./components/Textarea";
 
 export {
   Badge,
@@ -48,7 +49,8 @@ export {
   TextSelect,
   Tooltip,
   Typography,
-  RadioButton
+  RadioButton,
+  TextArea
 };
 
 export type {
