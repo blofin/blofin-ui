@@ -1,0 +1,29 @@
+.switch {
+    width: 40px;
+    height: 24px;
+    background: #bdbdbf;
+    border-radius: 90px;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    transition: 0.15s ease-in;
+    cursor: pointer;
+  }
+  
+  .thumb{
+    width: 18px;
+    height: 18px;
+    border-radius: 100%;
+    background: #fff;
+    transition: 0.15s ease-in;
+  }
+  
+  .move{
+    transform: translateX(15px)
+  }
+  
+  
+  .primary{
+    @apply bu-bg-dark-badge-primary-bg bu-bg-light-primary;
+  }
+  
