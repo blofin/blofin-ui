@@ -1,74 +1,49 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import CloseIcon from "../../assets/icons/close.svg";
 import useTheme from "../../provider/useTheme";
-import { BUIComponentSize, BUITheme } from "../../types/component";
-import { ButtonSize } from "../Button/types";
+import { BUITheme } from "../../types/component";
 import styles from "./index.module.scss";
 import { drawerVariants, iconStyles } from "./styles";
-  export interface DrawerProps {
-    title: null | string | React.ReactNode;
-    width: string;
-//   size: BUIComponentSize;
+export interface DrawerProps {
+  title: null | string | React.ReactNode;
+  width: string;
   content: string | React.ReactNode;
-  maskClosable?: boolean;
-  cancelText?: string;
-  confirmText?: string;
-  footer?: null | React.ReactNode;
   cancel?: () => void;
-//   confirm?: () => void;
   open: boolean;
   theme?: BUITheme;
-  footerLayout?: "right" | "left" | "center";
-  footerSize?: ButtonSize;
-  hideCancel?: Boolean;
-  hideConfirm?: Boolean;
   hideIcon?: Boolean;
-  className?: string;
   placement?: 'left' | 'right';
   }
 
   export const Drawer: React.FC<DrawerProps> = (props) => {
     const {
         title,
-        width,
+        width = '300px',
         content,
-        maskClosable = false,
-        cancelText = "",
-        confirmText = "",
-        footer,
         cancel,
         theme: mode,
-        footerLayout,
-        footerSize = "small",
-        hideCancel = false,
-        hideConfirm = false,
         hideIcon = false,
-        className,
         open,
         placement = 'right',
       } = props;
     const { theme } = useTheme();
-    const [isRendered, setIsRendered] = useState(false);
     const getTheme = () => {
         return mode ? mode : theme;
     };
-    const openDrawer = () => {
-        setIsRendered(true);
-    };
 
-    if (!isRendered && !open) {
+    if (!open) {
       return null;
     }
 
     const handleCancel = () => {
-        setIsRendered(false);
         if (cancel) {
            cancel();
         }
       };
       const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event.target === event.currentTarget) {
+            event.stopPropagation();
             handleCancel();
         }
       };
@@ -88,7 +63,7 @@ import { drawerVariants, iconStyles } from "./styles";
           })}
         ${styles[placement] }`} style={drawerStyle}>
           <div className={styles.drawerHeader}>
-            <h2>{title}</h2>
+          <div className={styles.title}>{title}</div>
             {!hideIcon && (
               <CloseIcon
                 className={`${iconStyles({

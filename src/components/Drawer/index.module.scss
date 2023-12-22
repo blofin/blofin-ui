@@ -1,60 +1,59 @@
 .drawerOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 半透明遮罩层 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .drawerContent {
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    height: 100%;
-    position: absolute;
-  }
-  .left {
-    left: 0;
-  }
-  .right {
-    right: 0;
-  }
-  .drawerHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  
-  .drawer-close-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: #888;
-  }
-  
-  
-  h2 {
-    margin: 0;
-    font-size: 20px;
-  }
-  .mock {
-    @apply bu-fixed bu-bottom-0 bu-left-0 bu-right-0 bu-top-0 bu-z-[9999] bu-bg-black/[.6];
-  }
-  .content {
-    @apply  bu-flex-grow bu-overflow-y-auto bu-overflow-x-hidden  bu-text-[14px] bu-font-normal bu-leading-[20px] bu-tracking-[-0.2px];
-    &::-webkit-scrollbar {
-        width: 4px;
-        height: 6px;
-      }
-      &::-webkit-scrollbar-thumb {
-        width: 4px;
-        border-radius: 4px;
-        @apply bu-bg-light-fill-tertiary;
-      }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明遮罩层 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drawerContent {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  height: 100%;
+  position: absolute;
+}
+.left {
+  left: 0;
+}
+.right {
+  right: 0;
+}
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.drawer-close-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #888;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+}
+.mock {
+  @apply bu-fixed bu-bottom-0 bu-left-0 bu-right-0 bu-top-0 bu-z-[9999] bu-bg-black/[.6];
+}
+.content {
+  @apply  bu-flex-grow bu-overflow-y-auto bu-overflow-x-hidden  bu-text-[14px] bu-font-normal bu-leading-[20px] bu-tracking-[-0.2px];
+  &::-webkit-scrollbar {
+      width: 4px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      width: 4px;
+      border-radius: 4px;
+      @apply bu-bg-light-fill-tertiary;
+    }
 }
