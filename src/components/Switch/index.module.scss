@@ -1,6 +1,6 @@
 .switch {
-    width: 40px;
-    height: 24px;
+    width: 30px;
+    height: 18px;
     background: #bdbdbf;
     border-radius: 90px;
     display: flex;
@@ -11,15 +11,15 @@
   }
   
   .thumb{
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     border-radius: 100%;
     background: #fff;
     transition: 0.15s ease-in;
   }
   
   .move{
-    transform: translateX(15px)
+    transform: translateX(10px)
   }
   
   
