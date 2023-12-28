@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { TextSelect } from "../components/TextSelect/TextSelect";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "..";
 
 const meta: Meta<typeof TextSelect> = {
@@ -28,28 +28,11 @@ export const Primary: Story = {
   render: () => {
     const mode = useMode();
 
-    const accountOptions = [
-      {
-        label: "fundingAccount",
-        value: "funding"
-      },
-      {
-        label: "derivativesAccount",
-        value: "derivatives"
-      },
-      {
-        label: "copyTradingAccount",
-        value: "copy_trading"
-      },
-      {
-        label: "earnAccount",
-        value: "earn"
-      }
-    ];
+    const [accountOptions, setAccountOptions] = useState<any>([]);
 
-    const [from, setFrom] = useState(accountOptions[0].value);
+    const [from, setFrom] = useState('');
 
-    const [to, setTo] = useState(accountOptions[1].value);
+    const [to, setTo] = useState('');
 
     const change = (value: string) => {
       console.log(value);
@@ -60,6 +43,32 @@ export const Primary: Story = {
       console.log(value);
       setTo(value);
     };
+
+    useEffect(() => {
+      setTimeout(() => {
+        const arr=[
+          {
+            label: "fundingAccount",
+            value: "funding"
+          },
+          {
+            label: "derivativesAccount",
+            value: "derivatives"
+          },
+          {
+            label: "copyTradingAccount",
+            value: "copy_trading"
+          },
+          {
+            label: "earnAccount",
+            value: "earn"
+          }
+        ]
+        setAccountOptions(arr);
+        setFrom(arr[0].value)
+        setTo(arr[1].value)
+      }, 1000);
+    }, []);
 
     return (
       <ThemeProvider value={{ theme: mode }}>

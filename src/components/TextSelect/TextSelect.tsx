@@ -17,6 +17,7 @@ interface TextSelectProps {
   placeholder?: string;
   defaultValue?: string;
   disabled?: string;
+  className?: string;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -76,7 +77,7 @@ const Options: FC<OptionsProps> = ({
 };
 
 const TextSelect: FC<TextSelectProps> = (props) => {
-  const { placeholder, defaultValue, options, onChange, disabled } = props;
+  const { placeholder, defaultValue, options, onChange, disabled, className = "" } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
@@ -129,7 +130,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
             onClick={() => {
               !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
             }}
-            className={`${iconStyles({ theme })} ${isFocus?styles.roate:''}`}
+            className={`${iconStyles({ theme })} ${isFocus ? styles.roate : ""}`}
           />
         }
       />
@@ -140,6 +141,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
           onChange={onChange}
           disabled={disabled}
           defaultValue={defaultValue}
+          className={className}
         />
       )}
     </div>
