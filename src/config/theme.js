@@ -66,7 +66,8 @@ module.exports = {
         fill: {
           primary: "#F7F8FA",
           secondary: "#F0F1F5",
-          tertiary: "#ABADB2"
+          tertiary: "#ABADB2",
+          quaternary: "#E8E9EB"
         },
         line: {
           primary: "#F5F6FA",
@@ -84,7 +85,8 @@ module.exports = {
           fill: {
             primary: "#F2F3F5",
             secondary: "#EBEDF2",
-            tertiary: "#C4C6CC"
+            tertiary: "#C4C6CC",
+            quaternary: "#EDEEF0"
           }
         },
         disabled: {
@@ -156,7 +158,8 @@ module.exports = {
         fill: {
           primary: "#000000",
           secondary: "#1A1A1A",
-          tertiary: "#323234"
+          tertiary: "#323234",
+          quaternary: "#282829"
         },
         line: {
           primary: "#2F3033",
@@ -174,7 +177,8 @@ module.exports = {
           fill: {
             primary: "#111214",
             secondary: "#242424",
-            tertiary: "#3E3F41"
+            tertiary: "#3E3F41",
+            quaternary: "#373738"
           }
         },
         disabled: {
