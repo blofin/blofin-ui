@@ -37,7 +37,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
   return (
     <div>
       {label && typeof label === "string" && (
-        <label htmlFor={id ? id : `bui-${label}`}>
+        <label>
           <Typography variant="body4" className={cn(LabelVariants({ theme: mode ? mode : theme }))}>
             {label}
           </Typography>
