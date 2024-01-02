@@ -47,12 +47,12 @@ const tertiaryStyles = cva("", {
     theme: {
       light: [
         "bu-bg-light-fill-secondary",
-        "hover:bu-bg-light-hover-fill-secondary",
+        "hover:bu-bg-light-hover-fill-secondary hover:bu-text-light-primary",
         "bu-text-light-label"
       ],
       dark: [
         "bu-bg-dark-fill-secondary",
-        "hover:bu-bg-dark-hover-fill-secondary",
+        "hover:bu-bg-dark-hover-fill-secondary hover:bu-text-dark-primary",
         "bu-text-dark-label"
       ]
     }
