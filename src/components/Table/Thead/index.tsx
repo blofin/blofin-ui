@@ -1,12 +1,13 @@
 import SortButton, { TextAlign } from "../../Sort/SortButton";
 import SortGroup from "../../Sort/SortGroup";
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { bgStyles, cssPosition, textStyles } from "../css";
 import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
 import styles from "../index.module.scss";
 import { SortProps, TableColumnProps } from "../interface";
 import { BUITheme, useTheme } from "../../..";
+import Sortable from "sortablejs";
 
 const Thead: FC<{
   columns: TableColumnProps[];
@@ -19,6 +20,8 @@ const Thead: FC<{
 
   const { theme } = useTheme();
 
+  const theadRef = useRef<HTMLTableRowElement>(null);
+
   const getClass = useStickyClassName(columns);
 
   const offets = useStickyOffset(columns);
@@ -29,18 +32,36 @@ const Thead: FC<{
     }
   };
 
+  useEffect(() => {
+    if (theadRef.current) {
+      const sortable = new Sortable(theadRef.current, {
+        sort: true,
+        animation: 150,
+        handle: ".drag-item",
+        filter: ".no-drag",
+        onMove: function (evt) {
+          return evt.related.className.indexOf("no-drag") === -1; //and this
+        },
+        onEnd: function (evt) {
+          console.log(evt.newIndex,'newIndex');
+          console.log(evt.oldIndex,'oldIndex');
+        },
+      });
+    }
+  }, []);
+
   return (
     <SortGroup>
       <thead
         className={`${styles.thead} ${props.theadClass}`}
-        style={props.scroll ? { position: "sticky", zIndex: "999", top: '-1px' } : {}}>
-        <tr>
+        style={props.scroll ? { position: "sticky", zIndex: "999", top: "-1px" } : {}}>
+        <tr ref={theadRef}>
           {columns.map((item, index) => {
             return (
               <th
                 className={`${getClass(item, index).join(" ")} ${styles.th} ${bgStyles({
                   theme: customeTheme ? customeTheme : theme
-                })}`}
+                })} ${item.fixed ? "no-drag" : "drag-item"}`}
                 style={cssPosition(item, offets[index].offset)}
                 key={item.key}>
                 <SortButton

@@ -42,9 +42,11 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
+    "@types/sortablejs": "^1.15.7",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "react-transition-group": "^4.4.5",
+    "sortablejs": "^1.15.1",
     "tailwind-merge": "^1.13.1"
   },
   "peerDependencies": {
