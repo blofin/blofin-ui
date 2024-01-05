@@ -15,6 +15,7 @@ interface TextSelectProps {
   options: Options[];
   onChange: (value: string) => void;
   inputChange?: (value: string) => void;
+  onFocus?: () => void;
   placeholder?: string;
   defaultValue?: string;
   value?: string;
@@ -88,6 +89,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
     options,
     onChange,
     inputChange,
+    onFocus,
     disabled,
     className = "",
     inputClassName='',
@@ -137,6 +139,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         variant="outlined"
         onFocus={() => {
           setShow(true);
+          onFocus && onFocus();
         }}
         className={inputClassName}
         readOnly={readOnly}
