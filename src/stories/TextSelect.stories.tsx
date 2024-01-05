@@ -82,6 +82,7 @@ export const Primary: Story = {
           <Tooltip placement="top" content="价格">
             <TextSelect
               placeholder={placeholder}
+              inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
               value={value}
               options={accountOptions}
               onChange={change}

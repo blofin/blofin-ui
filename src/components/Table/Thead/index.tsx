@@ -32,23 +32,23 @@ const Thead: FC<{
     }
   };
 
-  useEffect(() => {
-    if (theadRef.current) {
-      const sortable = new Sortable(theadRef.current, {
-        sort: true,
-        animation: 150,
-        handle: ".drag-item",
-        filter: ".no-drag",
-        onMove: function (evt) {
-          return evt.related.className.indexOf("no-drag") === -1; //and this
-        },
-        onEnd: function (evt) {
-          console.log(evt.newIndex,'newIndex');
-          console.log(evt.oldIndex,'oldIndex');
-        },
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (theadRef.current) {
+  //     const sortable = new Sortable(theadRef.current, {
+  //       sort: true,
+  //       animation: 150,
+  //       handle: ".drag-item",
+  //       filter: ".no-drag",
+  //       onMove: function (evt) {
+  //         return evt.related.className.indexOf("no-drag") === -1; //and this
+  //       },
+  //       onEnd: function (evt) {
+  //         console.log(evt.newIndex,'newIndex');
+  //         console.log(evt.oldIndex,'oldIndex');
+  //       },
+  //     });
+  //   }
+  // }, []);
 
   return (
     <SortGroup>
