@@ -14,10 +14,14 @@ interface Options {
 interface TextSelectProps {
   options: Options[];
   onChange: (value: string) => void;
+  inputChange?: (value: string) => void;
   placeholder?: string;
   defaultValue?: string;
+  value?: string;
   disabled?: string;
   className?: string;
+  hideEndAdornment?: boolean;
+  readOnly?: boolean;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -77,7 +81,18 @@ const Options: FC<OptionsProps> = ({
 };
 
 const TextSelect: FC<TextSelectProps> = (props) => {
-  const { placeholder, defaultValue, options, onChange, disabled, className = "" } = props;
+  const {
+    placeholder,
+    defaultValue,
+    options,
+    onChange,
+    inputChange,
+    disabled,
+    className = "",
+    hideEndAdornment = false,
+    readOnly = true,
+    value
+  } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
@@ -121,17 +136,22 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         onFocus={() => {
           setShow(true);
         }}
-        readOnly
+        readOnly={readOnly}
         onBlur={hide}
         placeholder={placeholder}
-        value={label}
+        value={readOnly === false ? value : label}
+        onChange={(e) => {
+          inputChange && inputChange(e.target.value);
+        }}
         endAdornment={
-          <SelectArrow
-            onClick={() => {
-              !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
-            }}
-            className={`${iconStyles({ theme })} ${isFocus ? styles.roate : ""}`}
-          />
+          !hideEndAdornment && (
+            <SelectArrow
+              onClick={() => {
+                !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+              }}
+              className={`${iconStyles({ theme })} ${isFocus ? styles.roate : ""}`}
+            />
+          )
         }
       />
       {show && (
