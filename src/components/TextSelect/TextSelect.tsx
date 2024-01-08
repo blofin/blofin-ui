@@ -16,6 +16,7 @@ interface TextSelectProps {
   onChange: (value: string) => void;
   inputChange?: (value: string) => void;
   onFocus?: () => void;
+  onBlur?: () => void;
   placeholder?: string;
   defaultValue?: string;
   value?: string;
@@ -90,6 +91,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
     onChange,
     inputChange,
     onFocus,
+    onBlur,
     disabled,
     className = "",
     inputClassName='',
@@ -143,7 +145,10 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         }}
         className={inputClassName}
         readOnly={readOnly}
-        onBlur={hide}
+        onBlur={()=>{
+          hide();
+          onBlur && onBlur();
+        }}
         placeholder={placeholder}
         value={readOnly === false ? value : label}
         onChange={(e) => {
