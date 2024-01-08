@@ -121,7 +121,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
     setTimeout(() => {
       setShow(false);
       setIsFocus(false);
-    }, 100);
+    }, 150);
   };
 
   useEffect(() => {
