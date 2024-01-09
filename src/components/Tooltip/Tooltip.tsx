@@ -6,6 +6,7 @@ import ArrowIcon from "../../assets/icons/arrow.svg";
 import useAlign from "../../hooks/useAlign";
 import styles from "./index.module.scss";
 import { arrowPositionStyles, bgStyles, popperStyles } from "./styles";
+import useClient from "../../hooks/useClient";
 
 interface TooltipProps {
   placement: "top" | "bottom" | "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
@@ -78,13 +79,17 @@ const Content: FC<ContentProps> = ({
         return {
           left: 0,
           top: 0,
-          transform: `translate3d(${offsetX - width + clientWidth + 4}px, ${offsetY - height - 4}px, 0px)`
+          transform: `translate3d(${offsetX - width + clientWidth + 4}px, ${
+            offsetY - height - 4
+          }px, 0px)`
         };
       } else {
         return {
           left: 0,
           top: 0,
-          transform: `translate3d(${offsetX - width + clientWidth + 8}px, ${offsetY - height - 4}px, 0px)`
+          transform: `translate3d(${offsetX - width + clientWidth + 8}px, ${
+            offsetY - height - 4
+          }px, 0px)`
         };
       }
     } else if (placement === "bottomLeft") {
@@ -92,7 +97,9 @@ const Content: FC<ContentProps> = ({
         return {
           left: 0,
           top: 0,
-          transform: `translate3d(${offsetX + clientWidth / 2 - 16 - 4}px, ${offsetY + clientHeight + 4}px, 0px)`
+          transform: `translate3d(${offsetX + clientWidth / 2 - 16 - 4}px, ${
+            offsetY + clientHeight + 4
+          }px, 0px)`
         };
       } else {
         return {
@@ -105,20 +112,26 @@ const Content: FC<ContentProps> = ({
       return {
         left: 0,
         top: 0,
-        transform: `translate3d(${offsetX - width / 2 + clientWidth / 2}px, ${offsetY + clientHeight + 4}px, 0px)`
+        transform: `translate3d(${offsetX - width / 2 + clientWidth / 2}px, ${
+          offsetY + clientHeight + 4
+        }px, 0px)`
       };
     } else {
       if (clientWidth - clientHeight > -5 && clientWidth - clientHeight < 5) {
         return {
           left: 0,
           top: 0,
-          transform: `translate3d(${offsetX - width + clientWidth + 4}px, ${offsetY + clientHeight + 4}px, 0px)`
+          transform: `translate3d(${offsetX - width + clientWidth + 4}px, ${
+            offsetY + clientHeight + 4
+          }px, 0px)`
         };
       } else {
         return {
           left: 0,
           top: 0,
-          transform: `translate3d(${offsetX - width + clientWidth + 8}px, ${offsetY + clientHeight + 4}px, 0px)`
+          transform: `translate3d(${offsetX - width + clientWidth + 8}px, ${
+            offsetY + clientHeight + 4
+          }px, 0px)`
         };
       }
     }
@@ -174,6 +187,8 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, ...props }) => {
 
   const [enter, setEnter] = useState(false);
 
+  const { isClient } = useClient();
+
   const mouseEnter = () => {
     setEnter(true);
   };
@@ -189,7 +204,7 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, ...props }) => {
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}>
       {children}
-      <Content {...props} enter={enter} parent={targetRef.current} />
+      {isClient && <Content {...props} enter={enter} parent={targetRef.current} />}
     </div>
   );
 };
