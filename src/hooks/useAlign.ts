@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useAlign = (target: HTMLDivElement | null) => {
   const [offset, setOffset] = useState({

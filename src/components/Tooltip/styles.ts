@@ -9,17 +9,26 @@ const bgStyles = cva("bu-text-white", {
   }
 });
 
-const arrowPositionStyles=cva('bu-absolute bu-w-[8px] bu-h-[8px]',{
+const arrowPositionStyles = cva("bu-absolute bu-h-[8px] bu-w-[8px]", {
   variants: {
     placement: {
-      top: "bu-left-[50%] bu-translate-x-[-50%] bu-bottom-[-7px]",
-      topLeft: "bu-left-[16px] bu-bottom-[-7px]",
-      topRight:"bu-right-[16px] bu-bottom-[-7px]",
-      bottom:"bu-left-[50%] bu-translate-x-[-50%] bu-top-[-7.5px] bu-rotate-[180deg]",
-      bottomLeft:"bu-left-[16px] bu-top-[-7.5px] bu-rotate-[180deg]",
-      bottomRight:"bu-right-[16px] bu-top-[-7.5px] bu-rotate-[180deg]",
+      top: "bu-bottom-[-7px] bu-left-[50%] bu-translate-x-[-50%]",
+      topLeft: "bu-bottom-[-7px] bu-left-[16px]",
+      topRight: "bu-bottom-[-7px] bu-right-[16px]",
+      bottom: "bu-left-[50%] bu-top-[-7.5px] bu-translate-x-[-50%] bu-rotate-[180deg]",
+      bottomLeft: "bu-left-[16px] bu-top-[-7.5px] bu-rotate-[180deg]",
+      bottomRight: "bu-right-[16px] bu-top-[-7.5px] bu-rotate-[180deg]"
     }
   }
-})
+});
 
-export { bgStyles,arrowPositionStyles };
+const popperStyles = cva("bu-transition-opacity", {
+  variants: {
+    show: {
+      true: "bu-opacity-1 bu-visible bu-z-[10000]",
+      false: "bu-invisible bu-opacity-0 bu-z-[-100]"
+    }
+  }
+});
+
+export { bgStyles, arrowPositionStyles, popperStyles };

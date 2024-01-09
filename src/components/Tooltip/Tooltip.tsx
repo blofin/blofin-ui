@@ -1,11 +1,11 @@
-import { FC, ReactNode, useRef, useState } from "react";
+import { FC, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { useTheme } from "../..";
 import ArrowDarkIcon from "../../assets/icons/arrow-dark.svg";
 import ArrowIcon from "../../assets/icons/arrow.svg";
 import useAlign from "../../hooks/useAlign";
 import styles from "./index.module.scss";
-import { arrowPositionStyles, bgStyles } from "./styles";
+import { arrowPositionStyles, bgStyles, popperStyles } from "./styles";
 
 interface TooltipProps {
   placement: "top" | "bottom" | "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
@@ -19,6 +19,7 @@ interface TooltipProps {
 
 type ContentProps = Omit<TooltipProps, "children"> & {
   parent: HTMLDivElement | null;
+  enter: boolean;
 };
 
 const Content: FC<ContentProps> = ({
@@ -27,85 +28,128 @@ const Content: FC<ContentProps> = ({
   placement,
   parent,
   className,
+  enter,
   hideArrow = false
 }) => {
   const { theme } = useTheme();
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const { offsetX, offsetY, clientWidth, clientHeight, offsetLeft, offsetRight } = useAlign(parent).offset;
+  const { offsetX, offsetY, clientWidth, clientHeight } = useAlign(parent).offset;
 
-  const positions = () => {
+  const [domOffset, setDomOffset] = useState({
+    width: 0,
+    height: 0
+  });
+
+  const positions = useMemo(() => {
     if (!targetRef.current) {
       return;
     }
-    const { height, width } = targetRef.current.getBoundingClientRect();
+
+    const { height, width } = domOffset;
+
     if (placement === "topLeft") {
       if (clientWidth - clientHeight > -5 && clientWidth - clientHeight < 5) {
         return {
-          left: offsetX + clientWidth / 2 - 16 - 4,
-          top: offsetY - height - 4
+          left: 0,
+          top: 0,
+          transform: `translate3d(${offsetX + clientWidth / 2 - 16 - 4}px, ${
+            offsetY - height - 4
+          }px, 0px)`
         };
       } else {
         return {
-          left: offsetX - 8,
-          top: offsetY - height - 4
+          left: 0,
+          top: 0,
+          transform: `translate3d(${offsetX - 8}px, ${offsetY - height - 4}px, 0px)`
         };
       }
     } else if (placement === "top") {
       return {
-        left: offsetX - width / 2 + clientWidth / 2,
-        top: offsetY - height - 4
+        left: 0,
+        top: 0,
+        transform: `translate3d(${offsetX - width / 2 + clientWidth / 2}px, ${
+          offsetY - height - 4
+        }px, 0px)`
       };
     } else if (placement === "topRight") {
       if (clientWidth - clientHeight > -5 && clientWidth - clientHeight < 5) {
         return {
-          left: offsetX - width + clientWidth + 4,
-          top: offsetY - height - 4
+          left: 0,
+          top: 0,
+          transform: `translate3d(${offsetX - width + clientWidth + 4}px, ${offsetY - height - 4}px, 0px)`
         };
       } else {
         return {
-          left: offsetX - width + clientWidth + 8,
-          top: offsetY - height - 4
+          left: 0,
+          top: 0,
+          transform: `translate3d(${offsetX - width + clientWidth + 8}px, ${offsetY - height - 4}px, 0px)`
         };
       }
     } else if (placement === "bottomLeft") {
       if (clientWidth - clientHeight > -5 && clientWidth - clientHeight < 5) {
         return {
-          left: offsetX + clientWidth / 2 - 16 - 4,
-          top: offsetY + clientHeight + 4
+          left: 0,
+          top: 0,
+          transform: `translate3d(${offsetX + clientWidth / 2 - 16 - 4}px, ${offsetY + clientHeight + 4}px, 0px)`
         };
       } else {
         return {
-          left: offsetX - 8,
-          top: offsetY + clientHeight + 4
+          left: 0,
+          top: 0,
+          transform: `translate3d(${offsetX - 8}px, ${offsetY + clientHeight + 4}px, 0px)`
         };
       }
     } else if (placement === "bottom") {
       return {
-        left: offsetX - width / 2 + clientWidth / 2,
-        top: offsetY + clientHeight + 4
+        left: 0,
+        top: 0,
+        transform: `translate3d(${offsetX - width / 2 + clientWidth / 2}px, ${offsetY + clientHeight + 4}px, 0px)`
       };
     } else {
       if (clientWidth - clientHeight > -5 && clientWidth - clientHeight < 5) {
         return {
-          left: offsetX - width + clientWidth + 4,
-          top: offsetY + clientHeight + 4
+          left: 0,
+          top: 0,
+          transform: `translate3d(${offsetX - width + clientWidth + 4}px, ${offsetY + clientHeight + 4}px, 0px)`
         };
       } else {
         return {
-          left: offsetX - width + clientWidth + 8,
-          top: offsetY + clientHeight + 4
+          left: 0,
+          top: 0,
+          transform: `translate3d(${offsetX - width + clientWidth + 8}px, ${offsetY + clientHeight + 4}px, 0px)`
         };
       }
     }
-  };
+  }, [offsetX, clientWidth, domOffset]);
+
+  useEffect(() => {
+    let observer: ResizeObserver;
+    if (targetRef.current) {
+      observer = new ResizeObserver((entries) => {
+        if (targetRef.current) {
+          const { height, width } = targetRef.current.getBoundingClientRect();
+          setDomOffset({
+            width,
+            height
+          });
+        }
+      });
+      observer.observe(targetRef.current);
+    }
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return ReactDOM.createPortal(
     <div
       ref={targetRef}
-      className={`${styles["tooltip-wrapper"]} ${bgStyles({ theme })} ${className || ""}`}
-      style={positions()}>
+      className={`${styles["tooltip-wrapper"]} ${popperStyles({ show: enter })} ${bgStyles({
+        theme
+      })} ${className || ""}`}
+      style={positions}>
       {title && <span className={styles.title}>{title}</span>}
       {title && content && <div className={styles.line}></div>}
       {content ? (
@@ -145,7 +189,7 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, ...props }) => {
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}>
       {children}
-      {(enter || isShow) && <Content {...props} parent={targetRef.current} />}
+      <Content {...props} enter={enter} parent={targetRef.current} />
     </div>
   );
 };
