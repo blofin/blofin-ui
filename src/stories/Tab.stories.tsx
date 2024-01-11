@@ -61,7 +61,7 @@ export const Primary: Story = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-full">
-          <Tab items={items} size="small" change={change}><input type="checkbox" /></Tab>
+          <Tab items={items} size="small" defaultIndex={5} change={change}><input type="checkbox" /></Tab>
         </div>
       </ThemeProvider>
     );

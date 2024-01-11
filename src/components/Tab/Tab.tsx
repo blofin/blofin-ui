@@ -24,10 +24,19 @@ interface TabProps extends Base {
   change: (key: string) => void;
   children?: React.ReactNode;
   tabWrapperClass?: string;
+  defaultIndex?: number;
 }
 
-const Tab: FC<TabProps> = ({ items, size, change, className, children, tabWrapperClass }) => {
-  const [active, setActive] = useState(items[0].key);
+const Tab: FC<TabProps> = ({
+  defaultIndex,
+  items,
+  size,
+  change,
+  className,
+  children,
+  tabWrapperClass
+}) => {
+  const [active, setActive] = useState(items[defaultIndex || 0]?.key || items[0].key);
 
   const { theme } = useTheme();
 
