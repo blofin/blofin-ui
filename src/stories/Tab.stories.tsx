@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Tab } from "../components/Tab/Tab";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
+import { Select } from "..";
 
 const meta: Meta<typeof Tab> = {
   /* 👇 The title prop is Tab.
@@ -45,7 +46,17 @@ const items = [
   },
   {
     key: "3",
-    label: `Tab 3`,
+    label: (
+      <Select
+        value={"alice"}
+        selectType="outlined"
+        activeColor={false}
+        selectItems={[
+          { label: "Alice", value: "alice" },
+          { label: "Bob", value: "bob" }
+        ]}
+      />
+    ),
     children: `Content of Tab Pane 3`
   }
 ];
@@ -61,7 +72,9 @@ export const Primary: Story = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-full">
-          <Tab items={items} size="small" defaultIndex={5} change={change}><input type="checkbox" /></Tab>
+          <Tab items={items} size="small" defaultIndex={5} change={change}>
+            <input type="checkbox" />
+          </Tab>
         </div>
       </ThemeProvider>
     );

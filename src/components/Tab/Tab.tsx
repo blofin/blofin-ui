@@ -17,7 +17,7 @@ import {
 interface TabProps extends Base {
   items: {
     key: string;
-    label: string;
+    label: React.ReactNode;
     children: React.ReactNode;
   }[];
   size: BUIComponentSize;
