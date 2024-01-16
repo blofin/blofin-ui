@@ -51,6 +51,7 @@ const items = [
         value={"alice"}
         selectType="outlined"
         activeColor={false}
+        align="right"
         selectItems={[
           { label: "Alice", value: "alice" },
           { label: "Bob", value: "bob" }
