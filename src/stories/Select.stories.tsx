@@ -24,13 +24,12 @@ type Story = StoryObj<typeof Select>;
  * to learn how to use render functions.
  */
 export const Primary: Story = {
-
   render: () => {
-    const [open,setOpen]=useState(false);
+    const [open, setOpen] = useState(false);
 
     return (
-      <ThemeProvider value={{theme:"dark"}}>
-        <Button variant="primary" onClick={()=>setOpen(true)} size="medium">
+      <ThemeProvider value={{ theme: "dark" }}>
+        <Button variant="primary" onClick={() => setOpen(true)} size="medium">
           333
         </Button>
         <Dialog
@@ -43,9 +42,9 @@ export const Primary: Story = {
               <div className="bu-h-[100px] bu-w-full"></div>
               <Select
                 value={"alice"}
-                selectType='outlined'
+                selectType="outlined"
                 activeColor={false}
-                align='right'
+                align="right"
                 selectItems={[
                   { label: "Alice", value: "alice" },
                   { label: "Bob", value: "bob" }
@@ -95,6 +94,7 @@ export const Controlled: Story = {
                 { label: "gtc", value: "gtc" },
                 { label: "Bob", value: "bob" }
               ]}
+              menuWithBorder
               value={selectedValue}
               handleChange={(value) => setSelectedValue(value)}
             />

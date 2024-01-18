@@ -19,7 +19,8 @@ const SelectMenu = ({
   offset,
   activeColor,
   theme,
-  offsetParent
+  offsetParent,
+  menuWithBorder
 }: {
   value: string;
   items: SelectItem[];
@@ -34,6 +35,7 @@ const SelectMenu = ({
   activeColor: boolean;
   theme: BUITheme;
   offsetParent?: number;
+  menuWithBorder?: boolean;
 }) => {
   // const { theme } = useTheme();
 
@@ -43,7 +45,13 @@ const SelectMenu = ({
     <div
       className={`bu-absolute bu-z-[99999] bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
         { theme }
-      )}`}
+      )} ${
+        menuWithBorder
+          ? theme === "dark"
+            ? "bu-border bu-border-dark-line-primary"
+            : "bu-border bu-border-light-line-primary"
+          : ""
+      }`}
       style={{
         left: `${align === "left" ? offsetLeft + "px" : ""}`,
         right: `${align === "right" ? offsetRight + "px" : ""}`,
@@ -77,6 +85,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   align?: "left" | "right";
   labelClassName?: string;
   arrowClassName?: string;
+  menuWithBorder?: boolean;
   scrollable?: boolean;
   wrapper?: (children: ReactNode) => ReactNode;
   activeColor?: boolean;
@@ -100,6 +109,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     arrowClassName = "",
     offsetParent,
     trigger = "click",
+    menuWithBorder,
     ...otherProps
   } = props;
 
@@ -230,6 +240,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           activeColor={activeColor}
           theme={mode || theme}
           offsetParent={offsetParent}
+          menuWithBorder={menuWithBorder}
         />
       )}
       <input
