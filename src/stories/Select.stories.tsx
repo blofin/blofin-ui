@@ -90,6 +90,7 @@ export const Controlled: Story = {
               align="right"
               labelClassName="!bu-text-[30px]"
               offsetParent={45}
+              trigger="hover"
               selectItems={[
                 { label: "gtc", value: "gtc" },
                 { label: "Bob", value: "bob" }

@@ -41,33 +41,29 @@ const SelectMenu = ({
 
   return createPortal(
     <div
-      className="bu-absolute bu-left-0 bu-top-0 bu-z-[99999] bu-h-full bu-w-screen bu-overflow-hidden"
-      onClick={handleClose}>
-      <div
-        className={`bu-absolute bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
-          { theme }
-        )}`}
-        style={{
-          left: `${align === "left" ? offsetLeft + "px" : ""}`,
-          right: `${align === "right" ? offsetRight + "px" : ""}`,
-          top: offsetY + (offsetParent || 18) + "px"
-        }}>
-        <ul>
-          {items?.map((item) => {
-            return (
-              <li
-                className={menuItemStyles({
-                  theme,
-                  active: activeColor ? value === item.value : activeColor
-                })}
-                key={item.value}
-                onClick={() => handleSelect(item.value)}>
-                {item.label}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      className={`bu-absolute bu-z-[99999] bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
+        { theme }
+      )}`}
+      style={{
+        left: `${align === "left" ? offsetLeft + "px" : ""}`,
+        right: `${align === "right" ? offsetRight + "px" : ""}`,
+        top: offsetY + (offsetParent || 18) + "px"
+      }}>
+      <ul>
+        {items?.map((item) => {
+          return (
+            <li
+              className={menuItemStyles({
+                theme,
+                active: activeColor ? value === item.value : activeColor
+              })}
+              key={item.value}
+              onClick={() => handleSelect(item.value)}>
+              {item.label}
+            </li>
+          );
+        })}
+      </ul>
     </div>,
     document.body
   );
@@ -85,6 +81,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   wrapper?: (children: ReactNode) => ReactNode;
   activeColor?: boolean;
   offsetParent?: number;
+  trigger?: "click" | "hover";
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -102,10 +99,13 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     activeColor = true,
     arrowClassName = "",
     offsetParent,
+    trigger = "click",
     ...otherProps
   } = props;
 
   const { theme } = useTheme();
+
+  const domRef = useRef<any>(null);
 
   const selectRef = useRef<HTMLDivElement | null>(null);
 
@@ -122,12 +122,49 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   const keyByItems = keyBy(selectItems, "value");
 
   const handleSelect = (value: string) => {
-    setShowMenu(false);
+    handleClose();
     handleChange && handleChange(value);
   };
 
   const handleClose = () => {
     setShowMenu(false);
+  };
+
+  const onMouseEnter = () => {
+    if (trigger === "hover") {
+      setShowMenu(true);
+    }
+  };
+
+  const onMouseLeave = () => {
+    if (trigger === "hover") {
+      setShowMenu(false);
+    }
+  };
+
+  const onClick = () => {
+    if (trigger === "click") {
+      setShowMenu(true);
+    }
+  };
+
+  useEffect(() => {
+    if (trigger === "click") {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      if (trigger === "click") {
+        document.removeEventListener("click", handleClickOutside);
+      }
+    };
+  }, [trigger]);
+
+  // 当单击文档时，检查单击事件的目标是否在下拉窗口内
+  const handleClickOutside = (event: any) => {
+    if (domRef.current && !domRef.current.contains(event.target)) {
+      setShowMenu(false);
+    }
   };
 
   useEffect(() => {
@@ -148,11 +185,11 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   }, [selectRef, showMenu]);
 
   return (
-    <div className="bu-flex">
+    <div className="bu-flex" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} ref={domRef}>
       <div
         ref={selectRef}
         className="bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center"
-        onClick={() => setShowMenu(!showMenu)}>
+        onClick={onClick}>
         {wrapper ? (
           wrapper(
             <Typography variant="body4" className={labelClassName}>
