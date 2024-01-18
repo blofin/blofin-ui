@@ -88,6 +88,8 @@ export const Controlled: Story = {
             <label htmlFor="select">{selectedValue}</label>
             <Select
               align="right"
+              labelClassName="bu-text-[30px]"
+              offsetParent={45}
               selectItems={[
                 { label: "gtc", value: "gtc" },
                 { label: "Bob", value: "bob" }

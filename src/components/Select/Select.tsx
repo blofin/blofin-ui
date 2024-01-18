@@ -17,7 +17,9 @@ const SelectMenu = ({
   handleSelect,
   handleClose,
   offset,
-  activeColor
+  activeColor,
+  theme,
+  offsetParent
 }: {
   value: string;
   items: SelectItem[];
@@ -30,8 +32,10 @@ const SelectMenu = ({
     offsetY: number;
   };
   activeColor: boolean;
+  theme: BUITheme;
+  offsetParent?: number;
 }) => {
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
 
   const { offsetLeft, offsetRight, offsetY } = offset;
 
@@ -46,7 +50,7 @@ const SelectMenu = ({
         style={{
           left: `${align === "left" ? offsetLeft + "px" : ""}`,
           right: `${align === "right" ? offsetRight + "px" : ""}`,
-          top: offsetY + 18 + "px"
+          top: offsetY + (offsetParent || 18) + "px"
         }}>
         <ul>
           {items?.map((item) => {
@@ -76,9 +80,11 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   handleChange?: (value: string) => void;
   align?: "left" | "right";
   labelClassName?: string;
+  arrowClassName?: string;
   scrollable?: boolean;
   wrapper?: (children: ReactNode) => ReactNode;
   activeColor?: boolean;
+  offsetParent?: number;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -94,6 +100,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     scrollable = false,
     wrapper,
     activeColor = true,
+    arrowClassName = "",
+    offsetParent,
     ...otherProps
   } = props;
 
@@ -162,15 +170,15 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
               labelStyles({
                 theme: mode || theme
               })
-            )}`}
+            )} ${arrowClassName}`}
           />
         ) : (
           <SelectArrow
-            className={`bu-h-[10px] bu-w-[10px] bu-ml-[4px] ${showMenu ? "bu-rotate-180" : ""} ${cn(
+            className={`bu-ml-[4px] bu-h-[10px] bu-w-[10px] ${showMenu ? "bu-rotate-180" : ""} ${cn(
               outlinedStyles({
                 theme: mode || theme
               })
-            )}`}
+            )} ${arrowClassName}`}
           />
         )}
       </div>
@@ -183,6 +191,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           handleClose={handleClose}
           offset={offset}
           activeColor={activeColor}
+          theme={mode || theme}
+          offsetParent={offsetParent}
         />
       )}
       <input
