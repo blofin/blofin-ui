@@ -92,9 +92,22 @@ export const Controlled: Story = {
               trigger="hover"
               selectItems={[
                 { label: "gtc", value: "gtc" },
-                { label: "Bob", value: "bob" }
+                { label: "Bob", value: "bob" },
+                { label: "Bob2", value: "Bob2" },
+                { label: "Bob3", value: "Bob3" },
+                { label: "Bob4", value: "Bob4" },
+                { label: "Bob5", value: "Bob5" },
+                { label: "Bob6", value: "Bob6" },
+                { label: "Bob7", value: "Bob7" },
+                { label: "Bob8", value: "Bob8" },
+                { label: "Bob9", value: "Bob9" },
+                { label: "Bob10", value: "Bob10" },
+                { label: "Bob11", value: "Bob11" },
+                { label: "Bob12", value: "Bob12" },
+                { label: "Bob13", value: "Bob13" },
               ]}
-              menuWithBorder
+              menuWrapperClassName="bu-border bu-border-dark-line-primary bu-max-h-[200px] bu-overflow-y-scroll"
+              arrowClassName="!bu-text-dark-label"          
               value={selectedValue}
               handleChange={(value) => setSelectedValue(value)}
             />
