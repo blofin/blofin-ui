@@ -22,9 +22,10 @@ interface TextSelectProps {
   value?: string;
   disabled?: string;
   className?: string;
-  inputClassName?:string;
+  inputClassName?: string;
   hideEndAdornment?: boolean;
   readOnly?: boolean;
+  popupContainer?: HTMLDivElement | null;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -38,14 +39,16 @@ const Options: FC<OptionsProps> = ({
   onChange,
   className,
   disabled,
-  defaultValue
+  defaultValue,
+  popupContainer
 }) => {
   const { theme } = useTheme();
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const { offsetX, offsetY, clientWidth, clientHeight, offsetLeft, offsetRight } =
-    useAlign(parent).offset;
+  const { offset, resize } = useAlign(parent);
+
+  const { offsetX, offsetY } = offset;
 
   const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
@@ -57,6 +60,17 @@ const Options: FC<OptionsProps> = ({
       onChange(value);
     }
   };
+
+  useEffect(() => {
+    if (popupContainer) {
+      popupContainer.addEventListener("scroll", resize);
+    }
+    return () => {
+      if (popupContainer) {
+        popupContainer.removeEventListener("scroll", resize);
+      }
+    };
+  }, [popupContainer]);
 
   return offsetX !== 0 && offsetY !== 0
     ? ReactDOM.createPortal(
@@ -78,7 +92,7 @@ const Options: FC<OptionsProps> = ({
             );
           })}
         </div>,
-        document.body
+        popupContainer || document.body
       )
     : null;
 };
@@ -94,10 +108,11 @@ const TextSelect: FC<TextSelectProps> = (props) => {
     onBlur,
     disabled,
     className = "",
-    inputClassName='',
+    inputClassName = "",
     hideEndAdornment = false,
     readOnly = true,
-    value
+    value,
+    popupContainer
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -145,7 +160,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         }}
         className={inputClassName}
         readOnly={readOnly}
-        onBlur={()=>{
+        onBlur={() => {
           hide();
           onBlur && onBlur();
         }}
@@ -173,6 +188,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
           disabled={disabled}
           defaultValue={defaultValue}
           className={className}
+          popupContainer={popupContainer}
         />
       )}
     </div>

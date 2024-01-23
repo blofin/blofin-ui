@@ -16,6 +16,7 @@ interface TooltipProps {
   isShow?: boolean;
   className?: string;
   hideArrow?: boolean;
+  popupContainer?: HTMLDivElement | null;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
@@ -30,13 +31,16 @@ const Content: FC<ContentProps> = ({
   parent,
   className,
   enter,
-  hideArrow = false
+  hideArrow = false,
+  popupContainer
 }) => {
   const { theme } = useTheme();
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const { offsetX, offsetY, clientWidth, clientHeight } = useAlign(parent).offset;
+  const { offset, resize } = useAlign(parent);
+
+  const { offsetX, offsetY, clientWidth, clientHeight } = offset;
 
   const [domOffset, setDomOffset] = useState({
     width: 0,
@@ -140,6 +144,7 @@ const Content: FC<ContentProps> = ({
   useEffect(() => {
     let observer: ResizeObserver;
     if (targetRef.current) {
+      resize();
       observer = new ResizeObserver((entries) => {
         if (targetRef.current) {
           const { height, width } = targetRef.current.getBoundingClientRect();
@@ -154,7 +159,29 @@ const Content: FC<ContentProps> = ({
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [enter]);
+
+  const scroll = () => {
+    resize();
+    if (targetRef.current) {
+      const { height, width } = targetRef.current.getBoundingClientRect();
+      setDomOffset({
+        width,
+        height
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (popupContainer) {
+      popupContainer.addEventListener("scroll", scroll);
+    }
+    return () => {
+      if (popupContainer) {
+        popupContainer.removeEventListener("scroll", scroll);
+      }
+    };
+  }, [popupContainer]);
 
   return ReactDOM.createPortal(
     <div
@@ -178,7 +205,7 @@ const Content: FC<ContentProps> = ({
         </div>
       )}
     </div>,
-    document.body
+    popupContainer || document.body
   );
 };
 

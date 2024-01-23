@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { TextSelect } from "../components/TextSelect/TextSelect";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Dialog, Tooltip } from "..";
 
 const meta: Meta<typeof TextSelect> = {
@@ -28,6 +28,8 @@ export const Primary: Story = {
   render: () => {
     const mode = useMode();
 
+    const ref = useRef<HTMLDivElement>(null);
+
     const [accountOptions, setAccountOptions] = useState<any>([]);
 
     const [open, setOpen] = useState(false);
@@ -38,20 +40,20 @@ export const Primary: Story = {
 
     const [to, setTo] = useState("");
 
-    const [placeholder,setPlaceholder] = useState("");
+    const [placeholder, setPlaceholder] = useState("");
 
     const change = (value: string) => {
-      if(value==='limit'){
-        setValue('20000');
-      }else{
-        setValue('');
-        setPlaceholder('市价')
+      if (value === "limit") {
+        setValue("20000");
+      } else {
+        setValue("");
+        setPlaceholder("市价");
       }
     };
 
-    const inputChange=(value:string)=>{
+    const inputChange = (value: string) => {
       setValue(value);
-    }
+    };
 
     const changeTo = (value: string) => {
       console.log(value);
@@ -78,52 +80,39 @@ export const Primary: Story = {
 
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <>
-          <Tooltip placement="top" content="价格">
-            <TextSelect
-              placeholder={placeholder}
-              inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
-              value={value}
-              options={accountOptions}
-              onChange={change}
-              inputChange={inputChange}
-              hideEndAdornment={true}
-              readOnly={false}
-            />
-          </Tooltip>
-          {/* <Button variant="primary" size="medium" onClick={() => setOpen(true)}>
-            Open
-          </Button>
-          <Dialog
-            title="demo"
-            size="large"
-            open={open}
-            footer={null}
-            cancel={() => setOpen(false)}
-            content={
-              <div>
-                <div className="bu-w-full">
-                  <TextSelect
-                    placeholder="Select a person"
-                    disabled={to}
-                    defaultValue={from}
-                    options={accountOptions}
-                    onChange={change}
-                  />
-                </div>
-                <div className="bu-w-full">
-                  <TextSelect
-                    placeholder="Select a person"
-                    disabled={from}
-                    defaultValue={to}
-                    options={accountOptions}
-                    onChange={changeTo}
-                  />
-                </div>
-              </div>
-            }
-          /> */}
-        </>
+        <div ref={ref} className="bu-h-[500px] bu-overflow-y-scroll">
+          <div className="bu-h-[1000px] bu-flex-col bu-p-[200px]">
+            <div className="bu-mb-[50px]">
+              <Tooltip placement="top" content="价格" popupContainer={ref.current}>
+                <TextSelect
+                  placeholder={placeholder}
+                  inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
+                  value={value}
+                  options={accountOptions}
+                  onChange={change}
+                  inputChange={inputChange}
+                  hideEndAdornment={true}
+                  readOnly={false}
+                  popupContainer={ref.current}
+                />
+              </Tooltip>
+            </div>
+            <div>
+              <Tooltip placement="top" content="价格">
+                <TextSelect
+                  placeholder={placeholder}
+                  inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
+                  value={value}
+                  options={accountOptions}
+                  onChange={change}
+                  inputChange={inputChange}
+                  hideEndAdornment={true}
+                  readOnly={false}
+                />
+              </Tooltip>
+            </div>
+          </div>
+        </div>
       </ThemeProvider>
     );
   }

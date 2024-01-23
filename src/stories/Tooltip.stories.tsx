@@ -18,29 +18,31 @@ export const Primary: Story = {
 
     const [show, setShow] = useState(false);
 
-    useEffect(()=>{
-      setTimeout(()=>{
+    useEffect(() => {
+      setTimeout(() => {
         setShow(true);
-      },2000)
-    },[])
+      }, 2000);
+    }, []);
 
     return (
-      <div className="bu-pl-[300px] bu-pt-[100px]">
-        <Tooltip
-          placement="top"
-          // hideArrow
-          title="This is Tooltip This is Tooltip This is Tooltip This is Tooltip"
-          content={
-            <div>
-              <p>
-                This is content This is content This is content This is content This is content This
-                is content
-              </p>
-              {show && <p>你好</p>}
-            </div>
-          }>
-          <Button size="small" icon="2" shape="circle"></Button>
-        </Tooltip>
+      <div className="bu-h-[300px] bu-overflow-y-scroll">
+        <div className="bu-h-[1000px] bu-pl-[300px] bu-pt-[300px]">
+          <Tooltip
+            placement="top"
+            // hideArrow
+            title="This is Tooltip This is Tooltip This is Tooltip This is Tooltip"
+            content={
+              <div>
+                <p>
+                  This is content This is content This is content This is content This is content
+                  This is content
+                </p>
+                {show && <p>你好</p>}
+              </div>
+            }>
+            <Button size="small" icon="2" shape="circle"></Button>
+          </Tooltip>
+        </div>
       </div>
     );
   }

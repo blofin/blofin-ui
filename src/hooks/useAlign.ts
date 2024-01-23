@@ -58,7 +58,7 @@ const useAlign = (target: HTMLDivElement | null) => {
     };
   }, [target]);
 
-  return { offset, getOffset };
+  return { offset, getOffset, resize };
 };
 
 export default useAlign;
