@@ -16,7 +16,7 @@ interface TooltipProps {
   isShow?: boolean;
   className?: string;
   hideArrow?: boolean;
-  popupContainer?: HTMLDivElement | null;
+  scrollContainer?: HTMLDivElement | null;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
@@ -32,7 +32,7 @@ const Content: FC<ContentProps> = ({
   className,
   enter,
   hideArrow = false,
-  popupContainer
+  scrollContainer
 }) => {
   const { theme } = useTheme();
 
@@ -173,15 +173,15 @@ const Content: FC<ContentProps> = ({
   };
 
   useEffect(() => {
-    if (popupContainer) {
-      popupContainer.addEventListener("scroll", scroll);
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", scroll);
     }
     return () => {
-      if (popupContainer) {
-        popupContainer.removeEventListener("scroll", scroll);
+      if (scrollContainer) {
+        scrollContainer.removeEventListener("scroll", scroll);
       }
     };
-  }, [popupContainer]);
+  }, [scrollContainer]);
 
   return ReactDOM.createPortal(
     <div

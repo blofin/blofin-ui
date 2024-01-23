@@ -25,7 +25,7 @@ interface TextSelectProps {
   inputClassName?: string;
   hideEndAdornment?: boolean;
   readOnly?: boolean;
-  popupContainer?: HTMLDivElement | null;
+  scrollContainer?: HTMLDivElement | null;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -40,7 +40,7 @@ const Options: FC<OptionsProps> = ({
   className,
   disabled,
   defaultValue,
-  popupContainer
+  scrollContainer
 }) => {
   const { theme } = useTheme();
 
@@ -62,15 +62,15 @@ const Options: FC<OptionsProps> = ({
   };
 
   useEffect(() => {
-    if (popupContainer) {
-      popupContainer.addEventListener("scroll", resize);
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", resize);
     }
     return () => {
-      if (popupContainer) {
-        popupContainer.removeEventListener("scroll", resize);
+      if (scrollContainer) {
+        scrollContainer.removeEventListener("scroll", resize);
       }
     };
-  }, [popupContainer]);
+  }, [scrollContainer]);
 
   return offsetX !== 0 && offsetY !== 0
     ? ReactDOM.createPortal(
@@ -112,7 +112,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
     hideEndAdornment = false,
     readOnly = true,
     value,
-    popupContainer
+    scrollContainer
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -188,7 +188,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
           disabled={disabled}
           defaultValue={defaultValue}
           className={className}
-          popupContainer={popupContainer}
+          scrollContainer={scrollContainer}
         />
       )}
     </div>

@@ -83,7 +83,7 @@ export const Primary: Story = {
         <div ref={ref} className="bu-h-[500px] bu-overflow-y-scroll bu-absolute bu-top-[100px]">
           <div className="bu-h-[1000px] bu-flex-col bu-p-[200px]">
             <div className="bu-mb-[50px]">
-              <Tooltip placement="top" content="价格" popupContainer={ref.current}>
+              <Tooltip placement="top" content="价格" scrollContainer={ref.current}>
                 <TextSelect
                   placeholder={placeholder}
                   inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
@@ -93,7 +93,7 @@ export const Primary: Story = {
                   inputChange={inputChange}
                   hideEndAdornment={true}
                   readOnly={false}
-                  popupContainer={ref.current}
+                  scrollContainer={ref.current}
                 />
               </Tooltip>
             </div>
