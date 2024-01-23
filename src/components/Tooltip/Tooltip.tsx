@@ -205,7 +205,7 @@ const Content: FC<ContentProps> = ({
         </div>
       )}
     </div>,
-    popupContainer || document.body
+    document.body
   );
 };
 

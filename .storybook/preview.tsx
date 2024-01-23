@@ -9,6 +9,7 @@ import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
 import useMode from "../src/hooks/useMode";
 import { ThemeProvider } from "../src/provider/ThemeProvider";
 import "../src/scss/base.scss";
+import './index.scss'
 
 const channel = addons.getChannel();
 

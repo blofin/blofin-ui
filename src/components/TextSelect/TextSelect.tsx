@@ -92,7 +92,7 @@ const Options: FC<OptionsProps> = ({
             );
           })}
         </div>,
-        popupContainer || document.body
+        document.body
       )
     : null;
 };
