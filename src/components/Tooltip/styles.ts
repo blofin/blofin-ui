@@ -22,7 +22,7 @@ const arrowPositionStyles = cva("bu-absolute bu-h-[8px] bu-w-[8px]", {
   }
 });
 
-const popperStyles = cva("bu-transition-opacity", {
+const popperStyles = cva("bu-transition-opacity bu-delay-200", {
   variants: {
     show: {
       true: "bu-opacity-1 bu-visible bu-z-[10000]",
