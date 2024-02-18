@@ -54,6 +54,14 @@ const Content: FC<ContentProps> = ({
 
     const { height, width } = domOffset;
 
+    if(!enter){
+      return {
+        left: 0,
+        top: 0,
+        transform: `translate3d(${0}px, ${0}px, 0px)`
+      };
+    }
+
     if (placement === "topLeft") {
       if (clientWidth - clientHeight > -5 && clientWidth - clientHeight < 5) {
         return {
