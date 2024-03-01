@@ -31,6 +31,7 @@ interface TextSelectProps {
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
   className?: string;
   parent: HTMLDivElement | null;
+  hide: () => void;
 };
 
 const Options: FC<OptionsProps> = ({
@@ -40,7 +41,8 @@ const Options: FC<OptionsProps> = ({
   className,
   disabled,
   defaultValue,
-  scrollContainer
+  scrollContainer,
+  hide
 }) => {
   const { theme } = useTheme();
 
@@ -59,6 +61,7 @@ const Options: FC<OptionsProps> = ({
     if (value !== defaultValue) {
       onChange(value);
     }
+    hide();
   };
 
   useEffect(() => {
@@ -133,18 +136,26 @@ const TextSelect: FC<TextSelectProps> = (props) => {
   }, [defaultValue]);
 
   const hide = () => {
-    setTimeout(() => {
-      setShow(false);
-      setIsFocus(false);
-    }, 150);
+    setShow(false);
+    setIsFocus(false);
+  };
+
+  const handleClickOutside = (event: any) => {
+    if (inputRef.current && !inputRef.current.contains(event.target)) {
+      hide()
+    }
   };
 
   useEffect(() => {
     if (inputRef.current) {
+      document.addEventListener("click", handleClickOutside);
       inputRef.current.addEventListener("focus", () => {
         setShow(true);
         setIsFocus(true);
       });
+    }
+    return ()=>{
+      document.removeEventListener("click", handleClickOutside);
     }
   }, []);
 
@@ -161,7 +172,6 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         className={inputClassName}
         readOnly={readOnly}
         onBlur={() => {
-          hide();
           onBlur && onBlur();
         }}
         placeholder={placeholder}
@@ -189,6 +199,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
           defaultValue={defaultValue}
           className={className}
           scrollContainer={scrollContainer}
+          hide={hide}
         />
       )}
     </div>
