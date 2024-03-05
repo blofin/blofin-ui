@@ -44,7 +44,8 @@ export const Primary: Story = {
                 value={"alice"}
                 selectType="outlined"
                 activeColor={false}
-                align="right"
+                align="left"
+                adsorb={true}
                 selectItems={[
                   { label: "Alice", value: "alice" },
                   { label: "Bob", value: "bob" }
@@ -68,23 +69,25 @@ export const Primary: Story = {
 export const Controlled: Story = {
   render: () => {
     const mode = useMode();
-    const [selectedValue, setSelectedValue] = useState("gtc");
+    const [selectedValue1, setSelectedValue1] = useState("gtc");
+    const [selectedValue2, setSelectedValue2] = useState("gtc");
+
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-flex">
           <div className="bu-flex bu-h-[24px] bu-w-full bu-flex-col bu-gap-4">
-            <label htmlFor="select">{selectedValue}</label>
+            <label htmlFor="select">{selectedValue1}</label>
             <Select
               selectItems={[
                 { label: "Good Till Cancel", value: "gtc" },
                 { label: "Bob", value: "bob" }
               ]}
-              value={selectedValue}
-              handleChange={(value) => setSelectedValue(value)}
+              value={selectedValue1}
+              handleChange={(value) => setSelectedValue1(value)}
             />
           </div>
           <div className="bu-flex bu-h-[24px] bu-w-full bu-flex-col bu-gap-4">
-            <label htmlFor="select">{selectedValue}</label>
+            <label htmlFor="select">{selectedValue2}</label>
             <Select
               align="right"
               labelClassName="!bu-text-[30px]"
@@ -104,12 +107,12 @@ export const Controlled: Story = {
                 { label: "Bob10", value: "Bob10" },
                 { label: "Bob11", value: "Bob11" },
                 { label: "Bob12", value: "Bob12" },
-                { label: "Bob13", value: "Bob13" },
+                { label: "Bob13", value: "Bob13" }
               ]}
               menuWrapperClassName="bu-border bu-border-dark-line-primary bu-max-h-[200px] bu-overflow-y-scroll"
-              arrowClassName="!bu-text-dark-label"          
-              value={selectedValue}
-              handleChange={(value) => setSelectedValue(value)}
+              arrowClassName="!bu-text-dark-label"
+              value={selectedValue2}
+              handleChange={(value) => setSelectedValue2(value)}
             />
           </div>
         </div>

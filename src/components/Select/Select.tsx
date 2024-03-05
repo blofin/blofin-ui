@@ -20,7 +20,8 @@ const SelectMenu = ({
   activeColor,
   theme,
   offsetParent,
-  menuWrapperClassName
+  menuWrapperClassName,
+  popupContainer
 }: {
   value: string;
   items: SelectItem[];
@@ -36,6 +37,7 @@ const SelectMenu = ({
   theme: BUITheme;
   offsetParent?: number;
   menuWrapperClassName?: string;
+  popupContainer: HTMLDivElement | null;
 }) => {
   // const { theme } = useTheme();
 
@@ -67,7 +69,7 @@ const SelectMenu = ({
         })}
       </ul>
     </div>,
-    document.body
+    popupContainer || document.body
   );
 };
 
@@ -85,6 +87,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   activeColor?: boolean;
   offsetParent?: number;
   trigger?: "click" | "hover";
+  adsorb?: boolean; // scroll with parent
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -104,6 +107,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     offsetParent,
     trigger = "click",
     menuWrapperClassName,
+    adsorb = false,
     ...otherProps
   } = props;
 
@@ -178,7 +182,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   }, [showMenu, scrollable]);
 
   useEffect(() => {
-    if (selectRef.current) {
+    if (selectRef.current && !adsorb) {
       const { offsetY, offsetLeft, offsetRight } = getOffset(selectRef.current);
       setOffset({
         offsetY,
@@ -186,13 +190,15 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
         offsetRight
       });
     }
-  }, [selectRef, showMenu]);
+  }, [selectRef, showMenu, adsorb]);
 
   return (
     <div className="bu-flex" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} ref={domRef}>
       <div
         ref={selectRef}
-        className="bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center"
+        className={`bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center ${
+          adsorb ? "bu-relative" : ""
+        }`}
         onClick={onClick}>
         {wrapper ? (
           wrapper(
@@ -235,6 +241,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           theme={mode || theme}
           offsetParent={offsetParent}
           menuWrapperClassName={menuWrapperClassName}
+          popupContainer={adsorb ? selectRef.current : null}
         />
       )}
       <input
