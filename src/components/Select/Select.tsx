@@ -152,7 +152,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
 
   const onClick = () => {
     if (trigger === "click") {
-      setShowMenu(true);
+      setShowMenu((preState) => !preState);
     }
   };
 
