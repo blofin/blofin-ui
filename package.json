@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "0.5.24",
+  "version": "0.5.25",
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -42,11 +42,9 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "@types/sortablejs": "^1.15.7",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "react-transition-group": "^4.4.5",
-    "sortablejs": "^1.15.1",
     "tailwind-merge": "^1.13.1"
   },
   "peerDependencies": {

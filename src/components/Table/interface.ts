@@ -8,7 +8,7 @@ interface TableColumnProps<T = any> {
   width?: string;
   align?: 'center' | 'flex-start' | 'flex-end';
   render?: (record: T) => JSX.Element;
-  renderHeader?: () => JSX.Element;
+  renderHeader?: (record: T) => JSX.Element;
   filter?: boolean;
 }
 

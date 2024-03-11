@@ -125,6 +125,9 @@ export const Primary: Story = {
         filter: true,
         render: (record) => {
           return <div>uid: {record.uid}</div>;
+        },
+        renderHeader(item) {
+          return <span>test {item.uid}</span>;
         }
       },
       {

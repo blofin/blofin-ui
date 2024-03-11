@@ -70,6 +70,7 @@ const Table: FC<TableProps> = (props) => {
             className={styles.table}
             style={{ width: isFixed ? tableWidth : "100%", minWidth: "100%" }}>
             <Thead
+              data={data}
               columns={columns}
               theadClass={props.theadClass ? props.theadClass : ""}
               onChange={props.onChange}
