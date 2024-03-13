@@ -1,30 +1,24 @@
-import { FC } from "react";
-import SortableItem from "./SortableItem";
+import { FC, useEffect, useRef, useState } from "react";
 import { SortableProvider } from "./context";
+import SortableItem from "./SortableItem";
 
 interface SortableProps {
   list: any[];
-  onDrag: (list: any[]) => void;
+  setList: any;
+  // onDrag: (list: any[]) => void;
   direction: "horizontal" | "vertical";
   children: React.ReactNode;
 }
 
-const Sortable: FC<SortableProps> = ({ list, onDrag, direction, children }) => {
-  const onMove = (prevIndex: number, nextIndex: number) => {
-    console.log(prevIndex,nextIndex,'+++')
-    // 更新列表
-    const newList = [...list];
-    newList.splice(nextIndex, 0, newList.splice(prevIndex, 1)[0]);
-    onDrag(newList);
-  };
-
+const Sortable: FC<SortableProps> = ({ children, direction }) => {
   return (
     <SortableProvider
       value={{
-        direction: direction,
-        onMove:onMove
+        direction: direction
       }}>
-      {children}
+      <div className={`bu-flex ${direction === "horizontal" ? "bu-flex-row" : "bu-flex-col"}`}>
+        {children}
+      </div>
     </SortableProvider>
   );
 };

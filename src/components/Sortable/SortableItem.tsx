@@ -5,10 +5,11 @@ interface SortableItemProps {
   children: React.ReactNode;
   index: number;
   listLength: number;
+  onMove: any;
 }
 
-const SortableItem: FC<SortableItemProps> = ({ children, index, listLength }) => {
-  const { direction, onMove } = useContext(SortableContent);
+const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMove }) => {
+  const { direction } = useContext(SortableContent);
 
   const [top, setTop] = useState(0);
 
@@ -18,21 +19,17 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength }) =>
 
   const [zIndex, setZIndex] = useState(0);
 
-  const ref = useRef();
-
+  const ref = useRef<any>();
   const indexRef = useRef(index);
-
-  console.log(indexRef.current);
-
+  const onMoveRef = useRef(onMove);
   const listLengthRef = useRef(listLength);
-
   const prevRectRef = useRef(null);
-
   const animationRef = useRef(null);
 
   useEffect(() => {
     // 始终保持最新状态 Ref 引用
     indexRef.current = index;
+    onMoveRef.current = onMove;
     listLengthRef.current = listLength;
   }, [index, onMove, listLength]);
 
@@ -50,48 +47,47 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength }) =>
       ev.preventDefault();
 
       // 获取元素 Rect 并更新 Ref
-      const rect = ev.target.getBoundingClientRect();
-
+      const rect = el.getBoundingClientRect();
       prevRectRef.current = rect;
 
-      let latestLeft = 0;
-      let latestTop = 0;
+      // 计算最新 Top 位置
+      let latestTop = ev.clientY - startY;
 
+      let latestLeft = ev.clientX - startX;
+
+      // 检查是否需要更新元素位置
       if (direction === "horizontal") {
-        latestLeft = ev.clientX - startX;
-        console.log("移动", latestLeft, rect.width, indexRef.current, listLengthRef.current - 1);
-
         if (latestLeft > rect.width / 2 && indexRef.current < listLengthRef.current - 1) {
-          // move right
-
-          onMove(indexRef.current, indexRef.current + 1);
+          // move down
+          // 通知父组件修改列表
+          onMoveRef.current(indexRef.current, indexRef.current + 1);
+          // 因为 DOM 位置被改变了，需要同步计算最新位置
+          // 可以理解为计算出来的值就是元素发生交换后，松开鼠标再按住鼠标时相关变量的值。
+          // 可以试着注释掉这行看看会发生什么，就能理解了（会闪一下）
           latestLeft -= rect.width;
+          // 开始位置也要更新
           startX += rect.width;
-        } else if (latestLeft < -rect.width && indexRef.current > 0) {
-          console.log("不执行");
-          // move left
-          onMove(indexRef.current, indexRef.current - 1);
+        } else if (latestLeft < -rect.width / 2 && indexRef.current > 0) {
+          // move up
+          onMoveRef.current(indexRef.current, indexRef.current - 1);
           latestLeft += rect.width;
           startX -= rect.width;
         }
-
         setLeft(latestLeft);
       } else {
-        latestTop = ev.clientY - startY;
-        // 检查是否需要更新元素位置
-        if (latestTop > rect.height / 2 && indexRef.current < listLengthRef.current - 1) {
+        if (latestTop > (rect.height * 2) / 3 && indexRef.current < listLengthRef.current - 1) {
           // move down
           // 通知父组件修改列表
-          onMove(indexRef.current, indexRef.current + 1);
+          onMoveRef.current(indexRef.current, indexRef.current + 1);
           // 因为 DOM 位置被改变了，需要同步计算最新位置
           // 可以理解为计算出来的值就是元素发生交换后，松开鼠标再按住鼠标时相关变量的值。
           // 可以试着注释掉这行看看会发生什么，就能理解了（会闪一下）
           latestTop -= rect.height;
           // 开始位置也要更新
           startY += rect.height;
-        } else if (latestTop < -rect.height && indexRef.current > 0) {
+        } else if (latestTop < (-rect.height * 2) / 3 && indexRef.current > 0) {
           // move up
-          onMove(indexRef.current, indexRef.current - 1);
+          onMoveRef.current(indexRef.current, indexRef.current - 1);
           latestTop += rect.height;
           startY -= rect.height;
         }
@@ -102,7 +98,7 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength }) =>
     const mouseUp = (ev: any) => {
       ev.preventDefault();
       document.removeEventListener("mousemove", mouseMove);
-
+      // 重置 Top
       if (direction === "horizontal") {
         setLeft(0);
       } else {
@@ -136,6 +132,8 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength }) =>
   }, []);
 
   useLayoutEffect(() => {
+    // FLIP animation
+    // https://aerotwist.com/blog/flip-your-animations/
     const el: any = ref.current;
     if (isDragging) {
       // 拖拽中的元素不计算
@@ -157,8 +155,10 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength }) =>
       }
     }
 
+    // FLIP: First
     const prevRect: any = prevRectRef.current;
 
+    // FLIP: Last
     const latestRect = el.getBoundingClientRect();
 
     const deltaY = latestRect.y - prevRect.y;
@@ -171,6 +171,8 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength }) =>
       if (deltaX === 0) {
         return;
       }
+
+      // FLIP: Invert and Play
       animationRef.current = el.animate(
         [
           {
@@ -186,6 +188,8 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength }) =>
       if (deltaY === 0) {
         return;
       }
+
+      // FLIP: Invert and Play
       animationRef.current = el.animate(
         [
           {
@@ -201,23 +205,27 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength }) =>
   }, [index, isDragging]);
 
   return (
-    <div
-      ref={ref as any}
-      style={{
-        border: "1px solid black",
-        padding: "10px",
-        background: "white",
-        transform: isDragging ? `scale(1.01)` : `scale(1)`,
-        top: direction === "vertical" ? `${top}px` : "",
-        left: direction === "horizontal" ? `${left}px` : "",
-        transition: "transform .1s, box-shadow .1s",
-        position: "relative",
-        width: "100%",
-        boxShadow: isDragging ? "0 0 10px 2px rgba(0, 0, 0, 0.5)" : "0 0 0 0px rgba(0, 0, 0, 0.5)",
-        zIndex: zIndex.toString()
-      }}>
-      {children}
-    </div>
+    <>
+      <div
+        ref={ref}
+        style={{
+          border: "1px solid black",
+          padding: "10px",
+          background: "white",
+          transform: isDragging ? `scale(1.01)` : `scale(1)`,
+          // top: `${top}px`,
+          left: `${left}px`,
+          transition: "transform .2s, box-shadow .2s",
+          position: "relative",
+          width: "100%",
+          boxShadow: isDragging
+            ? "0 0 10px 2px rgba(0, 0, 0, 0.5)"
+            : "0 0 0 0px rgba(0, 0, 0, 0.5)",
+          zIndex: zIndex.toString()
+        }}>
+        {children}
+      </div>
+    </>
   );
 };
 
