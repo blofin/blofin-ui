@@ -54,7 +54,7 @@ const Content: FC<ContentProps> = ({
 
     const { height, width } = domOffset;
 
-    if(!enter){
+    if (!enter) {
       return {
         left: 0,
         top: 0,
@@ -207,6 +207,9 @@ const Content: FC<ContentProps> = ({
           content
         )
       ) : null}
+      {placement.includes("top") && (
+        <div className="bu-absolute bu-bottom-[-7px] bu-h-[16px] bu-w-full"></div>
+      )}
       {!hideArrow && (
         <div className={arrowPositionStyles({ placement })}>
           {theme === "dark" ? <ArrowDarkIcon /> : <ArrowIcon />}
