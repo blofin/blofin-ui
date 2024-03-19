@@ -1,5 +1,6 @@
 import React, { FC, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { SortableContent } from "./context";
+import MenuIcon from "../../assets/icons/menu.svg";
 
 interface SortableItemProps {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ interface SortableItemProps {
 }
 
 const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMove }) => {
-  const { direction } = useContext(SortableContent);
+  const { direction, isAnimation, setIsAnimation } = useContext(SortableContent);
 
   const [top, setTop] = useState(0);
 
@@ -20,6 +21,7 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
   const [zIndex, setZIndex] = useState(0);
 
   const ref = useRef<any>();
+  const moveRef = useRef<any>();
   const indexRef = useRef(index);
   const onMoveRef = useRef(onMove);
   const listLengthRef = useRef(listLength);
@@ -35,6 +37,8 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
 
   useEffect(() => {
     const el: any = ref.current;
+
+    const moveEl: any = moveRef.current;
 
     // 存储起始鼠标位置
     let startY = 0;
@@ -106,6 +110,7 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
       }
       // 结束拖拽
       setIsDragging(false);
+      setIsAnimation(false);
       delayedSetZIndexTimeoutId = setTimeout(() => {
         // 延迟设置 zIndex，不然一结束拖拽该元素就会被盖到其他元素下面
         setZIndex(0);
@@ -120,6 +125,7 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
       document.addEventListener("mouseup", mouseUp, { once: true });
       // 开始拖拽
       setIsDragging(true);
+      setIsAnimation(true);
       setZIndex(999);
       // 记录开始位置
       if (direction === "horizontal") {
@@ -128,7 +134,7 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
         startY = ev.clientY;
       }
     };
-    el.addEventListener("mousedown", mouseDown);
+    moveEl.addEventListener("mousedown", mouseDown);
   }, []);
 
   useLayoutEffect(() => {
@@ -173,34 +179,38 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
       }
 
       // FLIP: Invert and Play
-      animationRef.current = el.animate(
-        [
-          {
-            left: `${-deltaX}px`
-          },
-          {
-            left: `0px`
-          }
-        ],
-        200
-      );
+      if (isAnimation) {
+        animationRef.current = el.animate(
+          [
+            {
+              left: `${-deltaX}px`
+            },
+            {
+              left: `0px`
+            }
+          ],
+          200
+        );
+      }
     } else {
       if (deltaY === 0) {
         return;
       }
 
       // FLIP: Invert and Play
-      animationRef.current = el.animate(
-        [
-          {
-            top: `${-deltaY}px`
-          },
-          {
-            top: `0px`
-          }
-        ],
-        200
-      );
+      if (isAnimation) {
+        animationRef.current = el.animate(
+          [
+            {
+              top: `${-deltaY}px`
+            },
+            {
+              top: `0px`
+            }
+          ],
+          200
+        );
+      }
     }
   }, [index, isDragging]);
 
@@ -208,14 +218,15 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
     <>
       <div
         ref={ref}
+        className={`bu-group bu-flex bu-items-center bu-justify-center`}
         style={{
-          border: "1px solid black",
-          padding: "10px",
+          borderRadius: "6px",
+          padding: "2px",
           background: "white",
           transform: isDragging ? `scale(1.01)` : `scale(1)`,
-          // top: `${top}px`,
-          left: `${left}px`,
-          transition: "transform .2s, box-shadow .2s",
+          top: `${direction === "vertical" ? top : 0}px`,
+          left: `${direction === "horizontal" ? left : 0}px`,
+          transition: isDragging ? "transform .2s, box-shadow .2s" : "none",
           position: "relative",
           width: "100%",
           boxShadow: isDragging
@@ -224,6 +235,9 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
           zIndex: zIndex.toString()
         }}>
         {children}
+        <div ref={moveRef} className="bu-ml-[4px]">
+          <MenuIcon className="bu-w-[14px] bu-opacity-0 group-hover:bu-opacity-[1]"></MenuIcon>
+        </div>
       </div>
     </>
   );

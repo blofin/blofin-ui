@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import Sortable from "../components/Sortable";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Tab } from "..";
 import SortableItem from "../components/Sortable/SortableItem";
 
@@ -26,20 +26,26 @@ type Story = StoryObj<typeof Sortable>;
  */
 export const Primary: Story = {
   render: () => {
-    const labelRef = useRef(["Positions", "Trade History", "Open Orders"]);
+    const labelRef = useRef([
+      "Positions(8)",
+      "Open Orders(1)",
+      "Assets",
+      "Order History",
+      "Trading Bots(4)"
+    ]);
 
     const onMove = (prevIndex: any, nextIndex: any) => {
       // 更新列表
       let newList = [...labelRef.current];
       newList.splice(nextIndex, 0, newList.splice(prevIndex, 1)[0]);
       console.log(newList);
-      labelRef.current=newList;
+      labelRef.current = newList;
       setList(
         newList.map((item, index) => {
           return {
             key: item,
             label: (
-              <SortableItem index={index} listLength={3} onMove={onMove}>
+              <SortableItem index={index} listLength={labelRef.current.length} onMove={onMove}>
                 {item}
               </SortableItem>
             ),
@@ -65,30 +71,9 @@ export const Primary: Story = {
 
     const change = () => {};
 
-    // const [list, setList] = useState(["Positions", "Trade History", "Open Orders"]);
-
-    // return (
-    //   <Sortable list={list} direction="horizontal" setList={setList}>
-    //     {list.map((child, i) => (
-    //       <SortableItem
-    //         key={child}
-    //         index={i}
-    //         listLength={list.length}
-    //         onMove={(prevIndex: any, nextIndex: any) => {
-    //           console.log(list);
-    //           // 更新列表
-    //           const newList = [...list];
-    //           newList.splice(nextIndex, 0, newList.splice(prevIndex, 1)[0]);
-    //           setList(newList);
-    //         }}>
-    //         {child}
-    //       </SortableItem>
-    //     ))}
-    //   </Sortable>
-    // );
     return (
-      <Sortable list={list} direction="horizontal" setList={setList}>
-        <Tab items={list} size="small" change={change}></Tab>
+      <Sortable direction="horizontal">
+        <Tab items={list} size="medium" change={change}></Tab>
       </Sortable>
     );
   }
