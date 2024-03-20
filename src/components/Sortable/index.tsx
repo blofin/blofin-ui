@@ -17,7 +17,7 @@ const Sortable: FC<SortableProps> = ({ children, direction }) => {
         isAnimation: isAnimation,
         setIsAnimation: setIsAnimation
       }}>
-      <div className={`bu-flex ${direction === "horizontal" ? "bu-flex-row" : "bu-flex-col"}`}>
+      <div className={`bu-flex bu-w-full bu-h-full ${direction === "horizontal" ? "bu-flex-row" : "bu-flex-col"}`}>
         {children}
       </div>
     </SortableProvider>

@@ -7,9 +7,10 @@ interface SortableItemProps {
   index: number;
   listLength: number;
   onMove: any;
+  onMoveUp?: () => void;
 }
 
-const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMove }) => {
+const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMove, onMoveUp }) => {
   const { direction, isAnimation, setIsAnimation } = useContext(SortableContent);
 
   const [top, setTop] = useState(0);
@@ -24,6 +25,7 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
   const moveRef = useRef<any>();
   const indexRef = useRef(index);
   const onMoveRef = useRef(onMove);
+  const onMoveUpRef = useRef(onMoveUp);
   const listLengthRef = useRef(listLength);
   const prevRectRef = useRef(null);
   const animationRef = useRef(null);
@@ -32,8 +34,9 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
     // 始终保持最新状态 Ref 引用
     indexRef.current = index;
     onMoveRef.current = onMove;
+    onMoveUpRef.current = onMoveUp;
     listLengthRef.current = listLength;
-  }, [index, onMove, listLength]);
+  }, [index, onMove, onMoveUp, listLength]);
 
   useEffect(() => {
     const el: any = ref.current;
@@ -79,7 +82,7 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
         }
         setLeft(latestLeft);
       } else {
-        if (latestTop > (rect.height * 2) / 3 && indexRef.current < listLengthRef.current - 1) {
+        if (latestTop > rect.height / 2 && indexRef.current < listLengthRef.current - 1) {
           // move down
           // 通知父组件修改列表
           onMoveRef.current(indexRef.current, indexRef.current + 1);
@@ -89,7 +92,7 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
           latestTop -= rect.height;
           // 开始位置也要更新
           startY += rect.height;
-        } else if (latestTop < (-rect.height * 2) / 3 && indexRef.current > 0) {
+        } else if (latestTop < -rect.height / 2 && indexRef.current > 0) {
           // move up
           onMoveRef.current(indexRef.current, indexRef.current - 1);
           latestTop += rect.height;
@@ -111,6 +114,7 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
       // 结束拖拽
       setIsDragging(false);
       setIsAnimation(false);
+      onMoveUpRef.current && onMoveUpRef.current();
       delayedSetZIndexTimeoutId = setTimeout(() => {
         // 延迟设置 zIndex，不然一结束拖拽该元素就会被盖到其他元素下面
         setZIndex(0);
@@ -218,7 +222,9 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
     <>
       <div
         ref={ref}
-        className={`bu-group bu-flex bu-items-center bu-justify-center`}
+        className={`bu-group bu-flex ${
+          direction === "horizontal" ? "bu-items-center" : "bu-justify-center"
+        } `}
         style={{
           borderRadius: "6px",
           padding: "2px",
