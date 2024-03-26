@@ -58,13 +58,13 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   const handleCancel = () => {
     if (cancel) {
-       cancel();
+      cancel();
     }
   };
 
-  const closeMask=()=>{
+  const closeMask = () => {
     maskClosable && handleCancel();
-  }
+  };
 
   const handleConfirm = () => {
     if (confirm) {
@@ -106,23 +106,23 @@ export const Dialog: FC<DialogProps> = (props) => {
                 footer
               ) : (
                 <>
-                  {!hideConfirm && (
-                    <Button
-                      size={footerSize}
-                      variant="primary"
-                      theme={getTheme()}
-                      onClick={handleConfirm}>
-                      {confirmText}
-                    </Button>
-                  )}
                   {!hideCancel && (
                     <Button
-                      className="bu-ml-[16px]"
                       size={footerSize}
                       variant="ghost"
                       theme={getTheme()}
                       onClick={handleCancel}>
                       {cancelText}
+                    </Button>
+                  )}
+                  {!hideConfirm && (
+                    <Button
+                      className="bu-ml-[16px]"
+                      size={footerSize}
+                      variant="primary"
+                      theme={getTheme()}
+                      onClick={handleConfirm}>
+                      {confirmText}
                     </Button>
                   )}
                 </>
