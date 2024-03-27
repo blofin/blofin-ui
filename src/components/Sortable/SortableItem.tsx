@@ -38,6 +38,10 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
     listLengthRef.current = listLength;
   }, [index, onMove, onMoveUp, listLength]);
 
+  // useEffect(()=>{
+  //   console.log(left);
+  // },[left])
+
   useEffect(() => {
     const el: any = ref.current;
 
@@ -62,6 +66,8 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
 
       let latestLeft = ev.clientX - startX;
 
+      console.log(latestLeft, "latestLeft", startX);
+
       // 检查是否需要更新元素位置
       if (direction === "horizontal") {
         if (latestLeft > rect.width / 2 && indexRef.current < listLengthRef.current - 1) {
@@ -71,14 +77,14 @@ const SortableItem: FC<SortableItemProps> = ({ children, index, listLength, onMo
           // 因为 DOM 位置被改变了，需要同步计算最新位置
           // 可以理解为计算出来的值就是元素发生交换后，松开鼠标再按住鼠标时相关变量的值。
           // 可以试着注释掉这行看看会发生什么，就能理解了（会闪一下）
-          latestLeft -= rect.width;
+          latestLeft -= rect.width / 2;
           // 开始位置也要更新
-          startX += rect.width;
+          startX += rect.width / 2;
         } else if (latestLeft < -rect.width / 2 && indexRef.current > 0) {
           // move up
           onMoveRef.current(indexRef.current, indexRef.current - 1);
-          latestLeft += rect.width;
-          startX -= rect.width;
+          latestLeft += rect.width / 2;
+          startX -= rect.width / 2;
         }
         setLeft(latestLeft);
       } else {

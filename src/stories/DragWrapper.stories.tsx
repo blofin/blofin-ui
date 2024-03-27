@@ -141,6 +141,10 @@ export const Primary: Story = {
         show: true
       },
       {
+        label: "estimateLiquidationPrice",
+        show: true
+      },
+      {
         label: "averagePrice",
         show: true
       },
@@ -162,10 +166,6 @@ export const Primary: Story = {
       },
       {
         label: "marginRatio",
-        show: true
-      },
-      {
-        label: "estimateLiquidationPrice",
         show: true
       },
       {
@@ -199,7 +199,7 @@ export const Primary: Story = {
         {/* <Sortable direction="horizontal">
           <Tab items={list} size="medium" change={change}></Tab>
         </Sortable> */}
-        <Sortable direction="vertical">
+        <Sortable direction='horizontal'>
           {list.map((item, index) => {
             return (
               <SortableItem
