@@ -25,7 +25,7 @@ import { Typography } from "./components/Typography/Typography";
 import useNotification from "./hooks/useNotification";
 import useToast from "./hooks/useToast";
 import Sortable from './components/Sortable';
-import SortableItem from "./components/Sortable/SortableItem";
+import SortItem from "./components/Sortable/SortItem";
 import { NoticeProvider } from "./provider/NoticeProvider";
 import { ThemeProvider } from "./provider/ThemeProvider";
 import useTheme from "./provider/useTheme";
@@ -54,7 +54,7 @@ export {
   Tooltip,
   Typography,
   Sortable,
-  SortableItem
+  SortItem
 };
 
   export type {

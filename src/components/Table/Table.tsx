@@ -20,7 +20,9 @@ const Table: FC<TableProps> = (props) => {
     data,
     hidePagination = false,
     renderEmpty,
-    paginationPosition = "flex-end"
+    paginationPosition = "flex-end",
+    moveEnd,
+    drag = false
   } = props;
 
   const tableWidth =
@@ -76,6 +78,8 @@ const Table: FC<TableProps> = (props) => {
               onChange={props.onChange}
               scroll={props.scroll}
               customeTheme={props.theme}
+              moveEnd={moveEnd}
+              drag={drag}
             />
             <Tbody
               data={data}

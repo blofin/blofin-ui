@@ -115,9 +115,9 @@ tr:last-child {
 .pagination {
   @apply bu-flex;
   .prev {
-    @apply bu-w-[100px] bu-mr-[10px];
+    @apply bu-mr-[10px] bu-w-[100px];
   }
-  .next{
+  .next {
     @apply bu-w-[100px];
   }
   .arrow {
@@ -169,4 +169,9 @@ tr:last-child {
   align-items: center;
   justify-content: center;
   color: #dcdcdd;
+}
+
+.ghostClass {
+  border: 1px dashed gray;
+  color: transparent !important;
 }

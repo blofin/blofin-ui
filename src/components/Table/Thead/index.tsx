@@ -1,12 +1,13 @@
 import SortButton, { TextAlign } from "../../Sort/SortButton";
 import SortGroup from "../../Sort/SortGroup";
-import { FC, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import { bgStyles, cssPosition } from "../css";
 import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
 import styles from "../index.module.scss";
 import { SortProps, TableColumnProps } from "../interface";
 import { BUITheme, useTheme } from "../../..";
+import Sortable from "sortablejs";
 
 const Thead: FC<{
   data: Record<string, string>[];
@@ -15,8 +16,10 @@ const Thead: FC<{
   onChange?: SortProps;
   theadClass?: string;
   customeTheme?: BUITheme;
+  moveEnd?: (prev: number, next: number) => void;
+  drag?: boolean;
 }> = (props) => {
-  const { columns, customeTheme, data } = props;
+  const { columns, customeTheme, data, moveEnd, drag } = props;
 
   const { theme } = useTheme();
 
@@ -32,6 +35,27 @@ const Thead: FC<{
     }
   };
 
+  useEffect(() => {
+    if (theadRef.current && drag) {
+      const sortable = new Sortable(theadRef.current, {
+        sort: true,
+        animation: 150,
+        handle: ".th-drag-item",
+        filter: ".no-drag",
+        ghostClass: styles.ghostClass,
+        onMove: function (evt) {
+          return evt.related.className.indexOf("no-drag") === -1; //and this
+        },
+        onEnd: function (evt) {
+          console.log(moveEnd);
+          moveEnd && moveEnd(evt.oldIndex!, evt.newIndex!);
+          console.log(evt.newIndex, "newIndex");
+          console.log(evt.oldIndex, "oldIndex");
+        }
+      });
+    }
+  }, []);
+
   return (
     <SortGroup>
       <thead
@@ -43,7 +67,7 @@ const Thead: FC<{
               <th
                 className={`${getClass(item, index).join(" ")} ${styles.th} ${bgStyles({
                   theme: customeTheme ? customeTheme : theme
-                })} ${item.fixed ? "no-drag" : "drag-item"}`}
+                })} ${item.fixed ? "no-drag" : "th-drag-item"}`}
                 style={cssPosition(item, offets[index].offset)}
                 key={item.key}>
                 <SortButton

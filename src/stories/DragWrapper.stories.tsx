@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import useMode from "../hooks/useMode";
-import { ThemeProvider } from "../provider/ThemeProvider";
 import Sortable from "../components/Sortable";
-import { useEffect, useRef, useState } from "react";
-import { Checkbox, Tab } from "..";
-import SortableItem from "../components/Sortable/SortableItem";
-import { cloneDeep } from "lodash";
+import { useEffect, useState } from "react";
+import { Checkbox } from "..";
+
+import SortItem from "../components/Sortable/SortItem";
 
 const meta: Meta<typeof Sortable> = {
   /* 👇 The title prop is optional.
@@ -27,48 +25,6 @@ type Story = StoryObj<typeof Sortable>;
  */
 export const Primary: Story = {
   render: () => {
-    const labelRef = useRef([
-      "Positions(8)",
-      "Open Orders(1)",
-      "Assets",
-      "Order History",
-      "Trading Bots(4)"
-    ]);
-
-    const onMove = (prevIndex: any, nextIndex: any) => {
-      // 更新列表
-      let newList = [...labelRef.current];
-      newList.splice(nextIndex, 0, newList.splice(prevIndex, 1)[0]);
-      labelRef.current = newList;
-      // setList(
-      //   newList.map((item, index) => {
-      //     return {
-      //       key: item,
-      //       label: (
-      //         <SortableItem index={index} listLength={labelRef.current.length} onMove={onMove}>
-      //           {item}
-      //         </SortableItem>
-      //       ),
-      //       children: <div>{item}</div>
-      //     };
-      //   })
-      // );
-    };
-
-    // const [list, setList] = useState(() =>
-    //   labelRef.current.map((item, index) => {
-    //     return {
-    //       key: item,
-    //       label: (
-    //         <SortableItem index={index} listLength={3} onMove={onMove}>
-    //           {item}
-    //         </SortableItem>
-    //       ),
-    //       children: <div>{item}</div>
-    //     };
-    //   })
-    // );
-
     const [columns, setColumns] = useState([
       {
         label: "total",
@@ -116,10 +72,14 @@ export const Primary: Story = {
       }
     ]);
 
-    const onMoveColumns = (prevIndex: number, nextIndex: number) => {
-      const newList = cloneDeep(columns);
+    const [isDragging, setIsDragging] = useState(false);
+
+    const moveEnd = (prevIndex: number, nextIndex: number) => {
+      console.log(prevIndex, nextIndex);
+      const newList = [...list];
       newList.splice(nextIndex, 0, newList.splice(prevIndex, 1)[0]);
-      setColumns(newList);
+      console.log(newList);
+      setList(newList);
     };
 
     const switchColumns = (key: string) => {
@@ -138,86 +98,90 @@ export const Primary: Story = {
     const [list, setList] = useState(() => [
       {
         label: "total",
-        show: true
+        show: true,
+        order: 0,
+        id: 0
       },
       {
         label: "estimateLiquidationPrice",
-        show: true
+        show: true,
+        order: 1,
+        id: 1
       },
       {
         label: "averagePrice",
-        show: true
+        show: true,
+        order: 2,
+        id: 2
       },
       {
         label: "tpSlPrice",
-        show: true
+        show: true,
+        order: 3,
+        id: 3
       },
       {
         label: "margin",
-        show: true
+        show: true,
+        order: 4,
+        id: 4
       },
       {
         label: "markPrice",
-        show: true
+        show: true,
+        order: 5,
+        id: 5
       },
       {
         label: "trailingStop",
-        show: true
+        show: true,
+        order: 6,
+        id: 6
       },
       {
         label: "marginRatio",
-        show: true
+        show: true,
+        order: 7,
+        id: 7
       },
       {
         label: "pnl",
-        show: true
+        show: true,
+        order: 8,
+        id: 8
       },
       {
         label: "pnlPercentage",
-        show: true
+        show: true,
+        order: 9,
+        id: 9
       },
       {
         label: "action",
-        show: true
+        show: true,
+        order: 10,
+        id: 10
       }
     ]);
-
-    const onMove1 = (prevIndex: any, nextIndex: any) => {
-      const newList = [...list];
-      newList.splice(nextIndex, 0, newList.splice(prevIndex, 1)[0]);
-      setList(newList);
-    };
 
     const change = () => {};
 
     useEffect(() => {
-      console.log(columns);
-    }, [columns]);
+      console.log(list);
+    }, [list]);
 
     return (
-      <div className="bu-w-[200px]">
-        {/* <Sortable direction="horizontal">
-          <Tab items={list} size="medium" change={change}></Tab>
-        </Sortable> */}
-        <Sortable direction='horizontal'>
+      <div className="bu-relative">
+        <Sortable direction="vertical" moveEnd={moveEnd}>
           {list.map((item, index) => {
             return (
-              <SortableItem
-                index={index}
-                key={item.label}
-                listLength={list.length}
-                onMove={onMove1}
-                onMoveUp={()=>{
-                  console.log("结束")
-                }}>
-                <div className="bu-flex bu-h-[30px] bu-w-full bu-items-center">
-                  <Checkbox
-                    label={item.label === "action" ? "Action" : item.label}
-                    checked={item.show}
-                    onChange={() => switchColumns(item.label)}
-                  />
-                </div>
-              </SortableItem>
+              <SortItem key={item.label}>
+                <Checkbox
+                  label={item.label === "action" ? "Action" : item.label}
+                  checked={item.show}
+                  onChange={() => switchColumns(item.label)}
+                />
+              </SortItem>
             );
           })}
         </Sortable>

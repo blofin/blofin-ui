@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactNode } from 'react';
-import { BUITheme } from '../..';
+import { ReactNode } from "react";
+import { BUITheme } from "../..";
 interface TableColumnProps<T = any> {
   key?: string;
   title?: string;
-  fixed?: 'right' | 'left';
+  fixed?: "right" | "left";
   width?: string;
-  align?: 'center' | 'flex-start' | 'flex-end';
+  align?: "center" | "flex-start" | "flex-end";
   render?: (record: T) => JSX.Element;
   renderHeader?: (record: T) => JSX.Element;
   filter?: boolean;
@@ -27,17 +27,19 @@ interface TableProps<T = any> {
   isLastPage?: boolean;
   changePagination?: (direction: Direction) => void;
   hidePagination?: boolean;
-  paginationPosition?: 'flex-start' | 'center' | 'flex-end';
+  paginationPosition?: "flex-start" | "center" | "flex-end";
   renderEmpty?: JSX.Element;
   theadClass?: string;
   tdClass?: string;
   scroll?: boolean;
   hideShadow?: boolean;
-  theme?:BUITheme
+  theme?: BUITheme;
+  moveEnd?: (prev: number, next: number) => void;
+  drag?: boolean;
 }
 
-type SortProps = (data: { sort: 'asc' | 'desc' | 'default'; sortKey: string }) => void;
+type SortProps = (data: { sort: "asc" | "desc" | "default"; sortKey: string }) => void;
 
-export type Direction = 'prev' | 'next';
+export type Direction = "prev" | "next";
 
 export type { TableColumnProps, TableProps, SortProps };
