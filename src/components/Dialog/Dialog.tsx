@@ -7,6 +7,8 @@ import { dialogVariants, footerStyles, iconStyles, textStyles } from "./styles";
 import useTheme from "../../provider/useTheme";
 import { ButtonSize } from "../Button/types";
 import styles from "./index.module.scss";
+import { CSSTransition } from "react-transition-group";
+import useClient from "../../hooks/useClient";
 
 export interface DialogProps {
   title: null | string | React.ReactNode;
@@ -52,6 +54,8 @@ export const Dialog: FC<DialogProps> = (props) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const { isClient } = useClient();
+
   const getTheme = () => {
     return mode ? mode : theme;
   };
@@ -80,56 +84,67 @@ export const Dialog: FC<DialogProps> = (props) => {
     };
   }, [open]);
 
-  return isOpen
+  return isClient
     ? ReactDOM.createPortal(
-        <div className={styles.mock} onClick={closeMask}>
-          <div
-            className={`${styles.dialog} ${dialogVariants({
-              size,
-              theme: getTheme()
-            })} ${className}`}>
-            {!hideIcon && (
-              <CloseIcon
-                className={`${iconStyles({
-                  theme: getTheme()
-                })}`}
-                onClick={handleCancel}
-              />
-            )}
-
-            <div className={textStyles({ theme: getTheme() })}>
-              {title !== null && <div className={styles.title}>{title}</div>}
-            </div>
-            <div className={styles.content}>{content}</div>
-            <div className={footerStyles({ footerLayout })}>
-              {footer === null ? null : footer ? (
-                footer
-              ) : (
-                <>
-                  {!hideCancel && (
-                    <Button
-                      size={footerSize}
-                      variant="ghost"
-                      theme={getTheme()}
-                      onClick={handleCancel}>
-                      {cancelText}
-                    </Button>
-                  )}
-                  {!hideConfirm && (
-                    <Button
-                      className="bu-ml-[16px]"
-                      size={footerSize}
-                      variant="primary"
-                      theme={getTheme()}
-                      onClick={handleConfirm}>
-                      {confirmText}
-                    </Button>
-                  )}
-                </>
+        <CSSTransition
+          in={isOpen}
+          timeout={150}
+          classNames={{
+            enter: styles["fade-enter"],
+            enterActive: styles["fade-enter-active"],
+            exit: styles["fade-exit"],
+            exitActive: styles["fade-exit-active"]
+          }}
+          unmountOnExit>
+          <div className={styles.mock} onClick={closeMask}>
+            <div
+              className={`${styles.dialog} ${dialogVariants({
+                size,
+                theme: getTheme()
+              })} ${className}`}>
+              {!hideIcon && (
+                <CloseIcon
+                  className={`${iconStyles({
+                    theme: getTheme()
+                  })}`}
+                  onClick={handleCancel}
+                />
               )}
+
+              <div className={textStyles({ theme: getTheme() })}>
+                {title !== null && <div className={styles.title}>{title}</div>}
+              </div>
+              <div className={styles.content}>{content}</div>
+              <div className={footerStyles({ footerLayout })}>
+                {footer === null ? null : footer ? (
+                  footer
+                ) : (
+                  <>
+                    {!hideCancel && (
+                      <Button
+                        size={footerSize}
+                        variant="ghost"
+                        theme={getTheme()}
+                        onClick={handleCancel}>
+                        {cancelText}
+                      </Button>
+                    )}
+                    {!hideConfirm && (
+                      <Button
+                        className="bu-ml-[16px]"
+                        size={footerSize}
+                        variant="primary"
+                        theme={getTheme()}
+                        onClick={handleConfirm}>
+                        {confirmText}
+                      </Button>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
-        </div>,
+        </CSSTransition>,
         document.body
       )
     : null;
