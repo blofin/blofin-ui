@@ -6,7 +6,6 @@ import { Drawer } from "../components/Drawer/Drawer";
 import { Switch } from "../components/Switch/Switch";
 import useTheme from "../hooks/useMode";
 
-
 const meta: Meta<typeof Drawer> = {
   title: "Components/Drawer",
   component: Drawer
@@ -16,44 +15,32 @@ export default meta;
 type Story = StoryObj<typeof Drawer>;
 
 const Content = () => {
-    const [changeValue, setChangeValue] = useState(false);
-    const change = () => {
-        setChangeValue(!changeValue)
-        };
-        const pt = {
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '20px'
-          };
-    return (
-        <div>
-            <div className="switchButton" style={pt}>
-            <div>Place order</div>
-            <Switch 
-            check={changeValue}
-            onChange={change}
-            />
-        </div>
-        <div className="switchButton" style={pt}>
-            <div>Reverse position</div>
-            <Switch 
-            check={changeValue}
-            onChange={change}
-            />
-        </div>
-        <div className="switchButton" style={pt}>
-            <div>Place order</div>
-            <Switch 
-            check={changeValue}
-            onChange={change}
-            />
-        </div>
-        </div>
-        
-        
-    );
+  const [changeValue, setChangeValue] = useState(false);
+  const change = () => {
+    setChangeValue(!changeValue);
   };
-  
+  const pt = {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "20px"
+  };
+  return (
+    <div>
+      <div className="switchButton" style={pt}>
+        <div>Place order</div>
+        <Switch check={changeValue} onChange={change} />
+      </div>
+      <div className="switchButton" style={pt}>
+        <div>Reverse position</div>
+        <Switch check={changeValue} onChange={change} />
+      </div>
+      <div className="switchButton" style={pt}>
+        <div>Place order</div>
+        <Switch check={changeValue} onChange={change} />
+      </div>
+    </div>
+  );
+};
 
 export const Primary: Story = {
   render: () => {
@@ -62,7 +49,7 @@ export const Primary: Story = {
     const mode = useTheme();
 
     const cancel = () => {
-    //   alert("Cancel");
+      //   alert("Cancel");
       setOpen(false);
     };
 
@@ -75,7 +62,7 @@ export const Primary: Story = {
           open={open}
           title="这是一个title"
           width="300px"
-          placement='right'
+          placement="right"
           hideIcon={true}
           cancel={cancel}
           content={<Content />}

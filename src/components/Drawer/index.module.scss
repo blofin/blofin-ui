@@ -43,7 +43,7 @@
   font-size: 20px;
 }
 .mock {
-  @apply bu-fixed bu-bottom-0 bu-left-0 bu-right-0 bu-top-0 bu-z-[9999] bu-bg-black/[.6];
+  @apply bu-fixed bu-bottom-0 bu-left-0 bu-right-0 bu-top-0 bu-bg-black/[.6];
 }
 .content {
   @apply  bu-flex-grow bu-overflow-y-auto bu-overflow-x-hidden  bu-text-[14px] bu-font-normal bu-leading-[20px] bu-tracking-[-0.2px];
