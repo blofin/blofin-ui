@@ -183,7 +183,9 @@ const TextSelect: FC<TextSelectProps> = (props) => {
           !hideEndAdornment && (
             <SelectArrow
               onClick={() => {
-                !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+                setTimeout(()=>{
+                  !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+                },0)
               }}
               className={`${iconStyles({ theme })} ${isFocus ? styles.roate : ""}`}
             />

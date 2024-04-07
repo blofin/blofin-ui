@@ -80,7 +80,7 @@ export const Primary: Story = {
 
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <div ref={ref} className="bu-h-[500px] bu-overflow-y-scroll bu-absolute bu-top-[100px]">
+        <div ref={ref} className="bu-absolute bu-top-[100px] bu-h-[500px] bu-overflow-y-scroll">
           <div className="bu-h-[1000px] bu-flex-col bu-p-[200px]">
             <div className="bu-mb-[50px]">
               <Tooltip placement="top" content="价格" scrollContainer={ref.current}>
@@ -97,20 +97,16 @@ export const Primary: Story = {
                 />
               </Tooltip>
             </div>
-            {/* <div>
-              <Tooltip placement="top" content="价格">
-                <TextSelect
-                  placeholder={placeholder}
-                  inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
-                  value={value}
-                  options={accountOptions}
-                  onChange={change}
-                  inputChange={inputChange}
-                  hideEndAdornment={true}
-                  readOnly={false}
-                />
-              </Tooltip>
-            </div> */}
+            <div>
+              <TextSelect
+                placeholder={placeholder}
+                inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
+                value={value}
+                options={accountOptions}
+                onChange={change}
+                inputChange={inputChange}
+              />
+            </div>
           </div>
         </div>
       </ThemeProvider>
