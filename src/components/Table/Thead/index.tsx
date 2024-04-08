@@ -47,10 +47,7 @@ const Thead: FC<{
           return evt.related.className.indexOf("no-drag") === -1; //and this
         },
         onEnd: function (evt) {
-          console.log(moveEnd);
           moveEnd && moveEnd(evt.oldIndex!, evt.newIndex!);
-          console.log(evt.newIndex, "newIndex");
-          console.log(evt.oldIndex, "oldIndex");
         }
       });
     }

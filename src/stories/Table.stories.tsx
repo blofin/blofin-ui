@@ -257,6 +257,7 @@ export const Primary: Story = {
             rowKey="id"
             onChange={onChange}
             customPagination={true}
+            drag
           />
         </div>
       </ThemeProvider>
