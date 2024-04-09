@@ -36,6 +36,7 @@ interface TableProps<T = any> {
   theme?: BUITheme;
   moveEnd?: (prev: number, next: number) => void;
   drag?: boolean;
+  tableLayout?: any;
 }
 
 type SortProps = (data: { sort: "asc" | "desc" | "default"; sortKey: string }) => void;

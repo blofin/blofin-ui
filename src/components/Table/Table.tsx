@@ -22,7 +22,8 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     renderEmpty,
     paginationPosition = "flex-end",
     moveEnd,
-    drag = false
+    drag = false,
+    tableLayout
   } = props;
 
   const tableWidth =
@@ -70,7 +71,11 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
         <div ref={ref} style={props.scroll ? { height: "100%", overflowY: "scroll" } : {}}>
           <table
             className={styles.table}
-            style={{ width: isFixed ? tableWidth : "100%", minWidth: "100%" }}>
+            style={{
+              width: isFixed ? tableWidth : "100%",
+              minWidth: "100%",
+              tableLayout: tableLayout ? tableLayout : "fixed"
+            }}>
             <Thead
               data={data}
               columns={columns}

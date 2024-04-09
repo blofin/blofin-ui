@@ -1,6 +1,6 @@
 import SortButton, { TextAlign } from "../../Sort/SortButton";
 import SortGroup from "../../Sort/SortGroup";
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { bgStyles, cssPosition } from "../css";
 import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
@@ -35,6 +35,10 @@ const Thead: FC<{
     }
   };
 
+  const draggedRef = useRef<any>();
+
+  const relatedRef = useRef<any>();
+
   useEffect(() => {
     if (theadRef.current && drag) {
       const sortable = new Sortable(theadRef.current, {
@@ -44,9 +48,11 @@ const Thead: FC<{
         filter: ".no-drag",
         ghostClass: styles.ghostClass,
         onMove: function (evt) {
+          evt.related.style.width='auto';
           return evt.related.className.indexOf("no-drag") === -1; //and this
         },
         onEnd: function (evt) {
+          console.log(evt);
           moveEnd && moveEnd(evt.oldIndex!, evt.newIndex!);
         }
       });
