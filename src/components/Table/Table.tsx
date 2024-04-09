@@ -1,4 +1,4 @@
-import { FC, UIEvent, useReducer } from "react";
+import { FC, forwardRef, UIEvent, useReducer, useRef } from "react";
 import Empty from "../Empty";
 // import StyledPagination from '../StyledPagination/StylePagination';
 import { Context, reducer, State } from "./context";
@@ -12,7 +12,7 @@ export const defaultWidth = "150";
 
 export const PageSize = 50;
 
-const Table: FC<TableProps> = (props) => {
+const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
   const [state, dispatch] = useReducer(reducer, State);
 
   const {
@@ -67,7 +67,7 @@ const Table: FC<TableProps> = (props) => {
           height: props.scroll ? " 100%" : "auto"
         }}
         onScroll={onScroll}>
-        <div style={props.scroll ? { height: "100%", overflowY: "scroll" } : {}}>
+        <div ref={ref} style={props.scroll ? { height: "100%", overflowY: "scroll" } : {}}>
           <table
             className={styles.table}
             style={{ width: isFixed ? tableWidth : "100%", minWidth: "100%" }}>
@@ -121,6 +121,6 @@ const Table: FC<TableProps> = (props) => {
       ) : null}
     </Context.Provider>
   );
-};
+});
 
 export default Table;

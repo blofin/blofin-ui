@@ -80,8 +80,8 @@ export const Primary: Story = {
 
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <div ref={ref} className="bu-absolute bu-top-[100px] bu-h-[500px] bu-overflow-y-scroll">
-          <div className="bu-h-[1000px] bu-flex-col bu-p-[200px]">
+        <div ref={ref} className="bu-overflow-y-scroll">
+          <div className="bu-flex-col bu-p-[200px] bu-pt-[1000px]">
             <div className="bu-mb-[50px]">
               <Tooltip placement="top" content="价格" scrollContainer={ref.current}>
                 <TextSelect

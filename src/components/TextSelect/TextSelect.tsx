@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
 import { TextField, useTheme } from "../..";
@@ -48,9 +48,13 @@ const Options: FC<OptionsProps> = ({
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
+  const [optionHeight, setOptionHeight] = useState(0);
+
   const { offset, resize } = useAlign(parent);
 
   const { offsetX, offsetY } = offset;
+
+  const [isBottomed, setIsBottomed] = useState(false);
 
   const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
@@ -75,11 +79,29 @@ const Options: FC<OptionsProps> = ({
     };
   }, [scrollContainer]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (targetRef.current) {
+        const screenHeight = window.innerHeight || document.documentElement.clientHeight;
+        const { bottom, height } = targetRef.current.getBoundingClientRect();
+        setOptionHeight(height);
+        if (bottom > screenHeight) {
+          setIsBottomed(true);
+        } else {
+          setIsBottomed(false);
+        }
+      }
+    }, 0);
+  }, []);
+
   return offsetX !== 0 && offsetY !== 0
     ? ReactDOM.createPortal(
         <div
           className={`${styles.options} ${className} ${bgStyles({ theme })}`}
-          style={{ top: offsetY + height + "px", left: offsetX + "px" }}
+          style={{
+            top: isBottomed ? offsetY - optionHeight : offsetY + height + "px",
+            left: offsetX + "px"
+          }}
           ref={targetRef}>
           {options.map((item) => {
             return (
@@ -142,7 +164,7 @@ const TextSelect: FC<TextSelectProps> = (props) => {
 
   const handleClickOutside = (event: any) => {
     if (inputRef.current && !inputRef.current.contains(event.target)) {
-      hide()
+      hide();
     }
   };
 
@@ -154,9 +176,9 @@ const TextSelect: FC<TextSelectProps> = (props) => {
         setIsFocus(true);
       });
     }
-    return ()=>{
+    return () => {
       document.removeEventListener("click", handleClickOutside);
-    }
+    };
   }, []);
 
   return (
@@ -183,9 +205,9 @@ const TextSelect: FC<TextSelectProps> = (props) => {
           !hideEndAdornment && (
             <SelectArrow
               onClick={() => {
-                setTimeout(()=>{
+                setTimeout(() => {
                   !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
-                },0)
+                }, 0);
               }}
               className={`${iconStyles({ theme })} ${isFocus ? styles.roate : ""}`}
             />
