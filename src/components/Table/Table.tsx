@@ -138,7 +138,6 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
               className={`bu-flex ${props.theadClass ? props.theadClass : ""}`}
               style={props.scroll ? { position: "sticky", zIndex: "1000", top: "-1px" } : {}}>
               {columns.map((item, index) => {
-                console.log(getClass(item, index).join(" "));
                 return (
                   <div
                     className={`${getClass(item, index).join(" ")} bu-flex bu-items-center ${

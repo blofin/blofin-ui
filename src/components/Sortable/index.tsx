@@ -23,7 +23,6 @@ const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass 
         handle: ".drag-item",
         onStart: () => {},
         onEnd: (event) => {
-          console.log(event.oldIndex, event.newIndex);
           moveEnd(event.oldIndex!, event.newIndex!);
         }
       });

@@ -88,7 +88,7 @@
   &:last-child {
     padding-right: 20px;
   }
-  @apply bu-order-1 bu-border-light-line-primary bu-bg-light-background;
+  @apply bu-order-1 bu-border-light-line-primary;
 }
 
 tr:last-child {
@@ -100,7 +100,6 @@ tr:last-child {
 .hover {
   &:hover {
     td {
-      background: #f8f9fc;
       transition: 0.1s linear;
     }
   }

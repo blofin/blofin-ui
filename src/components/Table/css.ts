@@ -41,8 +41,8 @@ export const cssPosition = (item: TableColumnProps, position: number) => {
 export const bgStyles = cva("", {
   variants: {
     theme: {
-      dark: "!bu-bg-dark-background",
-      light: "!bu-bg-light-background",
+      dark: "bu-bg-dark-background",
+      light: "bu-bg-light-background",
     }
   }
 });
