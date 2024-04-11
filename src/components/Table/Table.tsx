@@ -82,6 +82,9 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     }
   };
 
+  const oldRef = useRef<HTMLElement | null>(null);
+  const newRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     if (tbodyRef.current && drag && data.length > 0) {
       const tdWidths = Array.from(tbodyRef.current.children).map(
@@ -113,10 +116,14 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
         dragClass: styles.dragClass,
         forceFallback: true,
         onMove: function (evt) {
+          oldRef.current = evt.dragged;
+          newRef.current = evt.related;
           return evt.related.className.indexOf("no-drag") === -1; //and this
         },
         onEnd: function (evt) {
-          moveEnd && moveEnd(evt.oldIndex!, evt.newIndex!);
+          const oldKey=oldRef.current?.getAttribute('drag-id') as string;
+          const newKey=newRef.current?.getAttribute('drag-id') as string;
+          moveEnd && moveEnd(oldKey, newKey);
         }
       });
     }
@@ -146,7 +153,8 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
                       theme: theme
                     })} ${item.fixed ? "no-drag" : "th-drag-item"}`}
                     style={cssPosition(item, offets[index].offset)}
-                    key={item.key}>
+                    key={item.key}
+                    drag-id={item.key}>
                     {item.renderHeader ? (
                       item.renderHeader(data[index])
                     ) : (
@@ -172,8 +180,6 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
               onChange={props.onChange}
               scroll={props.scroll}
               customeTheme={props.theme}
-              moveEnd={moveEnd}
-              drag={drag}
             />
             <Tbody
               ref={tbodyRef}

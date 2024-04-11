@@ -34,7 +34,7 @@ interface TableProps<T = any> {
   scroll?: boolean;
   hideShadow?: boolean;
   theme?: BUITheme;
-  moveEnd?: (prev: number, next: number) => void;
+  moveEnd?: (prev: string, next: string) => void;
   drag?: boolean;
   tableLayout?: any;
   tbodyClass?:string;
