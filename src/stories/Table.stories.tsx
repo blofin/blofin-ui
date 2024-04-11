@@ -142,39 +142,37 @@ export const Primary: Story = {
         key: "name",
         title: `name`,
         width: "150px",
-        align: "center"
+        align: "flex-start",
       },
       {
         key: "name1",
         title: `name1`,
         width: "300px",
-        align: "center"
+        align: "flex-start",
       },
       {
         key: "name2",
         title: `name2`,
         width: "150px",
-        align: "flex-end"
+        align: "flex-start",
       },
       {
         key: "name3",
         title: `name3`,
         width: "150px",
-        align: "flex-end"
+        align: "flex-start",
       },
       {
         key: "name4",
         title: `name4`,
         width: "150px",
-        align: "flex-end",
-        fixed: "right"
+        align: "flex-start",
       },
       {
         key: "address",
         title: `address`,
         width: "150px",
-        align: "flex-end",
-        fixed: "right"
+        align: "flex-start",
       }
     ]);
 
@@ -258,6 +256,7 @@ export const Primary: Story = {
             onChange={onChange}
             customPagination={true}
             drag
+            tableLayout='auto'
           />
         </div>
       </ThemeProvider>

@@ -1,6 +1,6 @@
 import SortButton, { TextAlign } from "../../Sort/SortButton";
 import SortGroup from "../../Sort/SortGroup";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { bgStyles, cssPosition } from "../css";
 import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
@@ -8,8 +8,7 @@ import styles from "../index.module.scss";
 import { SortProps, TableColumnProps } from "../interface";
 import { BUITheme, useTheme } from "../../..";
 import Sortable from "sortablejs";
-
-const Thead: FC<{
+interface TheadProps {
   data: Record<string, string>[];
   columns: TableColumnProps[];
   scroll?: boolean;
@@ -18,12 +17,18 @@ const Thead: FC<{
   customeTheme?: BUITheme;
   moveEnd?: (prev: number, next: number) => void;
   drag?: boolean;
-}> = (props) => {
+}
+
+const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) => {
   const { columns, customeTheme, data, moveEnd, drag } = props;
 
   const { theme } = useTheme();
 
-  const theadRef = useRef<HTMLTableRowElement>(null);
+  const theadRef = useRef<HTMLTableRowElement | null>(null);
+
+  useImperativeHandle(ref, () => {
+    return theadRef.current as HTMLTableRowElement;
+  });
 
   const getClass = useStickyClassName(columns);
 
@@ -34,30 +39,7 @@ const Thead: FC<{
       props.onChange(data);
     }
   };
-
-  const draggedRef = useRef<any>();
-
-  const relatedRef = useRef<any>();
-
-  useEffect(() => {
-    if (theadRef.current && drag) {
-      const sortable = new Sortable(theadRef.current, {
-        sort: true,
-        animation: 150,
-        handle: ".th-drag-item",
-        filter: ".no-drag",
-        ghostClass: styles.ghostClass,
-        onMove: function (evt) {
-          evt.related.style.width='auto';
-          return evt.related.className.indexOf("no-drag") === -1; //and this
-        },
-        onEnd: function (evt) {
-          console.log(evt);
-          moveEnd && moveEnd(evt.oldIndex!, evt.newIndex!);
-        }
-      });
-    }
-  }, []);
+ 
 
   return (
     <SortGroup>
@@ -95,6 +77,6 @@ const Thead: FC<{
       </thead>
     </SortGroup>
   );
-};
+});
 
 export default Thead;

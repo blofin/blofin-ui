@@ -1,4 +1,4 @@
-import { FC, forwardRef, UIEvent, useReducer, useRef } from "react";
+import { forwardRef, UIEvent, useEffect, useReducer, useRef } from "react";
 import Empty from "../Empty";
 // import StyledPagination from '../StyledPagination/StylePagination';
 import { Context, reducer, State } from "./context";
@@ -7,6 +7,11 @@ import { Direction, TableProps } from "./interface";
 import Pagination from "./Pagination";
 import Tbody from "./Tbody";
 import Thead from "./Thead";
+import Sortable from "sortablejs";
+import useStickyClassName from "./hooks/useStickyClassName";
+import { bgStyles, cssPosition } from "./css";
+import { useTheme } from "../..";
+import useStickyOffset from "./hooks/useStickyOffset";
 
 export const defaultWidth = "150";
 
@@ -14,6 +19,16 @@ export const PageSize = 50;
 
 const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
   const [state, dispatch] = useReducer(reducer, State);
+
+  const dragTableRef = useRef<HTMLTableElement>(null);
+
+  const normalTableRef = useRef<HTMLTableElement>(null);
+
+  const theadRef = useRef<HTMLTableRowElement | null>(null);
+
+  const normalTheadRef = useRef<HTMLTableRowElement | null>(null);
+
+  const tbodyRef = useRef<HTMLTableRowElement | null>(null);
 
   const {
     columns,
@@ -25,6 +40,14 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     drag = false,
     tableLayout
   } = props;
+
+  const { theme } = useTheme();
+
+  const getClass = useStickyClassName(columns);
+
+  const offets = useStickyOffset(columns);
+
+  const sortableRef = useRef<any>(null);
 
   const tableWidth =
     columns.reduce((a: number | string, b) => {
@@ -59,6 +82,46 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     }
   };
 
+  useEffect(() => {
+    if (tbodyRef.current && drag && data.length > 0) {
+      const tdWidths = Array.from(tbodyRef.current.children).map(
+        (td) => (td as HTMLElement).offsetWidth
+      );
+      if (theadRef.current) {
+        Array.from(theadRef.current.children).forEach((th, index) => {
+          (th as HTMLElement).style.width = tdWidths[index] + "px";
+        });
+      }
+    }
+    if (dragTableRef.current) {
+      const width = dragTableRef.current.offsetWidth;
+      if (theadRef.current) {
+        theadRef.current.style.width = width + "px";
+      }
+    }
+  }, [drag, data]);
+
+  useEffect(() => {
+    if (theadRef.current && drag && !sortableRef.current) {
+      const table = document.querySelector(".drag-table") as HTMLTableElement;
+      sortableRef.current = new Sortable(theadRef.current, {
+        sort: true,
+        animation: 150,
+        handle: ".th-drag-item",
+        filter: ".no-drag",
+        ghostClass: styles.ghostClass,
+        dragClass: styles.dragClass,
+        forceFallback: true,
+        onMove: function (evt) {
+          return evt.related.className.indexOf("no-drag") === -1; //and this
+        },
+        onEnd: function (evt) {
+          moveEnd && moveEnd(evt.oldIndex!, evt.newIndex!);
+        }
+      });
+    }
+  }, [drag, data]);
+
   return (
     <Context.Provider value={{ state, dispatch }}>
       <div
@@ -69,7 +132,34 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
         }}
         onScroll={onScroll}>
         <div ref={ref} style={props.scroll ? { height: "100%", overflowY: "scroll" } : {}}>
+          {drag && data.length > 0 && (
+            <div
+              ref={theadRef}
+              className={`bu-flex ${props.theadClass ? props.theadClass : ""}`}
+              style={props.scroll ? { position: "sticky", zIndex: "1000", top: "-1px" } : {}}>
+              {columns.map((item, index) => {
+                console.log(getClass(item, index).join(" "));
+                return (
+                  <div
+                    className={`${getClass(item, index).join(" ")} bu-flex bu-items-center ${
+                      styles.th
+                    } ${bgStyles({
+                      theme: theme
+                    })} ${item.fixed ? "no-drag" : "th-drag-item"}`}
+                    style={cssPosition(item, offets[index].offset)}
+                    key={item.key}>
+                    {item.renderHeader ? (
+                      item.renderHeader(data[index])
+                    ) : (
+                      <span className={styles.sort}>{item.title}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
           <table
+            ref={dragTableRef}
             className={styles.table}
             style={{
               width: isFixed ? tableWidth : "100%",
@@ -87,14 +177,17 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
               drag={drag}
             />
             <Tbody
+              ref={tbodyRef}
               data={data}
               columns={columns}
               tdClass={props.tdClass ? props.tdClass : ""}
               rowKey={props.rowKey || "key"}
               rowClick={props.rowClick}
               customeTheme={props.theme}
+              tbodyClass={props.tbodyClass ? props.tbodyClass : ""}
             />
           </table>
+
           {data.length === 0 ? renderEmpty ? renderEmpty : <Empty /> : ""}
         </div>
 

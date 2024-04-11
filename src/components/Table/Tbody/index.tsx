@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, forwardRef } from "react";
 import { bgStyles, cssPosition } from "../css";
 import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
@@ -6,15 +6,18 @@ import styles from "../index.module.scss";
 import { TableColumnProps } from "../interface";
 import { BUITheme, useTheme } from "../../..";
 
-const Tbody: FC<{
+interface TbodyProps {
   data: Record<string, string>[];
   columns: TableColumnProps[];
   rowKey: string;
   rowClick?: (record: Record<string, string>) => void;
   tdClass?: string;
   customeTheme?: BUITheme;
-}> = (props) => {
-  const { data, columns, customeTheme } = props;
+  tbodyClass?: string;
+}
+
+const Tbody = forwardRef<HTMLTableRowElement | null, TbodyProps>((props, ref) => {
+  const { data, columns, customeTheme, tbodyClass } = props;
 
   const { theme } = useTheme();
 
@@ -29,10 +32,11 @@ const Tbody: FC<{
   };
 
   return (
-    <tbody className={styles.tbody}>
+    <tbody className={`${styles.tbody} ${tbodyClass}`}>
       {data.map((item) => {
         return (
           <tr
+            ref={ref}
             key={item[props.rowKey]}
             className={`${styles["hover"]} ${props.tdClass}`}
             style={props.rowClick ? { cursor: "pointer" } : {}}
@@ -54,6 +58,6 @@ const Tbody: FC<{
       })}
     </tbody>
   );
-};
+});
 
 export default Tbody;
