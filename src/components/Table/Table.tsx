@@ -1,4 +1,4 @@
-import { forwardRef, UIEvent, useEffect, useReducer, useRef } from "react";
+import { forwardRef, UIEvent, useEffect, useReducer, useRef, useState } from "react";
 import Empty from "../Empty";
 // import StyledPagination from '../StyledPagination/StylePagination';
 import { Context, reducer, State } from "./context";
@@ -45,6 +45,8 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
   const { theme } = useTheme();
 
   const getClass = useStickyClassName(columns);
+
+  const [isDraged, setIsDraged] = useState(false);
 
   const offets = useStickyOffset(columns);
 
@@ -103,7 +105,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
         theadRef.current.style.width = width + "px";
       }
     }
-  }, [drag, data]);
+  }, [drag, data, isDraged]);
 
   useEffect(() => {
     if (theadRef.current && drag && !sortableRef.current) {
@@ -117,6 +119,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
         dragClass: dragClass,
         forceFallback: true,
         onMove: function (evt) {
+          setIsDraged(false);
           oldRef.current = evt.dragged;
           newRef.current = evt.related;
           return evt.related.className.indexOf("no-drag") === -1; //and this
@@ -127,6 +130,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
           moveEnd && moveEnd(oldKey, newKey);
           oldRef.current = null;
           newRef.current = null;
+          setIsDraged(true);
         }
       });
     }
