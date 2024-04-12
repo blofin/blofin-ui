@@ -173,10 +173,3 @@ tr:last-child {
 .ghostClass {
   color: transparent !important;
 }
-
-.dragClass {
-  border-radius: 4px !important;
-  background: #fff !important;
-  opacity: 1 !important;
-  @apply bu-border bu-border-dashed bu-border-light-fill-secondary;
-}

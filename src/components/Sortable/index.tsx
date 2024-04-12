@@ -8,9 +8,10 @@ interface SortableProps {
   children: React.ReactNode;
   moveEnd: (prev: number, next: number) => void;
   ghostClass?: string;
+  dragClass?: string;
 }
 
-const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass }) => {
+const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass, dragClass }) => {
   const [isAnimation, setIsAnimation] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
@@ -20,7 +21,9 @@ const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass 
       sortable.create(ref.current, {
         animation: 200,
         ghostClass: ghostClass,
+        dragClass: dragClass,
         handle: ".drag-item",
+        forceFallback: true,
         onStart: () => {},
         onEnd: (event) => {
           moveEnd(event.oldIndex!, event.newIndex!);

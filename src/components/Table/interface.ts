@@ -38,6 +38,7 @@ interface TableProps<T = any> {
   drag?: boolean;
   tableLayout?: any;
   tbodyClass?:string;
+  dragClass?:string;
 }
 
 type SortProps = (data: { sort: "asc" | "desc" | "default"; sortKey: string }) => void;

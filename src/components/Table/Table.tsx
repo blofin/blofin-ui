@@ -38,7 +38,8 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     paginationPosition = "flex-end",
     moveEnd,
     drag = false,
-    tableLayout
+    tableLayout,
+    dragClass
   } = props;
 
   const { theme } = useTheme();
@@ -113,7 +114,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
         handle: ".th-drag-item",
         filter: ".no-drag",
         ghostClass: styles.ghostClass,
-        dragClass: styles.dragClass,
+        dragClass: dragClass,
         forceFallback: true,
         onMove: function (evt) {
           oldRef.current = evt.dragged;
@@ -121,9 +122,11 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
           return evt.related.className.indexOf("no-drag") === -1; //and this
         },
         onEnd: function (evt) {
-          const oldKey=oldRef.current?.getAttribute('drag-id') as string;
-          const newKey=newRef.current?.getAttribute('drag-id') as string;
+          const oldKey = oldRef.current?.getAttribute("drag-id") as string;
+          const newKey = newRef.current?.getAttribute("drag-id") as string;
           moveEnd && moveEnd(oldKey, newKey);
+          oldRef.current = null;
+          newRef.current = null;
         }
       });
     }
