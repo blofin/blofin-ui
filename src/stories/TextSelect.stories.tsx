@@ -54,7 +54,7 @@ export const Primary: Story = {
 
     const [placeholder, setPlaceholder] = useState("");
 
-    const selectRef=useRef<TextSelectRefProps>(null);
+    const selectRef = useRef<TextSelectRefProps>(null);
 
     const change = (value: string) => {
       if (value === "limit") {
@@ -127,12 +127,21 @@ export const Primary: Story = {
               </TextSelect>
             </div>
             <div>
-              <TextSelect ref={selectRef} defaultValue={value1} options={accountOptions1} onChange={change1}>
+              <TextSelect
+                ref={selectRef}
+                defaultValue={value1}
+                options={accountOptions1}
+                onChange={change1}>
                 <div>
                   <span>custom</span>
-                  <Button variant='primary' size="small" onClick={()=>{
-                    selectRef.current && selectRef.current.close();
-                  }}>Confirm</Button>
+                  <Button
+                    variant="primary"
+                    size="small"
+                    onClick={() => {
+                      selectRef.current && selectRef.current.close();
+                    }}>
+                    Confirm
+                  </Button>
                 </div>
               </TextSelect>
             </div>
