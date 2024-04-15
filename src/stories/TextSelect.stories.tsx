@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TextSelect } from "../components/TextSelect/TextSelect";
+import { TextSelect, TextSelectRefProps } from "../components/TextSelect/TextSelect";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { useEffect, useRef, useState } from "react";
@@ -31,6 +31,16 @@ export const Primary: Story = {
     const ref = useRef<HTMLDivElement>(null);
 
     const [accountOptions, setAccountOptions] = useState<any>([]);
+    const [accountOptions1, setAccountOptions1] = useState<any>([
+      {
+        label: "市价",
+        value: "market"
+      },
+      {
+        label: "最新价",
+        value: "limit"
+      }
+    ]);
 
     const [open, setOpen] = useState(false);
 
@@ -38,9 +48,13 @@ export const Primary: Story = {
 
     const [value, setValue] = useState("");
 
+    const [value1, setValue1] = useState("market");
+
     const [to, setTo] = useState("");
 
     const [placeholder, setPlaceholder] = useState("");
+
+    const selectRef=useRef<TextSelectRefProps>(null);
 
     const change = (value: string) => {
       if (value === "limit") {
@@ -49,6 +63,10 @@ export const Primary: Story = {
         setValue("");
         setPlaceholder("市价");
       }
+    };
+
+    const change1 = (value: string) => {
+      setValue1(value);
     };
 
     const inputChange = (value: string) => {
@@ -104,8 +122,19 @@ export const Primary: Story = {
                 value={value}
                 options={accountOptions}
                 onChange={change}
-                inputChange={inputChange}
-              />
+                inputChange={inputChange}>
+                <div>custom</div>
+              </TextSelect>
+            </div>
+            <div>
+              <TextSelect ref={selectRef} defaultValue={value1} options={accountOptions1} onChange={change1}>
+                <div>
+                  <span>custom</span>
+                  <Button variant='primary' size="small" onClick={()=>{
+                    selectRef.current && selectRef.current.close();
+                  }}>Confirm</Button>
+                </div>
+              </TextSelect>
             </div>
           </div>
         </div>

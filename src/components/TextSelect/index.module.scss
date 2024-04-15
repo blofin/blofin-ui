@@ -1,9 +1,9 @@
 .options {
-  @apply bu-absolute bu-rounded-[4px] bu-py-[8px] bu-z-[99999];
+  @apply bu-absolute bu-rounded-[4px] bu-py-[16px] bu-z-[99999];
 }
 
 .item {
-  @apply bu-flex bu-h-[34px] bu-cursor-pointer bu-items-center bu-px-[14px] bu-text-[12px];
+  @apply bu-flex bu-h-[34px] bu-cursor-pointer bu-items-center bu-px-[16px] bu-py-[8px] bu-text-[12px];
 }
 
 .input{

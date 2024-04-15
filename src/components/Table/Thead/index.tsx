@@ -39,7 +39,6 @@ const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) =>
       props.onChange(data);
     }
   };
- 
 
   return (
     <SortGroup>

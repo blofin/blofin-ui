@@ -14,17 +14,17 @@ import { Select } from "./components/Select";
 import { Slider } from "./components/Slider";
 import SortButton, { TextAlign } from "./components/Sort/SortButton";
 import SortGroup from "./components/Sort/SortGroup";
-import { Switch } from './components/Switch/Switch';
+import { Switch } from "./components/Switch/Switch";
 import { Tab } from "./components/Tab/Tab";
 import Table, { TableColumnProps } from "./components/Table";
 import { TextField } from "./components/TextField";
-import { TextSelect } from "./components/TextSelect/TextSelect";
+import { TextSelect, TextSelectRefProps } from "./components/TextSelect/TextSelect";
 import TextArea from "./components/Textarea";
 import { Tooltip } from "./components/Tooltip/Tooltip";
 import { Typography } from "./components/Typography/Typography";
 import useNotification from "./hooks/useNotification";
 import useToast from "./hooks/useToast";
-import Sortable from './components/Sortable';
+import Sortable from "./components/Sortable";
 import SortItem from "./components/Sortable/SortItem";
 import { NoticeProvider } from "./provider/NoticeProvider";
 import { ThemeProvider } from "./provider/ThemeProvider";
@@ -43,13 +43,17 @@ export {
   Dropdown,
   LabelTextField,
   Pagination,
-  Popover, RadioButton, Select,
+  Popover,
+  RadioButton,
+  Select,
   Slider,
   SortButton,
   SortGroup,
   Switch,
   Tab,
-  Table, TextArea, TextField,
+  Table,
+  TextArea,
+  TextField,
   TextSelect,
   Tooltip,
   Typography,
@@ -57,14 +61,16 @@ export {
   SortItem
 };
 
-  export type {
-    BUIComponentColor,
-    BUIComponentSize,
-    BUITheme, DialogProps, TableColumnProps,
-    TextAlign
-  };
+export type {
+  BUIComponentColor,
+  BUIComponentSize,
+  BUITheme,
+  DialogProps,
+  TableColumnProps,
+  TextSelectRefProps,
+  TextAlign
+};
 
-  export { NoticeProvider, ThemeProvider };
+export { NoticeProvider, ThemeProvider };
 
-  export { useNotification, useTheme, useToast };
-
+export { useNotification, useTheme, useToast };

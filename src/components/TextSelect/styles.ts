@@ -1,10 +1,10 @@
 import { cva } from "class-variance-authority";
 
-const bgStyles = cva("", {
+const bgStyles = cva("bu-border-[1px] bu-border-solid", {
   variants: {
     theme: {
-      light: "bu-bg-light-fill-secondary",
-      dark: "bu-bg-dark-fill-secondary"
+      light: "bu-border-light-line-secondary bu-bg-light-background",
+      dark: "bu-border-dark-line-secondary bu-bg-dark-background"
     }
   }
 });
@@ -12,9 +12,8 @@ const bgStyles = cva("", {
 const itemStyles = cva("", {
   variants: {
     theme: {
-      light:
-        "bu-text-light-label hover:bu-bg-light-hover-fill-secondary hover:bu-text-light-primary",
-      dark: "bu-text-dark-label hover:bu-bg-dark-hover-fill-secondary hover:bu-text-dark-primary"
+      light: "bu-text-light-label hover:bu-bg-light-hover-fill-primary",
+      dark: "bu-text-dark-label hover:bu-bg-dark-hover-fill-primary"
     }
   }
 });
@@ -22,13 +21,13 @@ const itemStyles = cva("", {
 const activeStyles = cva("", {
   variants: {
     theme: {
-      light: " bu-bg-light-hover-fill-secondary bu-text-light-primary",
-      dark: " bu-bg-dark-hover-fill-secondary bu-text-dark-primary"
+      light: "bu-bg-light-hover-fill-primary",
+      dark: "bu-bg-dark-hover-fill-primary"
     }
   }
 });
 
-const iconStyles = cva("bu-h-[16px] bu-w-[16px] bu-mr-[8px]", {
+const iconStyles = cva("bu-mr-[8px] bu-h-[16px] bu-w-[16px]", {
   variants: {
     theme: {
       light: "bu-text-dark-background",
@@ -46,4 +45,4 @@ const disabledStyles = cva("", {
   }
 });
 
-export { bgStyles, itemStyles, iconStyles, disabledStyles,activeStyles };
+export { bgStyles, itemStyles, iconStyles, disabledStyles, activeStyles };
