@@ -108,8 +108,11 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
   }, [drag, data, isDraged]);
 
   useEffect(() => {
-    if (theadRef.current && drag && !sortableRef.current) {
-      const table = document.querySelector(".drag-table") as HTMLTableElement;
+    if (data.length === 0) {
+      sortableRef.current = null;
+    }
+
+    if (theadRef.current && drag && data.length > 0 && !sortableRef.current) {
       sortableRef.current = new Sortable(theadRef.current, {
         sort: true,
         animation: 150,
