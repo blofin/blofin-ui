@@ -89,22 +89,24 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
   const newRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (tbodyRef.current && drag && data.length > 0) {
-      const tdWidths = Array.from(tbodyRef.current.children).map(
-        (td) => (td as HTMLElement).offsetWidth
-      );
-      if (theadRef.current) {
-        Array.from(theadRef.current.children).forEach((th, index) => {
-          (th as HTMLElement).style.width = tdWidths[index] + "px";
-        });
+    setTimeout(() => {
+      if (tbodyRef.current && drag && data.length > 0) {
+        const tdWidths = Array.from(tbodyRef.current.children).map(
+          (td) => (td as HTMLElement).offsetWidth
+        );
+        if (theadRef.current) {
+          Array.from(theadRef.current.children).forEach((th, index) => {
+            (th as HTMLElement).style.width = tdWidths[index] + "px";
+          });
+        }
       }
-    }
-    if (dragTableRef.current) {
-      const width = dragTableRef.current.offsetWidth;
-      if (theadRef.current) {
-        theadRef.current.style.width = width + "px";
+      if (dragTableRef.current) {
+        const width = dragTableRef.current.offsetWidth;
+        if (theadRef.current) {
+          theadRef.current.style.width = width + "px";
+        }
       }
-    }
+    }, 0);
   }, [drag, data, isDraged]);
 
   useEffect(() => {
