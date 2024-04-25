@@ -41,7 +41,13 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: any) => {
-    if (popupRef.current && !popupRef.current.contains(event.target) && show) {
+    if (
+      popupRef.current &&
+      document.contains(event.target) &&
+      event.target &&
+      !popupRef.current.contains(event.target) &&
+      show
+    ) {
       setShow(false);
       cancel && cancel();
     }
@@ -88,7 +94,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
             ? { top: distance + targetRefHeight + "px" }
             : { bottom: distance + targetRefHeight + "px" }
         }>
-        {content}
+        {show && content}
       </div>
     </div>
   );

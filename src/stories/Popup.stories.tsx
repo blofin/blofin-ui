@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import useTheme from "../hooks/useMode";
 import { ThemeProvider } from "..";
 import Popup, { PopupRef } from "../components/Popup";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const meta: Meta<typeof Popup> = {
   title: "Components/Popup",
@@ -18,6 +18,8 @@ export const Primary: Story = {
 
     const ref = useRef<PopupRef>(null);
 
+    const [show, setShow] = useState(true);
+
     useEffect(() => {
       setTimeout(() => {
         ref.current?.open();
@@ -25,7 +27,7 @@ export const Primary: Story = {
     }, []);
 
     const cancel = () => {
-      console.log("cancel!!!!")
+      console.log("cancel!!!!");
     };
 
     return (
@@ -35,7 +37,12 @@ export const Primary: Story = {
           ref={ref}
           title="我是Title"
           cancel={cancel}
-          content={<div className="bu-w-[60px] bu-bg-light-primary bu-text-right">111</div>}
+          content={
+            <div className="bu-w-[60px] bu-bg-light-primary bu-text-right">
+              {show && <div onClick={() => setShow(false)}>2222</div>}
+              3333
+            </div>
+          }
         />
         <div className="bu-h-[1000px]"></div>
       </ThemeProvider>
