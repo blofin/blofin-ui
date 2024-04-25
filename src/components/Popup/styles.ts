@@ -1,14 +1,10 @@
 import { cva } from "class-variance-authority";
 
-export const contentStyles = cva("bu-z-[-1]", {
+export const contentStyles = cva("", {
   variants: {
     show: {
-      true: "bu-opacity-1",
-      false: "bu-opacity-0"
-    },
-    isToped: {
-      true: "bu-top-[30px]",
-      false: "bu-bottom-[30px]"
+      true: "bu-opacity-1 bu-z-[1]",
+      false: "bu-z-[1] bu-opacity-0"
     }
   }
 });

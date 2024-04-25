@@ -1,12 +1,12 @@
-import { FC, ReactNode, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { ReactNode, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import styles from "./index.module.scss";
-import useClient from "../../hooks/useClient";
 import { contentStyles } from "./styles";
 
 interface PopupProps {
   title: ReactNode;
   content: ReactNode;
   cancel?: () => void;
+  distance?: number;
 }
 
 export interface PopupRef {
@@ -26,13 +26,15 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
     };
   });
 
-  const { title, content, cancel } = props;
+  const { title, content, cancel, distance = 10 } = props;
 
   const [show, setShow] = useState(false);
 
   const [isToped, setIsToped] = useState(false);
 
   const targetRef = useRef<HTMLDivElement>(null);
+
+  const [targetRefHeight, setTargetRefHeight] = useState(0);
 
   const popupRef = useRef<HTMLDivElement>(null);
 
@@ -46,6 +48,10 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
   };
 
   useEffect(() => {
+    if (targetRef.current) {
+      setTargetRefHeight(targetRef.current.clientHeight);
+    }
+
     if (targetRef.current && contentRef.current && show) {
       const screenHeight = window.innerHeight || document.documentElement.clientHeight;
       const { bottom } = targetRef.current.getBoundingClientRect();
@@ -76,7 +82,12 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
 
       <div
         ref={contentRef}
-        className={`${contentStyles({ show, isToped })} ${styles["popup-content"]}`}>
+        className={`${contentStyles({ show })} ${styles["popup-content"]}`}
+        style={
+          isToped
+            ? { top: distance + targetRefHeight + "px" }
+            : { bottom: distance + targetRefHeight + "px" }
+        }>
         {content}
       </div>
     </div>
