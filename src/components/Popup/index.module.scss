@@ -1,0 +1,11 @@
+.popup-container {
+  @apply bu-relative bu-inline-flex;
+}
+
+.popup-title {
+  @apply bu-cursor-pointer;
+}
+
+.popup-content {
+  @apply bu-absolute bu-right-0 bu-overflow-hidden bu-rounded-[4px] bu-duration-[150ms] bu-ease-linear;
+}
