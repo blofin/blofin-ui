@@ -6,6 +6,7 @@ import { contentStyles } from "./styles";
 interface PopupProps {
   title: ReactNode;
   content: ReactNode;
+  cancel?: () => void;
 }
 
 export interface PopupRef {
@@ -25,7 +26,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
     };
   });
 
-  const { title, content } = props;
+  const { title, content, cancel } = props;
 
   const [show, setShow] = useState(false);
 
@@ -38,8 +39,9 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: any) => {
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
+    if (popupRef.current && !popupRef.current.contains(event.target) && show) {
       setShow(false);
+      cancel && cancel();
     }
   };
 
@@ -58,12 +60,13 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
 
   useEffect(() => {
     if (popupRef.current) {
+      document.removeEventListener("click", handleClickOutside);
       document.addEventListener("click", handleClickOutside);
     }
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [show]);
 
   return (
     <div ref={popupRef} className={styles["popup-container"]}>

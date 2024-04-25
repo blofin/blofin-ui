@@ -14,21 +14,29 @@ type Story = StoryObj<typeof Popup>;
 
 export const Primary: Story = {
   render: () => {
-
     const mode = useTheme();
 
-    const ref=useRef<PopupRef>(null);
+    const ref = useRef<PopupRef>(null);
 
-    useEffect(()=>{
-      setTimeout(()=>{
+    useEffect(() => {
+      setTimeout(() => {
         ref.current?.open();
-      },2000)
-    },[])
+      }, 2000);
+    }, []);
+
+    const cancel = () => {
+      console.log("cancel!!!!")
+    };
 
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-h-[1000px]"></div>
-        <Popup ref={ref} title='我是Title' content={<div className="bu-w-[60px] bu-text-right bu-bg-light-primary">111</div>} />
+        <Popup
+          ref={ref}
+          title="我是Title"
+          cancel={cancel}
+          content={<div className="bu-w-[60px] bu-bg-light-primary bu-text-right">111</div>}
+        />
         <div className="bu-h-[1000px]"></div>
       </ThemeProvider>
     );
