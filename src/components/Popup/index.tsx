@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useRef, useState } from "react";
+import { FC, ReactNode, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import styles from "./index.module.scss";
 import useClient from "../../hooks/useClient";
 import { contentStyles } from "./styles";
@@ -8,7 +8,23 @@ interface PopupProps {
   content: ReactNode;
 }
 
-const Popup: FC<PopupProps> = (props) => {
+export interface PopupRef {
+  open: () => void;
+  close: () => void;
+}
+
+const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
+  useImperativeHandle(ref, () => {
+    return {
+      open: () => {
+        setShow(true);
+      },
+      close: () => {
+        setShow(false);
+      }
+    };
+  });
+
   const { title, content } = props;
 
   const [show, setShow] = useState(false);
@@ -62,6 +78,6 @@ const Popup: FC<PopupProps> = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default Popup;
