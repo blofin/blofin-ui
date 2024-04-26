@@ -40,6 +40,8 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
+  const cancelRef=useRef(cancel)
+
   const handleClickOutside = (event: any) => {
     if (
       popupRef.current &&
@@ -49,7 +51,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
       show
     ) {
       setShow(false);
-      cancel && cancel();
+      cancelRef.current && cancelRef.current();
     }
   };
 

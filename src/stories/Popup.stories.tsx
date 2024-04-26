@@ -33,6 +33,7 @@ export const Primary: Story = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-h-[1000px]"></div>
+        {show && <div onClick={() => setShow(false)}>2222</div>}
         <Popup
           ref={ref}
           title="我是Title"
