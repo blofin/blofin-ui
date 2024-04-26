@@ -1,6 +1,7 @@
 import { ReactNode, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import styles from "./index.module.scss";
 import { contentStyles } from "./styles";
+import useLatest from "../../hooks/useLatest";
 
 interface PopupProps {
   title: ReactNode;
@@ -40,7 +41,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const cancelRef=useRef(cancel)
+  const cancelRef = useLatest(cancel);
 
   const handleClickOutside = (event: any) => {
     if (
