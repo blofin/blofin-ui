@@ -1,0 +1,56 @@
+.picker-column {
+  height: 100%;
+  user-select: none;
+  touch-action: none;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+}
+
+.up,
+.down {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  height: calc(50% - 13px);
+  pointer-events: none;
+}
+
+.up-light {
+  top: -5px;
+  background: linear-gradient(0deg, hsla(0, 0%, 100%, .7) 50%, #fff);
+}
+
+.down-light {
+  bottom: -5px;
+  background: linear-gradient(180deg, hsla(0, 0%, 100%, .7) 50%, #fff);
+}
+
+.up-dark {
+  top: -5px;
+}
+
+.down-dark {
+  bottom: -5px;
+}
+
+.picker-column-wheel{
+  width: 100%;
+  cursor: pointer;
+  position: absolute;
+  top: calc(50% - 15px);
+  left: 0;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.picker-list {
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @apply bu-text-light-label dark:bu-text-dark-label;
+}
