@@ -2,6 +2,7 @@ import { Badge } from "./components/Badge/Badge";
 import { Button } from "./components/Button/Button";
 import { Checkbox } from "./components/Checkbox";
 import { CssDropdown } from "./components/CssDropdown/CssDropdown";
+import { DatePickerRange, DatePickerRangeProps } from "./components/DatePickerRange/DatePickerRange";
 import { Dialog, DialogProps } from "./components/Dialog/Dialog";
 import { Divider } from "./components/Divider";
 import { Drawer } from "./components/Drawer";
@@ -38,6 +39,7 @@ export {
   Button,
   Checkbox,
   CssDropdown,
+  DatePickerRange,
   Dialog,
   Divider,
   Drawer,
@@ -67,6 +69,7 @@ export type {
   BUIComponentColor,
   BUIComponentSize,
   BUITheme,
+  DatePickerRangeProps,
   DialogProps,
   TableColumnProps,
   TextSelectRefProps,

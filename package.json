@@ -45,6 +45,9 @@
     "@types/sortablejs": "^1.15.8",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
+    "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
+    "react-day-picker": "^8.10.1",
     "react-transition-group": "^4.4.5",
     "sortablejs": "^1.15.2",
     "tailwind-merge": "^1.13.1"
