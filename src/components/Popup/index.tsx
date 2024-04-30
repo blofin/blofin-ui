@@ -56,6 +56,13 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
     }
   };
 
+  const toggle = () => {
+    setShow(!show);
+    if (show) {
+      cancelRef.current && cancelRef.current();
+    }
+  };
+
   useEffect(() => {
     if (targetRef.current) {
       setTargetRefHeight(targetRef.current.clientHeight);
@@ -85,7 +92,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
 
   return (
     <div ref={popupRef} className={styles["popup-container"]}>
-      <div ref={targetRef} className={styles["popup-title"]} onClick={() => setShow(!show)}>
+      <div ref={targetRef} className={styles["popup-title"]} onClick={toggle}>
         {title}
       </div>
 
