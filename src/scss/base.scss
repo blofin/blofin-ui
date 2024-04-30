@@ -5,6 +5,7 @@
 @layer base {
   body {
     @apply dark:bu-bg-black dark:bu-text-white bu-min-h-screen bu-relative;
+    @apply transition-colors duration-400;
   }
 }
 
