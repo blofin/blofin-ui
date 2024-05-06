@@ -170,7 +170,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     readOnly = true,
     value,
     scrollContainer,
-    children
+    children,
+    auto=true
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -262,7 +263,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           defaultValue={defaultValue}
           className={className}
           scrollContainer={scrollContainer}
-          hide={hide}>
+          hide={hide}
+          auto={auto}>
           {children}
         </Options>
       )}
