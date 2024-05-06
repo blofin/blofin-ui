@@ -1,49 +1,67 @@
-import { createContext, Dispatch } from 'react';
+import { createContext, Dispatch } from "react";
 
 export enum SortEnum {
-  default = 'default',
-  desc = 'desc',
-  asc = 'asc',
+  default = "default",
+  desc = "desc",
+  asc = "asc"
 }
 
 export type SortState = SortEnum.default | SortEnum.desc | SortEnum.asc;
 
-type StateType = {
-  active: string;
+export type SortsState = {
+  sort: string;
   sortType: SortState;
 };
 
-type ActionType =
-  | {
-      type: 'change';
-      payload: string;
-    }
-  | {
-      type: 'changeSort';
-      payload: SortState;
-      success?: (state: StateType) => void;
-    };
+type StateType = {
+  type: "single" | "multiple";
+  sorts: SortsState[];
+};
+
+type ActionType = {
+  type: "changeSort";
+  payload: SortsState;
+  success?: (state: SortsState[]) => void;
+};
 
 const State = {
-  active: '',
-  sortType: SortEnum.default,
+  type: "single" as "single" | "multiple",
+  sorts: []
 };
 
 const Context = createContext<{ state: StateType; dispatch: Dispatch<ActionType> }>({
   state: State,
-  dispatch: () => undefined,
+  dispatch: () => undefined
 });
 
 const reducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
-    case 'change':
-      return { ...state, active: action.payload };
-    case 'changeSort':
-      const value = { ...state, sortType: action.payload };
-      if (action.success) {
-        action?.success(value);
+    case "changeSort":
+      const index = state.sorts.findIndex((item) => item.sort === action.payload.sort);
+      if (index === -1) {
+        const value = state.type === "single" ? [action.payload] : [...state.sorts, action.payload];
+        action.success && action.success(value);
+        return {
+          type: state.type,
+          sorts: value
+        };
+      } else {
+        const value = state.sorts.map((item) => {
+          if (item.sort === action.payload.sort) {
+            return {
+              ...item,
+              sortType: action.payload.sortType
+            };
+          } else {
+            return item;
+          }
+        });
+        action.success && action.success(value);
+        return {
+          type: state.type,
+          sorts: value
+        };
       }
-      return value;
     default:
       return state;
   }

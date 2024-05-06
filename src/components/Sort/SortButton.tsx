@@ -1,14 +1,15 @@
-import ArrowDown from '../../assets/icons/arrow-down.svg';
-import ArrowUp from '../../assets/icons/arrow-up.svg';
-import { CSSProperties, FC, useContext } from 'react';
-import { Context, SortEnum, SortState } from './reducer';
-import styles from './Sort.module.scss';
+import ArrowDown from "../../assets/icons/arrow-down.svg";
+import ArrowUp from "../../assets/icons/arrow-up.svg";
+import { CSSProperties, FC, useContext, useMemo } from "react";
+import { Context, SortEnum, SortState, SortsState } from "./reducer";
+import styles from "./Sort.module.scss";
+import { keyBy } from "../../utils/helper";
 
-export type TextAlign = 'flex-start' | 'flex-end' | 'center';
+export type TextAlign = "flex-start" | "flex-end" | "center";
 
 export interface SortButtonProps {
   children: JSX.Element;
-  onSortChange: (data: { sort: SortState; sortKey: string }) => void;
+  onSortChange: (data: SortsState[]) => void;
   sortKey: string;
   hideSort?: boolean;
   textAlign?: TextAlign;
@@ -21,67 +22,62 @@ const SortButton: FC<SortButtonProps> = ({
   onSortChange,
   sortKey,
   hideSort = false,
-  textAlign = 'center',
-  width = '100%',
-  iconStyle,
+  textAlign = "center",
+  width = "100%",
+  iconStyle
 }) => {
   const { state, dispatch } = useContext(Context);
 
-  const changeSort = (sort: SortState) => {
-    if (sort === SortEnum.default) {
-      dispatch({
-        type: 'changeSort',
-        payload: SortEnum.desc,
-        success: (item) => {
-          onSortChange({
-            sort: item.sortType,
-            sortKey: item.active,
-          });
-        },
-      });
-    } else if (sort === SortEnum.desc) {
-      dispatch({
-        type: 'changeSort',
-        payload: SortEnum.asc,
-        success: (item) => {
-          onSortChange({
-            sort: item.sortType,
-            sortKey: item.active,
-          });
-        },
-      });
+  const { sorts, type } = state;
+
+  const sortKeys = useMemo(() => {
+    if (sorts.length > 0) {
+      return sorts.map((item) => item.sort);
     } else {
-      dispatch({
-        type: 'changeSort',
-        payload: SortEnum.default,
-        success: (item) => {
-          onSortChange({
-            sort: item.sortType,
-            sortKey: item.active,
-          });
-        },
-      });
+      return [];
     }
-  };
+  }, [sorts]);
+
+  const sortsKeyBy = useMemo(() => {
+    return keyBy(sorts, "sort");
+  }, [sorts]);
 
   const handleSort = () => {
     if (hideSort) {
       return;
     }
-    if (state.active !== sortKey) {
+    const currentItem = sortsKeyBy[sortKey];
+
+    if (currentItem) {
+      let sortType = SortEnum.default;
+
+      if (currentItem.sortType === SortEnum.desc) {
+        sortType = SortEnum.asc;
+      } else if (currentItem.sortType === SortEnum.asc) {
+        sortType = SortEnum.default;
+      } else {
+        sortType = SortEnum.desc;
+      }
+
       dispatch({
-        type: 'changeSort',
-        payload: SortEnum.default,
+        type: "changeSort",
+        payload: { sort: sortKey, sortType: sortType },
         success: (item) => {
-          changeSort(item.sortType);
-        },
-      });
-      dispatch({
-        type: 'change',
-        payload: sortKey,
+          if (type === "single") {
+            onSortChange([item[0]]);
+          } else {
+            onSortChange(item);
+          }
+        }
       });
     } else {
-      changeSort(state.sortType);
+      dispatch({
+        type: "changeSort",
+        payload: { sort: sortKey, sortType: SortEnum.desc },
+        success: (item) => {
+          onSortChange(item);
+        }
+      });
     }
   };
 
@@ -90,25 +86,28 @@ const SortButton: FC<SortButtonProps> = ({
       <div
         onClick={handleSort}
         style={{
-          cursor: hideSort ? 'default' : 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: textAlign,
-        }}
-      >
+          cursor: hideSort ? "default" : "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: textAlign
+        }}>
         {children}
         {!hideSort && (
-          <div className={styles['sort-wrap']}>
+          <div className={styles["sort-wrap"]}>
             <ArrowUp
               style={iconStyle}
               className={`${styles.icon} ${
-                state.sortType === SortEnum.asc && state.active === sortKey && styles['sort-active']
+                sortsKeyBy[sortKey]?.sortType === SortEnum.asc &&
+                sortKeys.includes(sortKey) &&
+                styles["sort-active"]
               }`}
             />
             <ArrowDown
               style={iconStyle}
               className={`${styles.icon}  ${
-                state.sortType === SortEnum.desc && state.active === sortKey && styles['sort-active']
+                sortsKeyBy[sortKey]?.sortType === SortEnum.desc &&
+                sortKeys.includes(sortKey) &&
+                styles["sort-active"]
               }`}
             />
           </div>

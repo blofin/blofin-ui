@@ -4,6 +4,7 @@ import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { Fragment } from "react";
 import SortButton, { TextAlign } from "../components/Sort/SortButton";
+import { SortsState } from "../components/Sort/reducer";
 
 const meta: Meta<typeof SortGroup> = {
   /* 👇 The title prop is Tab.
@@ -59,14 +60,14 @@ export const Primary: Story = {
       }
     ];
 
-    const sortChange = (data: { sort: "asc" | "desc" | "default"; sortKey: string }) => {
-      console.log(data);
+    const sortChange = (data: SortsState[]) => {
+      console.log(data,'data');
     };
 
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-flex">
-          <SortGroup>
+          <SortGroup >
             <Fragment>
               {sortMenus.map((item) => {
                 return (
