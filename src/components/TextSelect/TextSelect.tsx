@@ -36,6 +36,7 @@ interface TextSelectProps {
   readOnly?: boolean;
   scrollContainer?: HTMLDivElement | null;
   children?: JSX.Element | ReactNode;
+  auto?: boolean;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -55,7 +56,8 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       defaultValue,
       scrollContainer,
       children,
-      hide
+      hide,
+      auto = true
     },
     ref
   ) => {
@@ -95,19 +97,21 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
     }, [scrollContainer]);
 
     useEffect(() => {
-      setTimeout(() => {
-        if (targetRef.current) {
-          const screenHeight = window.innerHeight || document.documentElement.clientHeight;
-          const { bottom, height } = targetRef.current.getBoundingClientRect();
-          setOptionHeight(height);
-          if (bottom > screenHeight) {
-            setIsBottomed(true);
-          } else {
-            setIsBottomed(false);
+      if (auto) {
+        setTimeout(() => {
+          if (targetRef.current) {
+            const screenHeight = window.innerHeight || document.documentElement.clientHeight;
+            const { bottom, height } = targetRef.current.getBoundingClientRect();
+            setOptionHeight(height);
+            if (bottom > screenHeight) {
+              setIsBottomed(true);
+            } else {
+              setIsBottomed(false);
+            }
           }
-        }
-      }, 0);
-    }, []);
+        }, 0);
+      }
+    }, [auto]);
 
     return offsetX !== 0 && offsetY !== 0
       ? ReactDOM.createPortal(
