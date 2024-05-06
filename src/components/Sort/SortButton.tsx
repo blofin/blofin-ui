@@ -1,7 +1,7 @@
 import ArrowDown from "../../assets/icons/arrow-down.svg";
 import ArrowUp from "../../assets/icons/arrow-up.svg";
 import { CSSProperties, FC, useContext, useMemo } from "react";
-import { Context, SortEnum, SortState, SortsState } from "./reducer";
+import { Context, SortEnum, SortsData } from "./reducer";
 import styles from "./Sort.module.scss";
 import { keyBy } from "../../utils/helper";
 
@@ -9,7 +9,7 @@ export type TextAlign = "flex-start" | "flex-end" | "center";
 
 export interface SortButtonProps {
   children: JSX.Element;
-  onSortChange: (data: SortsState[]) => void;
+  onSortChange: (data: SortsData[] | SortsData) => void;
   sortKey: string;
   hideSort?: boolean;
   textAlign?: TextAlign;
@@ -50,7 +50,6 @@ const SortButton: FC<SortButtonProps> = ({
 
     if (currentItem) {
       let sortType = SortEnum.default;
-
       if (currentItem.sortType === SortEnum.desc) {
         sortType = SortEnum.asc;
       } else if (currentItem.sortType === SortEnum.asc) {
@@ -64,9 +63,19 @@ const SortButton: FC<SortButtonProps> = ({
         payload: { sort: sortKey, sortType: sortType },
         success: (item) => {
           if (type === "single") {
-            onSortChange([item[0]]);
+            onSortChange({
+              sortKey: item[0].sort,
+              sort: item[0].sortType
+            });
           } else {
-            onSortChange(item);
+            onSortChange(
+              item.map((item) => {
+                return {
+                  sortKey: item.sort,
+                  sort: item.sortType
+                };
+              })
+            );
           }
         }
       });
@@ -75,7 +84,21 @@ const SortButton: FC<SortButtonProps> = ({
         type: "changeSort",
         payload: { sort: sortKey, sortType: SortEnum.desc },
         success: (item) => {
-          onSortChange(item);
+          if (type === "single") {
+            onSortChange({
+              sortKey: item[0].sort,
+              sort: item[0].sortType
+            });
+          } else {
+            onSortChange(
+              item.map((item) => {
+                return {
+                  sortKey: item.sort,
+                  sort: item.sortType
+                };
+              })
+            );
+          }
         }
       });
     }

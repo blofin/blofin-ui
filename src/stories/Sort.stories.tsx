@@ -4,7 +4,7 @@ import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { Fragment } from "react";
 import SortButton, { TextAlign } from "../components/Sort/SortButton";
-import { SortsState } from "../components/Sort/reducer";
+import { SortsData, SortsState } from "../components/Sort/reducer";
 
 const meta: Meta<typeof SortGroup> = {
   /* 👇 The title prop is Tab.
@@ -60,7 +60,7 @@ export const Primary: Story = {
       }
     ];
 
-    const sortChange = (data: SortsState[]) => {
+    const sortChange = (data: SortsData[]|SortsData) => {
       console.log(data,'data');
     };
 

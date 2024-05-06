@@ -13,8 +13,15 @@ export type SortsState = {
   sortType: SortState;
 };
 
+export type SortsData = {
+  sortKey: string;
+  sort: SortState;
+};
+
+export type SortType = "single" | "multiple";
+
 type StateType = {
-  type: "single" | "multiple";
+  type: SortType;
   sorts: SortsState[];
 };
 
@@ -25,7 +32,7 @@ type ActionType = {
 };
 
 const State = {
-  type: "single" as "single" | "multiple",
+  type: "single" as SortType,
   sorts: []
 };
 

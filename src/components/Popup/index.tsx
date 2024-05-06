@@ -33,6 +33,8 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
 
   const [isToped, setIsToped] = useState(false);
 
+  const [isRight, setIsRight] = useState(false);
+
   const targetRef = useRef<HTMLDivElement>(null);
 
   const [targetRefHeight, setTargetRefHeight] = useState(0);
@@ -70,8 +72,16 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
 
     if (targetRef.current && contentRef.current && show) {
       const screenHeight = window.innerHeight || document.documentElement.clientHeight;
-      const { bottom } = targetRef.current.getBoundingClientRect();
-      const { height } = contentRef.current.getBoundingClientRect();
+      const screenWidth = window.innerWidth || document.documentElement.clientWidth;
+      const { bottom, right } = targetRef.current.getBoundingClientRect();
+      const { height, width } = contentRef.current.getBoundingClientRect();
+
+      if (right + width >= screenWidth) {
+        setIsRight(true);
+      } else {
+        setIsRight(false);
+      }
+
       if (bottom + height > screenHeight) {
         setIsToped(false);
       } else {
@@ -99,11 +109,12 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
       <div
         ref={contentRef}
         className={`${contentStyles({ show })} ${styles["popup-content"]}`}
-        style={
-          isToped
+        style={{
+          ...(isToped
             ? { top: distance + targetRefHeight + "px" }
-            : { bottom: distance + targetRefHeight + "px" }
-        }>
+            : { bottom: distance + targetRefHeight + "px" }),
+          ...(isRight ? { right: 0 } : { left: 0 })
+        }}>
         {show && content}
       </div>
     </div>

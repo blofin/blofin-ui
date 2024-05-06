@@ -1,13 +1,14 @@
 import SortButton, { TextAlign } from "../../Sort/SortButton";
 import SortGroup from "../../Sort/SortGroup";
-import { FC, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import { bgStyles, cssPosition } from "../css";
 import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
 import styles from "../index.module.scss";
 import { SortProps, TableColumnProps } from "../interface";
 import { BUITheme, useTheme } from "../../..";
-import Sortable from "sortablejs";
+import { SortType, SortsData } from "../../Sort/reducer";
+
 interface TheadProps {
   data: Record<string, string>[];
   columns: TableColumnProps[];
@@ -17,10 +18,11 @@ interface TheadProps {
   customeTheme?: BUITheme;
   moveEnd?: (prev: number, next: number) => void;
   drag?: boolean;
+  type?: SortType;
 }
 
 const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) => {
-  const { columns, customeTheme, data, moveEnd, drag } = props;
+  const { columns, customeTheme, data, moveEnd, drag, onChange, type } = props;
 
   const { theme } = useTheme();
 
@@ -34,14 +36,12 @@ const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) =>
 
   const offets = useStickyOffset(columns);
 
-  const sortChange = (data: { sort: "asc" | "desc" | "default"; sortKey: string }) => {
-    if (props.onChange) {
-      props.onChange(data);
-    }
+  const sortChange = (data: SortsData[] | SortsData) => {
+    onChange && onChange(data);
   };
 
   return (
-    <SortGroup>
+    <SortGroup type={type}>
       <thead
         className={`${styles.thead} ${props.theadClass}`}
         style={props.scroll ? { position: "sticky", zIndex: "999", top: "-1px" } : {}}>

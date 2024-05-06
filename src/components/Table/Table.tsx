@@ -39,7 +39,8 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     moveEnd,
     drag = false,
     tableLayout,
-    dragClass
+    dragClass,
+    type='single'
   } = props;
 
   const { theme } = useTheme();
@@ -192,6 +193,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
               onChange={props.onChange}
               scroll={props.scroll}
               customeTheme={props.theme}
+              type={type}
             />
             <Tbody
               ref={tbodyRef}
