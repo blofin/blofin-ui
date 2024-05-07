@@ -1,4 +1,13 @@
-import React, { Children, FC, Fragment, useEffect, useMemo, useState } from "react";
+import React, {
+  Children,
+  FC,
+  Fragment,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useState
+} from "react";
 import { BUIComponentSize } from "../..";
 import useTheme from "../../provider/useTheme";
 import { Base } from "../../types/component";
@@ -27,15 +36,21 @@ interface TabProps extends Base {
   defaultIndex?: number;
 }
 
-const Tab: FC<TabProps> = ({
-  defaultIndex,
-  items,
-  size,
-  change,
-  className,
-  children,
-  tabWrapperClass
-}) => {
+export interface TabRef {
+  setTab: (tab: number) => void;
+}
+
+const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
+  const { defaultIndex, items, size, change, className, children, tabWrapperClass } = props;
+
+  useImperativeHandle(ref, () => {
+    return {
+      setTab: (tab: number) => {
+        setActive(items[tab]?.key);
+      }
+    };
+  });
+
   const [active, setActive] = useState(items[defaultIndex || 0]?.key || items[0].key);
 
   const { theme } = useTheme();
@@ -60,12 +75,6 @@ const Tab: FC<TabProps> = ({
       return noActStyles({ theme });
     }
   }, [size, theme]);
-
-  useEffect(()=>{
-    if(defaultIndex){
-      setActive(items[defaultIndex || 0]?.key|| items[0].key)
-    }
-  },[defaultIndex])
 
   return (
     <div className="bu-flex bu-flex-col">
@@ -94,6 +103,6 @@ const Tab: FC<TabProps> = ({
       </div>
     </div>
   );
-};
+});
 
 export { Tab };

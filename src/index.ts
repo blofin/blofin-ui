@@ -18,7 +18,7 @@ import { Slider } from "./components/Slider";
 import SortButton, { TextAlign } from "./components/Sort/SortButton";
 import SortGroup from "./components/Sort/SortGroup";
 import { Switch } from "./components/Switch/Switch";
-import { Tab } from "./components/Tab/Tab";
+import { Tab, TabRef } from "./components/Tab/Tab";
 import Table, { TableColumnProps } from "./components/Table";
 import { TextField } from "./components/TextField";
 import { TextSelect, TextSelectRefProps } from "./components/TextSelect/TextSelect";
@@ -29,7 +29,7 @@ import useNotification from "./hooks/useNotification";
 import useToast from "./hooks/useToast";
 import Sortable from "./components/Sortable";
 import SortItem from "./components/Sortable/SortItem";
-import Popup from "./components/Popup";
+import Popup, { PopupRef } from "./components/Popup";
 import { NoticeProvider } from "./provider/NoticeProvider";
 import { ThemeProvider } from "./provider/ThemeProvider";
 import useTheme from "./provider/useTheme";
@@ -75,7 +75,9 @@ export type {
   DialogProps,
   TableColumnProps,
   TextSelectRefProps,
-  TextAlign
+  TextAlign,
+  PopupRef,
+  TabRef
 };
 
 export { NoticeProvider, ThemeProvider };
