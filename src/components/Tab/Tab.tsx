@@ -1,4 +1,4 @@
-import React, { Children, FC, Fragment, useMemo, useState } from "react";
+import React, { Children, FC, Fragment, useEffect, useMemo, useState } from "react";
 import { BUIComponentSize } from "../..";
 import useTheme from "../../provider/useTheme";
 import { Base } from "../../types/component";
@@ -60,6 +60,12 @@ const Tab: FC<TabProps> = ({
       return noActStyles({ theme });
     }
   }, [size, theme]);
+
+  useEffect(()=>{
+    if(defaultIndex){
+      setActive(items[defaultIndex || 0]?.key|| items[0].key)
+    }
+  },[defaultIndex])
 
   return (
     <div className="bu-flex bu-flex-col">
