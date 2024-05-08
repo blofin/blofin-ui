@@ -257,6 +257,7 @@ export const Primary: Story = {
             customPagination={true}
             drag
             tableLayout='auto'
+            type='multiple'
           />
         </div>
       </ThemeProvider>
