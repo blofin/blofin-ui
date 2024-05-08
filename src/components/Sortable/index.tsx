@@ -1,7 +1,5 @@
-import { FC, useEffect, useRef, useState } from "react";
-import { SortableProvider } from "./context";
+import { FC, useEffect, useRef } from "react";
 import sortable from "sortablejs";
-import styles from "./index.module.scss";
 
 interface SortableProps {
   direction: "horizontal" | "vertical";
@@ -12,13 +10,13 @@ interface SortableProps {
 }
 
 const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass, dragClass }) => {
-  const [isAnimation, setIsAnimation] = useState(false);
-
   const ref = useRef<HTMLDivElement>(null);
 
+  const sortableRef = useRef<any>(null);
+
   useEffect(() => {
-    if (ref.current) {
-      sortable.create(ref.current, {
+    if (ref.current && !sortableRef.current) {
+      sortableRef.current = sortable.create(ref.current, {
         animation: 200,
         ghostClass: ghostClass,
         dragClass: dragClass,
@@ -26,6 +24,7 @@ const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass,
         forceFallback: true,
         onStart: () => {},
         onEnd: (event) => {
+          console.log(event);
           moveEnd(event.oldIndex!, event.newIndex!);
         }
       });
@@ -33,20 +32,13 @@ const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass,
   }, []);
 
   return (
-    <SortableProvider
-      value={{
-        direction: direction,
-        isAnimation: isAnimation,
-        setIsAnimation: setIsAnimation
-      }}>
-      <div
-        ref={ref}
-        className={`drag-item bu-flex bu-h-full bu-w-full ${
-          direction === "horizontal" ? "bu-flex-row" : "bu-flex-col"
-        }`}>
-        {children}
-      </div>
-    </SortableProvider>
+    <div
+      ref={ref}
+      className={`drag-item bu-flex bu-h-full bu-w-full ${
+        direction === "horizontal" ? "bu-flex-row" : "bu-flex-col"
+      }`}>
+      {children}
+    </div>
   );
 };
 
