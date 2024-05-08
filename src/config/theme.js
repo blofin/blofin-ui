@@ -52,17 +52,17 @@ module.exports = {
           14: "var(--light-danger-14)"
         },
         green: {
-          DEFAULT: "var(--light-green-defaul)",
+          DEFAULT: "var(--light-green-default)",
           alpha: "var(--light-green-alpha)"
         },
         red: {
-          DEFAULT: "var(--light-red-defaul)",
+          DEFAULT: "var(--light-red-default)",
           alpha: "var(--light-red-alpha)"
         },
         background: "var(--light-background)",
         second: "var(--light-second)",
         label: {
-          DEFAULT: "var(--light-label-defaults)",
+          DEFAULT: "var(--light-label-default)",
           60: "var(--light-label-60)",
           40: "var(--light-label-40)",
           20: "var(--light-label-20)"
@@ -137,7 +137,7 @@ module.exports = {
           14: "var(--dark-tertiary-14)"
         },
         success: {
-          DEFAULT: "var(--dark-success-defaul)",
+          DEFAULT: "var(--dark-success-default)",
           14: "var(--dark-success-14)"
         },
         warning: {

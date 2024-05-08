@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "0.5.63",
+  "version": "0.5.64",
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -18,8 +18,7 @@
     "./Divider": "./dist/Divider.es.js",
     "./Drawer": "./dist/Drawer.es.js",
     "./Form": "./dist/Form.es.js",
-    "./Slider": "./dist/Slider.es.js",
-    "./Tooltip": "./dist/Tooltip.es.js"
+    "./Slider": "./dist/Slider.es.js"
   },
   "files": [
     "dist"
