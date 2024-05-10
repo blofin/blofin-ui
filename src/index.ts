@@ -35,6 +35,7 @@ import { ThemeProvider } from "./provider/ThemeProvider";
 import useTheme from "./provider/useTheme";
 import "./scss/base.scss";
 import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component";
+import { SortsData } from "./components/Sort/reducer";
 
 export {
   Badge,
@@ -77,7 +78,8 @@ export type {
   TextSelectRefProps,
   TextAlign,
   PopupRef,
-  TabRef
+  TabRef,
+  SortsData
 };
 
 export { NoticeProvider, ThemeProvider };
