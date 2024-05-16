@@ -15,6 +15,7 @@ export interface TextareaProps extends React.InputHTMLAttributes<HTMLTextAreaEle
   textareaClassName?: string;
   helperText?: string;
   row?:number
+  className?:string;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => {
@@ -29,6 +30,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
     theme: mode,
     helperText,
     row=4,
+    className,
     ...otherProps
   } = props;
 
@@ -53,7 +55,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
           ref={ref as LegacyRef<HTMLTextAreaElement>}
           disabled={disabled}
           rows={row}
-          className={`${styles.hideScrollbar} ${textAreaStyles({ theme: mode ? mode : theme })}`}
+          className={`${styles.hideScrollbar} ${className} ${textAreaStyles({ theme: mode ? mode : theme })}`}
           {...otherProps}></textarea>
         {endAdornment && (
           <span
