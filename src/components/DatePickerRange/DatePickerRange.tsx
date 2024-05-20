@@ -16,6 +16,7 @@ import ArrowUpLine from "../../assets/icons/arrow-up-l-line.svg";
 import SubtractLine from "../../assets/icons/subtract-line.svg";
 import { ArrowLine, DatePickerBg } from "./styles";
 import useTheme from "../../provider/useTheme";
+import { locales } from "./localesOnDate";
 
 export type DateValue = {
   start_time: number;
@@ -38,7 +39,6 @@ export type DatePickerRangeProps = {
   includesToday?: boolean;
   startTime?: Date;
   isUtcTime?: boolean;
-  locale: Locale;
   lang: string;
   selectText: string;
   confirmText: string;
@@ -58,13 +58,12 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   includesToday = true,
   startTime,
   isUtcTime = false,
-  locale,
   lang = "en",
   selectText = "Selected",
   confirmText = "Confirm",
   cancelText = "Cancel",
   toText = "-",
-  distance= 5
+  distance = 5
 }) => {
   const [date, setDate] = React.useState<DateRange | undefined>();
 
@@ -99,6 +98,10 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   const modifiers = {
     today: utcToZonedTime(new Date().getTime(), "UTC")
   };
+
+  const locale = React.useMemo(() => {
+    return locales[lang as keyof typeof locales];
+  }, [lang]);
 
   const calculateMonths = React.useMemo(() => {
     const currentDate = maximum ? toUtc(new Date().getTime()) : toUtc(new Date(2100, 10).getTime());
@@ -151,7 +154,9 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
     if (startTime && from.getTime() < startTime.getTime()) {
       from.setTime(startTime.getTime());
     }
-    const to = toUtc(new Date().getTime());
+    const to = toUtc(
+      includesToday ? new Date().getTime() : addDays(new Date().getTime(), -1).getTime()
+    );
     setIsChange(true);
     setDate({ from, to });
     setValues({
@@ -312,8 +317,8 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
                     }
                     setMonth={setStartMonth}
                     locale={locale || enUS}
-                    confirmText = {confirmText}
-                    cancelText = {cancelText}
+                    confirmText={confirmText}
+                    cancelText={cancelText}
                     cancel={setStartMonthShow.bind(null, false)}
                     confirm={() => {
                       setMonth(startMonth);
@@ -365,8 +370,8 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
                     currentMonth={endMonth ? endMonth.getMonth() + 1 : new Date().getMonth() + 1}
                     setMonth={setEndMonth}
                     locale={locale || enUS}
-                    confirmText = {confirmText}
-                    cancelText = {cancelText}
+                    confirmText={confirmText}
+                    cancelText={cancelText}
                     cancel={setEndMonthShow.bind(null, false)}
                     confirm={() => {
                       setMonth(

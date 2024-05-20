@@ -1,12 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import DatePickerRange from "../components/DatePickerRange/DatePickerRange";
+import { DatePickerRange } from "../components/DatePickerRange/DatePickerRange";
 import addDays from "date-fns/addDays";
 import { useState } from "react";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import enUS from "date-fns/locale/en-US";
-import es from "date-fns/locale/es";
-import de from "date-fns/locale/de";
-import fr from "date-fns/locale/fr";
 
 const meta: Meta<typeof DatePickerRange> = {
   title: "Components/DatePickerRange",
@@ -18,20 +14,21 @@ type Story = StoryObj<typeof DatePickerRange>;
 
 export const Primary: Story = {
   render: () => {
+    const from = addDays(new Date(), -7);
+
+    const to = addDays(new Date(), -1);
+
+    from.setHours(0, 0, 0, 0);
+
+    to.setHours(23, 59, 59, 999);
+
     const [date, setDate] = useState({
-      start_time: addDays(new Date(), -29).getTime(),
-      end_time: new Date().getTime()
+      start_time: from.getTime(),
+      end_time: to.getTime()
     });
 
     const handleChangeDate = (date: any) => {
       setDate(date);
-    };
-
-    const locale = {
-      en: enUS,
-      es: es,
-      de: de,
-      fr: fr
     };
 
     const lang = "en";
@@ -45,12 +42,12 @@ export const Primary: Story = {
 
     const disabledDays = [
       {
-        from: addDays(new Date(), 1),
+        from: new Date(),
         to: new Date("2100-12-31")
       }
     ];
     return (
-      <ThemeProvider value={{ theme: "dark" }}>
+      <ThemeProvider value={{ theme: "light" }}>
         <div className="bu-h-[500px] bu-w-full">
           <DatePickerRange
             defaultValue={date}
@@ -60,12 +57,11 @@ export const Primary: Story = {
             quickSelection={buttonGroup}
             disabledSameDay
             lang={lang}
-            locale={locale[lang as keyof typeof locale]}
             selectText="Select"
             cancelText="Cancel"
             confirmText="Confirm"
             toText="To"
-            isUtcTime={true}></DatePickerRange>
+            includesToday={false}></DatePickerRange>
         </div>
       </ThemeProvider>
     );
