@@ -1,3 +1,3 @@
-import { DatePickerRange } from "./DatePickerRange";
+import DatePickerRange from "./DatePickerRange";
 
 export { DatePickerRange };
