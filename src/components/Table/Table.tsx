@@ -10,8 +10,9 @@ import Thead from "./Thead";
 import Sortable from "sortablejs";
 import useStickyClassName from "./hooks/useStickyClassName";
 import { bgStyles, cssPosition } from "./css";
-import { useTheme } from "../..";
+import { SortButton, SortGroup, TextAlign, useTheme } from "../..";
 import useStickyOffset from "./hooks/useStickyOffset";
+import { SortsData } from "../Sort/reducer";
 
 export const defaultWidth = "150";
 
@@ -39,7 +40,8 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     moveEnd,
     drag = false,
     tableLayout,
-    dragClass
+    dragClass,
+    type = "single"
   } = props;
 
   const { theme } = useTheme();
@@ -87,6 +89,10 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
 
   const oldRef = useRef<HTMLElement | null>(null);
   const newRef = useRef<HTMLElement | null>(null);
+
+  const sortChange = (data: SortsData[] | SortsData) => {
+    props.onChange && props.onChange(data);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -152,30 +158,42 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
         onScroll={onScroll}>
         <div ref={ref} style={props.scroll ? { height: "100%", overflowY: "scroll" } : {}}>
           {drag && data.length > 0 && (
-            <div
-              ref={theadRef}
-              className={`bu-flex ${props.theadClass ? props.theadClass : ""}`}
-              style={props.scroll ? { position: "sticky", zIndex: "1000", top: "-1px" } : {}}>
-              {columns.map((item, index) => {
-                return (
-                  <div
-                    className={`${getClass(item, index).join(" ")} bu-flex bu-items-center ${
-                      styles.th
-                    } ${bgStyles({
-                      theme: theme
-                    })} ${item.fixed ? "no-drag" : "th-drag-item"}`}
-                    style={cssPosition(item, offets[index].offset)}
-                    key={item.key}
-                    drag-id={item.key}>
-                    {item.renderHeader ? (
-                      item.renderHeader(data[index])
-                    ) : (
-                      <span className={styles.sort}>{item.title}</span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+            <SortGroup type={type}>
+              <div
+                ref={theadRef}
+                className={`bu-flex ${props.theadClass ? props.theadClass : ""}`}
+                style={props.scroll ? { position: "sticky", zIndex: "1000", top: "-1px" } : {}}>
+                {columns.map((item, index) => {
+                  return (
+                    <div
+                      className={`${getClass(item, index).join(" ")} bu-flex bu-items-center ${
+                        styles.th
+                      } ${bgStyles({
+                        theme: theme
+                      })} ${item.fixed ? "no-drag" : "th-drag-item"}`}
+                      style={cssPosition(item, offets[index].offset)}
+                      key={item.key}
+                      drag-id={item.key}>
+                      <SortButton
+                        key={item.key}
+                        onSortChange={sortChange}
+                        sortKey={item.key || ""}
+                        hideSort={item.filter ? false : true}
+                        textAlign={item.align as TextAlign}
+                        // width={item.width}
+                        width="100%"
+                        iconStyle={{ width: "10px", height: "5px" }}>
+                        {item.renderHeader ? (
+                          item.renderHeader(data[index])
+                        ) : (
+                          <span className={styles.sort}>{item.title}</span>
+                        )}
+                      </SortButton>
+                    </div>
+                  );
+                })}
+              </div>
+            </SortGroup>
           )}
           <table
             ref={dragTableRef}
@@ -192,6 +210,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
               onChange={props.onChange}
               scroll={props.scroll}
               customeTheme={props.theme}
+              type={type}
             />
             <Tbody
               ref={tbodyRef}

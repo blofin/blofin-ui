@@ -131,7 +131,8 @@ export const Primary: Story = {
                 ref={selectRef}
                 defaultValue={value1}
                 options={accountOptions1}
-                onChange={change1}>
+                onChange={change1}
+                auto={false}>
                 <div>
                   <span>custom</span>
                   <Button

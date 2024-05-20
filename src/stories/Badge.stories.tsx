@@ -3,6 +3,7 @@ import { Badge } from "../components/Badge/Badge";
 import { BadgeColor } from "../components/Badge/styles";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
+import { ReactNode } from "react";
 
 const meta: Meta<typeof Badge> = {
   /* 👇 The title prop is optional.
@@ -72,7 +73,7 @@ const BadgeWithHooks = ({
   color = "primary",
   decoration = true
 }: {
-  label?: string;
+  label?: ReactNode;
   color?: BadgeColor;
   decoration?: boolean;
 }) => {

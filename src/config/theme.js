@@ -25,196 +25,196 @@ module.exports = {
     colors: {
       light: {
         primary: {
-          DEFAULT: "#F80",
-          60: "rgba(255, 136, 0, 0.60)",
-          40: "rgba(255, 136, 0, 0.40)",
-          14: "rgba(255, 136, 0, 0.14)",
-          10: "rgba(255, 136, 0, 0.1)"
+          DEFAULT: "var(--light-primary-default)",
+          60: "var(--light-primary-60)",
+          40: "var(--light-primary-40)",
+          14: "var(--light-primary-14)",
+          10: "var(--light-primary-10)"
         },
         secondary: {
-          DEFAULT: "#0569FF",
-          14: "rgba(5, 105, 255, 0.14)"
+          DEFAULT: "var(--light-secondary-default)",
+          14: "var(--light-secondary-14)"
         },
         tertiary: {
-          DEFAULT: "#9FEA0E",
-          14: "rgba(159, 234, 14, 0.14)"
+          DEFAULT: "var(--light-tertiary-default)",
+          14: "var(--light-tertiary-14)"
         },
         success: {
-          DEFAULT: "#0FCC71",
-          14: "rgba(15, 204, 113, 0.14)"
+          DEFAULT: "var(--light-success-default)",
+          14: "var(--light-success-14)"
         },
         warning: {
-          DEFAULT: "#FFC400",
-          14: "rgba(255, 196, 0, 0.12)"
+          DEFAULT: "var(--light-warning-default)",
+          14: "var(--light-warning-14)"
         },
         danger: {
-          DEFAULT: "#D62035",
-          14: "rgba(214, 32, 53, 0.14)"
+          DEFAULT: "var(--light-danger-default)",
+          14: "var(--light-danger-14)"
         },
         green: {
-          DEFAULT: "#08C787",
-          alpha: "rgba(8, 199, 135, 0.12)"
+          DEFAULT: "var(--light-green-default)",
+          alpha: "var(--light-green-alpha)"
         },
         red: {
-          DEFAULT: "#F2465D",
-          alpha: "rgba(242, 70, 93, 0.12)"
+          DEFAULT: "var(--light-red-default)",
+          alpha: "var(--light-red-alpha)"
         },
-        background: "#FFFFFF",
-        second: "#050505",
+        background: "var(--light-background)",
+        second: "var(--light-second)",
         label: {
-          DEFAULT: "#0A0A0A",
-          60: "rgba(10, 10, 10, 0.6)",
-          40: "rgba(10, 10, 10, 0.4)",
-          20: "rgba(10, 10, 10, 0.2)"
+          DEFAULT: "var(--light-label-default)",
+          60: "var(--light-label-60)",
+          40: "var(--light-label-40)",
+          20: "var(--light-label-20)"
         },
         fill: {
-          primary: "#F7F8FA",
-          secondary: "#F0F1F5",
-          tertiary: "#ABADB2",
-          quaternary: "#E8E9EB"
+          primary: "var(--light-fill-primary)",
+          secondary: "var(--light-fill-secondary)",
+          tertiary: "var(--light-fill-tertiary)",
+          quaternary: "var(--light-fill-quaternary)"
         },
         line: {
-          primary: "#F5F6FA",
-          secondary: "#E6E7EB",
-          tertiary: "#D5D6DB"
+          primary: "var(--light-line-primary)",
+          secondary: "var(--light-line-secondary)",
+          tertiary: "var(--light-line-tertiary)"
         },
         hover: {
-          primary: "#F90",
-          secondary: "#0582FF",
-          tertiary: "#AAFA0F",
-          success: "#1AD97D",
-          warning: "#FFDA18",
-          danger: "#EB1730",
-          green: "#00D991",
-          red: "#FF4F67",
+          primary: "var(--light-hover-primary)",
+          secondary: "var(--light-hover-secondary)",
+          tertiary: "var(--light-hover-tertiary)",
+          success: "var(--light-hover-success)",
+          warning: "var(--light-hover-warning)",
+          danger: "var(--light-hover-danger)",
+          green: "var(--light-hover-green)",
+          red: "var(--light-hover-red)",
           fill: {
-            primary: "#F2F3F5",
-            secondary: "#EBEDF2",
-            tertiary: "#C4C6CC",
-            quaternary: "#EDEEF0"
+            primary: "var(--light-hover-fill-primary)",
+            secondary: "var(--light-hover-fill-secondary)",
+            tertiary: "var(--light-hover-fill-tertiary)",
+            quaternary: "var(--light-hover-fill-quaternary)"
           }
         },
         disabled: {
-          blue: "rgba(47, 84, 235, 0.4)"
+          blue: "var(--light-disabled-blue)"
         },
         badge: {
-          "primary-bg": "rgba(255, 136, 0, 0.14)",
-          "secondary-bg": "rgba(5, 105, 255, 0.14)",
-          "success-bg": "rgba(15, 204, 113, 0.14)",
-          "warning-bg": "rgba(255, 196, 0, 0.12)",
-          "danger-bg": "rgba(214, 32, 53, 0.14)",
-          "info-bg": "#EBEDF2"
+          "primary-bg": "var(--light-badge-primary-bg)",
+          "secondary-bg": "var(--light-badge-secondary-bg)",
+          "success-bg": "var(--light-badge-success-bg)",
+          "warning-bg": "var(--light-badge-warning-bg)",
+          "danger-bg": "var(--light-badge-danger-bg)",
+          "info-bg": "var(--light-badge-info-bg)"
         },
         pagination: {
-          primary: "#2F54EB",
-          "primary-hover": "#F6F7FB"
+          primary: "var(--light-pagination-primary)",
+          "primary-hover": "var(--light-pagination-primary-hover)"
         },
         input: {
-          primary: "#2F54EB",
-          gray: "#DCDCDD",
-          error: "#D9242F"
+          primary: "var(--light-input-primary)",
+          gray: "var(--light-input-gray)",
+          error: "var(--light-input-error)"
         },
         header: {
-          bgColor: "#FFFFFF"
+          bgColor: "var(--light-header-bgColor)"
         },
-        text: "#FFFFFF"
+        text: "var(--light-text)"
       },
       dark: {
         primary: {
-          DEFAULT: "#F80",
-          60: "rgba(255, 136, 0, 0.60)",
-          40: "rgba(255, 136, 0, 0.40)",
-          14: "rgba(255, 136, 0, 0.16)",
-          10: "rgba(255, 136, 0, 0.1)",
-          4: "rgba(255, 136, 0, 0.04)"
+          DEFAULT: "var(--dark-primary-default)",
+          60: "var(--dark-primary-60)",
+          40: "var(--dark-primary-40)",
+          14: "var(--dark-primary-14)",
+          10: "var(--dark-primary-10)",
+          4: "var(--dark-primary-10)"
         },
         secondary: {
-          DEFAULT: "#1E6BFF",
-          14: "rgba(30, 107, 255, 0/14)"
+          DEFAULT: "var(--dark-secondary-default)",
+          14: "var(--dark-secondary-14)"
         },
         tertiary: {
-          DEFAULT: "#A8FF00",
-          14: "rgba(168, 255, 0, 0.14)"
+          DEFAULT: "var(--dark-tertiary-default)",
+          14: "var(--dark-tertiary-14)"
         },
         success: {
-          DEFAULT: "#0FCC71",
-          14: "rgba(15, 204, 113, 0.14)"
+          DEFAULT: "var(--dark-success-default)",
+          14: "var(--dark-success-14)"
         },
         warning: {
-          DEFAULT: "#FFD60A",
-          14: "rgba(255, 214, 10, 0.14)"
+          DEFAULT: "var(--dark-warning-default)",
+          14: "var(--dark-warning-14)"
         },
         danger: {
-          DEFAULT: "#D62035",
-          14: "rgba(214, 32, 53, 0.14)"
+          DEFAULT: "var(--dark-danger-default)",
+          14: "var(--dark-danger-14)"
         },
         green: {
-          DEFAULT: "#08C787",
-          alpha: "rgba(8, 199, 135, 0.14)"
+          DEFAULT: "var(--dark-green-default)",
+          alpha: "var(--dark-green-alpha)"
         },
         red: {
-          DEFAULT: "#F2465D",
-          alpha: "rgba(242, 70, 93, 0.14)"
+          DEFAULT: "var(--dark-red-default)",
+          alpha: "var(--dark-red-alpha)"
         },
-        background: "#101014",
-        second: "#050505",
+        background: "var(--dark-background)",
+        second: "var(--dark-second)",
         label: {
-          DEFAULT: "#FCFDFF",
-          60: "rgba(235, 236, 245, 0.6)",
-          40: "rgba(235, 236, 245, 0.4)",
-          20: "rgba(235, 236, 245, 0.2)"
+          DEFAULT: "var(--dark-label-default)",
+          60: "var(--dark-label-60)",
+          40: "var(--dark-label-40)",
+          20: "var(--dark-label-20)",
         },
         fill: {
-          primary: "#000000",
-          secondary: "#1A1A1A",
-          tertiary: "#323234",
-          quaternary: "#282829"
+          primary: "var(--dark-fill-primary)",
+          secondary: "var(--dark-fill-secondary)",
+          tertiary: "var(--dark-fill-tertiary)",
+          quaternary: "var(--dark-fill-quaternary)"
         },
         line: {
-          primary: "#2F3033",
-          secondary: "#47484D",
-          tertiary: "#575961"
+          primary: "var(--dark-line-primary)",
+          secondary: "var(--dark-line-secondary)",
+          tertiary: "var(--dark-line-tertiary)"
         },
         hover: {
-          primary: "#FA7500",
-          secondary: "#1B60E5",
-          tertiary: "#A8FF00",
-          success: "#13BA6A",
-          warning: "#FFC908",
-          danger: "#BF1D30",
-          green: "#0BB87E",
-          red: "#E03A51",
+          primary: "var(--dark-hover-primary)",
+          secondary: "var(--dark-hover-secondary)",
+          tertiary: "var(--dark-hover-tertiary)",
+          success: "var(--dark-hover-success)",
+          warning: "var(--dark-hover-warning)",
+          danger: "var(--dark-hover-danger)",
+          green: "var(--dark-hover-green)",
+          red: "var(--dark-hover-red)",
           fill: {
-            primary: "#111214",
-            secondary: "#242424",
-            tertiary: "#3E3F41",
-            quaternary: "#373738"
+            primary: "var(--dark-hover-fill-primary)",
+            secondary: "var(--dark-hover-fill-secondary)",
+            tertiary: "var(--dark-hover-fill-tertiary)",
+            quaternary: "var(--dark-hover-fill-quaternary)"
           }
         },
         disabled: {
-          blue: "rgba(92, 124, 255, 0.4)"
+          blue: "var(--dark-disabled-blue)"
         },
         badge: {
-          "primary-bg": "rgba(255, 136, 0, 0.14)",
-          "secondary-bg": "rgba(30, 107, 255, 0.14)",
-          "success-bg": "rgba(15, 204, 113, 0.14)",
-          "warning-bg": "rgba(255, 214, 10, 0.14)",
-          "danger-bg": "rgba(214, 32, 53, 0.14)",
-          "info-bg": "#242424"
+          "primary-bg": "var(--dark-badge-primary-bg)",
+          "secondary-bg": "var(--dark-badge-secondary-bg)",
+          "success-bg": "var(--dark-badge-success-bg)",
+          "warning-bg": "var(--dark-badge-warning-bg)",
+          "danger-bg": "var(--dark-badge-danger-bg)",
+          "info-bg": "var(--dark-badge-info-bg)"
         },
         pagination: {
-          primary: "#2F54EB",
-          "primary-hover": "#F6F7FB"
+          primary: "var(--dark-pagination-primary)",
+          "primary-hover": "var(--dark-pagination-primary-hover)"
         },
         input: {
-          primary: "#2F54EB",
-          gray: "#DCDCDD",
-          error: "#D9242F"
+          primary: "var(--dark-input-primary)",
+          gray: "var(--dark-input-gray)",
+          error: "var(--dark-input-error)"
         },
         header: {
-          bgColor: "transparent"
+          bgColor: "var(--dark-header-bgColor)"
         },
-        text: "#FFFFFF"
+        text: "var(--dark-text)"
       }
     }
   }

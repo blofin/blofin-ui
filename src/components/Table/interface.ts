@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactNode } from "react";
 import { BUITheme } from "../..";
+import { SortType, SortsData } from "../Sort/reducer";
 interface TableColumnProps<T = any> {
   key?: string;
   title?: string;
@@ -10,6 +9,7 @@ interface TableColumnProps<T = any> {
   render?: (record: T) => JSX.Element;
   renderHeader?: (record: T) => JSX.Element;
   filter?: boolean;
+  type?: SortType;
 }
 
 interface TableProps<T = any> {
@@ -37,11 +37,12 @@ interface TableProps<T = any> {
   moveEnd?: (prev: string, next: string) => void;
   drag?: boolean;
   tableLayout?: any;
-  tbodyClass?:string;
-  dragClass?:string;
+  tbodyClass?: string;
+  dragClass?: string;
+  type?: SortType;
 }
 
-type SortProps = (data: { sort: "asc" | "desc" | "default"; sortKey: string }) => void;
+type SortProps = (data: SortsData[]|SortsData) => void;
 
 export type Direction = "prev" | "next";
 

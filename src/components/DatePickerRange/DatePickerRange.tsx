@@ -47,7 +47,7 @@ export type DatePickerRangeProps = {
   distance?: number;
 };
 
-export const DatePickerRange: React.FC<DatePickerRangeProps> = ({
+const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   className = "",
   defaultValue,
   setValues,
@@ -432,3 +432,5 @@ export const DatePickerRange: React.FC<DatePickerRangeProps> = ({
     </div>
   );
 };
+
+export default DatePickerRange

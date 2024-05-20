@@ -4,10 +4,149 @@
 
 @layer base {
   body {
-    @apply dark:bu-bg-black dark:bu-text-white bu-min-h-screen bu-relative;
+    @apply bu-relative bu-min-h-screen dark:bu-bg-black dark:bu-text-white;
+  }
+
+  :root {
+    --light-primary-default: #f80;
+    --light-primary-60: rgba(255, 136, 0, 0.6);
+    --light-primary-40: rgba(255, 136, 0, 0.4);
+    --light-primary-14: rgba(255, 136, 0, 0.14);
+    --light-primary-10: rgba(255, 136, 0, 0.1);
+    --light-secondary-default: #0569ff;
+    --light-secondary-14: rgba(5, 105, 255, 0.14);
+    --light-tertiary-default: #9fea0e;
+    --light-tertiary-14: rgba(159, 234, 14, 0.14);
+    --light-success-default: #0fcc71;
+    --light-success-14: rgba(15, 204, 113, 0.14);
+    --light-warning-default: #ffc400;
+    --light-warning-14: rgba(255, 196, 0, 0.12);
+    --light-danger-default: #d62035;
+    --light-danger-14: rgba(214, 32, 53, 0.14);
+    --light-green-default: #08c787;
+    --light-green-alpha: rgba(8, 199, 135, 0.12);
+    --light-red-default: #f2465d;
+    --light-red-alpha: rgba(242, 70, 93, 0.12);
+    --light-background: #ffffff;
+    --light-second: #050505;
+    --light-label-default: #0a0a0a;
+    --light-label-60: rgba(10, 10, 10, 0.6);
+    --light-label-40: rgba(10, 10, 10, 0.4);
+    --light-label-20: rgba(10, 10, 10, 0.2);
+    --light-fill-primary: #f7f8fa;
+    --light-fill-secondary: #f0f1f5;
+    --light-fill-tertiary: #abadb2;
+    --light-fill-quaternary: #e8e9eb;
+    --light-line-primary: #f5f6fa;
+    --light-line-secondary: #e6e7eb;
+    --light-line-tertiary: #b8b8bd;
+    --light-hover-primary: #f90;
+    --light-hover-secondary: #0582ff;
+    --light-hover-tertiary: #0582ff;
+    --light-hover-success: #0582ff;
+    --light-hover-warning: #ffda18;
+    --light-hover-anger: #eb1730;
+    --light-hover-green: #00d991;
+    --light-hover-red: #ff4f67;
+    --light-hover-fill-primary: #f2f3f5;
+    --light-hover-fill-secondary: #ebedf2;
+    --light-hover-fill-tertiary: #c4c6cc;
+    --light-hover-fill-quaternary: #edeef0;
+    --light-disabled-blue: rgba(47, 84, 235, 0.4);
+    --light-badge-primary-bg: rgba(255, 136, 0, 0.14);
+    --light-badge-secondary-bg: rgba(5, 105, 255, 0.14);
+    --light-badge-success-bg: rgba(15, 204, 113, 0.14);
+    --light-badge-warning-bg: rgba(255, 196, 0, 0.12);
+    --light-badge-danger-bg: rgba(214, 32, 53, 0.14);
+    --light-badge-info-bg: #ebedf2;
+    --light-pagination-primary: #2f54eb;
+    --light-pagination-primary-hover: #2f54eb;
+    --light-input-primary: #2f54eb;
+    --light-input-gray: #dcdcdd;
+    --light-input-error: #d9242f;
+    --light-header-bgColor: #ffffff;
+    --light-text: #ffffff;
+
+    --dark-primary-default: #f80;
+    --dark-primary-60: rgba(255, 136, 0, 0.6);
+    --dark-primary-40: rgba(255, 136, 0, 0.4);
+    --dark-primary-14: rgba(255, 136, 0, 0.16);
+    --dark-primary-10: rgba(255, 136, 0, 0.1);
+    --dark-primary-4: rgba(255, 136, 0, 0.04);
+
+    --dark-secondary-default: #1e6bff;
+    --dark-secondary-14: rgba(30, 107, 255, 0.14);
+
+    --dark-tertiary-default: #a8ff00;
+    --dark-tertiary-14: rgba(168, 255, 0, 0.14);
+
+    --dark-success-default: #0fcc71;
+    --dark-success-14: rgba(15, 204, 113, 0.14);
+
+    --dark-warning-default: #ffd60a;
+    --dark-warning-14: rgba(255, 214, 10, 0.14);
+
+    --dark-danger-default: #d62035;
+    --dark-danger-14: rgba(214, 32, 53, 0.14);
+
+    --dark-green-default: #08c787;
+    --dark-green-alpha: rgba(8, 199, 135, 0.14);
+
+    --dark-red-default: #f2465d;
+    --dark-red-alpha: rgba(242, 70, 93, 0.14);
+
+    --dark-background: #101014;
+
+    --dark-second: #050505;
+
+    --dark-label-default: #fcfdff;
+    --dark-label-60: rgba(235, 236, 245, 0.6);
+    --dark-label-40: rgba(235, 236, 245, 0.4);
+    --dark-label-20: rgba(235, 236, 245, 0.2);
+
+    --dark-fill-primary: #000000;
+    --dark-fill-secondary: #1a1a1a;
+    --dark-fill-tertiary: #323234;
+    --dark-fill-quaternary: #282829;
+
+    --dark-line-primary: #2f3033;
+    --dark-line-secondary: #47484d;
+    --dark-line-tertiary: #60626b;
+
+    --dark-hover-primary: #fa7500;
+    --dark-hover-secondary: #1b60e5;
+    --dark-hover-tertiary: #a8ff00;
+    --dark-hover-success: #13ba6a;
+    --dark-hover-warning: #ffc908;
+    --dark-hover-anger: #bf1d30;
+    --dark-hover-green: #0bb87e;
+    --dark-hover-red: #e03a51;
+    --dark-hover-fill-primary: #111214;
+    --dark-hover-fill-secondary: #242424;
+    --dark-hover-fill-tertiary: #3e3f41;
+    --dark-hover-fill-quaternary: #373738;
+
+    --dark-disabled-blue: rgba(92, 124, 255, 0.4);
+
+    --dark-badge-primary-bg: rgba(255, 136, 0, 0.14);
+    --dark-badge-secondary-bg: rgba(30, 107, 255, 0.14);
+    --dark-badge-success-bg: rgba(15, 204, 113, 0.14);
+    --dark-badge-warning-bg: rgba(255, 214, 10, 0.14);
+    --dark-badge-danger-bg: rgba(214, 32, 53, 0.14);
+    --dark-badge-info-bg: #242424;
+
+    --dark-pagination-primary: #2f54eb;
+    --dark-pagination-primary-hover: #f6f7fb;
+
+    --dark-input-primary: #2f54eb;
+    --dark-input-gray: #dcdcdd;
+    --dark-input-error: #d9242f;
+
+    --dark-header-bgColor: transparent;
+
+    --dark-text: #ffffff;
   }
 }
-
 
 .icon {
   width: 1em;

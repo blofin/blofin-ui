@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tab } from "../components/Tab/Tab";
+import { Tab, TabRef } from "../components/Tab/Tab";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { Select } from "..";
+import { useEffect, useRef, useState } from "react";
 
 const meta: Meta<typeof Tab> = {
   /* 👇 The title prop is Tab.
@@ -66,14 +67,26 @@ export const Primary: Story = {
   render: () => {
     const mode = useMode();
 
+    const [index,setIndex]=useState(0)
+
+    const ref=useRef<TabRef>(null)
+
     const change = (key: string) => {
       console.log(key);
     };
+    
+
+    useEffect(()=>{
+      setTimeout(()=>{
+        ref.current?.setTab(1)
+      },1000)
+    },[])
+
 
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-full">
-          <Tab items={items} size="small" defaultIndex={5} change={change}>
+          <Tab ref={ref} items={items} size="small" defaultIndex={index} change={change}>
             <input type="checkbox" />
           </Tab>
         </div>

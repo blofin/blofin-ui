@@ -26,6 +26,7 @@ export interface DialogProps {
   hideConfirm?: Boolean;
   hideIcon?: Boolean;
   className?: string;
+  contentClassName?: string;
 }
 
 export const Dialog: FC<DialogProps> = (props) => {
@@ -46,6 +47,7 @@ export const Dialog: FC<DialogProps> = (props) => {
     hideConfirm = false,
     hideIcon = false,
     className,
+    contentClassName,
     open
   } = props;
   const { theme } = useTheme();
@@ -100,7 +102,7 @@ export const Dialog: FC<DialogProps> = (props) => {
             <div className={textStyles({ theme: getTheme() })}>
               {title !== null && <div className={styles.title}>{title}</div>}
             </div>
-            <div className={styles.content}>{content}</div>
+            <div className={`${styles.content} ${contentClassName}`}>{content}</div>
             <div className={footerStyles({ footerLayout })}>
               {footer === null ? null : footer ? (
                 footer
