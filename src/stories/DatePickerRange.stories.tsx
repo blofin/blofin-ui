@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { DatePickerRange } from "../components/DatePickerRange/DatePickerRange";
+import DatePickerRange from "../components/DatePickerRange/DatePickerRange";
 import addDays from "date-fns/addDays";
 import { useState } from "react";
 import { ThemeProvider } from "../provider/ThemeProvider";
