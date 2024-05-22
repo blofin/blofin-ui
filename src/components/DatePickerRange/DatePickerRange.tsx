@@ -19,8 +19,8 @@ import useTheme from "../../provider/useTheme";
 import { locales } from "./localesOnDate";
 
 export type DateValue = {
-  start_time: number;
-  end_time: number;
+  start_time?: number;
+  end_time?: number;
 };
 
 export type QuickSelection = {
@@ -81,7 +81,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
 
   const [recentDays, setRecentDays] = React.useState<number | undefined>();
 
-  const [isChange, setIsChange] = React.useState<boolean>(false);
+  const isChange = React.useRef<boolean>(false);
 
   const ref = React.useRef<PopupRef>(null);
 
@@ -157,7 +157,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
     const to = toUtc(
       includesToday ? new Date().getTime() : addDays(new Date().getTime(), -1).getTime()
     );
-    setIsChange(true);
+    isChange.current = true;
     setDate({ from, to });
     setValues({
       start_time: from.getTime(),
@@ -187,25 +187,31 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
         }
       }
     }
-    setIsChange(false);
+    isChange.current = false;
     setDate(day);
   };
 
-  const handleClose = React.useCallback(() => {
-    if (!isChange) {
+  const handleClose = () => {
+    if (!isChange.current && defaultValue?.start_time && defaultValue?.end_time) {
       setDate({
         from: new Date(defaultValue.start_time),
         to: new Date(defaultValue.end_time)
+      });
+    }
+    if (!defaultValue?.start_time && !defaultValue?.end_time) {
+      setDate({
+        from: undefined,
+        to: undefined
       });
     }
     setTimeout(() => {
       setRecentDays(undefined);
       setStartMonthShow(false);
       setEndMonthShow(false);
-      setIsChange(false);
+      isChange.current = false;
     }, 500);
     ref.current?.close();
-  }, [defaultValue, isChange]);
+  };
 
   const handleConfirm = () => {
     if (date?.from && date?.to) {
@@ -224,10 +230,14 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
           ? toUtc(new Date().getTime()).getTime()
           : date.to.getTime()
       });
-    } else {
-      return;
     }
-    setIsChange(true);
+    isChange.current = true;
+    if (!date?.from && !date?.to) {
+      setValues({
+        start_time: undefined,
+        end_time: undefined
+      });
+    }
     handleClose();
   };
 
@@ -247,6 +257,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
 
   React.useEffect(() => {
     const { start_time, end_time } = defaultValue;
+    if (start_time === undefined || end_time === undefined) return;
     const startDate = new Date(start_time);
     const endDate = new Date(end_time);
     if (startTime && startDate.getTime() < startTime.getTime()) {
@@ -420,7 +431,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
                       <>{selectText}: </>
                     )}
                   </Typography>
-                  <Button onClick={handleConfirm} size="small" variant="primary">
+                  <Button onClick={() => handleConfirm()} size="small" variant="primary">
                     {confirmText}
                   </Button>
                 </div>
@@ -433,4 +444,4 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   );
 };
 
-export default DatePickerRange
+export default DatePickerRange;
