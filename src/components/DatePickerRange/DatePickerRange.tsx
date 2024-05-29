@@ -30,6 +30,7 @@ export type QuickSelection = {
 
 export type DatePickerRangeProps = {
   className?: string;
+  dateClassName?: string;
   defaultValue: DateValue;
   setValues: (values: DateValue) => void;
   disabledDays?: Matcher | Matcher[];
@@ -49,6 +50,7 @@ export type DatePickerRangeProps = {
 
 export const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   className = "",
+  dateClassName="",
   defaultValue,
   setValues,
   disabledDays,
@@ -264,9 +266,9 @@ export const DatePickerRange: React.FC<DatePickerRangeProps> = ({
         title={
           <div
             id="date"
-            className={`bu-flex bu-h-[40px] bu-w-[220px] bu-cursor-pointer bu-items-center bu-justify-between bu-rounded-[4px] bu-border bu-p-[8px] ${DatePickerBg(
+            className={`bu-flex bu-h-[40px] bu-w-[260px] bu-cursor-pointer bu-items-center bu-justify-between bu-rounded-[4px] bu-border bu-p-[8px] ${DatePickerBg(
               { theme }
-            )} ${!date && "bu-text-muted-foreground"}`}>
+            )}${!date ? " bu-text-muted-foreground" : ""} ${dateClassName}`}>
             {date?.from ? (
               date.to ? (
                 <>
