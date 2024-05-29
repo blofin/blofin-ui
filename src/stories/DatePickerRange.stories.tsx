@@ -51,6 +51,7 @@ export const Primary: Story = {
         <div className="bu-h-[500px] bu-w-full">
           <DatePickerRange
             defaultValue={date}
+            dateClassName={'bu-w-[260px]'}
             setValues={handleChangeDate}
             limitDays={180}
             disabledDays={disabledDays}
