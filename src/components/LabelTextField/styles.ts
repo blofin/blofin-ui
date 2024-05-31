@@ -48,6 +48,15 @@ const InputOutlinedStyles = cva("", {
   }
 });
 
+const InputWithFocus = cva("", {
+  variants: {
+    theme: {
+      light: ["focus-within:bu-border-light-primary hover:bu-border-light-primary"],
+      dark: ["focus-within:bu-border-dark-primary hover:bu-border-dark-primary"]
+    }
+  }
+});
+
 const InputBgVariants = ({
   variant,
   theme,
@@ -68,18 +77,15 @@ const InputBgVariants = ({
         outlined: InputOutlinedStyles({ theme })
       },
       theme: {
-        light: [
-          "bu-text-light-label focus-within:bu-border-light-primary hover:bu-border-light-primary"
-        ],
-        dark: [
-          "bu-text-dark-label focus-within:bu-border-dark-primary hover:bu-border-dark-primary"
-        ]
+        light: ["bu-text-light-label"],
+        dark: ["bu-text-dark-label"]
       },
       error: {
         true: InputErrorStyles({ theme })
       },
       disabled: {
-        true: InputDisabledStyles({ theme })
+        true: InputDisabledStyles({ theme }),
+        false: InputWithFocus({ theme })
       },
       noClassName: {
         true: "bu-h-[40px]"
