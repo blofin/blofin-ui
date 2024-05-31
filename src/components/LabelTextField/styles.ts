@@ -21,14 +21,22 @@ const InputErrorStyles = cva("", {
   }
 });
 
-const InputDisabledStyles = cva("", {
-  variants: {
-    theme: {
-      light: ["!bu-text-light-label-60"],
-      dark: ["!bu-text-dark-label-60"]
+const InputDisabledStyles = (props: { variant: InputVariant; theme: BUITheme }) => {
+  return cva("", {
+    variants: {
+      theme: {
+        light: ["!bu-text-light-label-40"],
+        dark: ["!bu-text-dark-label-40"]
+      },
+      variant: {
+        filled:
+          props.theme === "dark" ? "!bu-bg-dark-fill-quaternary" : "!bu-bg-light-fill-quaternary",
+        outlined:
+          props.theme === "dark" ? "!bu-bg-dark-fill-secondary" : "!bu-bg-light-fill-secondary"
+      }
     }
-  }
-});
+  })(props);
+};
 
 const InputFilledStyles = cva("", {
   variants: {
@@ -84,7 +92,7 @@ const InputBgVariants = ({
         true: InputErrorStyles({ theme })
       },
       disabled: {
-        true: InputDisabledStyles({ theme }),
+        true: InputDisabledStyles({ theme, variant }),
         false: InputWithFocus({ theme })
       },
       noClassName: {

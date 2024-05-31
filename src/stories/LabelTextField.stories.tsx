@@ -83,12 +83,15 @@ const LabelTextFieldWithTheme = ({
         startAdornment={startAdornment}
         endAdornment={endAdornment}
         disabled={true}
+        theme="dark"
       />
       <LabelTextField
         variant="outlined"
         label={label}
         startAdornment={startAdornment}
         endAdornment={endAdornment}
+        disabled={true}
+        theme="dark"
       />
       <LabelTextField
         variant="filled"
