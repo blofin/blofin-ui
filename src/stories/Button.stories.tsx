@@ -47,6 +47,7 @@ export const All = {
         <div style={{ display: "flex", gap: "10px" }}>
           <Button variant="ghost" size="small">
             Button
+            
           </Button>
           <Button variant="primary" size="small" type="submit">
             Button
