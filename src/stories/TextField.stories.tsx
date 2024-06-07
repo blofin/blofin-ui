@@ -69,6 +69,13 @@ const TextFieldWithTheme = ({
         />
         <TextField variant="outlined" startAdornment={startAdornment} endAdornment={endAdornment} />
         <TextField variant="outlined" className="bu-h-[30px] bu-w-24" />
+        <TextField variant="outlined" inputSize="lg" />
+        <TextField
+          variant="filled"
+          startAdornment={startAdornment}
+          endAdornment={endAdornment}
+          inputSize="lg"
+        />
       </div>
     </ThemeProvider>
   );
