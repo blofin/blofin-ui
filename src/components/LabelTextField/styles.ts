@@ -72,8 +72,8 @@ const AdornmentStyles = (props: { size: "md" | "lg"; position: "start" | "end" }
         md: ["bu-px-2 bu-text-sm bu-font-medium"],
         lg:
           props.position === "start"
-            ? ["bu-pl-3 bu-pr-2 bu-text-lg bu-font-medium"]
-            : ["bu-pl-2 bu-pr-3 bu-text-lg bu-font-medium"]
+            ? ["bu-pl-3 bu-pr-2 bu-text-md bu-font-medium"]
+            : ["bu-pl-2 bu-pr-3 bu-text-md bu-font-medium"]
       }
     }
   })(props);
