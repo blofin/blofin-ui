@@ -3,7 +3,13 @@ import { BUITheme } from "../..";
 import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
 import { Typography } from "../Typography/Typography";
-import { HelperTextVariants, InputBgVariants, InputVariant, LabelVariants } from "./styles";
+import {
+  HelperTextVariants,
+  InputBgVariants,
+  InputVariant,
+  LabelVariants,
+  AdornmentStyles
+} from "./styles";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: ReactNode;
@@ -15,6 +21,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   helperText?: string;
   disabled?: boolean;
   inputClassName?: string;
+  inputSize?: "md" | "lg";
 }
 
 const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -31,6 +38,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
     error,
     helperText,
     disabled,
+    inputSize = "md",
     ...otherProps
   } = props;
   const { theme } = useTheme();
@@ -51,7 +59,8 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             theme: mode ? mode : theme,
             error,
             disabled,
-            noClassName: !className
+            noClassName: !className,
+            size: inputSize
           }),
           className
         )}>
@@ -59,7 +68,9 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
           {startAdornment && (
             <div
               className={
-                typeof startAdornment === "string" ? "bu-px-2 bu-text-base bu-font-medium" : ""
+                typeof startAdornment === "string"
+                  ? AdornmentStyles({ size: inputSize, position: "start" })
+                  : ""
               }>
               {startAdornment}
             </div>
@@ -71,16 +82,19 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             {...otherProps}
             ref={ref as LegacyRef<HTMLInputElement>}
             className={cn(
-              "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-text-base bu-outline-none focus:bu-outline-0 focus-visible:bu-outline-0",
+              "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-outline-none focus:bu-outline-0 focus-visible:bu-outline-0",
+              inputSize === "lg" ? "bu-text-lg" : "bu-text-sm",
               inputClassName,
-              `${!startAdornment && "bu-pl-2"}`,
-              `${!endAdornment && "bu-pr-2"}`
+              !startAdornment && (inputSize === "lg" ? "bu-pl-3" : "bu-pl-2"),
+              !endAdornment && (inputSize === "lg" ? "bu-pr-3" : "bu-pr-2")
             )}
           />
           {endAdornment && (
             <div
               className={
-                typeof endAdornment === "string" ? "bu-px-2 bu-text-sm bu-font-medium" : ""
+                typeof endAdornment === "string"
+                  ? AdornmentStyles({ size: inputSize, position: "end" })
+                  : ""
               }>
               {endAdornment}
             </div>

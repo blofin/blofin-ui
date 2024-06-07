@@ -65,18 +65,34 @@ const InputWithFocus = cva("", {
   }
 });
 
+const AdornmentStyles = (props: { size: "md" | "lg"; position: "start" | "end" }) => {
+  return cva("", {
+    variants: {
+      size: {
+        md: ["bu-px-2 bu-text-sm bu-font-medium"],
+        lg:
+          props.position === "start"
+            ? ["bu-pl-3 bu-pr-2 bu-text-lg bu-font-medium"]
+            : ["bu-pl-2 bu-pr-3 bu-text-lg bu-font-medium"]
+      }
+    }
+  })(props);
+};
+
 const InputBgVariants = ({
   variant,
   theme,
   error = false,
   disabled = false,
-  noClassName = true
+  noClassName = true,
+  size
 }: {
   variant: InputVariant;
   theme: BUITheme;
   error?: boolean;
   disabled?: boolean;
   noClassName?: boolean;
+  size: "md" | "lg";
 }) => {
   return cva("bu-w-full bu-rounded bu-border", {
     variants: {
@@ -96,7 +112,7 @@ const InputBgVariants = ({
         false: InputWithFocus({ theme })
       },
       noClassName: {
-        true: "bu-h-[40px]"
+        true: size === "lg" ? "bu-h-[48px]" : "bu-h-[40px]"
       }
     }
   })({ variant, theme, error, disabled, noClassName });
@@ -111,4 +127,4 @@ const HelperTextVariants = cva("", {
   }
 });
 
-export { HelperTextVariants, InputBgVariants, LabelVariants };
+export { HelperTextVariants, InputBgVariants, LabelVariants, AdornmentStyles };
