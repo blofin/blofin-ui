@@ -19,11 +19,11 @@ const outlinedStyles = cva("", {
   }
 });
 
-const menuStyles = cva("", {
+const menuStyles = cva("bu-border-[1px]", {
   variants: {
     theme: {
-      light: "bu-bg-light-fill-secondary",
-      dark: "bu-bg-dark-fill-secondary"
+      light: "bu-bg-light-background bu-border-light-line-secondary",
+      dark: "bu-bg-dark-background bu-border-dark-line-primary"
     }
   }
 });
@@ -31,8 +31,8 @@ const menuStyles = cva("", {
 const activeItemStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-text-light-primary",
-      dark: "bu-text-dark-primary"
+      light: "bu-text-light-primary bu-bg-light-fill-secondary",
+      dark: "bu-text-dark-primary bu-bg-dark-fill-secondary"
     }
   }
 });
@@ -43,8 +43,8 @@ const menuItemStyles = ({ theme, active }: { theme: BUITheme; active: boolean })
     {
       variants: {
         theme: {
-          light: "bu-bg-light-fill-secondary hover:bu-bg-light-hover-fill-secondary",
-          dark: "bu-bg-dark-fill-secondary bu-text-dark-label hover:bu-bg-dark-hover-fill-secondary"
+          light: "bu-bg-light-background hover:bu-bg-light-hover-fill-secondary",
+          dark: "bu-bg-dark-background bu-text-dark-label hover:bu-bg-dark-hover-fill-secondary"
         },
         active: {
           true: activeItemStyles({ theme }),
