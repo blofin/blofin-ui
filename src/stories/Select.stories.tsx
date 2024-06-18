@@ -78,6 +78,7 @@ export const Controlled: Story = {
           <div className="bu-flex bu-h-[24px] bu-w-full bu-flex-col bu-gap-4">
             <label htmlFor="select">{selectedValue1}</label>
             <Select
+            labelId='testId'
               selectItems={[
                 { label: "Good Till Cancel", value: "gtc" },
                 { label: "Bob", value: "bob" }

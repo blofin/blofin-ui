@@ -88,6 +88,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   offsetParent?: number;
   trigger?: "click" | "hover";
   adsorb?: boolean; // scroll with parent
+  labelId?:string;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -108,8 +109,11 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     trigger = "click",
     menuWrapperClassName,
     adsorb = false,
+    labelId,
     ...otherProps
   } = props;
+
+  console.log(labelId,'labelId')
 
   const { theme } = useTheme();
 
@@ -195,6 +199,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   return (
     <div className="bu-flex" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} ref={domRef}>
       <div
+        id={labelId}
         ref={selectRef}
         className={`bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center ${
           adsorb ? "bu-relative" : ""
