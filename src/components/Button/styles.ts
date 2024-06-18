@@ -11,11 +11,11 @@ const primaryStyles = cva("bu-text-light-second", {
   }
 });
 
-const primaryDisabledStyles = cva("bu-text-light-second", {
+const primaryDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-primary-40", "hover:bu-bg-light-primary-40"],
-      dark: ["bu-bg-dark-primary-40", "hover:bu-bg-dark-primary-40"]
+      light: ["bu-bg-light-fill-secondary","bu-text-light-label-40", "hover:bu-bg-light-fill-secondary"],
+      dark: ["bu-bg-dark-fill-secondary","bu-text-dark-label-40", "hover:bu-bg-dark-fill-secondary"]
     }
   }
 });
@@ -36,8 +36,8 @@ const secondaryStyles = cva("", {
 const secondaryDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-primary-14", "hover:bu-bg-light-primary-14", "bu-text-light-primary-60"],
-      dark: ["bu-bg-dark-primary-14", "hover:bu-bg-dark-primary-14", "bu-text-dark-primary-60"]
+      light: ["bu-bg-light-fill-secondary","bu-text-light-label-40", "hover:bu-bg-light-fill-secondary"],
+      dark: ["bu-bg-dark-fill-secondary","bu-text-dark-label-40", "hover:bu-bg-dark-fill-secondary"]
     }
   }
 });
@@ -62,12 +62,8 @@ const tertiaryStyles = cva("", {
 const tertiaryDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: [
-        "bu-bg-light-fill-primary",
-        "hover:bu-bg-light-fill-primary",
-        "bu-text-light-label-40"
-      ],
-      dark: ["bu-bg-dark-fill-secondary", "hover:bu-bg-dark-fill-secondary", "bu-text-dark-label-60"]
+      light: ["bu-bg-light-fill-secondary","bu-text-light-label-40", "hover:bu-bg-light-fill-secondary"],
+      dark: ["bu-bg-dark-fill-secondary","bu-text-dark-label-40", "hover:bu-bg-dark-fill-secondary"]
     }
   }
 });
@@ -139,7 +135,7 @@ const ghostDisabledStyles = cva("", {
         "hover:bu-text-light-label-40",
         "bu-border",
         "bu-border-solid",
-        "bu-border-light-primary-60",
+        "bu-border-light-fill-secondary",
         "hover:bu-bg-transparent"
       ],
       dark: [
@@ -147,7 +143,7 @@ const ghostDisabledStyles = cva("", {
         "hover:bu-text-dark-label-40",
         "bu-border",
         "bu-border-solid",
-        "bu-border-dark-primary-60",
+        "bu-border-dark-fill-secondary",
         "hover:bu-bg-transparent"
       ]
     }

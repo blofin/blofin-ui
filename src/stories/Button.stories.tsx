@@ -34,7 +34,8 @@ export const Primary = {
     label: "Button",
     variant: "primary",
     size: "medium",
-    children: "Button"
+    children: "Button",
+    disabled:true
   }
 };
 
@@ -45,9 +46,8 @@ export const All = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div style={{ display: "flex", gap: "10px" }}>
-          <Button variant="ghost" size="small">
+          <Button variant="ghost" size="small" disabled>
             Button
-            
           </Button>
           <Button variant="primary" size="small" type="submit">
             Button
