@@ -113,8 +113,6 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     ...otherProps
   } = props;
 
-  console.log(labelId,'labelId')
-
   const { theme } = useTheme();
 
   const domRef = useRef<any>(null);
