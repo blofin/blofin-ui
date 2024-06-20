@@ -14,6 +14,7 @@ import { TextField, useTheme } from "../..";
 import useAlign from "../../hooks/useAlign";
 import { activeStyles, bgStyles, disabledStyles, iconStyles, itemStyles } from "./styles";
 import SelectArrow from "../../assets/icons/text-arrow.svg";
+import SearchIcon from "../../assets/icons/search.svg";
 
 interface Options {
   label: string;
@@ -37,6 +38,8 @@ interface TextSelectProps {
   scrollContainer?: HTMLDivElement | null;
   children?: JSX.Element | ReactNode;
   auto?: boolean;
+  search?: boolean;
+  searchChange?: (value: string) => void;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -57,7 +60,9 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       scrollContainer,
       children,
       hide,
-      auto = true
+      auto = true,
+      search = false,
+      searchChange
     },
     ref
   ) => {
@@ -83,6 +88,10 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
         onChange(value);
       }
       hide();
+    };
+
+    const handleSearch = (value: string) => {
+      searchChange && searchChange(value);
     };
 
     useEffect(() => {
@@ -122,21 +131,31 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
               left: offsetX + "px"
             }}
             ref={targetRef}>
-            {options.map((item) => {
-              return (
-                <div
-                  onClick={() => handleClick(item.value)}
-                  className={`${styles.item}  ${
-                    disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
-                  } ${defaultValue === item.value ? activeStyles({ theme }) : ""} `}
-                  style={{ width: width - 2 + "px" }}
-                  key={item.value}>
-                  {item.label}
+            <div ref={ref} style={{ width: width - 2 + "px" }}>
+              {search && (
+                <div className="bu-mb-[8px] bu-px-[8px]">
+                  <TextField
+                    variant="filled"
+                    startAdornment={<SearchIcon className="bu-mx-[8px]" />}
+                    onChange={(e) => handleSearch(e.target.value)}
+                  />
                 </div>
-              );
-            })}
-            <div ref={ref} className="bu-cursor-pointer bu-px-[16px]">
-              {children}
+              )}
+
+              {options.map((item) => {
+                return (
+                  <div
+                    onClick={() => handleClick(item.value)}
+                    className={`${styles.item}  ${
+                      disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
+                    } ${defaultValue === item.value ? activeStyles({ theme }) : ""} `}
+                    style={{ width: width - 2 + "px" }}
+                    key={item.value}>
+                    {item.label}
+                  </div>
+                );
+              })}
+              <div className="bu-cursor-pointer bu-px-[16px]">{children}</div>
             </div>
           </div>,
           document.body
@@ -171,7 +190,9 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     value,
     scrollContainer,
     children,
-    auto=true
+    auto = true,
+    search = false,
+    searchChange
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -179,6 +200,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const customeRef = useRef<HTMLDivElement | null>(null);
+
+  const searchRef = useRef<HTMLDivElement | null>(null);
 
   const [isFocus, setIsFocus] = useState(false);
 
@@ -196,6 +219,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
   const hide = () => {
     setShow(false);
     setIsFocus(false);
+    searchChange && searchChange("");
   };
 
   const handleClickOutside = (event: any) => {
@@ -264,7 +288,9 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           className={className}
           scrollContainer={scrollContainer}
           hide={hide}
-          auto={auto}>
+          auto={auto}
+          search={search}
+          searchChange={searchChange}>
           {children}
         </Options>
       )}

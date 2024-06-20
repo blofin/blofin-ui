@@ -3,7 +3,7 @@ import { TextSelect, TextSelectRefProps } from "../components/TextSelect/TextSel
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { useEffect, useRef, useState } from "react";
-import { Button, Dialog, Tooltip } from "..";
+import { Button, Dialog, TextField, Tooltip } from "..";
 
 const meta: Meta<typeof TextSelect> = {
   /* 👇 The title prop is Tab.
@@ -42,6 +42,8 @@ export const Primary: Story = {
       }
     ]);
 
+    const optionsRef=useRef(accountOptions1);
+
     const [open, setOpen] = useState(false);
 
     const [from, setFrom] = useState("");
@@ -77,6 +79,10 @@ export const Primary: Story = {
       console.log(value);
       setTo(value);
     };
+
+    const searchChange=(value:string)=>{
+      setAccountOptions1(optionsRef.current.filter((item:any)=>item.label.includes(value)));
+    }
 
     useEffect(() => {
       setTimeout(() => {
@@ -132,6 +138,8 @@ export const Primary: Story = {
                 defaultValue={value1}
                 options={accountOptions1}
                 onChange={change1}
+                search={true}
+                searchChange={searchChange}
                 auto={false}>
                 <div>
                   <span>custom</span>
