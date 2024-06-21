@@ -12,7 +12,7 @@ import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
 import { TextField, useTheme } from "../..";
 import useAlign from "../../hooks/useAlign";
-import { activeStyles, bgStyles, disabledStyles, iconStyles, itemStyles } from "./styles";
+import { activeStyles, bgStyles, disabledStyles, iconStyles, itemStyles, searchIconStyles, searchStyles } from "./styles";
 import SelectArrow from "../../assets/icons/text-arrow.svg";
 import SearchIcon from "../../assets/icons/search.svg";
 
@@ -133,10 +133,10 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
             ref={targetRef}>
             <div ref={ref} style={{ width: width - 2 + "px" }}>
               {search && (
-                <div className="bu-mb-[8px] bu-px-[8px]">
+                <div className={searchStyles({theme})}>
                   <TextField
                     variant="filled"
-                    startAdornment={<SearchIcon className="bu-mx-[8px]" />}
+                    startAdornment={<SearchIcon className={searchIconStyles({theme})} />}
                     onChange={(e) => handleSearch(e.target.value)}
                   />
                 </div>

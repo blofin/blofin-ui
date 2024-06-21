@@ -36,6 +36,24 @@ const iconStyles = cva("bu-mr-[8px] bu-h-[16px] bu-w-[16px]", {
   }
 });
 
+const searchStyles = cva("bu-mb-[8px] bu-pt-[8px] bu-px-[8px] bu-sticky bu-top-0", {
+  variants: {
+    theme: {
+      light: "bu-bg-light-background",
+      dark: "bu-bg-dark-background"
+    }
+  }
+});
+
+const searchIconStyles = cva("bu-mx-[8px]", {
+  variants: {
+    theme: {
+      light: "bu-text-light-label-40",
+      dark: "bu-text-dark-label-40"
+    }
+  }
+});
+
 const disabledStyles = cva("", {
   variants: {
     theme: {
@@ -45,4 +63,12 @@ const disabledStyles = cva("", {
   }
 });
 
-export { bgStyles, itemStyles, iconStyles, disabledStyles, activeStyles };
+export {
+  bgStyles,
+  itemStyles,
+  iconStyles,
+  disabledStyles,
+  activeStyles,
+  searchStyles,
+  searchIconStyles
+};

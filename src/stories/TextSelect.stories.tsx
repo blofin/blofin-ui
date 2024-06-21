@@ -39,6 +39,26 @@ export const Primary: Story = {
       {
         label: "最新价",
         value: "limit"
+      },
+      {
+        label: "最新价1",
+        value: "limit1"
+      },
+      {
+        label: "最新价2",
+        value: "limit2"
+      },
+      {
+        label: "最新价3",
+        value: "limit3"
+      },
+      {
+        label: "最新价4",
+        value: "limit4"
+      },
+      {
+        label: "最新价5",
+        value: "limit5"
       }
     ]);
 
@@ -140,6 +160,7 @@ export const Primary: Story = {
                 onChange={change1}
                 search={true}
                 searchChange={searchChange}
+                className='bu-max-h-[150px] bu-overflow-y-scroll'
                 auto={false}>
                 <div>
                   <span>custom</span>
