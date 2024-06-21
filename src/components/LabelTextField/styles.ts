@@ -3,11 +3,15 @@ import { BUITheme } from "../../types/component";
 
 export type InputVariant = "filled" | "outlined";
 
-const LabelVariants = cva("bu-mb-1", {
+const LabelVariants = cva("", {
   variants: {
     theme: {
       light: ["!bu-text-light-label-60"],
       dark: ["!bu-text-dark-label-60"]
+    },
+    size: {
+      md: ["bu-mb-1"],
+      lg: ["bu-mb-2", "!bu-text-base bu-leading-[20px]"]
     }
   }
 });

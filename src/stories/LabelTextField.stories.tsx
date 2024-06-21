@@ -68,6 +68,7 @@ const LabelTextFieldWithTheme = ({
         label={label}
         startAdornment={startAdornment}
         endAdornment={endAdornment}
+        inputSize="lg"
       />
       <LabelTextField
         variant="filled"
