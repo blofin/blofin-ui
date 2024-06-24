@@ -73,7 +73,7 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
       <div
         ref={ref}
         className={`bu-absolute bu-z-[99999] bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] ${
-          search ? "bu-pt-[8px]" : "bu-py-[8px]"
+          search ? "bu-pb-[8px]" : "bu-py-[8px]"
         } ${menuStyles({ theme })} ${menuWrapperClassName || ""}`}
         style={{
           left: `${align === "left" ? offsetLeft + "px" : ""}`,
