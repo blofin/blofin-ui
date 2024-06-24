@@ -37,6 +37,7 @@ type SelectMenuProps = {
   customSelectItems?: (item: SelectItem) => ReactNode;
   search?: boolean;
   searchChange?: (value: string) => void;
+  rowKey?: string;
 };
 
 const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
@@ -55,7 +56,8 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
       popupContainer,
       customSelectItems,
       search,
-      searchChange
+      searchChange,
+      rowKey
     },
     ref
   ) => {
@@ -97,7 +99,7 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
                   theme,
                   active: activeColor ? value === item.value : activeColor
                 })}
-                key={item.value}
+                key={item[(rowKey as keyof SelectItem) || value]}
                 onClick={() => handleSelect(item.value)}>
                 {customSelectItems ? customSelectItems(item) : item.label}
               </li>
@@ -129,6 +131,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   search?: boolean;
   customSelectItems?: (item: SelectItem) => ReactNode;
   searchChange?: (value: string) => void;
+  rowKey?: string;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -153,6 +156,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     customSelectItems,
     search,
     searchChange,
+    rowKey,
     ...otherProps
   } = props;
 
@@ -176,9 +180,9 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
 
   const keyByItems = keyBy(selectItems, "value");
 
-  const keyByItemsMemo=useMemo(()=>{
-    return keyByItems
-  },[value])
+  const keyByItemsMemo = useMemo(() => {
+    return keyByItems;
+  }, [value]);
 
   const handleSelect = (value: string) => {
     handleClose();
@@ -302,6 +306,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           offsetParent={offsetParent}
           menuWrapperClassName={menuWrapperClassName}
           popupContainer={adsorb ? selectRef.current : null}
+          rowKey={rowKey}
         />
       )}
       <input
