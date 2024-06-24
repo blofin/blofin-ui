@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ReactNode, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { Select } from "../components/Select";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
@@ -69,8 +69,50 @@ export const Primary: Story = {
 export const Controlled: Story = {
   render: () => {
     const mode = useMode();
-    const [selectedValue1, setSelectedValue1] = useState("gtc");
+    const [selectedValue1, setSelectedValue1] = useState("market");
     const [selectedValue2, setSelectedValue2] = useState("gtc");
+
+    const [accountOptions1, setAccountOptions1] = useState<any>([
+      {
+        label: "市价",
+        value: "market"
+      },
+      {
+        label: "最新价",
+        value: "limit"
+      },
+      {
+        label: "最新价1",
+        value: "limit1"
+      },
+      {
+        label: "最新价2",
+        value: "limit2"
+      },
+      {
+        label: "最新价3",
+        value: "limit3"
+      },
+      {
+        label: "最新价4",
+        value: "limit4"
+      },
+      {
+        label: "最新价5",
+        value: "limit5"
+      }
+    ]);
+
+    const optionsRef = useRef(accountOptions1);
+
+    const searchChange = (value: string) => {
+      setAccountOptions1(
+        optionsRef.current.filter(
+          (item: any) =>
+            item.label.includes(value.toLowerCase()) || item.value.includes(value.toLowerCase())
+        )
+      );
+    };
 
     return (
       <ThemeProvider value={{ theme: mode }}>
@@ -78,11 +120,17 @@ export const Controlled: Story = {
           <div className="bu-flex bu-h-[24px] bu-w-full bu-flex-col bu-gap-4">
             <label htmlFor="select">{selectedValue1}</label>
             <Select
-            labelId='testId'
-              selectItems={[
-                { label: "Good Till Cancel", value: "gtc" },
-                { label: "Bob", value: "bob" }
-              ]}
+              labelId="testId"
+              selectItems={accountOptions1}
+              customSelectItems={(item: { label: string; value: string }) => {
+                return (
+                  <div className="bu-w-[440px]">
+                    {item.label} --- {item.value}
+                  </div>
+                );
+              }}
+              search={true}
+              searchChange={searchChange}
               value={selectedValue1}
               handleChange={(value) => setSelectedValue1(value)}
             />

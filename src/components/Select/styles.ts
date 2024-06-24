@@ -22,8 +22,8 @@ const outlinedStyles = cva("", {
 const menuStyles = cva("bu-border-[1px]", {
   variants: {
     theme: {
-      light: "bu-bg-light-background bu-border-light-line-secondary",
-      dark: "bu-bg-dark-background bu-border-dark-line-primary"
+      light: "bu-border-light-line-secondary bu-bg-light-background",
+      dark: "bu-border-dark-line-primary bu-bg-dark-background"
     }
   }
 });
@@ -31,8 +31,8 @@ const menuStyles = cva("bu-border-[1px]", {
 const activeItemStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-text-light-primary bu-bg-light-fill-secondary",
-      dark: "bu-text-dark-primary bu-bg-dark-fill-secondary"
+      light: "bu-bg-light-fill-secondary bu-text-light-primary",
+      dark: "bu-bg-dark-fill-secondary bu-text-dark-primary"
     }
   }
 });
@@ -48,11 +48,29 @@ const menuItemStyles = ({ theme, active }: { theme: BUITheme; active: boolean })
         },
         active: {
           true: activeItemStyles({ theme }),
-          false:''
+          false: ""
         }
       }
     }
   )({ theme, active });
 };
 
-export { labelStyles, menuItemStyles, menuStyles,outlinedStyles };
+const searchStyles = cva("bu-sticky bu-top-0 bu-mb-[8px] bu-px-[8px] bu-pt-[8px]", {
+  variants: {
+    theme: {
+      light: "bu-bg-light-background",
+      dark: "bu-bg-dark-background"
+    }
+  }
+});
+
+const searchIconStyles = cva("bu-mx-[8px]", {
+  variants: {
+    theme: {
+      light: "bu-text-light-label-40",
+      dark: "bu-text-dark-label-40"
+    }
+  }
+});
+
+export { labelStyles, menuItemStyles, menuStyles, outlinedStyles, searchStyles, searchIconStyles };

@@ -1,28 +1,24 @@
-import { ReactNode, forwardRef, useEffect, useRef, useState } from "react";
+import { ReactNode, forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { BUITheme, Typography, useTheme } from "../..";
+import { BUITheme, TextField, Typography, useTheme } from "../..";
 import SelectArrow from "../../assets/icons/select-arrow.svg";
 import ArrowFill from "../../assets/icons/arrow-fill.svg";
 import useAlign from "../../hooks/useAlign";
 import { keyBy } from "../../utils/helper";
 import { cn } from "../../utils/utils";
-import { labelStyles, menuItemStyles, menuStyles, outlinedStyles } from "./styles";
+import SearchIcon from "../../assets/icons/search.svg";
+import {
+  labelStyles,
+  menuItemStyles,
+  menuStyles,
+  outlinedStyles,
+  searchIconStyles,
+  searchStyles
+} from "./styles";
 
 export type SelectItem = { label: string; value: string };
 
-const SelectMenu = ({
-  value,
-  items,
-  align,
-  handleSelect,
-  handleClose,
-  offset,
-  activeColor,
-  theme,
-  offsetParent,
-  menuWrapperClassName,
-  popupContainer
-}: {
+type SelectMenuProps = {
   value: string;
   items: SelectItem[];
   align: "left" | "right";
@@ -38,40 +34,81 @@ const SelectMenu = ({
   offsetParent?: number;
   menuWrapperClassName?: string;
   popupContainer: HTMLDivElement | null;
-}) => {
-  // const { theme } = useTheme();
-
-  const { offsetLeft, offsetRight, offsetY } = offset;
-
-  return createPortal(
-    <div
-      className={`bu-absolute bu-z-[99999] bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
-        { theme }
-      )} ${menuWrapperClassName || ""}`}
-      style={{
-        left: `${align === "left" ? offsetLeft + "px" : ""}`,
-        right: `${align === "right" ? offsetRight + "px" : ""}`,
-        top: offsetY + (offsetParent || 18) + "px"
-      }}>
-      <ul>
-        {items?.map((item) => {
-          return (
-            <li
-              className={menuItemStyles({
-                theme,
-                active: activeColor ? value === item.value : activeColor
-              })}
-              key={item.value}
-              onClick={() => handleSelect(item.value)}>
-              {item.label}
-            </li>
-          );
-        })}
-      </ul>
-    </div>,
-    popupContainer || document.body
-  );
+  customSelectItems?: (item: SelectItem) => ReactNode;
+  search?: boolean;
+  searchChange?: (value: string) => void;
 };
+
+const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
+  (
+    {
+      value,
+      items,
+      align,
+      handleSelect,
+      handleClose,
+      offset,
+      activeColor,
+      theme,
+      offsetParent,
+      menuWrapperClassName,
+      popupContainer,
+      customSelectItems,
+      search,
+      searchChange
+    },
+    ref
+  ) => {
+    // const { theme } = useTheme();
+
+    const { offsetLeft, offsetRight, offsetY } = offset;
+
+    const handleSearch = (value: string) => {
+      searchChange && searchChange(value);
+    };
+
+    return createPortal(
+      <div
+        ref={ref}
+        className={`bu-absolute bu-z-[99999] bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
+          { theme }
+        )} ${menuWrapperClassName || ""}`}
+        style={{
+          left: `${align === "left" ? offsetLeft + "px" : ""}`,
+          right: `${align === "right" ? offsetRight + "px" : ""}`,
+          top: offsetY + (offsetParent || 18) + "px"
+        }}>
+        {search && (
+          <div className={searchStyles({ theme })}>
+            <TextField
+              variant="filled"
+              className="bu-h-[38px]"
+              startAdornment={<SearchIcon className={searchIconStyles({ theme })} />}
+              onChange={(e) => handleSearch(e.target.value)}
+            />
+          </div>
+        )}
+
+        <ul>
+          {items?.map((item) => {
+            return (
+              <li
+                className={menuItemStyles({
+                  theme,
+                  active: activeColor ? value === item.value : activeColor
+                })}
+                key={item.value}
+                onClick={() => handleSelect(item.value)}>
+                {customSelectItems ? customSelectItems(item) : item.label}
+              </li>
+            );
+          })}
+        </ul>
+      </div>,
+      popupContainer || document.body
+    );
+  }
+);
 
 export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   selectItems: SelectItem[];
@@ -88,7 +125,10 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   offsetParent?: number;
   trigger?: "click" | "hover";
   adsorb?: boolean; // scroll with parent
-  labelId?:string;
+  labelId?: string;
+  search?: boolean;
+  customSelectItems?: (item: SelectItem) => ReactNode;
+  searchChange?: (value: string) => void;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -110,6 +150,9 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     menuWrapperClassName,
     adsorb = false,
     labelId,
+    customSelectItems,
+    search,
+    searchChange,
     ...otherProps
   } = props;
 
@@ -118,6 +161,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   const domRef = useRef<any>(null);
 
   const selectRef = useRef<HTMLDivElement | null>(null);
+
+  const customeRef = useRef<HTMLDivElement | null>(null);
 
   const { getOffset } = useAlign(selectRef.current);
 
@@ -130,6 +175,10 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const keyByItems = keyBy(selectItems, "value");
+
+  const keyByItemsMemo=useMemo(()=>{
+    return keyByItems
+  },[value])
 
   const handleSelect = (value: string) => {
     handleClose();
@@ -172,9 +221,13 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
 
   // 当单击文档时，检查单击事件的目标是否在下拉窗口内
   const handleClickOutside = (event: any) => {
+    if (customeRef.current?.contains(event.target)) {
+      return;
+    }
     if (domRef.current && !domRef.current.contains(event.target)) {
       setShowMenu(false);
     }
+    searchChange && searchChange("");
   };
 
   useEffect(() => {
@@ -206,12 +259,12 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
         {wrapper ? (
           wrapper(
             <Typography variant="body4" className={labelClassName}>
-              {keyByItems[String(value)].label}
+              {keyByItemsMemo[String(value)]?.label}
             </Typography>
           )
         ) : (
           <Typography variant="body4" className={labelClassName}>
-            {keyByItems[String(value)].label}
+            {keyByItemsMemo[String(value)]?.label}
           </Typography>
         )}
         {selectType === "filled" ? (
@@ -234,8 +287,12 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
       </div>
       {showMenu && (
         <SelectMenu
+          ref={customeRef}
+          search={search}
+          searchChange={searchChange}
           value={String(value)}
           items={selectItems}
+          customSelectItems={customSelectItems}
           align={align}
           handleSelect={handleSelect}
           handleClose={handleClose}
