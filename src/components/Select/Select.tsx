@@ -72,9 +72,9 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
     return createPortal(
       <div
         ref={ref}
-        className={`bu-absolute bu-z-[99999] bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${menuStyles(
-          { theme }
-        )} ${menuWrapperClassName || ""}`}
+        className={`bu-absolute bu-z-[99999] bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] ${
+          search ? "bu-pt-[8px]" : "bu-py-[8px]"
+        } ${menuStyles({ theme })} ${menuWrapperClassName || ""}`}
         style={{
           left: `${align === "left" ? offsetLeft + "px" : ""}`,
           right: `${align === "right" ? offsetRight + "px" : ""}`,
@@ -132,6 +132,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   customSelectItems?: (item: SelectItem) => ReactNode;
   searchChange?: (value: string) => void;
   rowKey?: string;
+  labelField?: string;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -157,6 +158,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     search,
     searchChange,
     rowKey,
+    labelField = "label",
     ...otherProps
   } = props;
 
@@ -263,12 +265,12 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
         {wrapper ? (
           wrapper(
             <Typography variant="body4" className={labelClassName}>
-              {keyByItemsMemo[String(value)]?.label}
+              {keyByItemsMemo[String(value)]?.[labelField]}
             </Typography>
           )
         ) : (
           <Typography variant="body4" className={labelClassName}>
-            {keyByItemsMemo[String(value)]?.label}
+            {keyByItemsMemo[String(value)]?.[labelField]}
           </Typography>
         )}
         {selectType === "filled" ? (
