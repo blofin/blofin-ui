@@ -8,6 +8,7 @@ interface PopupProps {
   content: ReactNode;
   cancel?: () => void;
   distance?: number;
+  disabled?: boolean;
 }
 
 export interface PopupRef {
@@ -27,7 +28,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
     };
   });
 
-  const { title, content, cancel, distance = 10 } = props;
+  const { title, content, cancel, distance = 10, disabled = false } = props;
 
   const [show, setShow] = useState(false);
 
@@ -59,6 +60,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
   };
 
   const toggle = () => {
+    if (disabled) return;
     setShow(!show);
     if (show) {
       cancelRef.current && cancelRef.current();

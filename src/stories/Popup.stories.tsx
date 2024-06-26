@@ -37,6 +37,7 @@ export const Primary: Story = {
         <Popup
           ref={ref}
           title="我是Title"
+          // disabled
           cancel={cancel}
           content={
             <div className="bu-w-[60px] bu-bg-light-primary bu-text-right">
