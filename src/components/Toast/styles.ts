@@ -25,7 +25,7 @@ const bgStyles = cva("", {
   }
 });
 
-const textStyles = cva("", {
+const textStyles = cva("bu-leading-[24px]", {
   variants: {
     theme: {
       light: "bu-text-light-label",
