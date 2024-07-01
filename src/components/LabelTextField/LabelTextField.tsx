@@ -80,7 +80,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             </div>
           )}
           <input
-            id={typeof label === "string" ? (id ? id : `bui-${label}`) : undefined}
+            id={id ? id : (typeof label === "string" ? `bui-${label}` : undefined)}
             disabled={disabled}
             type={type}
             {...otherProps}
