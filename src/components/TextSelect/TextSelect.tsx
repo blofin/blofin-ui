@@ -22,6 +22,7 @@ interface Options {
 }
 
 interface TextSelectProps {
+  id?: string;
   options: Options[];
   onChange: (value: string) => void;
   inputChange?: (value: string) => void;
@@ -175,6 +176,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
   });
 
   const {
+    id,
     placeholder,
     defaultValue,
     options,
@@ -247,6 +249,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
   return (
     <div className="bu-relative bu-cursor-pointer" ref={targetRef}>
       <TextField
+        id={id || ''}
         ref={inputRef}
         inputClassName={styles.input}
         variant="outlined"
