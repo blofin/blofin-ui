@@ -14,6 +14,7 @@ interface TbodyProps {
   tdClass?: string;
   customeTheme?: BUITheme;
   tbodyClass?: string;
+  rowIdPrefix?: string;
 }
 
 const Tbody = forwardRef<HTMLTableRowElement | null, TbodyProps>((props, ref) => {
@@ -33,9 +34,10 @@ const Tbody = forwardRef<HTMLTableRowElement | null, TbodyProps>((props, ref) =>
 
   return (
     <tbody className={`${styles.tbody} ${tbodyClass}`}>
-      {data.map((item) => {
+      {data.map((item, index) => {
         return (
           <tr
+            id={props.rowIdPrefix ? `${props.rowIdPrefix}-${index}` : ""}
             ref={ref}
             key={item[props.rowKey]}
             className={`${styles["hover"]} ${props.tdClass}`}

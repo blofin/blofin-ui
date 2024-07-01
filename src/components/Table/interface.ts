@@ -40,6 +40,7 @@ interface TableProps<T = any> {
   tbodyClass?: string;
   dragClass?: string;
   type?: SortType;
+  rowIdPrefix?: string;
 }
 
 type SortProps = (data: SortsData[]|SortsData) => void;
