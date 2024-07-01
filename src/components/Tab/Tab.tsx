@@ -86,6 +86,7 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
           {items.map((item) => {
             return (
               <li
+                id={item.key}
                 className={`${itemStyles({ size })} ${active === item.key ? act : noAct}`}
                 onClick={() => toggle(item.key)}
                 key={item.key}>

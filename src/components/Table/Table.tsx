@@ -221,6 +221,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
               rowClick={props.rowClick}
               customeTheme={props.theme}
               tbodyClass={props.tbodyClass ? props.tbodyClass : ""}
+              rowIdPrefix={props.rowIdPrefix || ""}
             />
           </table>
 
