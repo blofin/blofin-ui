@@ -184,7 +184,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
 
   const keyByItemsMemo = useMemo(() => {
     return keyByItems;
-  }, [value]);
+  }, [value, selectItems]);
 
   const handleSelect = (value: string) => {
     handleClose();
