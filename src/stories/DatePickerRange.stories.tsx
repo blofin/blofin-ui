@@ -62,6 +62,7 @@ export const Primary: Story = {
             cancelText="Cancel"
             confirmText="Confirm"
             toText="To"
+            auto={false}
             includesToday={false}></DatePickerRange>
         </div>
       </ThemeProvider>

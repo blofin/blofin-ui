@@ -46,6 +46,7 @@ export type DatePickerRangeProps = {
   cancelText: string;
   toText: string;
   distance?: number;
+  auto?: boolean;
 };
 
 const DatePickerRange: React.FC<DatePickerRangeProps> = ({
@@ -65,7 +66,8 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   confirmText = "Confirm",
   cancelText = "Cancel",
   toText = "-",
-  distance = 5
+  distance = 5,
+  auto=true
 }) => {
   const [date, setDate] = React.useState<DateRange | undefined>();
 
@@ -274,6 +276,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
         ref={ref}
         distance={distance}
         cancel={handleClose}
+        auto={auto}
         title={
           <div
             id="date"
