@@ -185,12 +185,12 @@ tr:last-child {
 }
 .scroll-light {
   &::-webkit-scrollbar-thumb {
-    @apply bu-bg-light-line-tertiary;
+    background-color: #b8b8bd;
   }
 }
 
 .scroll-dark {
   &::-webkit-scrollbar-thumb {
-    @apply bu-bg-dark-line-tertiary;
+    background-color: #60626b;
   }
 }
