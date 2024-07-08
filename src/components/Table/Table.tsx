@@ -156,7 +156,12 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
           height: props.scroll ? " 100%" : "auto"
         }}
         onScroll={onScroll}>
-        <div ref={ref} className={styles.scroll} style={props.scroll ? { height: "100%", overflowY: "scroll" } : {}}>
+        <div
+          ref={ref}
+          className={`${styles.scroll} ${
+            theme === "dark" ? styles["scroll-dark"] : styles["scroll-light"]
+          }`}
+          style={props.scroll ? { height: "100%", overflowY: "scroll" } : {}}>
           {drag && data.length > 0 && (
             <SortGroup type={type}>
               <div
