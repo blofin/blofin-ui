@@ -9,6 +9,7 @@ interface PopupProps {
   cancel?: () => void;
   distance?: number;
   disabled?: boolean;
+  auto?: boolean;
 }
 
 export interface PopupRef {
@@ -28,7 +29,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
     };
   });
 
-  const { title, content, cancel, distance = 10, disabled = false } = props;
+  const { title, content, cancel, distance = 10, disabled = false, auto } = props;
 
   const [show, setShow] = useState(false);
 
@@ -84,13 +85,17 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
         setIsRight(false);
       }
 
-      if (bottom + height > screenHeight) {
-        setIsToped(false);
-      } else {
+      if (!auto) {
         setIsToped(true);
+      } else {
+        if (bottom + height > screenHeight) {
+          setIsToped(false);
+        } else {
+          setIsToped(true);
+        }
       }
     }
-  }, [show]);
+  }, [show, auto]);
 
   useEffect(() => {
     if (popupRef.current) {

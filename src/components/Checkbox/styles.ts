@@ -27,8 +27,8 @@ const CheckMarkVariants = cva(
   {
     variants: {
       theme: {
-        light: ["bu-border-light-label-60"],
-        dark: ["bu-border-dark-label-60"]
+        light: ["bu-border-light-label-40"],
+        dark: ["bu-border-dark-label-40"]
       }
     }
   }
@@ -37,8 +37,8 @@ const CheckMarkVariants = cva(
 const CheckboxLabelVariants = cva("bu-select-none bu-text-sm", {
   variants: {
     theme: {
-      light: ["bu-text-light-label-60"],
-      dark: ["bu-text-dark-label-60"]
+      light: ["bu-text-light-label-40"],
+      dark: ["bu-text-dark-label-40"]
     }
   }
 });
