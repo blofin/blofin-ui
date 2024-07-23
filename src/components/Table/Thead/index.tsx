@@ -19,10 +19,11 @@ interface TheadProps {
   moveEnd?: (prev: number, next: number) => void;
   drag?: boolean;
   type?: SortType;
+  methodRef?:any
 }
 
 const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) => {
-  const { columns, customeTheme, data, moveEnd, drag, onChange, type } = props;
+  const { columns, customeTheme, data, moveEnd, drag, onChange, type,methodRef } = props;
 
   const { theme } = useTheme();
 
@@ -41,7 +42,7 @@ const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) =>
   };
 
   return (
-    <SortGroup type={type}>
+    <SortGroup ref={methodRef} type={type}>
       <thead
         className={`${styles.thead} ${props.theadClass}`}
         style={props.scroll ? { position: "sticky", zIndex: "999", top: "-1px" } : {}}>

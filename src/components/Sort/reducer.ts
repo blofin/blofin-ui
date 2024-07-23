@@ -26,9 +26,10 @@ type StateType = {
 };
 
 type ActionType = {
-  type: "changeSort";
+  type: "changeSort" | "restSort";
   payload: SortsState;
   success?: (state: SortsState[]) => void;
+  reset?: () => void;
 };
 
 const State = {
@@ -69,6 +70,13 @@ const reducer = (state: StateType, action: ActionType) => {
           sorts: value
         };
       }
+
+    case "restSort":
+      action.reset && action.reset();
+      return {
+        ...state,
+        sorts: []
+      };
     default:
       return state;
   }

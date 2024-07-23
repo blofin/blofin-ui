@@ -1,15 +1,33 @@
-import { FC, useReducer } from "react";
-import { Context, reducer, State } from "./reducer";
+import { FC, useReducer, forwardRef, useImperativeHandle, useEffect } from "react";
+import { Context, reducer, SortEnum, State } from "./reducer";
 
 interface SortGroupProps {
   children: JSX.Element;
   type?: "single" | "multiple";
 }
 
-const SortGroup: FC<SortGroupProps> = ({ children, type = "single" }) => {
-  const [state, dispatch] = useReducer(reducer, { ...State, type });
+const SortGroup = forwardRef<{ restSort: (callBack:()=>void) => void }, SortGroupProps>(
+  ({ children, type = "single" }, ref) => {
+    const [state, dispatch] = useReducer(reducer, { ...State, type });
 
-  return <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>;
-};
+    const restSort = (callBack:()=>void) => {
+      dispatch({
+        type: "restSort",
+        payload: { sort: "", sortType: SortEnum.default },
+        reset: () => {
+          callBack()
+        }
+      });
+    };
+
+    useImperativeHandle(ref, () => {
+      return {
+        restSort
+      };
+    });
+
+    return <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>;
+  }
+);
 
 export default SortGroup;

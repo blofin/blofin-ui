@@ -41,9 +41,10 @@ interface TableProps<T = any> {
   dragClass?: string;
   type?: SortType;
   rowIdPrefix?: string;
+  methodRef?: any;
 }
 
-type SortProps = (data: SortsData[]|SortsData) => void;
+type SortProps = (data: SortsData[] | SortsData) => void;
 
 export type Direction = "prev" | "next";
 

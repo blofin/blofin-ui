@@ -1,4 +1,12 @@
-import { forwardRef, UIEvent, useEffect, useReducer, useRef, useState } from "react";
+import {
+  forwardRef,
+  UIEvent,
+  useEffect,
+  useImperativeHandle,
+  useReducer,
+  useRef,
+  useState
+} from "react";
 import Empty from "../Empty";
 // import StyledPagination from '../StyledPagination/StylePagination';
 import { Context, reducer, State } from "./context";
@@ -23,11 +31,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
 
   const dragTableRef = useRef<HTMLTableElement>(null);
 
-  const normalTableRef = useRef<HTMLTableElement>(null);
-
   const theadRef = useRef<HTMLTableRowElement | null>(null);
-
-  const normalTheadRef = useRef<HTMLTableRowElement | null>(null);
 
   const tbodyRef = useRef<HTMLTableRowElement | null>(null);
 
@@ -41,7 +45,8 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     drag = false,
     tableLayout,
     dragClass,
-    type = "single"
+    type = "single",
+    methodRef
   } = props;
 
   const { theme } = useTheme();
@@ -211,6 +216,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
               scroll={props.scroll}
               customeTheme={props.theme}
               type={type}
+              methodRef={methodRef}
             />
             <Tbody
               ref={tbodyRef}
