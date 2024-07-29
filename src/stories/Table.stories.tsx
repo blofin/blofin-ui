@@ -34,7 +34,7 @@ const data = [
     id: "2222",
     name: "HLY",
     address: "Beijing",
-    name1: "HLY1HLY1HLY1HLY1HLY1HLY1HLY1HLY1HLY1HLY1HLY1HLY1HLY1HLY1HLY1",
+    name1: "HLY1HLY1HLY",
     name2: "HLy2",
     name3: "HLy2",
     name4: "HLy2"
@@ -136,9 +136,11 @@ export const Primary: Story = {
         key: "id",
         title: `id`,
         width: "100px",
-        align: "flex-start",
         filter: true,
-        fixed: "left"
+        fixed: "left",
+        onCell: (_, index) => {
+          return index === 0 ? 2 : 0;
+        }
       },
       {
         key: "name",

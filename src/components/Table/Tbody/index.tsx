@@ -34,26 +34,33 @@ const Tbody = forwardRef<HTMLTableRowElement | null, TbodyProps>((props, ref) =>
 
   return (
     <tbody className={`${styles.tbody} ${tbodyClass}`}>
-      {data.map((item, index) => {
+      {data.map((item, col) => {
+        let i = 0;
+        let location = 0;
         return (
           <tr
-            id={props.rowIdPrefix ? `${props.rowIdPrefix}-${index}` : ""}
+            id={props.rowIdPrefix ? `${props.rowIdPrefix}-${col}` : ""}
             ref={ref}
             key={item[props.rowKey]}
             className={`${styles["hover"]} ${props.tdClass}`}
             style={props.rowClick ? { cursor: "pointer" } : {}}
             onClick={() => handleClick(item)}>
             {columns.map((v, index) => {
-              return (
+              if (v.onCell) {
+                i = v.onCell(item, col);
+                location = index;
+              }
+              return index <= location || index > i ? (
                 <td
+                  colSpan={v.onCell && v?.onCell(item, col)}
                   key={v.key}
                   className={`${getClass(v, index).join(" ")} ${styles.td} ${bgStyles({
                     theme: customeTheme ? customeTheme : theme
                   })}`}
                   style={cssPosition(v, offets[index].offset)}>
-                  {v.render ? v.render(item) : item[v.key as string]}
+                  {v.render ? v.render(item, col) : item[v.key as string]}
                 </td>
-              );
+              ) : null;
             })}
           </tr>
         );
