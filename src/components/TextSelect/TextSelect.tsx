@@ -15,8 +15,9 @@ import useAlign from "../../hooks/useAlign";
 import { activeStyles, bgStyles, disabledStyles, iconStyles, itemStyles, searchIconStyles, searchStyles } from "./styles";
 import SelectArrow from "../../assets/icons/text-arrow.svg";
 import SearchIcon from "../../assets/icons/search.svg";
+import { CustomFields } from "../../types/component";
 
-interface Options {
+interface Options extends CustomFields {
   label: string;
   value: string;
 }
@@ -41,6 +42,8 @@ interface TextSelectProps {
   auto?: boolean;
   search?: boolean;
   searchChange?: (value: string) => void;
+  startAdornment?:ReactNode
+  customSelectItems?: (item: Options) => ReactNode;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -63,7 +66,8 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       hide,
       auto = true,
       search = false,
-      searchChange
+      searchChange,
+      customSelectItems
     },
     ref
   ) => {
@@ -152,7 +156,7 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
                     } ${defaultValue === item.value ? activeStyles({ theme }) : ""} `}
                     style={{ width: width - 2 + "px" }}
                     key={item.value}>
-                    {item.label}
+                     {customSelectItems ? customSelectItems(item) : item.label}
                   </div>
                 );
               })}
@@ -194,7 +198,9 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     children,
     auto = true,
     search = false,
-    searchChange
+    searchChange,
+    startAdornment,
+    customSelectItems
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -267,6 +273,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         onChange={(e) => {
           inputChange && inputChange(e.target.value);
         }}
+        startAdornment={startAdornment}
         endAdornment={
           !hideEndAdornment && (
             <SelectArrow
@@ -290,6 +297,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           defaultValue={defaultValue}
           className={className}
           scrollContainer={scrollContainer}
+          customSelectItems={customSelectItems}
           hide={hide}
           auto={auto}
           search={search}
