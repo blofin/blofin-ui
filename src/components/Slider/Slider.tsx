@@ -29,10 +29,11 @@ export interface SliderProps {
    * BUI theme
    */
   theme?: BUITheme;
+  id?: string;
 }
 
 export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
-  const { value, onSliderChange, theme: mode } = props;
+  const { value, onSliderChange, theme: mode, id } = props;
   const { theme } = useTheme();
 
   const railRef = useRef<HTMLDivElement>(null);
@@ -93,7 +94,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
   };
 
   return (
-    <div className={styles["slider-container"]}>
+    <div id={id ? `${id}-slider-container` : ""} className={styles["slider-container"]}>
       <div className={styles["slider-content"]}>
         <div
           ref={railRef}
@@ -101,7 +102,10 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
         <div
           className={`${styles["track"]} ${cn(TrackVariants({ theme: mode || theme }))}`}
           style={{ width: `${value}%` }}></div>
-        <div className={styles["mark-container"]} onClick={(e) => handleContainerClick(e)}>
+        <div
+          id={id ? `${id}-mark-container` : ""}
+          className={styles["mark-container"]}
+          onClick={(e) => handleContainerClick(e)}>
           <div
             className={`${styles["mark"]} ${cn(
               SliderMarkVariants({ theme: mode || theme }),
@@ -148,6 +152,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           </div>
         </div>
         <div
+          id={id ? `${id}-thumb-container` : ""}
           className={styles["thumb-container"]}
           style={{
             left: `${value}%`
@@ -159,6 +164,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
             {value}%
           </div>
           <div
+            id={id ? `${id}-thumb` : ""}
             className={`${styles["thumb"]} ${cn(SliderThumbVariants({ theme: mode || theme }))}`}
             onMouseDown={handleMouseDown}></div>
         </div>
