@@ -46,6 +46,9 @@ export const All = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div style={{ display: "flex", gap: "10px" }}>
+          <Button.LoadingButton variant="ghost" size="small" >
+            Loading Button
+          </Button.LoadingButton>
           <Button variant="ghost" size="small" disabled>
             Button
           </Button>

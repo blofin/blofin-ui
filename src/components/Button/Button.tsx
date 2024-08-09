@@ -4,6 +4,7 @@ import { cn } from "../../utils/utils";
 import buttonVariants from "./styles";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./types";
 import useTheme from "../../provider/useTheme";
+import Loading from "./Loading";
 
 export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -93,4 +94,12 @@ const WhiteButton: FC<ButtonProps> = (props) => {
   );
 };
 
+const LoadingButton: FC<ButtonProps> = (props) => {
+  const { theme } = useTheme();
+
+  return <Button {...props} variant="ghost" endIcon={<Loading />}></Button>;
+};
+
 Button.WhiteButton = WhiteButton;
+
+Button.LoadingButton = LoadingButton;
