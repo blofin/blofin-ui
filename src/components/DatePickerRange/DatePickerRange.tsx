@@ -16,7 +16,7 @@ import ArrowUpLine from "../../assets/icons/arrow-up-l-line.svg";
 import SubtractLine from "../../assets/icons/subtract-line.svg";
 import { ArrowLine, DatePickerBg } from "./styles";
 import useTheme from "../../provider/useTheme";
-import { locales } from "./localesOnDate";
+import { loadLocale } from "./locales";
 
 export type DateValue = {
   start_time?: number;
@@ -85,6 +85,8 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
 
   const [recentDays, setRecentDays] = React.useState<number | undefined>();
 
+  const [locale, setLocale] = React.useState(null);
+
   const isChange = React.useRef<boolean>(false);
 
   const ref = React.useRef<PopupRef>(null);
@@ -103,8 +105,13 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
     today: utcToZonedTime(new Date().getTime(), "UTC")
   };
 
-  const locale = React.useMemo(() => {
-    return locales[lang as keyof typeof locales];
+  React.useEffect(() => {
+    const fetchLocale = async () => {
+      const loadedLocale = await loadLocale(lang);
+      setLocale(loadedLocale);
+    };
+
+    fetchLocale();
   }, [lang]);
 
   const calculateMonths = React.useMemo(() => {
