@@ -8,7 +8,7 @@ import { drawerVariants, iconStyles } from "./styles";
 export interface DrawerProps {
   title: null | string | React.ReactNode;
   content: string | React.ReactNode;
-  drawerContentClass:string;
+  drawerContentClass: string;
   cancel?: () => void;
   open: boolean;
   theme?: BUITheme;
@@ -25,7 +25,7 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
     hideIcon = false,
     open,
     placement = "right",
-    drawerContentClass='bu-w-[300px]'
+    drawerContentClass = "bu-w-[300px]"
   } = props;
   const { theme } = useTheme();
   const getTheme = () => {
