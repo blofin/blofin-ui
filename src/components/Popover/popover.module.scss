@@ -9,3 +9,7 @@
     }
   }
 }
+
+.outside-popover{
+  @apply bu-absolute bu-top-4 bu-z-[1000] bu-shadow;
+}

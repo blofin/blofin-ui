@@ -38,6 +38,7 @@ type SelectMenuProps = {
   search?: boolean;
   searchChange?: (value: string) => void;
   rowKey?: string;
+  styles?:object
 };
 
 const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
@@ -57,7 +58,8 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
       customSelectItems,
       search,
       searchChange,
-      rowKey
+      rowKey,
+      styles
     },
     ref
   ) => {
@@ -78,7 +80,8 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
         style={{
           left: `${align === "left" ? offsetLeft + "px" : ""}`,
           right: `${align === "right" ? offsetRight + "px" : ""}`,
-          top: offsetY + (offsetParent || 18) + "px"
+          top: offsetY + (offsetParent || 18) + "px",
+          ...styles
         }}>
         {search && (
           <div className={searchStyles({ theme })}>
@@ -133,6 +136,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   searchChange?: (value: string) => void;
   rowKey?: string;
   labelField?: string;
+  styles?: object;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -159,6 +163,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     searchChange,
     rowKey,
     labelField = "label",
+    styles,
     ...otherProps
   } = props;
 
@@ -309,6 +314,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           menuWrapperClassName={menuWrapperClassName}
           popupContainer={adsorb ? selectRef.current : null}
           rowKey={rowKey}
+          styles={styles}
         />
       )}
       <input

@@ -11,3 +11,6 @@ export interface Base {
   theme?: BUITheme;
   className?: string;
 }
+export interface CustomFields {
+  [key: string]: any;
+}

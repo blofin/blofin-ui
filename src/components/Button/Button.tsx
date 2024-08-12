@@ -4,6 +4,7 @@ import { cn } from "../../utils/utils";
 import buttonVariants from "./styles";
 import { ButtonShape, ButtonSize, ButtonVariant } from "./types";
 import useTheme from "../../provider/useTheme";
+import Loading from "./Loading";
 
 export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -34,6 +35,8 @@ export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElemen
   shape?: ButtonShape;
 
   children?: React.ReactNode;
+
+  loading?: boolean;
 }
 
 export const Button = ({
@@ -48,9 +51,14 @@ export const Button = ({
   shape = "normal",
   className = "",
   theme: mode,
+  loading,
   ...props
 }: ButtonProps) => {
   const handleClick = () => {
+    if (loading) {
+      return;
+    }
+
     if (onClick) {
       onClick();
     }
@@ -59,11 +67,11 @@ export const Button = ({
   const { theme } = useTheme();
 
   const buttonProps = {
-    variant,
+    variant: loading ? "tertiary" : variant,
     size,
     theme: mode ? mode : theme,
     shape,
-    disabled
+    disabled: loading ? true : disabled
   };
 
   return (
@@ -73,10 +81,16 @@ export const Button = ({
       className={`${cn(buttonVariants(buttonProps))} ${className}`}
       disabled={disabled}
       {...props}>
-      {startIcon && <span className="bu-mr-[9px]">{startIcon}</span>}
-      {children}
-      {endIcon && <span className="bu-ml-[9px] bu-flex bu-items-center">{endIcon}</span>}
-      {icon}
+      {loading ? (
+        <Loading size={size} />
+      ) : (
+        <>
+          {startIcon && <span className="bu-mr-[9px]">{startIcon}</span>}
+          {children}
+          {endIcon && <span className="bu-ml-[9px] bu-flex bu-items-center">{endIcon}</span>}
+          {icon}
+        </>
+      )}
     </button>
   );
 };

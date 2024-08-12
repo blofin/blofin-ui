@@ -1,0 +1,81 @@
+//medium
+.loader-medium {
+  width: 4px; /* 从12px缩小到1/3，即4px */
+  height: 4px; /* 从12px缩小到1/3，即4px */
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  color: rgba(10,10,10,0.6);
+  box-sizing: border-box;
+  animation: animloader-medium 1s linear infinite alternate;
+}
+
+@keyframes animloader-medium {
+  0% {
+    box-shadow: -12.67px -4px, -4.67px 0, 4.67px 0, 12.67px 0; /* 所有值除以3 */
+  }
+  33% {
+    box-shadow: -12.67px 0px, -4.67px -4px, 4.67px 0, 12.67px 0; /* 所有值除以3 */
+  }
+  66% {
+    box-shadow: -12.67px 0px, -4.67px 0, 4.67px -4px, 12.67px 0; /* 所有值除以3 */
+  }
+  100% {
+    box-shadow: -12.67px 0, -4.67px 0, 4.67px 0, 12.67px -4px; /* 所有值除以3 */
+  }
+}
+
+//large
+.loader-large {
+  width: 6px; /* 从12px减半到6px */
+  height: 6px; /* 从12px减半到6px */
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  color: rgba(10,10,10,0.6);
+  box-sizing: border-box;
+  animation: animloader-large 1s linear infinite alternate;
+}
+
+@keyframes animloader-large {
+  0% {
+    box-shadow: -19px -6px, -7px 0, 7px 0, 19px 0; /* 所有值减半 */
+  }
+  33% {
+    box-shadow: -19px 0px, -7px -6px, 7px 0, 19px 0; /* 所有值减半 */
+  }
+  66% {
+    box-shadow: -19px 0px, -7px 0, 7px -6px, 19px 0; /* 所有值减半 */
+  }
+  100% {
+    box-shadow: -19px 0, -7px 0, 7px 0, 19px -6px; /* 所有值减半 */
+  }
+}
+
+
+//small
+.loader-small {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  color: rgba(10,10,10,0.6);
+  box-sizing: border-box;
+  animation: animloader-small 0.8s linear infinite alternate;
+}
+
+@keyframes animloader-small {
+  0% {
+    box-shadow: -9.5px -3px, -3.5px 0, 3.5px 0, 9.5px 0;
+  }
+  33% {
+    box-shadow: -9.5px 0px, -3.5px -3px, 3.5px 0, 9.5px 0;
+  }
+  66% {
+    box-shadow: -9.5px 0px, -3.5px 0, 3.5px -3px, 9.5px 0;
+  }
+  100% {
+    box-shadow: -9.5px 0, -3.5px 0, 3.5px 0, 9.5px -3px;
+  }
+}

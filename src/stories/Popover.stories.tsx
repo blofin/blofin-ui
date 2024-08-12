@@ -23,6 +23,8 @@ export const Primary: Story = {
   render: () => (
     <Popover
       label="Popover"
+      outside
+      trigger="click"
       content={
         <>
           <ul className="bu-w-48 bu-px-2">

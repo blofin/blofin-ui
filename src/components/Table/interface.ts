@@ -6,10 +6,11 @@ interface TableColumnProps<T = any> {
   fixed?: "right" | "left";
   width?: string;
   align?: "center" | "flex-start" | "flex-end";
-  render?: (record: T) => JSX.Element;
+  render?: (record: T, index?: number) => JSX.Element;
   renderHeader?: (record: T) => JSX.Element;
   filter?: boolean;
   type?: SortType;
+  onCell?: (record: T, index: number) => number;
 }
 
 interface TableProps<T = any> {
@@ -41,9 +42,10 @@ interface TableProps<T = any> {
   dragClass?: string;
   type?: SortType;
   rowIdPrefix?: string;
+  methodRef?: any;
 }
 
-type SortProps = (data: SortsData[]|SortsData) => void;
+type SortProps = (data: SortsData[] | SortsData) => void;
 
 export type Direction = "prev" | "next";
 

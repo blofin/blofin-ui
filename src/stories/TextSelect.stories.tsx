@@ -62,7 +62,7 @@ export const Primary: Story = {
       }
     ]);
 
-    const optionsRef=useRef(accountOptions1);
+    const optionsRef = useRef(accountOptions1);
 
     const [open, setOpen] = useState(false);
 
@@ -100,9 +100,9 @@ export const Primary: Story = {
       setTo(value);
     };
 
-    const searchChange=(value:string)=>{
-      setAccountOptions1(optionsRef.current.filter((item:any)=>item.label.includes(value)));
-    }
+    const searchChange = (value: string) => {
+      setAccountOptions1(optionsRef.current.filter((item: any) => item.label.includes(value)));
+    };
 
     useEffect(() => {
       setTimeout(() => {
@@ -160,7 +160,14 @@ export const Primary: Story = {
                 onChange={change1}
                 search={true}
                 searchChange={searchChange}
-                className='bu-max-h-[150px] bu-overflow-y-scroll'
+                className="bu-max-h-[150px] bu-overflow-y-scroll"
+                customSelectItems={(item: { label: string; value: string }) => {
+                  return (
+                    <div className="bu-w-[440px]">
+                      {item.label} --- {item.value}
+                    </div>
+                  );
+                }}
                 auto={false}>
                 <div>
                   <span>custom</span>

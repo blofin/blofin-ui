@@ -3,6 +3,7 @@ import { Button } from "../components/Button/Button";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import DemoIcon from "../assets/icons/demo.svg";
+import { useEffect, useState } from "react";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
@@ -35,7 +36,7 @@ export const Primary = {
     variant: "primary",
     size: "medium",
     children: "Button",
-    disabled:true
+    disabled: true
   }
 };
 
@@ -43,13 +44,22 @@ export const All = {
   render: () => {
     const mode = useMode();
 
+    const [loading, setLoading] = useState(false);
+
+    const handleRequest=()=>{
+      setLoading(true);
+      setTimeout(()=>{
+        setLoading(false);
+      },3000)
+    }
+
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div style={{ display: "flex", gap: "10px" }}>
-          <Button variant="ghost" size="small" disabled>
+          <Button variant="ghost" onClick={handleRequest} loading={loading} size="small">
             Button
           </Button>
-          <Button variant="primary" size="small" type="submit">
+          <Button variant="primary" onClick={handleRequest} loading={loading} size="medium" type="submit">
             Button
           </Button>
           <Button

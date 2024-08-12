@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const drawerVariants = cva(
-    "bu-absolute  bu-flex  bu-flex-col bu-rounded-[10px] bu-pb-[32px] bu-pt-[24px]",
+    "bu-absolute  bu-flex  bu-flex-col bu-pb-[32px] bu-pt-[24px]",
     {
       variants: {
         theme: {
