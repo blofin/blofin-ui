@@ -74,7 +74,7 @@ export const Primary: Story = {
         <Drawer
           open={open}
           title="这是一个title"
-          width="300px"
+          drawerContentClass="bu-w-[400px]"
           placement='right'
           hideIcon={true}
           cancel={cancel}
