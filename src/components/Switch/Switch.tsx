@@ -15,7 +15,7 @@ export const Switch: FC<SwitchProps> = ({ check, onChange, size = "medium" }) =>
 
   return (
     <div
-      className={`${styles.switch} ${check ? styles.primary : ""} ${switchSize({ size })} `}
+      className={`${styles.switch} ${switchSize({ size })} ${check ? 'bu-bg-light-primary' : ""}`}
       onClick={change}>
       <div className={`${styles.thumb} ${check ? moveSize({size}) : "" } ${thumbSize({size})}`}></div>
     </div>

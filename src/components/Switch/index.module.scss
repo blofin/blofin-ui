@@ -1,21 +1,15 @@
 .switch {
-    border-radius: 90px;
-    display: flex;
-    align-items: center;
-    transition: 0.15s ease-in;
-    cursor: pointer;
-  }
-  
-  .thumb{
-    transition: 0.15s ease-in;
-  }
-  
-  .move{
-    transform: translateX(10px)
-  }
-  
-  
-  .primary{
-    @apply bu-bg-dark-badge-primary-bg bu-bg-light-primary;
-  }
-  
+  border-radius: 90px;
+  display: flex;
+  align-items: center;
+  transition: 0.15s ease-in;
+  cursor: pointer;
+}
+
+.thumb {
+  transition: 0.15s ease-in;
+}
+
+.move {
+  transform: translateX(10px);
+}
