@@ -161,6 +161,8 @@ export const Primary: Story = {
                 search={true}
                 searchChange={searchChange}
                 className="bu-max-h-[150px] bu-overflow-y-scroll"
+                selectItemClassName="!bu-h-[52px]"
+                searchClassName="!bu-px-[16px] bu-py-[8px] !bu-mb-0"
                 customSelectItems={(item: { label: string; value: string }) => {
                   return (
                     <div className="bu-w-[440px]">
