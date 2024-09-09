@@ -54,6 +54,8 @@ interface TextSelectProps {
   startAdornment?: ReactNode;
   customSelectItems?: (item: Options) => ReactNode;
   selectItemClassName?: string;
+  hideSelectedState?: boolean;
+  offsetPixels?: number;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -79,7 +81,9 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       searchChange,
       customSelectItems,
       selectItemClassName,
-      searchClassName
+      searchClassName,
+      hideSelectedState = false,
+      offsetPixels = -2
     },
     ref
   ) => {
@@ -148,7 +152,7 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
               left: offsetX + "px"
             }}
             ref={targetRef}>
-            <div ref={ref} style={{ width: width - 2 + "px" }}>
+            <div ref={ref} style={{ width: width + offsetPixels + "px" }}>
               {search && (
                 <div className={`${searchStyles({ theme })} ${searchClassName}`}>
                   <TextField
@@ -163,12 +167,16 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
                 return (
                   <div
                     onClick={() => handleClick(item.value)}
-                    className={`${styles.item}  ${
+                    className={`${styles.item} ${
                       disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
                     } ${
-                      defaultValue === item.value ? activeStyles({ theme }) : ""
+                      hideSelectedState
+                        ? ""
+                        : defaultValue === item.value
+                        ? activeStyles({ theme })
+                        : ""
                     } ${selectItemClassName}`}
-                    style={{ width: width - 2 + "px" }}
+                    style={{ width: width + offsetPixels + "px" }}
                     key={item.value}>
                     {customSelectItems ? customSelectItems(item) : item.label}
                   </div>
@@ -216,7 +224,9 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     searchClassName,
     startAdornment,
     customSelectItems,
-    selectItemClassName
+    selectItemClassName,
+    hideSelectedState,
+    offsetPixels = -2
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -315,6 +325,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           scrollContainer={scrollContainer}
           customSelectItems={customSelectItems}
           selectItemClassName={selectItemClassName}
+          hideSelectedState={hideSelectedState}
+          offsetPixels={offsetPixels}
           hide={hide}
           auto={auto}
           search={search}
