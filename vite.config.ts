@@ -24,7 +24,10 @@ function addEntryFiles() {
 
   // Initialize exports object
   const exports = {
-    ".": "./dist/index.es.js",
+    ".": {
+      "import": "./dist/index.es.js",
+      "types": "./dist/index.d.ts"
+    },
     "./blofin.css": "./dist/blofin.css",
     "./theme": "./dist/config/theme.js"
   };
