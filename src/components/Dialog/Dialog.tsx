@@ -119,7 +119,7 @@ export const Dialog: FC<DialogProps> = (props) => {
                   )}
                   {!hideConfirm && (
                     <Button
-                      className="bu-ml-[16px]"
+                      className={!hideCancel ? "bu-ml-[16px]" : ""}
                       size={footerSize}
                       variant="primary"
                       theme={getTheme()}
