@@ -44,16 +44,14 @@ const TextField = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
         className
       )}>
       <div className="bu-flex bu-h-full bu-w-full bu-items-center bu-justify-center">
-        {startAdornment && (
-          <span
-            className={
-              typeof startAdornment === "string"
-                ? AdornmentStyles({ size: inputSize, position: "start" })
-                : ""
-            }>
-            {startAdornment}
-          </span>
-        )}
+        {startAdornment &&
+          (typeof startAdornment === "string" ? (
+            <span className={AdornmentStyles({ size: inputSize, position: "start" })}>
+              {startAdornment}
+            </span>
+          ) : (
+            startAdornment
+          ))}
         <input
           disabled={disabled}
           type={type}
@@ -67,16 +65,14 @@ const TextField = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
             !endAdornment && (inputSize === "lg" ? "bu-pr-3" : "bu-pr-2")
           )}
         />
-        {endAdornment && (
-          <span
-            className={
-              typeof endAdornment === "string"
-                ? AdornmentStyles({ size: inputSize, position: "end" })
-                : ""
-            }>
-            {endAdornment}
-          </span>
-        )}
+        {endAdornment &&
+          (typeof endAdornment === "string" ? (
+            <span className={AdornmentStyles({ size: inputSize, position: "end" })}>
+              {endAdornment}
+            </span>
+          ) : (
+            endAdornment
+          ))}
       </div>
     </div>
   );

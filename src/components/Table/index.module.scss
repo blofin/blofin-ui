@@ -184,13 +184,13 @@ tr:last-child {
   }
 }
 .scroll-light {
-  &::-webkit-scrollbar-thumb {
-    background-color: #b8b8bd;
-  }
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: #b8b8bd;
+  // }
 }
 
 .scroll-dark {
-  &::-webkit-scrollbar-thumb {
-    background-color: #60626b;
-  }
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: #60626b;
+  // }
 }
