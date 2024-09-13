@@ -173,3 +173,24 @@ tr:last-child {
 .ghostClass {
   color: transparent !important;
 }
+
+.scroll {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+  }
+}
+.scroll-light {
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: #b8b8bd;
+  // }
+}
+
+.scroll-dark {
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: #60626b;
+  // }
+}

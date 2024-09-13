@@ -12,7 +12,15 @@ import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
 import { TextField, useTheme } from "../..";
 import useAlign from "../../hooks/useAlign";
-import { activeStyles, bgStyles, disabledStyles, iconStyles, itemStyles, searchIconStyles, searchStyles } from "./styles";
+import {
+  activeStyles,
+  bgStyles,
+  disabledStyles,
+  iconStyles,
+  itemStyles,
+  searchIconStyles,
+  searchStyles
+} from "./styles";
 import SelectArrow from "../../assets/icons/text-arrow.svg";
 import SearchIcon from "../../assets/icons/search.svg";
 import { CustomFields } from "../../types/component";
@@ -42,8 +50,12 @@ interface TextSelectProps {
   auto?: boolean;
   search?: boolean;
   searchChange?: (value: string) => void;
-  startAdornment?:ReactNode
+  searchClassName?: string;
+  startAdornment?: ReactNode;
   customSelectItems?: (item: Options) => ReactNode;
+  selectItemClassName?: string;
+  hideSelectedState?: boolean;
+  offsetPixels?: number;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -67,7 +79,11 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       auto = true,
       search = false,
       searchChange,
-      customSelectItems
+      customSelectItems,
+      selectItemClassName,
+      searchClassName,
+      hideSelectedState = false,
+      offsetPixels = -2
     },
     ref
   ) => {
@@ -136,12 +152,12 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
               left: offsetX + "px"
             }}
             ref={targetRef}>
-            <div ref={ref} style={{ width: width - 2 + "px" }}>
+            <div ref={ref} style={{ width: width + offsetPixels + "px" }}>
               {search && (
-                <div className={searchStyles({theme})}>
+                <div className={`${searchStyles({ theme })} ${searchClassName}`}>
                   <TextField
                     variant="filled"
-                    startAdornment={<SearchIcon className={searchIconStyles({theme})} />}
+                    startAdornment={<SearchIcon className={searchIconStyles({ theme })} />}
                     onChange={(e) => handleSearch(e.target.value)}
                   />
                 </div>
@@ -151,12 +167,18 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
                 return (
                   <div
                     onClick={() => handleClick(item.value)}
-                    className={`${styles.item}  ${
+                    className={`${styles.item} ${
                       disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
-                    } ${defaultValue === item.value ? activeStyles({ theme }) : ""} `}
-                    style={{ width: width - 2 + "px" }}
+                    } ${
+                      hideSelectedState
+                        ? ""
+                        : defaultValue === item.value
+                        ? activeStyles({ theme })
+                        : ""
+                    } ${selectItemClassName}`}
+                    style={{ width: width + offsetPixels + "px" }}
                     key={item.value}>
-                     {customSelectItems ? customSelectItems(item) : item.label}
+                    {customSelectItems ? customSelectItems(item) : item.label}
                   </div>
                 );
               })}
@@ -199,8 +221,12 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     auto = true,
     search = false,
     searchChange,
+    searchClassName,
     startAdornment,
-    customSelectItems
+    customSelectItems,
+    selectItemClassName,
+    hideSelectedState,
+    offsetPixels = -2
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -255,7 +281,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
   return (
     <div className="bu-relative bu-cursor-pointer" ref={targetRef}>
       <TextField
-        id={id || ''}
+        id={id || ""}
         ref={inputRef}
         inputClassName={styles.input}
         variant="outlined"
@@ -298,10 +324,14 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           className={className}
           scrollContainer={scrollContainer}
           customSelectItems={customSelectItems}
+          selectItemClassName={selectItemClassName}
+          hideSelectedState={hideSelectedState}
+          offsetPixels={offsetPixels}
           hide={hide}
           auto={auto}
           search={search}
-          searchChange={searchChange}>
+          searchChange={searchChange}
+          searchClassName={searchClassName}>
           {children}
         </Options>
       )}
