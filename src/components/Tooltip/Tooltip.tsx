@@ -150,7 +150,7 @@ const Content: FC<ContentProps> = ({
         };
       }
     }
-  }, [offsetX, clientWidth, domOffset]);
+  }, [offsetX, offsetY, clientWidth, clientHeight, domOffset]);
 
   useEffect(() => {
     let observer: ResizeObserver;
