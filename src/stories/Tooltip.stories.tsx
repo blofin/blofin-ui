@@ -18,6 +18,8 @@ export const Primary: Story = {
 
     const [show, setShow] = useState(false);
 
+    const [isShow, setIsShow] = useState(false);
+
     useEffect(() => {
       setTimeout(() => {
         setShow(true);
@@ -30,7 +32,7 @@ export const Primary: Story = {
           <Tooltip
             placement="top"
             // hideArrow
-            isShow = {true}
+            isShow = {isShow}
             title="This is Tooltip This is Tooltip This is Tooltip This is Tooltip"
             content={
               <div>

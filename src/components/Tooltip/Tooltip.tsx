@@ -182,6 +182,10 @@ const Content: FC<ContentProps> = ({
   };
 
   useEffect(() => {
+    scroll();
+  }, [isShow]);
+
+  useEffect(() => {
     if (scrollContainer) {
       scrollContainer.addEventListener("scroll", scroll);
     }
