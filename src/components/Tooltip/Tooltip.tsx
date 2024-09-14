@@ -41,6 +41,8 @@ const Content: FC<ContentProps> = ({
 
   const { offset, resize } = useAlign(parent);
 
+  const isFirstRender = useRef(true);
+
   const { offsetX, offsetY, clientWidth, clientHeight } = offset;
 
   const [domOffset, setDomOffset] = useState({
@@ -182,8 +184,15 @@ const Content: FC<ContentProps> = ({
   };
 
   useEffect(() => {
+    if (isFirstRender.current) return;
     scroll();
   }, [isShow]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      isFirstRender.current = false;
+    }, 500);
+  }, []);
 
   useEffect(() => {
     if (scrollContainer) {
