@@ -32,7 +32,8 @@ const Content: FC<ContentProps> = ({
   className,
   enter,
   hideArrow = false,
-  scrollContainer
+  scrollContainer,
+  isShow = false
 }) => {
   const { theme } = useTheme();
 
@@ -54,7 +55,7 @@ const Content: FC<ContentProps> = ({
 
     const { height, width } = domOffset;
 
-    if (!enter) {
+    if (!enter && !isShow) {
       return {
         left: 0,
         top: 0,
@@ -194,7 +195,9 @@ const Content: FC<ContentProps> = ({
   return ReactDOM.createPortal(
     <div
       ref={targetRef}
-      className={`${styles["tooltip-wrapper"]} ${popperStyles({ show: enter })} ${bgStyles({
+      className={`${styles["tooltip-wrapper"]} ${popperStyles({
+        show: enter || isShow
+      })} ${bgStyles({
         theme
       })} ${className || ""}`}
       style={positions}>
@@ -242,7 +245,7 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, ...props }) => {
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}>
       {children}
-      {isClient && <Content {...props} enter={enter} parent={targetRef.current} />}
+      {isClient && <Content {...props} enter={enter} isShow={isShow} parent={targetRef.current} />}
     </div>
   );
 };

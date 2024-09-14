@@ -30,6 +30,7 @@ export const Primary: Story = {
           <Tooltip
             placement="top"
             // hideArrow
+            isShow = {true}
             title="This is Tooltip This is Tooltip This is Tooltip This is Tooltip"
             content={
               <div>
