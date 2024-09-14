@@ -312,6 +312,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
             />
           )
         }
+        autoComplete="off"
       />
       {show && (
         <Options
