@@ -78,11 +78,11 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
 
   return (
     <div className="bu-flex bu-flex-col">
-      <div
-        className={`bu-flex bu-justify-between ${size !== "small" ? borderSyles({ theme }) : ""} ${
-          tabWrapperClass || ""
-        }`}>
-        <ul className={`${styles.tab}`}>
+      <div className={`bu-flex bu-justify-between ${tabWrapperClass || ""}`}>
+        <ul
+          className={`${styles.tab} ${children ? "bu-mr-[24px]" : ""} ${
+            size !== "small" ? borderSyles({ theme }) : ""
+          }`}>
           {items.map((item) => {
             return (
               <li

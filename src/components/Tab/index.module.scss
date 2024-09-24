@@ -1,5 +1,5 @@
 .tab{
-    @apply bu-inline-flex;
+    @apply bu-inline-flex bu-flex-1;
     li{
         @apply bu-mr-[16px] bu-flex bu-flex-col bu-items-center;
     }
