@@ -48,7 +48,7 @@ const noSmallActStyles = cva("", {
   }
 });
 
-const borderSyles = cva("bu-border-b-[1px] bu-px-[16px]", {
+const borderSyles = cva("bu-border-b-[1px]", {
   variants: {
     theme: {
       light: "bu-border-light-line-primary",

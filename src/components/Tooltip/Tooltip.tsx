@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { useTheme } from "../..";
+import { BUITheme, useTheme } from "../..";
 import ArrowDarkIcon from "../../assets/icons/arrow-dark.svg";
 import ArrowIcon from "../../assets/icons/arrow.svg";
 import useAlign from "../../hooks/useAlign";
@@ -17,11 +17,13 @@ interface TooltipProps {
   className?: string;
   hideArrow?: boolean;
   scrollContainer?: HTMLDivElement | null;
+  theme?:BUITheme;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
   parent: HTMLDivElement | null;
   enter: boolean;
+  theme?: BUITheme;
 };
 
 const Content: FC<ContentProps> = ({
@@ -33,9 +35,18 @@ const Content: FC<ContentProps> = ({
   enter,
   hideArrow = false,
   scrollContainer,
-  isShow = false
+  isShow = false,
+  theme: toolTipTheme
 }) => {
-  const { theme } = useTheme();
+  const { theme: mode } = useTheme();
+
+  const theme = useMemo(() => {
+    if (toolTipTheme) {
+      return toolTipTheme;
+    } else {
+      return mode;
+    }
+  }, [toolTipTheme, mode]);
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 

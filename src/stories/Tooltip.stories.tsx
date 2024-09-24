@@ -31,6 +31,7 @@ export const Primary: Story = {
         <div className="bu-h-[1000px] bu-pl-[300px] bu-pt-[300px]">
           <Tooltip
             placement="top"
+            theme={'dark'}
             // hideArrow
             isShow = {isShow}
             title="This is Tooltip This is Tooltip This is Tooltip This is Tooltip"
