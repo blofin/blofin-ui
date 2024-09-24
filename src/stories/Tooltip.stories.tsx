@@ -46,6 +46,23 @@ export const Primary: Story = {
             }>
             <Button size="small" icon="2" shape="circle"></Button>
           </Tooltip>
+
+          <Tooltip
+            placement="top"
+            // hideArrow
+            isShow = {isShow}
+            title="This is Tooltip This is Tooltip This is Tooltip This is Tooltip"
+            content={
+              <div>
+                <p>
+                  This is content This is content This is content This is content This is content
+                  This is content
+                </p>
+                {show && <p>你好</p>}
+              </div>
+            }>
+            <Button size="small" icon="2" shape="circle"></Button>
+          </Tooltip>
         </div>
       </div>
     );

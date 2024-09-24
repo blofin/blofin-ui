@@ -1,8 +1,7 @@
 import { FC, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { BUITheme, useTheme } from "../..";
-import ArrowDarkIcon from "../../assets/icons/arrow-dark.svg";
-import ArrowIcon from "../../assets/icons/arrow.svg";
+import ArrowIcon from "../../assets/icons/arrow-dark.svg";
 import useAlign from "../../hooks/useAlign";
 import styles from "./index.module.scss";
 import { arrowPositionStyles, bgStyles, popperStyles } from "./styles";
@@ -17,7 +16,7 @@ interface TooltipProps {
   className?: string;
   hideArrow?: boolean;
   scrollContainer?: HTMLDivElement | null;
-  theme?:BUITheme;
+  theme?: BUITheme;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
@@ -36,18 +35,8 @@ const Content: FC<ContentProps> = ({
   hideArrow = false,
   scrollContainer,
   isShow = false,
-  theme: toolTipTheme
+  theme
 }) => {
-  const { theme: mode } = useTheme();
-
-  const theme = useMemo(() => {
-    if (toolTipTheme) {
-      return toolTipTheme;
-    } else {
-      return mode;
-    }
-  }, [toolTipTheme, mode]);
-
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const { offset, resize } = useAlign(parent);
@@ -239,7 +228,11 @@ const Content: FC<ContentProps> = ({
       )}
       {!hideArrow && (
         <div className={arrowPositionStyles({ placement })}>
-          {theme === "dark" ? <ArrowDarkIcon /> : <ArrowIcon />}
+          <ArrowIcon
+            className={
+              theme === "dark" ? "bu-text-dark-fill-tertiary" : "bu-text-light-fill-tertiary"
+            }
+          />
         </div>
       )}
     </div>,
@@ -247,7 +240,7 @@ const Content: FC<ContentProps> = ({
   );
 };
 
-const Tooltip: FC<TooltipProps> = ({ children, isShow, ...props }) => {
+const Tooltip: FC<TooltipProps> = ({ children, isShow, theme: toolTipTheme, ...props }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const [enter, setEnter] = useState(false);
@@ -262,6 +255,16 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, ...props }) => {
     setEnter(false);
   };
 
+  const { theme: mode } = useTheme();
+
+  const theme = useMemo(() => {
+    if (toolTipTheme) {
+      return toolTipTheme;
+    } else {
+      return mode;
+    }
+  }, [toolTipTheme, mode]);
+
   return (
     <div
       ref={targetRef}
@@ -269,7 +272,15 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, ...props }) => {
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}>
       {children}
-      {isClient && <Content {...props} enter={enter} isShow={isShow} parent={targetRef.current} />}
+      {isClient && (
+        <Content
+          {...props}
+          enter={enter}
+          theme={theme}
+          isShow={isShow}
+          parent={targetRef.current}
+        />
+      )}
     </div>
   );
 };
