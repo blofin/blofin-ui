@@ -34,6 +34,7 @@ interface TabProps extends Base {
   children?: React.ReactNode;
   tabWrapperClass?: string;
   defaultIndex?: number;
+  hideBorder?: boolean;
 }
 
 export interface TabRef {
@@ -41,7 +42,16 @@ export interface TabRef {
 }
 
 const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
-  const { defaultIndex, items, size, change, className, children, tabWrapperClass } = props;
+  const {
+    defaultIndex,
+    items,
+    size,
+    change,
+    className,
+    children,
+    tabWrapperClass,
+    hideBorder = false
+  } = props;
 
   useImperativeHandle(ref, () => {
     return {
@@ -79,13 +89,10 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
   return (
     <div className="bu-flex bu-flex-col">
       <div
-        className={`bu-flex bu-justify-between ${children ? "bu-items-end" : ""} ${
+        className={`bu-flex bu-justify-between ${size !== "small" && !hideBorder ? borderSyles({ theme }) : ""} ${
           tabWrapperClass || ""
         }`}>
-        <ul
-          className={`${styles.tab} ${children ? "bu-mr-[24px]" : ""} ${
-            size !== "small" ? borderSyles({ theme }) : ""
-          }`}>
+        <ul className={`${styles.tab}`}>
           {items.map((item) => {
             return (
               <li
