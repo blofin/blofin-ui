@@ -11,7 +11,7 @@ import { Drawer } from "./components/Drawer";
 import { Dropdown } from "./components/Dropdown/Dropdown";
 import { LabelTextField } from "./components/LabelTextField";
 import { Pagination } from "./components/Pagination/Pagination";
-import { Popover } from "./components/Popover/Popover";
+import { Popover, PopoverRefProps } from "./components/Popover/Popover";
 import { RadioButton } from "./components/RadioButton";
 import { Select } from "./components/Select";
 import { Slider } from "./components/Slider";
@@ -81,7 +81,8 @@ export type {
   PopupRef,
   TabRef,
   SortsData,
-  Placement
+  Placement,
+  PopoverRefProps
 };
 
 export { NoticeProvider, ThemeProvider };
