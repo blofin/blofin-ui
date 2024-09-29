@@ -14,7 +14,7 @@ export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElemen
   /**
    * Optional click handler
    */
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * Button state
    */
@@ -54,13 +54,13 @@ export const Button = ({
   loading,
   ...props
 }: ButtonProps) => {
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (loading) {
       return;
     }
 
     if (onClick) {
-      onClick();
+      onClick(event);
     }
   };
 

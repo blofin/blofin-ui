@@ -36,6 +36,7 @@ import useTheme from "./provider/useTheme";
 import "./scss/base.scss";
 import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component";
 import { SortsData } from "./components/Sort/reducer";
+import { Placement } from "@popperjs/core";
 
 export {
   Badge,
@@ -79,7 +80,8 @@ export type {
   TextAlign,
   PopupRef,
   TabRef,
-  SortsData
+  SortsData,
+  Placement
 };
 
 export { NoticeProvider, ThemeProvider };
