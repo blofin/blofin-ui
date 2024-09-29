@@ -1,8 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./popover.module.scss";
-import useAlign from "../../hooks/useAlign";
+import React, { FC, forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from "react";
+import popoverStyles from "./popover.module.scss";
 import useClient from "../../hooks/useClient";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
+import { usePopper } from "react-popper";
+import useDelayEvent from "../../hooks/useDelayEvent";
+import useOutsideClick from "../../hooks/useOutsideClick";
+import { Placement } from "@popperjs/core";
 
 export interface PopoverProps {
   /**
@@ -14,61 +17,135 @@ export interface PopoverProps {
    */
   content: React.ReactNode;
   trigger?: "click";
-  outside?: boolean;
-  top?: number;
+  y?: number;
+  x?: number;
+  placement?: Placement;
+  flipPlacement?: Placement[];
+  afterClose?: () => void;
 }
 
-export const Popover = ({ label, content, trigger, outside, top }: PopoverProps) => {
-  const popoverRef = useRef<HTMLDivElement>(null);
+export interface PopoverRefProps {
+  close: () => void;
+}
 
-  const [show, setShow] = useState(false);
+const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
+  useImperativeHandle(ref, () => {
+    return {
+      close: hide
+    };
+  });
+
+  const {
+    label,
+    content,
+    trigger,
+    y,
+    x,
+    placement = "bottom-start",
+    flipPlacement,
+    afterClose
+  } = props;
+
+  const isEnabled = useMemo(() => {
+    return trigger === "click" ? false : true;
+  }, [trigger]);
+
+  const [showPopover, setShowPopover] = useDelayEvent<boolean>(false, 100, isEnabled);
+
+  const popoverRef = useRef<HTMLDivElement | null>(null);
+
+  const popoverElement = useRef<HTMLDivElement | null>(null);
+
+  useOutsideClick(
+    showPopover,
+    setShowPopover,
+    isEnabled,
+    popoverRef.current,
+    popoverElement.current
+  );
 
   const { isClient } = useClient();
 
-  const { offset } = useAlign(popoverRef.current);
+  const { styles, attributes, update } = usePopper(popoverRef.current, popoverElement.current, {
+    placement: placement,
+    strategy: "fixed",
+    modifiers: [
+      {
+        name: "offset",
+        options: {
+          offset: [x, y]
+        }
+      },
+      {
+        name: "flip",
+        options: {
+          fallbackPlacements: flipPlacement ? flipPlacement : undefined
+        }
+      }
+    ]
+  });
 
-  const displayPopover = () => {
-    if (trigger === "click") {
-      setShow(true);
-    }
-  };
-
-  const handleClickOutside = (event: any) => {
-    if (popoverRef.current?.contains(event.target)) {
-      return;
-    }
-    setShow(false);
+  const hide = () => {
+    setShowPopover(false);
   };
 
   useEffect(() => {
-    if (popoverRef.current) {
-      document.removeEventListener("click", handleClickOutside);
-      document.addEventListener("click", handleClickOutside);
+    if (update) {
+      update();
     }
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [show]);
+  }, [showPopover, update]);
+
+  const togglePopover = () => {
+    if (trigger === "click") {
+      setShowPopover(!showPopover);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    if (trigger !== "click") {
+      setShowPopover(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (trigger !== "click") {
+      setShowPopover(false);
+    }
+  };
+
+  useEffect(()=>{
+    if(!showPopover){
+      afterClose && afterClose()
+    }
+  },[showPopover])
 
   return (
-    <div ref={popoverRef} className={styles["popover-container"]}>
-      <label onClick={displayPopover}>{label}</label>
-      {isClient && outside ? (
-        show &&
-        ReactDOM.createPortal(
+    <div ref={popoverRef} onClick={togglePopover}>
+      <label
+        className="bu-cursor-pointer"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}>
+        {label}
+      </label>
+      {isClient &&
+        createPortal(
           <div
-            style={{
-              left: offset.offsetLeft,
-              top: offset.offsetY + offset.clientHeight
-            }}
-            className={styles["outside-popover"]}>
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            ref={popoverElement}
+            style={styles.popper}
+            {...attributes.popper}
+            className={`${popoverStyles["popover-content"]} ${
+              showPopover
+                ? popoverStyles["popover-content-visible"]
+                : popoverStyles["popover-content-hidden"]
+            }`}>
             {content}
           </div>,
           document.body
-        )
-      ) : (
-        <div className={styles["popover"]}>{content}</div>
-      )}
+        )}
     </div>
   );
-};
+});
+
+export { Popover };

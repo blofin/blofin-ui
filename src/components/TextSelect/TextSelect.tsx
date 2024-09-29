@@ -101,7 +101,8 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
 
     const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
-    const handleClick = (value: string) => {
+    const handleClick = (value: string, e: React.MouseEvent) => {
+      e.preventDefault();
       if (disabled === value) {
         return;
       }
@@ -166,7 +167,7 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
               {options.map((item) => {
                 return (
                   <div
-                    onClick={() => handleClick(item.value)}
+                    onClick={(e) => handleClick(item.value, e)}
                     className={`${styles.item} ${
                       disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
                     } ${

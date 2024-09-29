@@ -1,15 +1,15 @@
-.popover-container {
-  @apply bu-relative bu-max-w-fit;
-  .popover {
-    @apply bu-absolute bu-left-0 bu-top-4 bu-z-[1000] bu-hidden bu-shadow;
-  }
-  &:hover {
-    .popover {
-      @apply bu-flex;
-    }
-  }
+.popover-content {
+  visibility: hidden;
+  transition: opacity 0.12s ease-in-out, visibility 0.12s ease-in-out;
+  @apply bu-pointer-events-none bu-z-[1000] bu-opacity-0  bu-shadow bu-rounded-[4px];
 }
 
-.outside-popover{
-  @apply bu-absolute bu-top-4 bu-z-[1000] bu-shadow;
+.popover-content-visible {
+  visibility: visible;
+  @apply bu-pointer-events-auto bu-opacity-[1];
+}
+
+.popover-content-hidden {
+  visibility: hidden;
+  @apply bu-pointer-events-none bu-opacity-0;
 }
