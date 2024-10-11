@@ -1,6 +1,6 @@
 import { cva } from "class-variance-authority";
 
-const itemStyles = cva("bu-cursor-pointer", {
+const itemStyles = cva("bu-cursor-pointer bu-min-w-[32px]", {
   variants: {
     size: {
       small: "bu-text-[14px]",
