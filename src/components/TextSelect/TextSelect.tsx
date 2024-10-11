@@ -56,6 +56,7 @@ interface TextSelectProps {
   selectItemClassName?: string;
   hideSelectedState?: boolean;
   offsetPixels?: number;
+  preventDuplicateSelection?: boolean;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -83,7 +84,8 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       selectItemClassName,
       searchClassName,
       hideSelectedState = false,
-      offsetPixels = -2
+      offsetPixels = -2,
+      preventDuplicateSelection = true
     },
     ref
   ) => {
@@ -106,9 +108,11 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       if (disabled === value) {
         return;
       }
-      if (value !== defaultValue) {
+
+      if (value !== defaultValue || !preventDuplicateSelection) {
         onChange(value);
       }
+
       hide();
     };
 
@@ -227,7 +231,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     customSelectItems,
     selectItemClassName,
     hideSelectedState,
-    offsetPixels = -2
+    offsetPixels = -2,
+    preventDuplicateSelection = true
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -333,7 +338,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           auto={auto}
           search={search}
           searchChange={searchChange}
-          searchClassName={searchClassName}>
+          searchClassName={searchClassName}
+          preventDuplicateSelection={preventDuplicateSelection}>
           {children}
         </Options>
       )}

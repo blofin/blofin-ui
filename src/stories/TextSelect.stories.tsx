@@ -68,7 +68,7 @@ export const Primary: Story = {
 
     const [from, setFrom] = useState("");
 
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState("market");
 
     const [value1, setValue1] = useState("market");
 
@@ -79,12 +79,14 @@ export const Primary: Story = {
     const selectRef = useRef<TextSelectRefProps>(null);
 
     const change = (value: string) => {
-      if (value === "limit") {
-        setValue("20000");
-      } else {
-        setValue("");
-        setPlaceholder("市价");
-      }
+      console.log(value, "+++");
+      setValue(value)
+      // if (value === "limit") {
+      //   setValue("20000");
+      // } else {
+      //   setValue("");
+      //   setPlaceholder("市价");
+      // }
     };
 
     const change1 = (value: string) => {
@@ -129,6 +131,7 @@ export const Primary: Story = {
             <div className="bu-mb-[50px]">
               <Tooltip placement="top" content="价格" scrollContainer={ref.current}>
                 <TextSelect
+                  preventDuplicateSelection={false}
                   placeholder={placeholder}
                   inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
                   value={value}
@@ -143,9 +146,10 @@ export const Primary: Story = {
             </div>
             <div>
               <TextSelect
+                preventDuplicateSelection={false}
                 placeholder={placeholder}
                 inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
-                value={value}
+                defaultValue={value}
                 options={accountOptions}
                 onChange={change}
                 inputChange={inputChange}>
