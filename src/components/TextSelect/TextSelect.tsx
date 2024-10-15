@@ -17,6 +17,7 @@ import {
   bgStyles,
   disabledStyles,
   iconStyles,
+  iconStylesVariants,
   itemStyles,
   searchIconStyles,
   searchStyles
@@ -57,6 +58,7 @@ interface TextSelectProps {
   hideSelectedState?: boolean;
   offsetPixels?: number;
   preventDuplicateSelection?: boolean;
+  inputDisabled?: boolean;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -232,7 +234,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     selectItemClassName,
     hideSelectedState,
     offsetPixels = -2,
-    preventDuplicateSelection = true
+    preventDuplicateSelection = true,
+    inputDisabled = false
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -288,6 +291,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     <div className="bu-relative bu-cursor-pointer" ref={targetRef}>
       <TextField
         id={id || ""}
+        disabled={inputDisabled}
         ref={inputRef}
         inputClassName={styles.input}
         variant="outlined"
@@ -310,11 +314,14 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           !hideEndAdornment && (
             <SelectArrow
               onClick={() => {
+                if(inputDisabled) return;
                 setTimeout(() => {
                   !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
                 }, 0);
               }}
-              className={`${iconStyles({ theme })} ${isFocus ? styles.roate : ""}`}
+              className={`${iconStylesVariants({ theme, disabled: inputDisabled })} ${
+                isFocus ? styles.roate : ""
+              }`}
             />
           )
         }
