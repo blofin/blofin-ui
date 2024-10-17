@@ -27,6 +27,7 @@ export interface DialogProps {
   hideIcon?: Boolean;
   className?: string;
   contentClassName?: string;
+  loading?: boolean;
 }
 
 export const Dialog: FC<DialogProps> = (props) => {
@@ -48,7 +49,8 @@ export const Dialog: FC<DialogProps> = (props) => {
     hideIcon = false,
     className,
     contentClassName,
-    open
+    open,
+    loading = false
   } = props;
   const { theme } = useTheme();
 
@@ -122,6 +124,7 @@ export const Dialog: FC<DialogProps> = (props) => {
                       className={!hideCancel ? "bu-ml-[16px]" : ""}
                       size={footerSize}
                       variant="primary"
+                      loading={loading}
                       theme={getTheme()}
                       onClick={handleConfirm}>
                       {confirmText}
