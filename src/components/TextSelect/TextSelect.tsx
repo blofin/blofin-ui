@@ -44,6 +44,7 @@ interface TextSelectProps {
   disabled?: string;
   className?: string;
   inputClassName?: string;
+  valueClassName?: string;
   hideEndAdornment?: boolean;
   readOnly?: boolean;
   scrollContainer?: HTMLDivElement | null;
@@ -220,6 +221,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     disabled,
     className = "",
     inputClassName = "",
+    valueClassName = "",
     hideEndAdornment = false,
     readOnly = true,
     value,
@@ -293,7 +295,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         id={id || ""}
         disabled={inputDisabled}
         ref={inputRef}
-        inputClassName={styles.input}
+        inputClassName={`${styles.input} ${valueClassName}`}
         variant="outlined"
         onFocus={() => {
           setShow(true);
@@ -314,7 +316,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           !hideEndAdornment && (
             <SelectArrow
               onClick={() => {
-                if(inputDisabled) return;
+                if (inputDisabled) return;
                 setTimeout(() => {
                   !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
                 }, 0);
