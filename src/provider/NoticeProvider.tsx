@@ -4,7 +4,7 @@ import { Notification } from "../components/Notification/Notification";
 import { Toast } from "../components/Toast/Toast";
 
 export interface NotificationType {
-  title: string;
+  title: React.ReactNode;
   node: React.ReactNode;
   id: number;
   type: BUIComponentType;
@@ -17,8 +17,8 @@ export interface ToastType {
 }
 
 export type configType = {
-  title: string;
-  msg: string;
+  title: React.ReactNode;
+  msg: React.ReactNode;
 };
 
 export type Methods = (config: configType, type: BUIComponentType) => void;
