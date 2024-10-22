@@ -16,7 +16,7 @@ import { bgStyles, closeIconStyles, iconstyles, textStyles, textbg } from "./sty
 import CloseIcon from "../../assets/icons/close.svg";
 import { NoticeContext } from "../../provider/NoticeProvider";
 interface NotificationMsgProps {
-  title: string;
+  title: React.ReactNode;
   children: React.ReactNode;
   type: BUIComponentType;
   remove: () => void;
