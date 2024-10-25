@@ -4,6 +4,7 @@ import { BadgeColor } from "../components/Badge/styles";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { ReactNode } from "react";
+import { Tooltip } from "../components/Tooltip/Tooltip";
 
 const meta: Meta<typeof Badge> = {
   /* 👇 The title prop is optional.
@@ -71,7 +72,7 @@ export const Success: Story = {
 const BadgeWithHooks = ({
   label = "Badge",
   color = "primary",
-  decoration = true
+  decoration = false
 }: {
   label?: ReactNode;
   color?: BadgeColor;
@@ -81,7 +82,23 @@ const BadgeWithHooks = ({
   const mode = useMode();
   return (
     <ThemeProvider value={{ theme: mode }}>
-      <Badge color={color} label={label} decoration={decoration} />
+      <Badge
+        startIcon={
+          <Tooltip placement="bottom" content="1111">
+            START
+          </Tooltip>
+        }
+        endIcon={
+          <span className="bu-ml-[20px]">
+            <Tooltip placement="bottom" content="1111">
+              END
+            </Tooltip>
+          </span>
+        }
+        color={color}
+        label={label}
+        decoration={decoration}
+      />
     </ThemeProvider>
   );
 };

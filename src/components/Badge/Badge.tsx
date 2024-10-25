@@ -19,14 +19,26 @@ export interface BadgeProps {
   label: ReactNode;
 
   theme?: BUITheme;
+
+  startIcon?: React.ReactNode;
+
+  endIcon?: React.ReactNode;
 }
 
-export const Badge = ({ color = "primary", decoration = true, label, theme: mode }: BadgeProps) => {
+export const Badge = ({
+  color = "primary",
+  decoration = true,
+  label,
+  theme: mode,
+  startIcon,
+  endIcon
+}: BadgeProps) => {
   const { theme } = useTheme();
   return (
     <span className={`${cn(BadgeVariants({ theme: mode ? mode : theme, color }))}`}>
-      {decoration && `• `}
+      {startIcon ? startIcon : decoration ? `• ` : null}
       {label}
+      {endIcon}
     </span>
   );
 };
