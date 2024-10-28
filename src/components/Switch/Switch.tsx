@@ -1,6 +1,7 @@
 import { FC } from "react";
 import styles from "./index.module.scss";
-import { moveSize, switchSize, thumbSize } from "./styles";
+import { bgStyle, moveSize, switchSize, thumbSize } from "./styles";
+import useTheme from "../../provider/useTheme";
 
 interface SwitchProps {
   check: boolean;
@@ -9,15 +10,22 @@ interface SwitchProps {
 }
 
 export const Switch: FC<SwitchProps> = ({ check, onChange, size = "medium" }) => {
+  const { theme } = useTheme();
+
   const change = () => {
     onChange();
   };
 
   return (
     <div
-      className={`${styles.switch} ${switchSize({ size })} ${check ? 'bu-bg-light-primary' : ""}`}
+      className={`${styles.switch} ${bgStyle({ theme: theme })} ${switchSize({ size })} ${
+        check ? "bu-bg-light-primary" : ""
+      }`}
       onClick={change}>
-      <div className={`${styles.thumb} ${check ? moveSize({size}) : "" } ${thumbSize({size})}`}></div>
+      <div
+        className={`${styles.thumb} ${check ? moveSize({ size }) : ""} ${thumbSize({
+          size
+        })}`}></div>
     </div>
   );
 };

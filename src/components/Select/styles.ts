@@ -13,7 +13,7 @@ const labelStyles = cva("", {
 const outlinedStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-text-light-label-60",
+      light: "bu-text-light-label",
       dark: "bu-text-white"
     }
   }
