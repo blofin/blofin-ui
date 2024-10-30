@@ -54,11 +54,17 @@ const TextFieldWithTheme = ({
   return (
     <ThemeProvider value={{ theme: mode }}>
       <div className="bu-flex bu-flex-col bu-gap-2">
-        <TextField variant="filled" startAdornment={startAdornment} endAdornment={endAdornment} />
+        <TextField
+          variant="filled"
+          placeholder="1111"
+          startAdornment={startAdornment}
+          endAdornment={endAdornment}
+        />
         <TextField
           variant="filled"
           startAdornment={startAdornment}
           endAdornment={endAdornment}
+          placeholder="1111"
           error={true}
         />
         <TextField
@@ -94,21 +100,30 @@ export const All: Story = {
       formState: { errors }
     } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
+    const mode = useMode();
     return (
-      /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-      <form className="bu-flex bu-max-w-sm bu-flex-col bu-gap-4" onSubmit={handleSubmit(onSubmit)}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <TextField variant="outlined" defaultValue="test" {...register("example")} />
+        /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+      <ThemeProvider value={{ theme: mode }}>
+        <form
+          className="bu-flex bu-max-w-sm bu-flex-col bu-gap-4"
+          onSubmit={handleSubmit(onSubmit)}>
+          {/* register your input into the hook by invoking the "register" function */}
+          <TextField
+            placeholder="1111"
+            variant="outlined"
+            defaultValue="test"
+            {...register("example")}
+          />
 
-        {/* include validation with required or other standard HTML validation rules */}
-        <TextField variant="outlined" {...register("exampleRequired", { required: true })} />
+          {/* include validation with required or other standard HTML validation rules */}
+          <TextField variant="outlined" {...register("exampleRequired", { required: true })} />
 
-        {/* errors will return when field validation fails  */}
-        {errors.exampleRequired && <span>This field is required</span>}
+          {/* errors will return when field validation fails  */}
+          {errors.exampleRequired && <span>This field is required</span>}
 
-        <TextField variant="filled" type="submit" />
-      </form>
+          <TextField variant="filled" type="submit" />
+        </form>
+      </ThemeProvider>
     );
   }
 };

@@ -80,7 +80,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             </div>
           )}
           <input
-            id={id ? id : (typeof label === "string" ? `bui-${label}` : undefined)}
+            id={id ? id : typeof label === "string" ? `bui-${label}` : undefined}
             disabled={disabled}
             type={type}
             {...otherProps}
@@ -90,7 +90,10 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
               inputSize === "lg" ? "bu-text-md" : "bu-text-sm",
               inputClassName,
               !startAdornment && (inputSize === "lg" ? "bu-pl-3" : "bu-pl-2"),
-              !endAdornment && (inputSize === "lg" ? "bu-pr-3" : "bu-pr-2")
+              !endAdornment && (inputSize === "lg" ? "bu-pr-3" : "bu-pr-2"),
+              (mode ? mode : theme) === "light"
+                ? "bu-placeholder-light-label-40"
+                : "bu-placeholder-dark-label-40"
             )}
           />
           {endAdornment && (
