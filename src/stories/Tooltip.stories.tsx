@@ -28,9 +28,9 @@ export const Primary: Story = {
 
     return (
       <div className="bu-h-[300px] bu-overflow-y-scroll">
-        <div className="bu-h-[1000px] bu-pl-[300px] bu-pt-[300px]">
+        <div className="bu-h-[1500px] bu-pl-[700px] bu-pt-[300px]">
           <Tooltip
-            placement="top"
+            placement='top'
             theme={'dark'}
             // hideArrow
             isShow = {isShow}
@@ -47,7 +47,7 @@ export const Primary: Story = {
             <Button size="small" icon="2" shape="circle"></Button>
           </Tooltip>
 
-          <Tooltip
+          {/* <Tooltip
             placement="top"
             // hideArrow
             isShow = {isShow}
@@ -62,7 +62,7 @@ export const Primary: Story = {
               </div>
             }>
             <Button size="small" icon="2" shape="circle"></Button>
-          </Tooltip>
+          </Tooltip> */}
         </div>
       </div>
     );
