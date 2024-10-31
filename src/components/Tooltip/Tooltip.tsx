@@ -73,8 +73,6 @@ const Content: FC<ContentProps> = ({
     }
   }, [enter, isShow]);
 
-  console.log(styles,'styles+++')
-
   return ReactDOM.createPortal(
     <div
       ref={targetRef}
@@ -112,6 +110,8 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, theme: toolTipTheme, ...p
 
   const [enter, setEnter] = useDelayEvent<boolean>(false, 100);
 
+  const [show, setShow] = useState(false);
+
   const { isClient } = useClient();
 
   const mouseEnter = () => {
@@ -128,6 +128,14 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, theme: toolTipTheme, ...p
     return toolTipTheme ? toolTipTheme : mode;
   }, [toolTipTheme, mode]);
 
+  useEffect(() => {
+    if (isShow !== undefined) {
+      setTimeout(()=>{
+        setShow(isShow);
+      },0)
+    }
+  }, [isShow]);
+
   return (
     <div
       ref={targetRef}
@@ -136,13 +144,7 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, theme: toolTipTheme, ...p
       onMouseLeave={mouseLeave}>
       {children}
       {isClient && (
-        <Content
-          {...props}
-          enter={enter}
-          theme={theme}
-          isShow={isShow}
-          parent={targetRef.current}
-        />
+        <Content {...props} enter={enter} theme={theme} isShow={show} parent={targetRef.current} />
       )}
     </div>
   );

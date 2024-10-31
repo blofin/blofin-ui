@@ -18,13 +18,13 @@ export const Primary: Story = {
 
     const [show, setShow] = useState(false);
 
-    const [isShow, setIsShow] = useState(false);
+    const [isShow, setIsShow] = useState(true);
 
-    useEffect(() => {
-      setTimeout(() => {
-        setShow(true);
-      }, 2000);
-    }, []);
+    // useEffect(() => {
+    //   setTimeout(() => {
+    //     setShow(true);
+    //   }, 2000);
+    // }, []);
 
     return (
       <div className="bu-h-[300px] bu-overflow-y-scroll">
