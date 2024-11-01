@@ -1,11 +1,12 @@
 import { cva } from "class-variance-authority";
 
-const itemStyles = cva("bu-cursor-pointer bu-min-w-[32px]", {
+const itemStyles = cva("bu-min-w-[32px] bu-cursor-pointer", {
   variants: {
     size: {
-      small: "bu-text-[14px]",
-      medium: "bu-text-[14px]",
-      large: "bu-text-[16px]"
+      small: "bu-text-[14px] bu-mr-[16px]",
+      medium: "bu-text-[14px] bu-mr-[16px]",
+      large: "bu-text-[16px] bu-mr-[16px]",
+      max: "bu-text-[20px] bu-mr-[24px]"
     }
   }
 });
@@ -52,7 +53,7 @@ const borderSyles = cva("bu-border-b-[1px] bu-px-[16px]", {
   variants: {
     theme: {
       light: "bu-border-light-line-primary",
-      dark: "bu-border-dark-line-primary",
+      dark: "bu-border-dark-line-primary"
     }
   }
 });
