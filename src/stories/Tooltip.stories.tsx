@@ -20,18 +20,18 @@ export const Primary: Story = {
 
     const [isShow, setIsShow] = useState(true);
 
-    // useEffect(() => {
-    //   setTimeout(() => {
-    //     setShow(true);
-    //   }, 2000);
-    // }, []);
+    useEffect(() => {
+      setTimeout(() => {
+        setIsShow(false);
+      }, 2000);
+    }, []);
 
     return (
       <div className="bu-h-[300px] bu-overflow-y-scroll">
         <div className="bu-h-[1500px] bu-pl-[700px] bu-pt-[300px]">
           <Tooltip
             placement='top'
-            theme={'dark'}
+            theme={'light'}
             // hideArrow
             isShow = {isShow}
             title="This is Tooltip This is Tooltip This is Tooltip This is Tooltip"
