@@ -86,7 +86,7 @@ export const Primary: Story = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-full">
-          <Tab ref={ref} items={items} size="medium" hideBorder tabWrapperClass='bu-justify-end' defaultIndex={index} change={change}>
+          <Tab ref={ref} items={items} size="max" hideBorder tabWrapperClass='bu-justify-end' defaultIndex={index} change={change}>
             <input type="checkbox" />
           </Tab>
         </div>

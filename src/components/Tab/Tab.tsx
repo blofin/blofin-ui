@@ -29,7 +29,7 @@ interface TabProps extends Base {
     label: React.ReactNode;
     children: React.ReactNode;
   }[];
-  size: BUIComponentSize;
+  size: BUIComponentSize | 'max';
   change: (key: string) => void;
   children?: React.ReactNode;
   tabWrapperClass?: string;
@@ -89,9 +89,9 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
   return (
     <div className="bu-flex bu-flex-col">
       <div
-        className={`bu-flex bu-justify-between ${size !== "small" && !hideBorder ? borderSyles({ theme }) : ""} ${
-          tabWrapperClass || ""
-        }`}>
+        className={`bu-flex bu-justify-between ${
+          size !== "small" && !hideBorder ? borderSyles({ theme }) : ""
+        } ${tabWrapperClass || ""}`}>
         <ul className={`${styles.tab}`}>
           {items.map((item) => {
             return (

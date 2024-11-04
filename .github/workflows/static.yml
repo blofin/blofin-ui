@@ -1,6 +1,6 @@
 # Sample workflow for building and deploying a VitePress site to GitHub Pages
 #
-name: Deploy VitePress site to Pages
+name: Deploy StoryBook site to Pages
 
 on:
   # Runs on pushes targeting the `main` branch. Change this to `master` if you're
@@ -43,11 +43,11 @@ jobs:
       - name: Install dependencies
         run: yarn install # or pnpm install / yarn install
       - name: Build with VitePress
-        run: yarn docs:build # or pnpm docs:build / yarn docs:build
+        run: yarn build-storybook # or pnpm docs:build / yarn docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: docs/.vitepress/dist
+          path: dist
 
   # Deployment job
   deploy:

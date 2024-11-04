@@ -57,13 +57,16 @@ const TextField = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
           type={type}
           {...otherProps}
           ref={ref as LegacyRef<HTMLInputElement>}
-          className={cn(
+          className={`${cn(
             "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-outline-none focus:bu-outline-0 focus-visible:bu-outline-0",
             inputSize === "lg" ? "bu-text-md" : "bu-text-sm",
             inputClassName,
             !startAdornment && (inputSize === "lg" ? "bu-pl-3" : "bu-pl-2"),
-            !endAdornment && (inputSize === "lg" ? "bu-pr-3" : "bu-pr-2")
-          )}
+            !endAdornment && (inputSize === "lg" ? "bu-pr-3" : "bu-pr-2"),
+            (mode ? mode : theme) === "light"
+              ? "bu-placeholder-light-label-40"
+              : "bu-placeholder-dark-label-40"
+          )}`}
         />
         {endAdornment &&
           (typeof endAdornment === "string" ? (
