@@ -33,6 +33,7 @@ export const Primary: Story = {
             placement='top'
             theme={'light'}
             // hideArrow
+            flipPlacement={['bottom']}
             isShow = {isShow}
             title="This is Tooltip This is Tooltip This is Tooltip This is Tooltip"
             content={

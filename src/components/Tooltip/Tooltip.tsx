@@ -48,7 +48,7 @@ const Content: FC<ContentProps> = ({
 }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const { styles, attributes, update } = usePopper(parent, targetRef.current, {
+  const { styles, attributes, update, state } = usePopper(parent, targetRef.current, {
     placement: PLACEMENT[placement],
     strategy: "fixed",
     modifiers: [
@@ -92,8 +92,11 @@ const Content: FC<ContentProps> = ({
           content
         )
       ) : null}
-      {!hideArrow && (
-        <div className={arrowPositionStyles({ placement })}>
+      {!hideArrow && state && (
+        <div
+          className={arrowPositionStyles({
+            placement: PLACEMENT[state.placement as keyof typeof PLACEMENT] as TooltipPlacement
+          })}>
           <ArrowIcon
             className={
               theme === "dark" ? "bu-text-dark-fill-tertiary" : "bu-text-light-fill-tertiary"
@@ -130,9 +133,9 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, theme: toolTipTheme, ...p
 
   useEffect(() => {
     if (isShow !== undefined) {
-      setTimeout(()=>{
+      setTimeout(() => {
         setShow(isShow);
-      },0)
+      }, 0);
     }
   }, [isShow]);
 
