@@ -5,7 +5,8 @@ export const switchSize = cva(
   {
     variants: {
       size: {
-        small: `bu-h-[18px] bu-w-[30px]`,
+        tiny: `bu-h-[16px] bu-w-[28px]`,
+        small: `bu-h-[18px] bu-w-[32px]`,
         medium: `bu-h-[24px] bu-w-[40px]`
       }
     }
@@ -15,6 +16,7 @@ export const switchSize = cva(
 export const thumbSize = cva("bu-rounded-full bu-bg-light-background", {
   variants: {
     size: {
+      tiny: `bu-h-[12px] bu-w-[12px]`,
       small: `bu-h-[14px] bu-w-[14px]`,
       medium: `bu-h-[20px] bu-w-[20px]`
     }
@@ -24,7 +26,8 @@ export const thumbSize = cva("bu-rounded-full bu-bg-light-background", {
 export const moveSize = cva("", {
   variants: {
     size: {
-      small: `bu-translate-x-[10px]`,
+      tiny: `bu-translate-x-[12px]`,
+      small: `bu-translate-x-[14px]`,
       medium: `bu-translate-x-[16px]`
     }
   }
