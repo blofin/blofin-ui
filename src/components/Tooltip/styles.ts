@@ -13,7 +13,7 @@ const arrowPositionStyles = cva("bu-absolute bu-h-[8px] bu-w-[8px]", {
   variants: {
     placement: {
       top: "bu-bottom-[-7px] bu-left-[50%] bu-translate-x-[-50%]",
-      topLeft: "bu-bottom-[-7px] bu-left-[16px]",
+      topLeft: "bu-bottom-[-8px] bu-left-[16px]",
       topRight: "bu-bottom-[-7px] bu-right-[16px]",
       bottom: "bu-left-[50%] bu-top-[-7.5px] bu-translate-x-[-50%] bu-rotate-[180deg]",
       bottomLeft: "bu-left-[16px] bu-top-[-7.5px] bu-rotate-[180deg]",

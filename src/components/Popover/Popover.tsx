@@ -8,13 +8,7 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 import { Placement } from "@popperjs/core";
 
 export interface PopoverProps {
-  /**
-   * Popover label
-   */
   label: string | React.ReactNode;
-  /**
-   * Popover content
-   */
   content: React.ReactNode;
   trigger?: "click";
   y?: number;
@@ -79,7 +73,7 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
       {
         name: "flip",
         options: {
-          fallbackPlacements: flipPlacement ? flipPlacement : undefined
+          fallbackPlacements: flipPlacement ? flipPlacement : []
         }
       }
     ]
