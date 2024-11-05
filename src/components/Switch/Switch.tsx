@@ -6,7 +6,7 @@ import useTheme from "../../provider/useTheme";
 interface SwitchProps {
   check: boolean;
   onChange: () => void;
-  size?: "small" | "medium";
+  size?: "tiny" | "small" | "medium";
 }
 
 export const Switch: FC<SwitchProps> = ({ check, onChange, size = "medium" }) => {

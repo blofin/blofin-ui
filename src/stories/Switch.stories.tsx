@@ -24,10 +24,23 @@ export const Primary: Story = {
 
     return (
       <ThemeProvider value={{ theme: mode }}>
+        <div style={{ display: "flex", gap: "10px" }}>
         <Switch
           check={changeValue}
           onChange={change}
+          size="tiny"
         />
+        <Switch
+          check={changeValue}
+          onChange={change}
+          size="small"
+        />
+        <Switch
+          check={changeValue}
+          onChange={change}
+          size="medium"
+        />
+        </div>
       </ThemeProvider>
     );
   }
