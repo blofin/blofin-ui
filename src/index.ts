@@ -5,6 +5,7 @@ import { CssDropdown } from "./components/CssDropdown/CssDropdown";
 import DatePickerRange, {
   DatePickerRangeProps
 } from "./components/DatePickerRange/DatePickerRange";
+import DateTimePicker, { DateTimePickerProps } from "./components/DateTimePicker/DateTimePicker";
 import { Dialog, DialogProps } from "./components/Dialog/Dialog";
 import { Divider } from "./components/Divider";
 import { Drawer } from "./components/Drawer";
@@ -44,6 +45,7 @@ export {
   Checkbox,
   CssDropdown,
   DatePickerRange,
+  DateTimePicker,
   Dialog,
   Divider,
   Drawer,
@@ -74,6 +76,7 @@ export type {
   BUIComponentSize,
   BUITheme,
   DatePickerRangeProps,
+  DateTimePickerProps,
   DialogProps,
   TableColumnProps,
   TextSelectRefProps,
