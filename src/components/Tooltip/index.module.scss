@@ -1,5 +1,5 @@
 .tooltip-wrapper {
-  @apply bu-absolute bu-flex bu-min-w-[48px] bu-max-w-[500px] bu-flex-col bu-rounded-[4px] bu-px-[12px] bu-py-[8px];
+  @apply bu-min-w-[48px] bu-max-w-[500px] bu-flex-col bu-rounded-[4px] bu-px-[12px] bu-py-[8px];
   .title {
     @apply bu-text-[14px] bu-font-medium bu-leading-[20px];
   }

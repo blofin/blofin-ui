@@ -18,21 +18,22 @@ export const Primary: Story = {
 
     const [show, setShow] = useState(false);
 
-    const [isShow, setIsShow] = useState(false);
+    const [isShow, setIsShow] = useState(true);
 
     useEffect(() => {
       setTimeout(() => {
-        setShow(true);
+        setIsShow(false);
       }, 2000);
     }, []);
 
     return (
       <div className="bu-h-[300px] bu-overflow-y-scroll">
-        <div className="bu-h-[1000px] bu-pl-[300px] bu-pt-[300px]">
+        <div className="bu-h-[1500px] bu-pl-[700px] bu-pt-[300px]">
           <Tooltip
-            placement="top"
-            theme={'dark'}
+            placement='top'
+            theme={'light'}
             // hideArrow
+            flipPlacement={['bottom']}
             isShow = {isShow}
             title="This is Tooltip This is Tooltip This is Tooltip This is Tooltip"
             content={
@@ -47,7 +48,7 @@ export const Primary: Story = {
             <Button size="small" icon="2" shape="circle"></Button>
           </Tooltip>
 
-          <Tooltip
+          {/* <Tooltip
             placement="top"
             // hideArrow
             isShow = {isShow}
@@ -62,7 +63,7 @@ export const Primary: Story = {
               </div>
             }>
             <Button size="small" icon="2" shape="circle"></Button>
-          </Tooltip>
+          </Tooltip> */}
         </div>
       </div>
     );
