@@ -1,7 +1,7 @@
 .popover-content {
   visibility: hidden;
   transition: opacity 0.12s ease-in-out, visibility 0.12s ease-in-out;
-  @apply bu-pointer-events-none bu-z-[1000] bu-opacity-0  bu-shadow bu-rounded-[4px];
+  @apply bu-pointer-events-none bu-z-[9999] bu-opacity-0  bu-shadow bu-rounded-[4px];
 }
 
 .popover-content-visible {
