@@ -28,6 +28,7 @@ export interface DialogProps {
   className?: string;
   contentClassName?: string;
   loading?: boolean;
+  containerRef?: React.RefObject<HTMLDivElement>;
 }
 
 export const Dialog: FC<DialogProps> = (props) => {
@@ -50,7 +51,8 @@ export const Dialog: FC<DialogProps> = (props) => {
     className,
     contentClassName,
     open,
-    loading = false
+    loading = false,
+    containerRef
   } = props;
   const { theme } = useTheme();
 
@@ -104,7 +106,9 @@ export const Dialog: FC<DialogProps> = (props) => {
             <div className={textStyles({ theme: getTheme() })}>
               {title !== null && <div className={styles.title}>{title}</div>}
             </div>
-            <div className={`${styles.content} ${contentClassName}`}>{content}</div>
+            <div ref={containerRef} className={`${styles.content} ${contentClassName}`}>
+              {content}
+            </div>
             <div className={footerStyles({ footerLayout })}>
               {footer === null ? null : footer ? (
                 footer
