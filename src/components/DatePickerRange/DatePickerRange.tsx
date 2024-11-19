@@ -16,7 +16,7 @@ import ArrowUpLine from "../../assets/icons/arrow-up-l-line.svg";
 import SubtractLine from "../../assets/icons/subtract-line.svg";
 import { ArrowLine, DatePickerBg } from "./styles";
 import useTheme from "../../provider/useTheme";
-import { loadLocale } from "./locales";
+import { loadLocale } from "../../utils/locales";
 
 export type DateValue = {
   start_time?: number;
