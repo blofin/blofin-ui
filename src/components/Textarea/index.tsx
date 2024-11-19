@@ -55,7 +55,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
           ref={ref as LegacyRef<HTMLTextAreaElement>}
           disabled={disabled}
           rows={row}
-          className={`${styles.hideScrollbar} ${className} ${textAreaStyles({ theme: mode ? mode : theme })}`}
+          className={`${styles.hideScrollbar} ${textAreaStyles({ theme: mode ? mode : theme })} ${className}`}
           {...otherProps}></textarea>
         {endAdornment && (
           <span
