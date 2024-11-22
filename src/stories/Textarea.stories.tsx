@@ -25,13 +25,13 @@ export const Primary: Story = {
     const [value, setValue] = useState("");
 
     return (
-      <ThemeProvider value={{ theme: "light" }}>
+      <ThemeProvider value={{ theme: "dark" }}>
         <TextArea
           value={value}
           onChange={(e) => setValue(e.target.value)}
           label="测试"
-          error={true}
-          helperText="3333"
+          error={false}
+          helperText=""
           endAdornment={<div className="bu-flex bu-justify-end bu-text-[12px]">{value.length}/50</div>}
         />
       </ThemeProvider>

@@ -4,10 +4,10 @@ const borderStyles = cva("bu-rounded-[4px] bu-border-[1px] bu-p-[8px]", {
   variants: {
     theme: {
       light: [
-        "bu-border-light-label-40 bu-bg-light-background focus-within:bu-border-light-primary hover:bu-border-light-primary"
+        "bu-border-light-line-secondary bu-bg-light-background focus-within:bu-border-light-primary hover:bu-border-light-primary"
       ],
       dark: [
-        "bu-border-dark-label-60 bu-bg-dark-background focus-within:bu-border-dark-primary hover:bu-border-dark-primary"
+        "bu-border-dark-line-secondary bu-bg-dark-background focus-within:bu-border-dark-primary hover:bu-border-dark-primary"
       ]
     }
   }
