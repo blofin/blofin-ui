@@ -100,13 +100,13 @@ const Calendar: React.FC<CalendarProps> = ({
         table: "bu-border-collapse !bu-my-[8px]",
         tbody: "bu-pt-2",
         head_row: "bu-flex",
-        head_cell: `bu-w-8 bu-font-normal bu-text-[12px] bu-pb-[8px] bu-border-b ${HeadCell({
+        head_cell: `!bu-w-[32px] !bu-h-[28px] bu-font-normal bu-text-[12px] bu-pb-[8px] bu-border-b ${HeadCell({
           theme
         })}`,
         row: "bu-flex bu-w-full bu-mt-2",
         cell: `${Cell({
           theme
-        })}  bu-h-8 bu-w-8 bu-text-center bu-text-base bu-p-0 bu-relative [&:has([disabled])]:!bu-cursor-not-allowed [&:has([aria-selected].day-range-end)]:bu-rounded-r-[16px] first:[&:has([aria-selected])]:bu-rounded-l-[0px] last:[&:has([aria-selected])]:bu-rounded-r-[0px] focus-within:bu-relative focus-within:bu-z-20 [&:has([aria-selected].day-range-start)]:bu-rounded-l-[16px]`,
+        })}  !bu-h-[32px] !bu-w-[32px] bu-text-center bu-text-base bu-p-0 bu-relative [&:has([disabled])]:!bu-cursor-not-allowed [&:has([aria-selected].day-range-end)]:bu-rounded-r-[16px] first:[&:has([aria-selected])]:bu-rounded-l-[0px] last:[&:has([aria-selected])]:bu-rounded-r-[0px] focus-within:bu-relative focus-within:bu-z-20 [&:has([aria-selected].day-range-start)]:bu-rounded-l-[16px]`,
         day: `${Day({
           theme
         })} bu-inline-flex bu-items-center bu-justify-center bu-whitespace-nowrap bu-rounded-[16px] bu-text-base bu-font-medium bu-ring-offset-background bu-transition-colors focus-visible:bu-outline-none focus:bu-outline-none focus-visible:bu-ring-2 focus-visible:bu-ring-ring focus-visible:bu-ring-offset-2 disabled:bu-pointer-events-none bu-h-8 bu-w-8 bu-p-0 bu-font-normal aria-selected:bu-opacity-100`,
