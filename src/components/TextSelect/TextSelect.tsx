@@ -60,6 +60,8 @@ interface TextSelectProps {
   offsetPixels?: number;
   preventDuplicateSelection?: boolean;
   inputDisabled?: boolean;
+  base?: "input" | "div";
+  customLabel?: (item: Options) => ReactNode;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -237,12 +239,16 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     hideSelectedState,
     offsetPixels = -2,
     preventDuplicateSelection = true,
-    inputDisabled = false
+    inputDisabled = false,
+    base = "input",
+    customLabel
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const divRef = useRef<HTMLDivElement>(null);
 
   const customeRef = useRef<HTMLDivElement | null>(null);
 
@@ -258,8 +264,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     const option = options.find((item) => {
       return item.value === defaultValue;
     });
-    return option ? option.label : "";
-  }, [defaultValue]);
+    return option ? (customLabel ? customLabel(option) : option.label) : "";
+  }, [defaultValue, customLabel]);
 
   const hide = () => {
     setShow(false);
@@ -271,7 +277,11 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     if (customeRef.current?.contains(event.target)) {
       return;
     }
-    if (inputRef.current && !inputRef.current.contains(event.target)) {
+
+    if (
+      (inputRef.current && !inputRef.current.contains(event.target)) ||
+      (divRef.current && !divRef.current.contains(event.target))
+    ) {
       hide();
     }
   };
@@ -295,7 +305,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         id={id || ""}
         disabled={inputDisabled}
         ref={inputRef}
-        inputClassName={`${styles.input} ${valueClassName}`}
+        inputClassName={`${styles.input} ${valueClassName} ${base === "div" ? "bu-h-0" : ""}`}
         variant="outlined"
         onFocus={() => {
           setShow(true);
@@ -313,7 +323,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         }}
         startAdornment={startAdornment}
         endAdornment={
-          !hideEndAdornment && (
+          !hideEndAdornment &&
+          base === "input" && (
             <SelectArrow
               onClick={() => {
                 if (inputDisabled) return;
@@ -329,6 +340,33 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         }
         autoComplete="off"
       />
+      <div
+        ref={divRef}
+        className={`${styles.input} ${valueClassName} ${
+          base === "div" ? "bu-absolute bu-left-0 bu-top-0" : ""
+        } bu-flex bu-h-full bu-w-full bu-items-center bu-justify-between`}
+        onClick={() => {
+          if (inputDisabled) return;
+          setTimeout(() => {
+            !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+          }, 0);
+        }}>
+        <div className="bu-pl-[16px] bu-text-[12px]">{label}</div>
+        {!hideEndAdornment && (
+          <SelectArrow
+            onClick={() => {
+              if (inputDisabled) return;
+              setTimeout(() => {
+                !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+              }, 0);
+            }}
+            className={`${iconStylesVariants({ theme, disabled: inputDisabled })} ${
+              isFocus ? styles.roate : ""
+            }`}
+          />
+        )}
+      </div>
+
       {show && (
         <Options
           ref={customeRef}
