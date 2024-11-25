@@ -264,6 +264,13 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     const option = options.find((item) => {
       return item.value === defaultValue;
     });
+    return option ? option.label : "";
+  }, [defaultValue]);
+
+  const customLabelNode = useMemo(() => {
+    const option = options.find((item) => {
+      return item.value === defaultValue;
+    });
     return option ? (customLabel ? customLabel(option) : option.label) : "";
   }, [defaultValue, customLabel]);
 
@@ -351,7 +358,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
             !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
           }, 0);
         }}>
-        <div className="bu-pl-[16px] bu-text-[12px]">{label}</div>
+        <div className="bu-pl-[16px] bu-text-[12px]">{customLabelNode}</div>
         {!hideEndAdornment && (
           <SelectArrow
             onClick={() => {
