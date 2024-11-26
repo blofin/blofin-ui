@@ -347,32 +347,38 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         }
         autoComplete="off"
       />
-      <div
-        ref={divRef}
-        className={`${styles.input} ${valueClassName} ${
-          base === "div" ? "bu-absolute bu-left-0 bu-top-0" : ""
-        } bu-flex bu-h-full bu-w-full bu-items-center bu-justify-between`}
-        onClick={() => {
-          if (inputDisabled) return;
-          setTimeout(() => {
-            !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
-          }, 0);
-        }}>
-        <div className="bu-pl-[16px] bu-text-[12px]">{customLabelNode}</div>
-        {!hideEndAdornment && (
-          <SelectArrow
-            onClick={() => {
-              if (inputDisabled) return;
-              setTimeout(() => {
-                !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
-              }, 0);
-            }}
-            className={`${iconStylesVariants({ theme, disabled: inputDisabled })} ${
-              isFocus ? styles.roate : ""
-            }`}
-          />
-        )}
-      </div>
+      {base === "div" && (
+        <div
+          ref={divRef}
+          className={`${styles.input} ${valueClassName} ${
+            base === "div" ? "bu-absolute bu-left-0 bu-top-0" : ""
+          } bu-flex bu-h-full bu-w-full bu-items-center bu-justify-between ${
+            theme === "light"
+              ? "bu-rounded bu-border-[1px] bu-border-light-line-secondary bu-bg-light-background"
+              : "bu-rounded bu-border-[1px] bu-border-dark-line-secondary bu-bg-dark-background"
+          }`}
+          onClick={() => {
+            if (inputDisabled) return;
+            setTimeout(() => {
+              !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+            }, 0);
+          }}>
+          <div className="bu-pl-[8px] bu-text-[12px]">{customLabelNode}</div>
+          {!hideEndAdornment && (
+            <SelectArrow
+              onClick={() => {
+                if (inputDisabled) return;
+                setTimeout(() => {
+                  !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+                }, 0);
+              }}
+              className={`${iconStylesVariants({ theme, disabled: inputDisabled })} ${
+                isFocus ? styles.roate : ""
+              }`}
+            />
+          )}
+        </div>
+      )}
 
       {show && (
         <Options

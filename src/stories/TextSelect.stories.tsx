@@ -176,6 +176,7 @@ export const Primary: Story = {
                 searchClassName="!bu-px-[16px] bu-py-[8px] !bu-mb-0"
                 hideSelectedState={true}
                 base="div"
+                inputDisabled={true}
                 customLabel={(item) => {
                   return (
                     <div className="bu-w-[440px]">
