@@ -69,6 +69,8 @@ const useDateTimePicker = ({
       setDate(new Date(defaultValue));
       setCurrentHour(new Date(defaultValue).getHours());
       setCurrentMinute(new Date(defaultValue).getMinutes());
+      setMonth(new Date(defaultValue));
+      setStartMonth(new Date(defaultValue));
     }
   }, [defaultValue]);
 

@@ -16,7 +16,7 @@ type Story = StoryObj<typeof DateTimePicker>;
 
 export const Primary: Story = {
   render: () => {
-    const [date, setDate] = useState<number | undefined>();
+    const [date, setDate] = useState<number | undefined>(new Date('2025-1-2').getTime());
 
     const handleChangeDate = (date?: number) => {
       setDate(date);
