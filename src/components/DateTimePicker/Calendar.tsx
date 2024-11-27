@@ -28,6 +28,7 @@ export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
   startMonthShow: boolean;
   setStartMonthShow: React.Dispatch<React.SetStateAction<boolean>>;
   setStartMonth: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  date?: number;
 };
 
 const Calendar: React.FC<CalendarProps> = ({
@@ -35,6 +36,7 @@ const Calendar: React.FC<CalendarProps> = ({
   classNames,
   showOutsideDays = true,
   month,
+  date,
   startMonthShow,
   setStartMonthShow,
   setStartMonth,
@@ -43,43 +45,48 @@ const Calendar: React.FC<CalendarProps> = ({
 }) => {
   const { theme } = useTheme();
 
-  function CustomCaption(props: CaptionProps) {
-    const { goToMonth, nextMonth, previousMonth } = useNavigation();
+  const CustomCaption = React.useCallback(
+    (props: CaptionProps) => {
+      const { goToMonth, nextMonth, previousMonth } = useNavigation();
 
-    const handleMonthClick = () => {
-      setStartMonthShow(!startMonthShow);
-      setStartMonth(props.displayMonth);
-    };
+      const handleMonthClick = () => {
+        setStartMonthShow(!startMonthShow);
+        setStartMonth(props.displayMonth);
+      };
 
-    React.useEffect(() => {
-      if (month) {
-        goToMonth(month);
-      }
-    }, [month]);
+      React.useEffect(() => {
+        if (month) {
+          goToMonth(month);
+        }
+      }, [month, date]);
 
-    return (
-      <div className="bu-flex bu-w-[333px] bu-h-10 bu-items-center bu-justify-between bu-py-2">
-        <div
-          className="bu-flex bu-h-3 bu-cursor-pointer bu-items-center bu-gap-1"
-          onClick={handleMonthClick}>
-          <Typography variant="body2" weight="medium">
-            {format(props.displayMonth, "MMM yyy", { locale: locale })}
-          </Typography>
-          <ArrowDownLine
-            className={`bu-h-5 bu-w-5 bu-cursor-pointer ${ArrowLine({ theme })}`}></ArrowDownLine>
+      return (
+        <div className="bu-flex bu-h-[40px] bu-w-[333px] bu-items-center bu-justify-between bu-py-[8px]">
+          <div
+            className="bu-flex bu-h-[12px] bu-cursor-pointer bu-items-center bu-gap-1"
+            onClick={handleMonthClick}>
+            <Typography variant="body2" weight="medium">
+              {format(props.displayMonth, "MMM yyy", { locale: locale })}
+            </Typography>
+            <ArrowDownLine
+              className={`bu-h-[20px] bu-w-[20px] bu-cursor-pointer ${ArrowLine({
+                theme
+              })}`}></ArrowDownLine>
+          </div>
+
+          <div className="bu-flex bu-gap-6">
+            <ArrowLeftLine
+              className={`bu-h-[24px] bu-w-[24px] bu-cursor-pointer ${ArrowLine({ theme })}`}
+              onClick={() => previousMonth && goToMonth(previousMonth)}></ArrowLeftLine>
+            <ArrowRightLine
+              className={`bu-h-[24px] bu-w-[24px] bu-cursor-pointer ${ArrowLine({ theme })}`}
+              onClick={() => nextMonth && goToMonth(nextMonth)}></ArrowRightLine>
+          </div>
         </div>
-
-        <div className="bu-flex bu-gap-6">
-          <ArrowLeftLine
-            className={`bu-h-6 bu-w-6 bu-cursor-pointer ${ArrowLine({ theme })}`}
-            onClick={() => previousMonth && goToMonth(previousMonth)}></ArrowLeftLine>
-          <ArrowRightLine
-            className={`bu-h-6 bu-w-6 bu-cursor-pointer ${ArrowLine({ theme })}`}
-            onClick={() => nextMonth && goToMonth(nextMonth)}></ArrowRightLine>
-        </div>
-      </div>
-    );
-  }
+      );
+    },
+    [month, date]
+  );
 
   return (
     <DayPicker
@@ -98,15 +105,17 @@ const Calendar: React.FC<CalendarProps> = ({
         nav_button_previous: "bu-absolute bu-left-1",
         nav_button_next: "bu-absolute bu-right-1",
         table: "bu-border-collapse !bu-my-[8px]",
-        tbody: "bu-pt-2",
+        tbody: "bu-pt-[8px]",
         head_row: "bu-flex",
-        head_cell: `bu-w-8 bu-font-normal bu-text-[12px] bu-pb-[8px] bu-border-b ${HeadCell({
-          theme
-        })}`,
-        row: "bu-flex bu-w-full bu-mt-2",
+        head_cell: `!bu-w-[32px] !bu-h-[28px] bu-font-normal bu-text-[12px] bu-pb-[8px] bu-border-b ${HeadCell(
+          {
+            theme
+          }
+        )}`,
+        row: "bu-flex bu-w-full bu-mt-[8px]",
         cell: `${Cell({
           theme
-        })}  bu-h-8 bu-w-8 bu-text-center bu-text-base bu-p-0 bu-relative [&:has([disabled])]:!bu-cursor-not-allowed [&:has([aria-selected].day-range-end)]:bu-rounded-r-[16px] first:[&:has([aria-selected])]:bu-rounded-l-[0px] last:[&:has([aria-selected])]:bu-rounded-r-[0px] focus-within:bu-relative focus-within:bu-z-20 [&:has([aria-selected].day-range-start)]:bu-rounded-l-[16px]`,
+        })}  !bu-h-[32px] !bu-w-[32px] bu-text-center bu-text-base bu-p-0 bu-relative [&:has([disabled])]:!bu-cursor-not-allowed [&:has([aria-selected].day-range-end)]:bu-rounded-r-[16px] first:[&:has([aria-selected])]:bu-rounded-l-[0px] last:[&:has([aria-selected])]:bu-rounded-r-[0px] focus-within:bu-relative focus-within:bu-z-20 [&:has([aria-selected].day-range-start)]:bu-rounded-l-[16px]`,
         day: `${Day({
           theme
         })} bu-inline-flex bu-items-center bu-justify-center bu-whitespace-nowrap bu-rounded-[16px] bu-text-base bu-font-medium bu-ring-offset-background bu-transition-colors focus-visible:bu-outline-none focus:bu-outline-none focus-visible:bu-ring-2 focus-visible:bu-ring-ring focus-visible:bu-ring-offset-2 disabled:bu-pointer-events-none bu-h-8 bu-w-8 bu-p-0 bu-font-normal aria-selected:bu-opacity-100`,
