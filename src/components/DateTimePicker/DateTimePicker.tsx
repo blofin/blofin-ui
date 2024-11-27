@@ -146,6 +146,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           )}
           <Calendar
             mode="single"
+            date={date?.getTime()}
             selected={date}
             onSelect={onSelect}
             disabled={disabledDays}
