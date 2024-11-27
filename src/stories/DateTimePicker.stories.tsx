@@ -4,7 +4,7 @@ import addDays from "date-fns/addDays";
 import { useState } from "react";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import React from "react";
-import Popup, { PopupRef } from "../components/Popup";
+import { Popover, PopoverRefProps } from "../components/Popover/Popover";
 
 const meta: Meta<typeof DateTimePicker> = {
   title: "Components/DateTimePicker",
@@ -32,21 +32,19 @@ export const Primary: Story = {
       }
     ];
 
-    const ref = React.useRef<PopupRef>(null);
+    const popupref = React.useRef<PopoverRefProps>(null);
 
     const handleClose = () => {
-      ref.current?.close();
+      popupref.current?.close();
     };
 
     return (
       <ThemeProvider value={{ theme: "light" }}>
         <div className="bu-h-[500px] bu-w-full">
-          <Popup
-            ref={ref}
-            distance={5}
-            cancel={handleClose}
-            auto={true}
-            title={"Select DateTime"}
+          <Popover
+            ref={popupref}
+            placement="bottom"
+            label={<span className="iconfont icon-calendar-fill text-light-label text-[20px] cursor-pointer">1111</span>}
             content={
               <DateTimePicker
                 defaultValue={date}
