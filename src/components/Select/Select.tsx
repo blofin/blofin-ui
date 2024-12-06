@@ -38,7 +38,7 @@ type SelectMenuProps = {
   search?: boolean;
   searchChange?: (value: string) => void;
   rowKey?: string;
-  styles?:object
+  styles?: object;
 };
 
 const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>(
@@ -138,6 +138,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   labelField?: string;
   styles?: object;
   inputDisabled?: boolean;
+  hoverClassName?: string;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -166,6 +167,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     labelField = "label",
     styles,
     inputDisabled = false,
+    hoverClassName,
     ...otherProps
   } = props;
 
@@ -184,6 +186,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     offsetRight: 0,
     offsetY: 0
   });
+
+  const [isHover, setIsHover] = useState(false);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -271,15 +275,19 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
         className={`bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center ${
           adsorb ? "bu-relative" : ""
         }`}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
         onClick={onClick}>
         {wrapper ? (
           wrapper(
-            <Typography variant="body4" className={labelClassName}>
+            <Typography
+              variant="body4"
+              className={`${labelClassName} ${isHover ? hoverClassName : ''}`}>
               {keyByItemsMemo[String(value)]?.[labelField]}
             </Typography>
           )
         ) : (
-          <Typography variant="body4" className={labelClassName}>
+          <Typography variant="body4" className={`${labelClassName} ${isHover ? hoverClassName : ''}`}>
             {keyByItemsMemo[String(value)]?.[labelField]}
           </Typography>
         )}
@@ -289,7 +297,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
               labelStyles({
                 theme: mode || theme
               })
-            )} ${arrowClassName}`}
+            )} ${arrowClassName} ${isHover ? hoverClassName : ''}`}
           />
         ) : (
           <SelectArrow
@@ -297,7 +305,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
               outlinedStyles({
                 theme: mode || theme
               })
-            )} ${arrowClassName}`}
+            )} ${arrowClassName} ${isHover ? hoverClassName : ''}`}
           />
         )}
       </div>

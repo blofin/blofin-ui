@@ -21,7 +21,7 @@ export type configType = {
   msg: React.ReactNode;
 };
 
-export type Methods = (config: configType, type: BUIComponentType) => void;
+export type Methods = (config: configType, type: BUIComponentType, position?: string) => void;
 
 export type ToastMthods = (msg: string, type: BUIComponentType) => void;
 
@@ -34,6 +34,7 @@ interface NoticeContextProps {
   setToastList: (item: ToastType[]) => void;
   openToast: ToastMthods;
   removeToast: (id: number) => void;
+  position: string;
 }
 
 const NoticeContext = createContext<NoticeContextProps>({
@@ -48,11 +49,14 @@ const NoticeContext = createContext<NoticeContextProps>({
   openToast: () => {
     console.warn("not methods");
   },
-  removeToast: () => {}
+  removeToast: () => {},
+  position: "leftBottom"
 });
 
 const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [notificationList, setNotificationList] = useState<NotificationType[]>([]);
+
+  const [position, setPosition] = useState<string>("leftBottom");
 
   const [toastList, setToastList] = useState<ToastType[]>([]);
 
@@ -62,7 +66,7 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const toastKey = useRef(0);
 
-  const open = (config: configType, type: BUIComponentType) => {
+  const open = (config: configType, type: BUIComponentType, position?: string) => {
     setNotificationList((list) => [
       ...list,
       {
@@ -73,6 +77,7 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
       }
     ]);
     key.current += 1;
+    position && setPosition(position);
   };
 
   const remove = (id: number) => {
@@ -109,7 +114,8 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
         toastList,
         setToastList,
         openToast,
-        removeToast
+        removeToast,
+        position,
       }}>
       {children}
       {visible && <Notification />}

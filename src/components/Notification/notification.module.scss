@@ -16,3 +16,22 @@
   opacity: 0;
   margin-left: -50px;
 }
+
+.notification-enter-right {
+  opacity: 1;
+  margin-left: 50px;
+}
+.notification-enter-active-right {
+  transition: all 0.3s linear;
+  opacity: 1;
+  margin-left: 0;
+}
+.notification-exit-right {
+  opacity: 1;
+  margin-left: 0;
+}
+.notification-exit-active-right {
+  transition: all 0.3s cubic-bezier(0.05, 0.03, 0.99, 0.28);
+  opacity: 0;
+  margin-left: 50px;
+}
