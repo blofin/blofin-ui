@@ -51,6 +51,7 @@ export const Primary: Story = {
                   { label: "Alice", value: "alice" },
                   { label: "Bob", value: "bob" }
                 ]}
+                inputDisabled={true}
                 wrapper={(children: ReactNode) => {
                   return (
                     <Tooltip placement="top" content="111">

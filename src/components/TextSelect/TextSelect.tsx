@@ -17,6 +17,7 @@ import {
   bgStyles,
   disabledStyles,
   iconStyles,
+  iconStylesVariants,
   itemStyles,
   searchIconStyles,
   searchStyles
@@ -43,6 +44,7 @@ interface TextSelectProps {
   disabled?: string;
   className?: string;
   inputClassName?: string;
+  valueClassName?: string;
   hideEndAdornment?: boolean;
   readOnly?: boolean;
   scrollContainer?: HTMLDivElement | null;
@@ -57,6 +59,9 @@ interface TextSelectProps {
   hideSelectedState?: boolean;
   offsetPixels?: number;
   preventDuplicateSelection?: boolean;
+  inputDisabled?: boolean;
+  base?: "input" | "div";
+  customLabel?: (item: Options) => ReactNode;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -218,6 +223,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     disabled,
     className = "",
     inputClassName = "",
+    valueClassName = "",
     hideEndAdornment = false,
     readOnly = true,
     value,
@@ -232,12 +238,17 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     selectItemClassName,
     hideSelectedState,
     offsetPixels = -2,
-    preventDuplicateSelection = true
+    preventDuplicateSelection = true,
+    inputDisabled = false,
+    base = "input",
+    customLabel
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const divRef = useRef<HTMLDivElement>(null);
 
   const customeRef = useRef<HTMLDivElement | null>(null);
 
@@ -256,6 +267,13 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     return option ? option.label : "";
   }, [defaultValue]);
 
+  const customLabelNode = useMemo(() => {
+    const option = options.find((item) => {
+      return item.value === defaultValue;
+    });
+    return option ? (customLabel ? customLabel(option) : option.label) : "";
+  }, [defaultValue, customLabel]);
+
   const hide = () => {
     setShow(false);
     setIsFocus(false);
@@ -266,7 +284,11 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     if (customeRef.current?.contains(event.target)) {
       return;
     }
-    if (inputRef.current && !inputRef.current.contains(event.target)) {
+
+    if (
+      (inputRef.current && !inputRef.current.contains(event.target)) ||
+      (divRef.current && !divRef.current.contains(event.target))
+    ) {
       hide();
     }
   };
@@ -288,8 +310,9 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     <div className="bu-relative bu-cursor-pointer" ref={targetRef}>
       <TextField
         id={id || ""}
+        disabled={inputDisabled}
         ref={inputRef}
-        inputClassName={styles.input}
+        inputClassName={`${styles.input} ${valueClassName} ${base === "div" ? "bu-h-0" : ""}`}
         variant="outlined"
         onFocus={() => {
           setShow(true);
@@ -307,19 +330,56 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         }}
         startAdornment={startAdornment}
         endAdornment={
-          !hideEndAdornment && (
+          !hideEndAdornment &&
+          base === "input" && (
             <SelectArrow
               onClick={() => {
+                if (inputDisabled) return;
                 setTimeout(() => {
                   !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
                 }, 0);
               }}
-              className={`${iconStyles({ theme })} ${isFocus ? styles.roate : ""}`}
+              className={`${iconStylesVariants({ theme, disabled: inputDisabled })} ${
+                isFocus ? styles.roate : ""
+              }`}
             />
           )
         }
         autoComplete="off"
       />
+      {base === "div" && (
+        <div
+          ref={divRef}
+          className={`${styles.input} ${valueClassName} ${
+            base === "div" ? "bu-absolute bu-left-0 bu-top-0" : ""
+          } bu-flex bu-h-full bu-w-full bu-items-center bu-justify-between ${
+            theme === "light"
+              ? "bu-rounded bu-border-[1px] bu-border-light-line-secondary bu-bg-light-background"
+              : "bu-rounded bu-border-[1px] bu-border-dark-line-secondary bu-bg-dark-background"
+          }`}
+          onClick={() => {
+            if (inputDisabled) return;
+            setTimeout(() => {
+              !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+            }, 0);
+          }}>
+          <div className="bu-pl-[8px] bu-text-[12px]">{customLabelNode}</div>
+          {!hideEndAdornment && (
+            <SelectArrow
+              onClick={() => {
+                if (inputDisabled) return;
+                setTimeout(() => {
+                  !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
+                }, 0);
+              }}
+              className={`${iconStylesVariants({ theme, disabled: inputDisabled })} ${
+                isFocus ? styles.roate : ""
+              }`}
+            />
+          )}
+        </div>
+      )}
+
       {show && (
         <Options
           ref={customeRef}

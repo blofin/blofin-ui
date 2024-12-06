@@ -137,6 +137,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   rowKey?: string;
   labelField?: string;
   styles?: object;
+  inputDisabled?: boolean;
   hoverClassName?: string;
 }
 
@@ -165,6 +166,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     rowKey,
     labelField = "label",
     styles,
+    inputDisabled = false,
     hoverClassName,
     ...otherProps
   } = props;
@@ -205,18 +207,21 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   };
 
   const onMouseEnter = () => {
+    if(inputDisabled) return;
     if (trigger === "hover") {
       setShowMenu(true);
     }
   };
 
   const onMouseLeave = () => {
+    if(inputDisabled) return;
     if (trigger === "hover") {
       setShowMenu(false);
     }
   };
 
   const onClick = () => {
+    if(inputDisabled) return;
     if (trigger === "click") {
       setShowMenu((preState) => !preState);
     }

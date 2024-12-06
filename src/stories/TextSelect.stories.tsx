@@ -34,31 +34,38 @@ export const Primary: Story = {
     const [accountOptions1, setAccountOptions1] = useState<any>([
       {
         label: "市价",
-        value: "market"
+        value: "market",
+        subLabel: "sub-市价"
       },
       {
         label: "最新价",
-        value: "limit"
+        value: "limit",
+        subLabel: "sub-最新价"
       },
       {
         label: "最新价1",
-        value: "limit1"
+        value: "limit1",
+        subLabel: "sub-最新价1"
       },
       {
         label: "最新价2",
-        value: "limit2"
+        value: "limit2",
+        subLabel: "sub-最新价2"
       },
       {
         label: "最新价3",
-        value: "limit3"
+        value: "limit3",
+        subLabel: "sub-最新价3"
       },
       {
         label: "最新价4",
-        value: "limit4"
+        value: "limit4",
+        subLabel: "sub-最新价4"
       },
       {
         label: "最新价5",
-        value: "limit5"
+        value: "limit5",
+        subLabel: "sub-最新价5"
       }
     ]);
 
@@ -80,7 +87,7 @@ export const Primary: Story = {
 
     const change = (value: string) => {
       console.log(value, "+++");
-      setValue(value)
+      setValue(value);
       // if (value === "limit") {
       //   setValue("20000");
       // } else {
@@ -128,7 +135,7 @@ export const Primary: Story = {
       <ThemeProvider value={{ theme: mode }}>
         <div ref={ref} className="bu-overflow-y-scroll">
           <div className="bu-flex-col bu-p-[200px] bu-pt-[1000px]">
-            <div className="bu-mb-[50px]">
+            {/* <div className="bu-mb-[50px]">
               <Tooltip placement="top" content="价格" scrollContainer={ref.current}>
                 <TextSelect
                   preventDuplicateSelection={false}
@@ -155,7 +162,7 @@ export const Primary: Story = {
                 inputChange={inputChange}>
                 <div>custom</div>
               </TextSelect>
-            </div>
+            </div> */}
             <div>
               <TextSelect
                 ref={selectRef}
@@ -168,10 +175,19 @@ export const Primary: Story = {
                 selectItemClassName="!bu-h-[52px]"
                 searchClassName="!bu-px-[16px] bu-py-[8px] !bu-mb-0"
                 hideSelectedState={true}
-                customSelectItems={(item: { label: string; value: string }) => {
+                base="div"
+                inputDisabled={true}
+                customLabel={(item) => {
                   return (
                     <div className="bu-w-[440px]">
-                      {item.label} --- {item.value}
+                      {item.label} --- {item.subLabel}
+                    </div>
+                  );
+                }}
+                customSelectItems={(item) => {
+                  return (
+                    <div className="bu-w-[440px]">
+                      {item.label} --- {item.subLabel}
                     </div>
                   );
                 }}

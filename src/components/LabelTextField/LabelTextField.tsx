@@ -93,7 +93,10 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
               !endAdornment && (inputSize === "lg" ? "bu-pr-3" : "bu-pr-2"),
               (mode ? mode : theme) === "light"
                 ? "bu-placeholder-light-label-40"
-                : "bu-placeholder-dark-label-40"
+                : "bu-placeholder-dark-label-40",
+              (mode ? mode : theme) === "light"
+                ? "focus:bu-caret-light-primary"
+                : "focus:dark:bu-caret-dark-primary"
             )}
           />
           {endAdornment && (
