@@ -43,6 +43,7 @@ export const Primary: Story = {
               <Select
                 value={"alice"}
                 selectType="outlined"
+                hoverClassName='!bu-text-light-primary !dark:bu-text-dark-primary'
                 activeColor={false}
                 align="left"
                 adsorb={true}

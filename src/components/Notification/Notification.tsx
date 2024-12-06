@@ -1,8 +1,4 @@
-import React, {
-  FC,
-  useContext,
-  useEffect,
-} from "react";
+import React, { FC, useContext, useEffect, useMemo } from "react";
 import ReactDOM from "react-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styles from "./notification.module.scss";
@@ -74,20 +70,53 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
 };
 
 const NotificationContainer = () => {
-  const { notificationList, remove } = useContext(NoticeContext);
+  const { notificationList, remove, position } = useContext(NoticeContext);
+
+  const [positionStyle, enter, enterActive, exit, exitActive] = useMemo(() => {
+    const positionStyleMap = {
+      leftTop: "bu-top-[32px] bu-left-[32px]",
+      leftBottom: "bu-bottom-[32px] bu-left-[32px]",
+      rightTop: "bu-top-[32px] bu-right-[32px]",
+      rightBottom: "bu-bottom-[32px] bu-right-[32px]"
+    };
+
+    const positionStyle = positionStyleMap[position as keyof typeof positionStyleMap];
+
+    const enter =
+      position === "leftTop" || position === "leftBottom"
+        ? "notification-enter"
+        : "notification-enter-right";
+
+    const enterActive =
+      position === "leftTop" || position === "leftBottom"
+        ? "notification-enter-active"
+        : "notification-enter-active-right";
+
+    const exit =
+      position === "leftTop" || position === "leftBottom"
+        ? "notification-exit"
+        : "notification-exit-right";
+
+    const exitActive =
+      position === "leftTop" || position === "leftBottom"
+        ? "notification-exit-active"
+        : "notification-exit-active-right";
+
+    return [positionStyle, enter, enterActive, exit, exitActive];
+  }, [position, styles]);
 
   return (
-    <TransitionGroup className="bu-fixed bu-bottom-[32px] bu-left-[32px] bu-z-[99999] bu-w-[384px]">
+    <TransitionGroup className={`bu-fixed bu-z-[99999] bu-w-[384px] ${positionStyle}`}>
       {notificationList.map(({ title, node, id, type }) => {
         return (
           <CSSTransition
             key={id}
             timeout={300}
             classNames={{
-              enter: styles["notification-enter"],
-              enterActive: styles["notification-enter-active"],
-              exit: styles["notification-exit"],
-              exitActive: styles["notification-exit-active"]
+              enter: styles[enter],
+              enterActive: styles[enterActive],
+              exit: styles[exit],
+              exitActive: styles[exitActive]
             }}
             unmountOnExit>
             <NotificationMsg
