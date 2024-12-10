@@ -76,8 +76,8 @@ const NotificationContainer = () => {
     const positionStyleMap = {
       leftTop: "bu-top-[32px] bu-left-[32px]",
       leftBottom: "bu-bottom-[32px] bu-left-[32px]",
-      rightTop: "bu-top-[32px] bu-right-[32px]",
-      rightBottom: "bu-bottom-[32px] bu-right-[32px]"
+      rightTop: "bu-top-[32px] bu-right-[24px]",
+      rightBottom: "bu-bottom-[32px] bu-right-[24px]"
     };
 
     const positionStyle = positionStyleMap[position as keyof typeof positionStyleMap];
