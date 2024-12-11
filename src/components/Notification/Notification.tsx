@@ -48,7 +48,7 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
 
   return (
     <div
-      className={`bu-mb-[24px] bu-w-full bu-rounded-[6px] bu-shadow-toast ${bgStyles({ theme })}`}>
+      className={`bu-mb-[24px] bu-w-full bu-rounded-[6px] bu-shadow-toast bu-border ${bgStyles({ theme })}`}>
       <div className="bu-flex bu-rounded-[6px] bu-px-[24px] bu-py-[16px]">
         <Icon type={type} />
         <div className="w-full bu-flex bu-flex-col">
@@ -76,8 +76,8 @@ const NotificationContainer = () => {
     const positionStyleMap = {
       leftTop: "bu-top-[32px] bu-left-[32px]",
       leftBottom: "bu-bottom-[32px] bu-left-[32px]",
-      rightTop: "bu-top-[32px] bu-right-[24px]",
-      rightBottom: "bu-bottom-[32px] bu-right-[24px]"
+      rightTop: "bu-top-[32px] bu-right-[8px]",
+      rightBottom: "bu-bottom-[32px] bu-right-[8px]"
     };
 
     const positionStyle = positionStyleMap[position as keyof typeof positionStyleMap];
