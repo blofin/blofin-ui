@@ -4,20 +4,23 @@ import { BUIComponentType, BUITheme } from "../../types/component";
 const bgStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-bg-light-background",
-      dark: "bu-bg-dark-background"
+      light: "bu-border-light-line-primary bu-bg-light-background",
+      dark: "bu-border-dark-line-primary bu-bg-dark-background"
     }
   }
 });
 
-const textStyles = cva("bu-w-[296px] bu-break-words bu-text-[14px] bu-font-normal bu-leading-[20px]", {
-  variants: {
-    theme: {
-      light: "bu-text-light-label",
-      dark: "bu-text-dark-label"
+const textStyles = cva(
+  "bu-w-[296px] bu-break-words bu-text-[14px] bu-font-normal bu-leading-[20px]",
+  {
+    variants: {
+      theme: {
+        light: "bu-text-light-label",
+        dark: "bu-text-dark-label"
+      }
     }
   }
-});
+);
 
 const textbg = cva("", {
   variants: {
