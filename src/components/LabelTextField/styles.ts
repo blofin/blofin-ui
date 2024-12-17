@@ -45,8 +45,9 @@ const InputDisabledStyles = (props: { variant: InputVariant; theme: BUITheme }) 
 const InputFilledStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-border-transparent bu-bg-light-fill-secondary",
-      dark: "bu-border-transparent bu-bg-dark-fill-secondary"
+      light:
+        "bu-border-transparent bu-bg-light-fill-secondary hover:bu-border-[1px] hover:bu-border-light-line-tertiary focus-within:bu-border-light-primary",
+      dark: "bu-border-transparent bu-bg-dark-fill-secondary hover:bu-border-[1px] hover:bu-border-dark-line-tertiary focus-within:bu-border-dark-primary"
     }
   }
 });
@@ -54,17 +55,8 @@ const InputFilledStyles = cva("", {
 const InputOutlinedStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-border-light-line-secondary"],
-      dark: ["bu-border-dark-line-secondary"]
-    }
-  }
-});
-
-const InputWithFocus = cva("", {
-  variants: {
-    theme: {
-      light: ["focus-within:bu-border-light-primary hover:bu-border-light-primary"],
-      dark: ["focus-within:bu-border-dark-primary hover:bu-border-dark-primary"]
+      light: ["bu-border-light-line-tertiary hover:bu-bg-light-fill-secondary focus-within:bu-border-light-primary"],
+      dark: ["bu-border-dark-line-tertiary hover:bu-bg-dark-fill-secondary focus-within:bu-border-light-primary"]
     }
   }
 });
@@ -98,7 +90,7 @@ const InputBgVariants = ({
   noClassName?: boolean;
   size: "md" | "lg";
 }) => {
-  return cva("bu-w-full bu-rounded bu-border", {
+  return cva("bu-w-full bu-rounded-[8px] bu-border", {
     variants: {
       variant: {
         filled: InputFilledStyles({ theme }),
@@ -113,7 +105,7 @@ const InputBgVariants = ({
       },
       disabled: {
         true: InputDisabledStyles({ theme, variant }),
-        false: InputWithFocus({ theme })
+        false: ''
       },
       noClassName: {
         true: size === "lg" ? "bu-h-[48px]" : "bu-h-[40px]"
@@ -131,4 +123,49 @@ const HelperTextVariants = cva("", {
   }
 });
 
-export { HelperTextVariants, InputBgVariants, LabelVariants, AdornmentStyles };
+const InputSizeTextStyle = cva("", {
+  variants: {
+    inputSize: {
+      lg: "bu-text-md",
+      md: "bu-text-sm"
+    }
+  }
+});
+
+const InputSizeStyle = cva("", {
+  variants: {
+    inputSize: {
+      lg: "bu-pl-3",
+      md: "bu-pl-2"
+    }
+  }
+});
+
+const InputPlaceholderStyle = cva("", {
+  variants: {
+    theme: {
+      light: "bu-placeholder-light-label-40",
+      dark: "bu-placeholder-dark-label-40"
+    }
+  }
+});
+
+const InputFocusedStyle = cva("focus:bu-outline-0 focus-visible:bu-outline-0", {
+  variants: {
+    theme: {
+      light: "focus:bu-caret-light-primary",
+      dark: "focus:dark:bu-caret-dark-primary"
+    }
+  }
+});
+
+export {
+  HelperTextVariants,
+  InputBgVariants,
+  LabelVariants,
+  AdornmentStyles,
+  InputSizeTextStyle,
+  InputSizeStyle,
+  InputPlaceholderStyle,
+  InputFocusedStyle
+};

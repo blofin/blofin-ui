@@ -26,9 +26,9 @@
       @apply -bu-translate-y-1/2 bu-transform;
       @apply bu-cursor-pointer;
       .mark {
-        @apply bu-w-2;
-        @apply bu-h-2;
-        @apply bu-rounded-full;
+        @apply bu-w-[6px];
+        @apply bu-h-[6px];
+        @apply bu-rounded-[1px];
         @apply bu-border;
         @apply bu-cursor-pointer;
         .mark-label {
@@ -57,9 +57,9 @@
     }
     .thumb {
       @apply bu-absolute;
-      @apply bu-w-4;
-      @apply bu-h-4;
-      @apply bu-rounded-full;
+      @apply bu-w-[12px];
+      @apply bu-h-[12px];
+      @apply bu-rounded-[2px];
       @apply bu-border-2;
       @apply bu-top-1/2;
       @apply -bu-translate-x-2 -bu-translate-y-1/2 bu-transform;
@@ -85,6 +85,7 @@
       position: absolute;
       top: 100%; /* At the bottom of the tooltip */
       left: 50%;
+      margin-top: -1px;
       margin-left: -5px;
       border-width: 5px;
     }

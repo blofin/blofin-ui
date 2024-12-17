@@ -48,8 +48,8 @@ const MarkLabelVariants = cva("", {
 const SliderThumbVariants = cva("", {
   variants: {
     theme: {
-      light: ["bu-border-light-fill-secondary bu-bg-light-background"],
-      dark: ["bu-border-dark-fill-secondary bu-bg-light-background"]
+      light: ["bu-border-light-primary bu-bg-light-background"],
+      dark: ["bu-border-dark-primary bu-bg-light-background"]
     }
   }
 });
