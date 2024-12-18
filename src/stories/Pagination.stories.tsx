@@ -29,7 +29,13 @@ export const Example = () => {
   const mode = useMode();
   return (
     <ThemeProvider value={{ theme: mode }}>
-      <Pagination {...page} onChange={handleChange} />
+      <Pagination
+        {...page}
+        onChange={handleChange}
+        activeStyle={{
+          backgroundColor: "red"
+        }}
+      />
     </ThemeProvider>
   );
 };
