@@ -49,7 +49,7 @@ const SliderThumbVariants = cva("", {
   variants: {
     theme: {
       light: ["bu-border-light-primary bu-bg-light-background"],
-      dark: ["bu-border-dark-primary bu-bg-light-background"]
+      dark: ["bu-border-dark-primary bu-bg-dark-background"]
     }
   }
 });

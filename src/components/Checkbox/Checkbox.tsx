@@ -3,10 +3,11 @@ import { BUITheme, useTheme } from "../..";
 import { cn } from "../../utils/utils";
 import styles from "./Checkbox.module.scss";
 import {
-  CheckMarkCheckedStyles,
-  CheckMarkVariants,
+  CheckedMarkCheckedStyles,
   CheckboxCheckedStyles,
-  CheckboxLabelVariants,
+  CheckboxDisabledLabelVariants,
+  UncheckedboxLabelVariants,
+  UncheckedMarkCheckedStyles,
   disabledMarkStyles
 } from "./styles";
 
@@ -40,11 +41,13 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           styles.checkmark,
           checked
             ? disabled
-              ? disabledMarkStyles()
-              : CheckMarkCheckedStyles({
+              ? disabledMarkStyles({ theme: mode || theme })
+              : CheckedMarkCheckedStyles({
                   theme: mode || theme
                 })
-            : CheckMarkVariants({
+            : disabled
+            ? disabledMarkStyles({ theme: mode || theme })
+            : UncheckedMarkCheckedStyles({
                 theme: mode || theme
               })
         )}></span>
@@ -52,9 +55,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         className={
           checked
             ? disabled
-              ? CheckboxLabelVariants({ theme: mode || theme })
+              ? CheckboxDisabledLabelVariants({ theme: mode || theme })
               : CheckboxCheckedStyles({ theme: mode || theme })
-            : CheckboxLabelVariants({ theme: mode || theme })
+            : disabled
+            ? CheckboxDisabledLabelVariants({ theme: mode || theme })
+            : UncheckedboxLabelVariants({ theme: mode || theme })
         }>
         {label}
       </span>
