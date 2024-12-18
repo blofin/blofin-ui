@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, CSSProperties } from "react";
 import clsx from "clsx";
 import useTheme from "../../provider/useTheme";
 import Arrow from "../../assets/icons/text-arrow.svg";
@@ -27,6 +27,7 @@ export interface PaginationProps {
    */
   className?: string;
   theme?: BUITheme;
+  activeStyle?: CSSProperties;
 }
 
 export function Pagination({
@@ -34,7 +35,8 @@ export function Pagination({
   currentPage,
   onChange,
   className,
-  theme
+  theme,
+  activeStyle
 }: PaginationProps) {
   const [pageList, setPageList] = useState(() => calcPageList(currentPage, totalPages));
   const isFirstRendering = useRef(true);
@@ -82,7 +84,9 @@ export function Pagination({
         return (
           <li
             key={`${pageNum}-${i}`}
-            data-current={currentPage === pageNum}
+            {...(currentPage === pageNum
+              ? { "data-current": true, style: activeStyle }
+              : { "data-current": false })}
             className={paginationVariants({ theme: theme || defaultTheme })}>
             {typeof pageNum === "string" ? (
               <span>{pageNum}</span>
