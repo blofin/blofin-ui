@@ -32,9 +32,9 @@ export const Example = () => {
       <Pagination
         {...page}
         onChange={handleChange}
-        activeStyle={{
-          backgroundColor: "red"
-        }}
+        // activeStyle={{
+        //   backgroundColor: "red"
+        // }}
       />
     </ThemeProvider>
   );
