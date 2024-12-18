@@ -22,16 +22,20 @@ export interface DialogProps {
   theme?: BUITheme;
   footerLayout?: "right" | "left" | "center";
   footerSize?: ButtonSize;
-  hideCancel?: Boolean;
-  hideConfirm?: Boolean;
-  hideIcon?: Boolean;
+  hideCancel?: boolean;
+  hideConfirm?: boolean;
+  hideIcon?: boolean;
   className?: string;
   contentClassName?: string;
   loading?: boolean;
   containerRef?: React.RefObject<HTMLDivElement>;
 }
 
-export const Dialog: FC<DialogProps> = (props) => {
+interface DialogComponent extends FC<DialogProps> {
+  show: (options: Omit<DialogProps, "open">) => void;
+}
+
+const Dialog: DialogComponent = (props) => {
   const {
     size,
     title,
@@ -54,8 +58,8 @@ export const Dialog: FC<DialogProps> = (props) => {
     loading = false,
     containerRef
   } = props;
-  const { theme } = useTheme();
 
+  const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   const getTheme = () => {
@@ -143,3 +147,35 @@ export const Dialog: FC<DialogProps> = (props) => {
       )
     : null;
 };
+
+Dialog.show = (options: Omit<DialogProps, "open">) => {
+  const div = document.createElement("div");
+  document.body.appendChild(div);
+
+  const destroy = () => {
+    ReactDOM.unmountComponentAtNode(div);
+    document.body.removeChild(div);
+  };
+
+  const handleCancel = () => {
+    if (options.cancel) options.cancel();
+    destroy();
+  };
+
+  const handleConfirm = () => {
+    if (options.confirm) options.confirm();
+    destroy();
+  };
+
+  ReactDOM.render(
+    <Dialog
+      {...options}
+      open={true} // 强制打开对话框
+      cancel={handleCancel}
+      confirm={handleConfirm}
+    />,
+    div
+  );
+};
+
+export { Dialog };

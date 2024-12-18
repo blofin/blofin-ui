@@ -265,14 +265,14 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
       return item.value === defaultValue;
     });
     return option ? option.label : "";
-  }, [defaultValue]);
+  }, [defaultValue, options]);
 
   const customLabelNode = useMemo(() => {
     const option = options.find((item) => {
       return item.value === defaultValue;
     });
     return option ? (customLabel ? customLabel(option) : option.label) : "";
-  }, [defaultValue, customLabel]);
+  }, [defaultValue, customLabel, options]);
 
   const hide = () => {
     setShow(false);

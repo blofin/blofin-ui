@@ -69,12 +69,26 @@ export const Primary: Story = {
       setOpen(false);
     };
 
+    const openDialog = () => {
+      Dialog.show({
+        title: "Confirm Delete",
+        content: "Are you sure you want to delete this item?",
+        cancelText: "Cancel",
+        confirmText: "Confirm",
+        size: "medium",
+        cancel: () => console.log("Cancel clicked"),
+        confirm: () => console.log("Confirm clicked"),
+        footerLayout:"right",
+        footerSize:"medium",
+      });
+    };
+
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <Button size="medium" onClick={() => setOpen(true)}>
+        <Button size="medium" onClick={openDialog}>
           Open Dialog
         </Button>
-        <Dialog
+        {/* <Dialog
           open={open}
           title="Hello"
           content={<Content />}
@@ -87,7 +101,7 @@ export const Primary: Story = {
           footerLayout="left"
           footerSize="large"
           hideCancel={true}
-        />
+        /> */}
       </ThemeProvider>
     );
   }
