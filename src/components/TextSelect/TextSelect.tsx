@@ -260,21 +260,25 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
 
   const { theme } = useTheme();
 
-  const persistOptions = options;
+  const [selectedLabel, setSelectedLabel] = useState("");
 
-  const label = useMemo(() => {
-    const option = persistOptions.find((item) => {
+  const [selectedLabelNode, setSelectedLabelNode] = useState<string | ReactNode>("");
+
+  useEffect(() => {
+    const initialOption = options.find((item) => item.value === defaultValue);
+    if (initialOption) {
+      setSelectedLabel(initialOption.label);
+    }
+  }, [defaultValue, options]);
+
+  useEffect(() => {
+    const option = options.find((item) => {
       return item.value === defaultValue;
     });
-    return option ? option.label : "";
-  }, [defaultValue, persistOptions]);
-
-  const customLabelNode = useMemo(() => {
-    const option = persistOptions.find((item) => {
-      return item.value === defaultValue;
-    });
-    return option ? (customLabel ? customLabel(option) : option.label) : "";
-  }, [defaultValue, customLabel, persistOptions]);
+    if (option) {
+      setSelectedLabelNode(customLabel ? customLabel(option) : option.label)
+    }
+  }, [defaultValue, customLabel, options]);
 
   const hide = () => {
     setShow(false);
@@ -326,7 +330,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           onBlur && onBlur();
         }}
         placeholder={placeholder}
-        value={readOnly === false ? value : label}
+        value={readOnly === false ? value : selectedLabel}
         onChange={(e) => {
           inputChange && inputChange(e.target.value);
         }}
@@ -365,7 +369,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
               !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
             }, 0);
           }}>
-          <div className="bu-pl-[8px] bu-text-[12px]">{customLabelNode}</div>
+          <div className="bu-pl-[8px] bu-text-[12px]">{selectedLabelNode}</div>
           {!hideEndAdornment && (
             <SelectArrow
               onClick={() => {
