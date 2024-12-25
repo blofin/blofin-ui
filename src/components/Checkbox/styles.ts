@@ -10,7 +10,7 @@ const CheckboxCheckedStyles = cva("bu-select-none bu-text-sm", {
 });
 
 const CheckedMarkCheckedStyles = cva(
-  "bu-flex bu-h-[9px] bu-w-[9px] bu-items-center bu-justify-center bu-border",
+  "bu-flex bu-h-[12px] bu-w-[12px] bu-items-center bu-justify-center bu-border",
   {
     variants: {
       theme: {
@@ -22,7 +22,7 @@ const CheckedMarkCheckedStyles = cva(
 );
 
 const UncheckedMarkCheckedStyles = cva(
-  "bu-flex bu-h-[9px] bu-w-[9px] bu-items-center bu-justify-center bu-border",
+  "bu-flex bu-h-[12px] bu-w-[12px] bu-items-center bu-justify-center bu-border",
   {
     variants: {
       theme: {
@@ -34,7 +34,7 @@ const UncheckedMarkCheckedStyles = cva(
 );
 
 const CheckMarkVariants = cva(
-  "bu-flex bu-h-[9px] bu-w-[9px] bu-items-center bu-justify-center bu-border bu-bg-transparent",
+  "bu-flex bu-h-[12px] bu-w-[12px] bu-items-center bu-justify-center bu-border bu-bg-transparent",
   {
     variants: {
       theme: {
@@ -64,7 +64,7 @@ const CheckboxDisabledLabelVariants = cva("bu-select-none bu-text-sm", {
 });
 
 const disabledMarkStyles = cva(
-  "bu-flex bu-h-[9px] bu-w-[9px] bu-items-center bu-justify-center bu-border",
+  "bu-flex bu-h-[12px] bu-w-[12px] bu-items-center bu-justify-center bu-border",
   {
     variants: {
       theme: {

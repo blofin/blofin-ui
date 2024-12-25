@@ -5,7 +5,7 @@
     .rail {
       @apply bu-absolute;
       @apply bu-w-full;
-      @apply bu-h-1;
+      @apply bu-h-[2px];
       @apply bu-rounded-full;
       @apply bu-top-1/2;
       @apply -bu-translate-y-1/2 bu-transform;
@@ -33,7 +33,7 @@
         @apply bu-cursor-pointer;
         .mark-label {
           @apply bu-absolute;
-          @apply bu-text-xs;
+          @apply bu-text-[12px];
           @apply bu-top-3;
         }
       }

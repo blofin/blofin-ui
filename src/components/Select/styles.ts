@@ -31,8 +31,8 @@ const menuStyles = cva("bu-border-[1px]", {
 const activeItemStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-bg-light-fill-secondary bu-text-light-primary",
-      dark: "bu-bg-dark-fill-secondary bu-text-dark-primary"
+      light: "bu-text-light-primary",
+      dark: "bu-text-dark-primary"
     }
   }
 });

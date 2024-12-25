@@ -35,8 +35,8 @@
 /* Style the checkmark/indicator */
 .container .checkmark:after {
   @apply bu-border-solid;
-  width: 3px;
-  height: 5px;
+  width: 4px;
+  height: 6px;
   margin-bottom: 2px;
   border-width: 0 1.8px 1.8px 0;
   -webkit-transform: rotate(35deg);
