@@ -53,7 +53,7 @@ export const Primary: Story = {
             defaultValue={date}
             dateClassName={'bu-w-[260px]'}
             setValues={handleChangeDate}
-            limitDays={180}
+            limitDays={370}
             disabledDays={disabledDays}
             quickSelection={buttonGroup}
             disabledSameDay
