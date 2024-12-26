@@ -116,7 +116,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
               className={`${styles["mark-label"]} ${cn(
                 MarkLabelVariants({ theme: mode || theme })
               )}`}>
-              0
+              0%
             </span>
           </div>
           <div
