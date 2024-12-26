@@ -260,18 +260,24 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
 
   const { theme } = useTheme();
 
-  const label = useMemo(() => {
-    const option = options.find((item) => {
-      return item.value === defaultValue;
-    });
-    return option ? option.label : "";
+  const [selectedLabel, setSelectedLabel] = useState("");
+
+  const [selectedLabelNode, setSelectedLabelNode] = useState<string | ReactNode>("");
+
+  useEffect(() => {
+    const initialOption = options.find((item) => item.value === defaultValue);
+    if (initialOption) {
+      setSelectedLabel(initialOption.label);
+    }
   }, [defaultValue, options]);
 
-  const customLabelNode = useMemo(() => {
+  useEffect(() => {
     const option = options.find((item) => {
       return item.value === defaultValue;
     });
-    return option ? (customLabel ? customLabel(option) : option.label) : "";
+    if (option) {
+      setSelectedLabelNode(customLabel ? customLabel(option) : option.label)
+    }
   }, [defaultValue, customLabel, options]);
 
   const hide = () => {
@@ -324,7 +330,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           onBlur && onBlur();
         }}
         placeholder={placeholder}
-        value={readOnly === false ? value : label}
+        value={readOnly === false ? value : selectedLabel}
         onChange={(e) => {
           inputChange && inputChange(e.target.value);
         }}
@@ -363,7 +369,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
               !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
             }, 0);
           }}>
-          <div className="bu-pl-[8px] bu-text-[12px]">{customLabelNode}</div>
+          <div className="bu-pl-[8px] bu-text-[12px]">{selectedLabelNode}</div>
           {!hideEndAdornment && (
             <SelectArrow
               onClick={() => {

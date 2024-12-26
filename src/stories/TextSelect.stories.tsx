@@ -31,45 +31,53 @@ export const Primary: Story = {
     const ref = useRef<HTMLDivElement>(null);
 
     const [accountOptions, setAccountOptions] = useState<any>([]);
-    const [accountOptions1, setAccountOptions1] = useState<any>([
-      {
-        label: "市价",
-        value: "market",
-        subLabel: "sub-市价"
-      },
-      {
-        label: "最新价",
-        value: "limit",
-        subLabel: "sub-最新价"
-      },
-      {
-        label: "最新价1",
-        value: "limit1",
-        subLabel: "sub-最新价1"
-      },
-      {
-        label: "最新价2",
-        value: "limit2",
-        subLabel: "sub-最新价2"
-      },
-      {
-        label: "最新价3",
-        value: "limit3",
-        subLabel: "sub-最新价3"
-      },
-      {
-        label: "最新价4",
-        value: "limit4",
-        subLabel: "sub-最新价4"
-      },
-      {
-        label: "最新价5",
-        value: "limit5",
-        subLabel: "sub-最新价5"
-      }
-    ]);
+    const [accountOptions1, setAccountOptions1] = useState<any>([]);
 
     const optionsRef = useRef(accountOptions1);
+
+    useEffect(() => {
+      setTimeout(() => {
+        const account = [
+          {
+            label: "市价",
+            value: "market",
+            subLabel: "sub-市价"
+          },
+          {
+            label: "最新价",
+            value: "limit",
+            subLabel: "sub-最新价"
+          },
+          {
+            label: "最新价1",
+            value: "limit1",
+            subLabel: "sub-最新价1"
+          },
+          {
+            label: "最新价2",
+            value: "limit2",
+            subLabel: "sub-最新价2"
+          },
+          {
+            label: "最新价3",
+            value: "limit3",
+            subLabel: "sub-最新价3"
+          },
+          {
+            label: "最新价4",
+            value: "limit4",
+            subLabel: "sub-最新价4"
+          },
+          {
+            label: "最新价5",
+            value: "limit5",
+            subLabel: "sub-最新价5"
+          }
+        ];
+        setAccountOptions1(account);
+        optionsRef.current = account;
+      }, 2000);
+    }, []);
 
     const [open, setOpen] = useState(false);
 
@@ -176,14 +184,15 @@ export const Primary: Story = {
                 searchClassName="!bu-px-[16px] bu-py-[8px] !bu-mb-0"
                 hideSelectedState={true}
                 base="div"
-                inputDisabled={true}
-                customLabel={(item) => {
-                  return (
-                    <div className="bu-w-[440px]">
-                      {item.label} --- {item.subLabel}
-                    </div>
-                  );
-                }}
+                inputDisabled={false}
+                // customLabel={(item) => {
+                //   console.log(item)
+                //   return (
+                //     <div className="bu-w-[440px]">
+                //       {item.label} --- {item.subLabel}
+                //     </div>
+                //   );
+                // }}
                 customSelectItems={(item) => {
                   return (
                     <div className="bu-w-[440px]">
