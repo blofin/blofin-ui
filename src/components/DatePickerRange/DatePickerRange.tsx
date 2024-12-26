@@ -51,7 +51,7 @@ export type DatePickerRangeProps = {
 
 const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   className = "",
-  dateClassName="",
+  dateClassName = "",
   defaultValue,
   setValues,
   disabledDays,
@@ -67,7 +67,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   cancelText = "Cancel",
   toText = "-",
   distance = 5,
-  auto=true
+  auto = true
 }) => {
   const [date, setDate] = React.useState<DateRange | undefined>();
 
@@ -147,7 +147,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
     }
 
     return yearMonthData;
-  }, [limitDays]);
+  }, [maximum]);
 
   const isSameDay = (date1: Date, date2: Date) => {
     return (
