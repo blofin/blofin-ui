@@ -266,7 +266,7 @@ const buttonVariants = (props: {
       },
       size: {
         small: `${
-          shape === "circle" ? "bu-h-[28px] bu-min-w-[30px]" : "bu-h-[28px] bu-min-w-[80px] bu-rounded-[4px]"
+          shape === "circle" ? "bu-h-[28px] bu-min-w-[30px]" : "bu-h-[28px] bu-min-w-[80px] bu-rounded-[6px]"
         } bu-px-[12px] bu-text-[12px] bu-leading-[18px]`,
         medium: `${
           shape === "circle" ? "bu-h-[40px] bu-min-w-[40px]" : "bu-h-[40px] bu-min-w-[100px] bu-rounded-[8px]"

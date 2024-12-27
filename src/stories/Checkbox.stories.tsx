@@ -42,7 +42,7 @@ export const Vertical: Story = {
           <Checkbox
             label="TP/SL"
             checked={isChecked}
-            disabled={false}
+            disabled={true}
             onChange={() => setIsChecked(!isChecked)}
           />
         </ThemeProvider>

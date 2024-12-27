@@ -14,7 +14,7 @@ const CheckedMarkCheckedStyles = cva(
   {
     variants: {
       theme: {
-        light: ["bu-border-dark-background bu-bg-dark-background after:bu-border-light-background"],
+        light: ["bu-border-light-primary bu-bg-light-primary after:bu-border-light-background"],
         dark: ["bu-border-light-background bu-bg-light-background after:bu-border-dark-background"]
       }
     }
@@ -26,8 +26,12 @@ const UncheckedMarkCheckedStyles = cva(
   {
     variants: {
       theme: {
-        light: ["bu-border-light-label-40 after:bu-border-light-background"],
-        dark: ["bu-border-dark-label-40  after:bu-border-dark-background"]
+        light: [
+          "bu-border-light-label-40 after:bu-border-light-background hover:bu-border-light-primary"
+        ],
+        dark: [
+          "bu-border-dark-label-40  after:bu-border-dark-background hover:bu-border-light-background"
+        ]
       }
     }
   }
