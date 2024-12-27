@@ -8,7 +8,7 @@ import useClient from "../../hooks/useClient";
 import { usePopper } from "react-popper";
 import useDelayEvent from "../../hooks/useDelayEvent";
 import { TooltipPlacement } from "./type";
-import { OFFSET, PLACEMENT } from "./enum";
+import { OFFSET, PLACEMENT, PLACEMENT_REVERSE } from "./enum";
 
 interface TooltipProps {
   placement: TooltipPlacement;
@@ -95,7 +95,7 @@ const Content: FC<ContentProps> = ({
       {!hideArrow && state && (
         <div
           className={arrowPositionStyles({
-            placement: PLACEMENT[state.placement as keyof typeof PLACEMENT] as TooltipPlacement
+            placement: PLACEMENT_REVERSE[state.placement as keyof typeof PLACEMENT] as TooltipPlacement
           })}>
           <ArrowIcon
             className={

@@ -30,7 +30,7 @@ export const Primary: Story = {
       <div className="bu-h-[300px] bu-overflow-y-scroll">
         <div className="bu-h-[1500px] bu-pl-[700px] bu-pt-[300px]">
           <Tooltip
-            placement='top'
+            placement='topRight'
             theme={'light'}
             // hideArrow
             flipPlacement={['bottom']}

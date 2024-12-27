@@ -10,7 +10,9 @@ import {
   SliderThumbVariants,
   SliderTooltipVariants,
   TrackVariants,
-  SliderActivityMarkVariants
+  SliderActivityMarkVariants,
+  SliderThumbVariantsDefault,
+  TrackVariantsDefault
 } from "./styles";
 
 export interface SliderProps {
@@ -56,17 +58,21 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
 
   const mouseDown = useRef<boolean>(false);
 
+  const [onMouseDown, setMouseDonw] = useState(false);
+
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     e.preventDefault();
     (document.activeElement as HTMLElement).blur();
 
     mouseDown.current = true;
+    setMouseDonw(true);
 
     document.addEventListener(
       "mouseup",
       () => {
         mouseDown.current = false;
+        setMouseDonw(false);
         document.removeEventListener("mousemove", handleMouseMove);
       },
       { once: true }
@@ -93,6 +99,10 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     handleDrag(e as any);
   };
 
+  const activiMark = () => {
+    return onMouseDown ? SliderActivityMarkVariants({ theme: mode || theme }) : SliderThumbVariantsDefault({ theme: mode || theme });
+  };
+
   return (
     <div id={id ? `${id}-slider-container` : ""} className={styles["slider-container"]}>
       <div className={styles["slider-content"]}>
@@ -100,7 +110,11 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           ref={railRef}
           className={`${styles["rail"]} ${cn(RailVariants({ theme: mode || theme }))}`}></div>
         <div
-          className={`${styles["track"]} ${cn(TrackVariants({ theme: mode || theme }))}`}
+          className={`${styles["track"]} ${
+            onMouseDown
+              ? cn(TrackVariants({ theme: mode || theme }))
+              : TrackVariantsDefault({ theme: mode || theme })
+          }`}
           style={{ width: `${value}%` }}></div>
         <div
           id={id ? `${id}-mark-container` : ""}
@@ -109,7 +123,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           <div
             className={`${styles["mark"]} ${cn(
               SliderMarkVariants({ theme: mode || theme }),
-              value >= 0 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+              value >= 0 ? activiMark() : ""
             )}`}
             onClick={(e) => handleMarkClick(e, 0)}>
             <span
@@ -122,25 +136,25 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           <div
             className={`${styles["mark"]} ${cn(
               SliderMarkVariants({ theme: mode || theme }),
-              value >= 25 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+              value >= 25 ? activiMark() : ""
             )}`}
             onClick={(e) => handleMarkClick(e, 25)}></div>
           <div
             className={`${styles["mark"]} ${cn(
               SliderMarkVariants({ theme: mode || theme }),
-              value >= 50 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+              value >= 50 ? activiMark() : ""
             )}`}
             onClick={(e) => handleMarkClick(e, 50)}></div>
           <div
             className={`${styles["mark"]} ${cn(
               SliderMarkVariants({ theme: mode || theme }),
-              value >= 75 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+              value >= 75 ? activiMark() : ""
             )}`}
             onClick={(e) => handleMarkClick(e, 75)}></div>
           <div
             className={`${styles["mark"]} ${cn(
               SliderMarkVariants({ theme: mode || theme }),
-              value >= 100 ? SliderActivityMarkVariants({ theme: mode || theme }) : ""
+              value >= 100 ? activiMark() : ""
             )}`}
             onClick={(e) => handleMarkClick(e, 100)}>
             <span
@@ -165,7 +179,11 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           </div>
           <div
             id={id ? `${id}-thumb` : ""}
-            className={`${styles["thumb"]} ${cn(SliderThumbVariants({ theme: mode || theme }))}`}
+            className={`${styles["thumb"]} ${
+              onMouseDown
+                ? cn(SliderThumbVariants({ theme: mode || theme }))
+                : SliderThumbVariantsDefault({ theme: mode || theme })
+            }`}
             onMouseDown={handleMouseDown}></div>
         </div>
       </div>

@@ -18,6 +18,15 @@ const TrackVariants = cva("", {
   }
 });
 
+const TrackVariantsDefault = cva("", {
+  variants: {
+    theme: {
+      light: ["bu-bg-light-label-60"],
+      dark: ["bu-bg-dark-label"]
+    }
+  }
+});
+
 const SliderMarkVariants = cva("", {
   variants: {
     theme: {
@@ -27,11 +36,20 @@ const SliderMarkVariants = cva("", {
   }
 });
 
-const SliderActivityMarkVariants = cva("", {
+const SliderActivityMarkVariants = cva("bu-transition-colors", {
   variants: {
     theme: {
       light: ["bu-border-light-primary"],
       dark: ["bu-border-dark-primary"]
+    }
+  }
+});
+
+const SliderMarkVariantsDefault = cva("bu-transition-colors", {
+  variants: {
+    theme: {
+      light: ["bu-border-light-label-60"],
+      dark: ["bu-border-dark-label"]
     }
   }
 });
@@ -50,6 +68,15 @@ const SliderThumbVariants = cva("", {
     theme: {
       light: ["bu-border-light-primary bu-bg-light-background"],
       dark: ["bu-border-dark-primary bu-bg-dark-background"]
+    }
+  }
+});
+
+const SliderThumbVariantsDefault = cva("", {
+  variants: {
+    theme: {
+      light: ["bu-border-light-label-60 bu-bg-light-background"],
+      dark: ["bu-border-dark-label bu-bg-dark-background"]
     }
   }
 });
@@ -74,5 +101,8 @@ export {
   SliderThumbVariants,
   SliderTooltipVariants,
   TrackVariants,
-  SliderActivityMarkVariants
+  TrackVariantsDefault,
+  SliderActivityMarkVariants,
+  SliderThumbVariantsDefault,
+  SliderMarkVariantsDefault
 };

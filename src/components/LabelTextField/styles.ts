@@ -55,8 +55,8 @@ const InputFilledStyles = cva("", {
 const InputOutlinedStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-border-light-line-tertiary hover:bu-bg-light-fill-secondary focus-within:bu-border-light-primary"],
-      dark: ["bu-border-dark-line-tertiary hover:bu-bg-dark-fill-secondary focus-within:bu-border-light-primary"]
+      light: ["bu-border-light-line-secondary hover:bu-bg-light-fill-secondary focus-within:bu-border-light-primary"],
+      dark: ["bu-border-dark-line-secondary hover:bu-bg-dark-fill-secondary focus-within:bu-border-light-primary"]
     }
   }
 });
