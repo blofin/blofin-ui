@@ -43,8 +43,8 @@ const menuItemStyles = ({ theme, active }: { theme: BUITheme; active: boolean })
     {
       variants: {
         theme: {
-          light: "bu-bg-light-background hover:bu-bg-light-hover-fill-secondary",
-          dark: "bu-bg-dark-background bu-text-dark-label hover:bu-bg-dark-hover-fill-secondary"
+          light: "bu-bg-light-background hover:bu-bg-light-fill-secondary",
+          dark: "bu-bg-dark-background bu-text-dark-label hover:bu-bg-dark-fill-secondary"
         },
         active: {
           true: activeItemStyles({ theme }),

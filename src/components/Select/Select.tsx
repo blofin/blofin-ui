@@ -207,21 +207,21 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   };
 
   const onMouseEnter = () => {
-    if(inputDisabled) return;
+    if (inputDisabled) return;
     if (trigger === "hover") {
       setShowMenu(true);
     }
   };
 
   const onMouseLeave = () => {
-    if(inputDisabled) return;
+    if (inputDisabled) return;
     if (trigger === "hover") {
       setShowMenu(false);
     }
   };
 
   const onClick = () => {
-    if(inputDisabled) return;
+    if (inputDisabled) return;
     if (trigger === "click") {
       setShowMenu((preState) => !preState);
     }
@@ -282,12 +282,14 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           wrapper(
             <Typography
               variant="body4"
-              className={`${labelClassName} ${isHover ? hoverClassName : ''}`}>
+              className={`${labelClassName} ${isHover ? hoverClassName : ""}`}>
               {keyByItemsMemo[String(value)]?.[labelField]}
             </Typography>
           )
         ) : (
-          <Typography variant="body4" className={`${labelClassName} ${isHover ? hoverClassName : ''}`}>
+          <Typography
+            variant="body4"
+            className={`${labelClassName} ${isHover ? hoverClassName : ""}`}>
             {keyByItemsMemo[String(value)]?.[labelField]}
           </Typography>
         )}
@@ -297,7 +299,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
               labelStyles({
                 theme: mode || theme
               })
-            )} ${arrowClassName} ${isHover ? hoverClassName : ''}`}
+            )} ${arrowClassName} ${isHover ? hoverClassName : ""}`}
           />
         ) : (
           <SelectArrow
@@ -305,11 +307,11 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
               outlinedStyles({
                 theme: mode || theme
               })
-            )} ${arrowClassName} ${isHover ? hoverClassName : ''}`}
+            )} ${arrowClassName} ${isHover ? hoverClassName : ""}`}
           />
         )}
       </div>
-      {showMenu && (
+      {!showMenu && (
         <SelectMenu
           ref={customeRef}
           search={search}
