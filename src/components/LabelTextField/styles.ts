@@ -127,7 +127,7 @@ const InputSizeTextStyle = cva("", {
   variants: {
     inputSize: {
       lg: "bu-text-md",
-      md: "bu-text-sm"
+      md: "bu-text-base"
     }
   }
 });

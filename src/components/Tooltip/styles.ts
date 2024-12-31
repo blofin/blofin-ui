@@ -3,8 +3,8 @@ import { cva } from "class-variance-authority";
 const bgStyles = cva("bu-text-white", {
   variants: {
     theme: {
-      light: "bu-bg-light-fill-tertiary",
-      dark: "bu-bg-dark-fill-tertiary"
+      light: "bu-bg-light-hover-fill-tertiary",
+      dark: "bu-bg-dark-hover-fill-tertiary"
     }
   }
 });
