@@ -14,7 +14,7 @@ const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) 
   const checked = value === selected;
   const { theme } = useTheme();
   return (
-    <div className="bu-flex bu-cursor-pointer bu-items-center bu-gap-2">
+    <div className="bu-group bu-flex bu-cursor-pointer bu-items-center bu-gap-2">
       <input
         type="radio"
         className={cn(RadioButtonInputVariants({ theme: mode || theme }))}

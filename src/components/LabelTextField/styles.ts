@@ -46,8 +46,8 @@ const InputFilledStyles = cva("", {
   variants: {
     theme: {
       light:
-        "bu-border-transparent bu-bg-light-fill-secondary hover:bu-border-[1px] hover:bu-border-light-line-tertiary focus-within:bu-border-light-primary",
-      dark: "bu-border-transparent bu-bg-dark-fill-secondary hover:bu-border-[1px] hover:bu-border-dark-line-tertiary focus-within:bu-border-dark-primary"
+        "bu-border-transparent bu-bg-light-fill-secondary focus-within:!bu-border-light-primary hover:bu-border-[1px] hover:bu-border-light-line-tertiary",
+      dark: "bu-border-transparent bu-bg-dark-fill-secondary focus-within:!bu-border-dark-primary hover:bu-border-[1px] hover:bu-border-dark-line-tertiary"
     }
   }
 });
@@ -55,8 +55,12 @@ const InputFilledStyles = cva("", {
 const InputOutlinedStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-border-light-line-secondary hover:bu-bg-light-fill-secondary focus-within:bu-border-light-primary"],
-      dark: ["bu-border-dark-line-secondary hover:bu-bg-dark-fill-secondary focus-within:bu-border-light-primary"]
+      light: [
+        "bu-border-light-line-secondary focus-within:bu-border-light-primary hover:bu-bg-light-fill-secondary"
+      ],
+      dark: [
+        "bu-border-dark-line-secondary focus-within:bu-border-light-primary hover:bu-bg-dark-fill-secondary"
+      ]
     }
   }
 });
@@ -105,7 +109,7 @@ const InputBgVariants = ({
       },
       disabled: {
         true: InputDisabledStyles({ theme, variant }),
-        false: ''
+        false: ""
       },
       noClassName: {
         true: size === "lg" ? "bu-h-[48px]" : "bu-h-[40px]"
