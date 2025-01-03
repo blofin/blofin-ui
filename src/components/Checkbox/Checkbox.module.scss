@@ -18,7 +18,7 @@
   width: 0;
 }
 .checkmark {
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -35,8 +35,8 @@
 /* Style the checkmark/indicator */
 .container .checkmark:after {
   @apply bu-border-solid;
-  width: 5px;
-  height: 8px;
+  width: 4px;
+  height: 6px;
   margin-bottom: 2px;
   border-width: 0 1.8px 1.8px 0;
   -webkit-transform: rotate(35deg);

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { RadioButton } from "../components/RadioButton";
+import { ThemeProvider } from "../provider/ThemeProvider";
+import useTheme from "../hooks/useMode";
 
 const meta: Meta<typeof RadioButton> = {
   /* 👇 The title prop is optional.
@@ -29,25 +31,29 @@ export const Primary: Story = {
 export const Vertical: Story = {
   render: () => {
     const [currentValue, setCurrentValue] = useState("buy");
+
+    const mode = useTheme();
     return (
-      <div className="bu-h-[24px] bu-w-full">
-        <div className="bu-flex bu-gap-2">
-          <RadioButton
-            label="buy"
-            name="TP/SL"
-            value={"buy"}
-            selected={currentValue}
-            onChange={(e) => setCurrentValue(e.target.value)}
-          />
-          <RadioButton
-            label="sell"
-            name="TP/SL"
-            value={"sell"}
-            selected={currentValue}
-            onChange={(e) => setCurrentValue(e.target.value)}
-          />
+      <ThemeProvider value={{ theme: mode }}>
+        <div className="bu-h-[24px] bu-w-full">
+          <div className="bu-flex bu-gap-2">
+            <RadioButton
+              label="buy"
+              name="TP/SL"
+              value={"buy"}
+              selected={currentValue}
+              onChange={(e) => setCurrentValue(e.target.value)}
+            />
+            <RadioButton
+              label="sell"
+              name="TP/SL"
+              value={"sell"}
+              selected={currentValue}
+              onChange={(e) => setCurrentValue(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
+      </ThemeProvider>
     );
   }
 };

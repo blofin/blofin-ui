@@ -23,10 +23,10 @@
     --light-warning-14: rgba(255, 196, 0, 0.12);
     --light-danger-default: #d62035;
     --light-danger-14: rgba(214, 32, 53, 0.14);
-    --light-green-default: #08c787;
-    --light-green-alpha: rgba(8, 199, 135, 0.12);
-    --light-red-default: #f2465d;
-    --light-red-alpha: rgba(242, 70, 93, 0.12);
+    --light-green-default: #04b97d;
+    --light-green-alpha: rgba(4, 185, 125, 0.14);
+    --light-red-default: #f13c54;
+    --light-red-alpha: rgba(241, 60, 84, 0.14);
     --light-background: #ffffff;
     --light-second: #050505;
     --light-label-default: #0a0a0a;
@@ -34,24 +34,24 @@
     --light-label-40: rgba(10, 10, 10, 0.4);
     --light-label-20: rgba(10, 10, 10, 0.2);
     --light-fill-primary: #f7f8fa;
-    --light-fill-secondary: #f0f1f5;
-    --light-fill-tertiary: #abadb2;
-    --light-fill-quaternary: #e8e9eb;
-    --light-line-primary: #EBEDF0;
-    --light-line-secondary: #DCDEE0;
-    --light-line-tertiary: #CDCFD1;
+    --light-fill-secondary: #edeff0;
+    --light-fill-tertiary: #cacbcc;
+    --light-fill-quaternary: #e3e4e5;
+    --light-line-primary: #ebedf0;
+    --light-line-secondary: #dcdee0;
+    --light-line-tertiary: #cdcfd1;
     --light-hover-primary: #f90;
     --light-hover-secondary: #0582ff;
     --light-hover-tertiary: #0582ff;
     --light-hover-success: #0582ff;
     --light-hover-warning: #ffda18;
     --light-hover-anger: #eb1730;
-    --light-hover-green: #00d991;
+    --light-hover-green: #00cc88;
     --light-hover-red: #ff4f67;
     --light-hover-fill-primary: #f2f3f5;
-    --light-hover-fill-secondary: #ebedf2;
-    --light-hover-fill-tertiary: #c4c6cc;
-    --light-hover-fill-quaternary: #edeef0;
+    --light-hover-fill-secondary: #e3e4e5;
+    --light-hover-fill-tertiary: #b1b2b2;
+    --light-hover-fill-quaternary: #dfdfe0;
     --light-disabled-blue: rgba(47, 84, 235, 0.4);
     --light-badge-primary-bg: rgba(255, 136, 0, 0.14);
     --light-badge-secondary-bg: rgba(5, 105, 255, 0.14);
@@ -89,13 +89,13 @@
     --dark-danger-default: #d62035;
     --dark-danger-14: rgba(214, 32, 53, 0.14);
 
-    --dark-green-default: #08c787;
-    --dark-green-alpha: rgba(8, 199, 135, 0.14);
+    --dark-green-default: #04b97d;
+    --dark-green-alpha: rgba(4, 185, 125, 0.14);
 
-    --dark-red-default: #f2465d;
-    --dark-red-alpha: rgba(242, 70, 93, 0.14);
+    --dark-red-default: #f13c54;
+    --dark-red-alpha: rgba(241, 60, 84, 0.14);
 
-    --dark-background: #0F0F0F;
+    --dark-background: #0f0f0f;
 
     --dark-second: #050505;
 
@@ -106,12 +106,12 @@
 
     --dark-fill-primary: #000000;
     --dark-fill-secondary: #1a1a1a;
-    --dark-fill-tertiary: #323234;
-    --dark-fill-quaternary: #282829;
+    --dark-fill-tertiary: #2d2d2e;
+    --dark-fill-quaternary: #232324;
 
-    --dark-line-primary: #2D2D2E;
-    --dark-line-secondary: #3C3D3D;
-    --dark-line-tertiary: #4B4C4D;
+    --dark-line-primary: #2d2d2e;
+    --dark-line-secondary: #3c3d3d;
+    --dark-line-tertiary: #4b4c4d;
 
     --dark-hover-primary: #fa7500;
     --dark-hover-secondary: #1b60e5;
@@ -119,12 +119,12 @@
     --dark-hover-success: #13ba6a;
     --dark-hover-warning: #ffc908;
     --dark-hover-anger: #bf1d30;
-    --dark-hover-green: #0bb87e;
+    --dark-hover-green: #0aab75;
     --dark-hover-red: #e03a51;
-    --dark-hover-fill-primary: #111214;
+    --dark-hover-fill-primary: #121212;
     --dark-hover-fill-secondary: #242424;
-    --dark-hover-fill-tertiary: #3e3f41;
-    --dark-hover-fill-quaternary: #373738;
+    --dark-hover-fill-tertiary: #373838;
+    --dark-hover-fill-quaternary: #323233;
 
     --dark-disabled-blue: rgba(92, 124, 255, 0.4);
 

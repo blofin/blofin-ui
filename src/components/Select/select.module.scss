@@ -1,0 +1,4 @@
+.select-container {
+  @apply bu-z-[99999] bu-min-w-[80px] bu-overflow-auto bu-rounded-[4px];
+  transition: opacity 0.3s;
+}

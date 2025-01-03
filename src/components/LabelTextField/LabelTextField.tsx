@@ -8,7 +8,11 @@ import {
   InputBgVariants,
   InputVariant,
   LabelVariants,
-  AdornmentStyles
+  AdornmentStyles,
+  InputSizeTextStyle,
+  InputSizeStyle,
+  InputPlaceholderStyle,
+  InputFocusedStyle
 } from "./styles";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -87,16 +91,12 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             ref={ref as LegacyRef<HTMLInputElement>}
             className={cn(
               "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-outline-none focus:bu-outline-0 focus-visible:bu-outline-0",
-              inputSize === "lg" ? "bu-text-md" : "bu-text-sm",
+              InputSizeTextStyle({ inputSize }),
               inputClassName,
-              !startAdornment && (inputSize === "lg" ? "bu-pl-3" : "bu-pl-2"),
-              !endAdornment && (inputSize === "lg" ? "bu-pr-3" : "bu-pr-2"),
-              (mode ? mode : theme) === "light"
-                ? "bu-placeholder-light-label-40"
-                : "bu-placeholder-dark-label-40",
-              (mode ? mode : theme) === "light"
-                ? "focus:bu-caret-light-primary"
-                : "focus:dark:bu-caret-dark-primary"
+              !startAdornment && InputSizeStyle({ inputSize }),
+              !endAdornment && InputSizeStyle({ inputSize }),
+              InputPlaceholderStyle({ theme: mode ? mode : theme }),
+              InputFocusedStyle({ theme: mode ? mode : theme })
             )}
           />
           {endAdornment && (
