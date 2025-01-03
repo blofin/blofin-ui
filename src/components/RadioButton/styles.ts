@@ -26,7 +26,7 @@ const RadioButtonLabelVariants = ({ theme, checked }: { theme: BUITheme; checked
 
 const RadioButtonInputVariants = ({ theme }: { theme: BUITheme }) => {
   return cva(
-    "bu-relative bu-h-4 bu-w-4 bu-cursor-pointer bu-appearance-none bu-rounded-full bu-border-2 checked:after:bu-absolute checked:after:bu-left-1/2 checked:after:bu-top-1/2 checked:after:bu-block checked:after:bu-h-2.5 checked:after:bu-w-2.5 checked:after:bu--translate-x-1/2 checked:after:bu--translate-y-1/2 checked:after:bu-transform checked:after:bu-rounded-full",
+    "bu-relative bu-h-[12px] bu-w-[12px] bu-cursor-pointer bu-appearance-none bu-rounded-full bu-border-[1px] checked:after:bu-absolute checked:after:bu-left-1/2 checked:after:bu-top-1/2 checked:after:bu-block checked:after:bu-h-[6px] checked:after:bu-w-[6px] checked:after:bu--translate-x-1/2 checked:after:bu--translate-y-1/2 checked:after:bu-transform checked:after:bu-rounded-full",
     {
       variants: {
         theme: {

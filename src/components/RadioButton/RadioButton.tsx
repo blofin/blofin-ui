@@ -19,7 +19,7 @@ const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) 
         htmlFor={id ? id : `bui-radiobutton-${label}`}
         className={`${cn(
           RadioButtonLabelVariants({ theme: mode || theme, checked: !!checked })
-        )} bu-flex bu-cursor-pointer bu-items-center bu-gap-2`}>
+        )} bu-flex bu-cursor-pointer bu-items-center bu-gap-[4px]`}>
         <input
           type="radio"
           className={cn(RadioButtonInputVariants({ theme: mode || theme }))}
