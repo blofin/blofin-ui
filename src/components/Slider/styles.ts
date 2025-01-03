@@ -57,8 +57,8 @@ const SliderMarkVariantsDefault = cva("bu-transition-colors", {
 const MarkLabelVariants = cva("", {
   variants: {
     theme: {
-      light: ["bu-text-light-label-40"],
-      dark: ["bu-text-dark-label-40"]
+      light: ["bu-text-light-label-60"],
+      dark: ["bu-text-dark-label-60"]
     }
   }
 });
