@@ -26,7 +26,7 @@ const popperStyles = cva("bu-transition-opacity bu-delay-200", {
   variants: {
     show: {
       true: "bu-opacity-1 bu-visible bu-z-[10000]",
-      false: "bu-invisible bu-opacity-0 bu-z-[-100]"
+      false: "bu-invisible bu-z-[-100] bu-opacity-0"
     }
   }
 });

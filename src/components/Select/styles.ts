@@ -73,4 +73,21 @@ const searchIconStyles = cva("bu-mx-[8px]", {
   }
 });
 
-export { labelStyles, menuItemStyles, menuStyles, outlinedStyles, searchStyles, searchIconStyles };
+const popperStyles = cva("", {
+  variants: {
+    show: {
+      true: "bu-opacity-1 bu-visible bu-z-[10000]",
+      false: "bu-invisible bu-z-[-100] bu-opacity-0"
+    }
+  }
+});
+
+export {
+  labelStyles,
+  menuItemStyles,
+  menuStyles,
+  outlinedStyles,
+  searchStyles,
+  searchIconStyles,
+  popperStyles
+};
