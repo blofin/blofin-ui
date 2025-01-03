@@ -14,21 +14,23 @@ const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) 
   const checked = value === selected;
   const { theme } = useTheme();
   return (
-    <div className="bu-group bu-flex bu-cursor-pointer bu-items-center bu-gap-2">
-      <input
-        type="radio"
-        className={cn(RadioButtonInputVariants({ theme: mode || theme }))}
-        id={id ? id : `bui-radiobutton-${label}`}
-        name={name}
-        ref={ref}
-        value={value}
-        {...otherProps}
-        checked={checked}
-        onChange={onChange}
-      />
+    <div className="bu-group">
       <label
         htmlFor={id ? id : `bui-radiobutton-${label}`}
-        className={cn(RadioButtonLabelVariants({ theme: mode || theme, checked: !!checked }))}>
+        className={`${cn(
+          RadioButtonLabelVariants({ theme: mode || theme, checked: !!checked })
+        )} bu-flex bu-cursor-pointer bu-items-center bu-gap-2`}>
+        <input
+          type="radio"
+          className={cn(RadioButtonInputVariants({ theme: mode || theme }))}
+          id={id ? id : `bui-radiobutton-${label}`}
+          name={name}
+          ref={ref}
+          value={value}
+          {...otherProps}
+          checked={checked}
+          onChange={onChange}
+        />
         {label}
       </label>
     </div>
