@@ -46,7 +46,8 @@ export const Primary: Story = {
   args: {
     label: "Label",
     startAdornment: "https://",
-    endAdornment: ".com"
+    endAdornment: ".com",
+    theme: "dark"
   }
 };
 

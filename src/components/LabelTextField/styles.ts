@@ -56,10 +56,10 @@ const InputOutlinedStyles = cva("", {
   variants: {
     theme: {
       light: [
-        "bu-border-light-line-secondary focus-within:bu-border-light-primary hover:bu-bg-light-fill-secondary"
+        "bu-border-light-line-secondary focus-within:bu-border-light-primary focus-within:!bu-bg-transparent hover:bu-bg-light-fill-secondary"
       ],
       dark: [
-        "bu-border-dark-line-secondary focus-within:bu-border-light-primary hover:bu-bg-dark-fill-secondary"
+        "bu-border-dark-line-secondary focus-within:bu-border-light-primary focus-within:!bu-bg-transparent hover:bu-bg-dark-fill-secondary"
       ]
     }
   }
