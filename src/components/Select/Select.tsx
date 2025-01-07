@@ -38,6 +38,8 @@ type SelectMenuProps = {
   searchChange?: (value: string) => void;
   rowKey?: string;
   styles?: object;
+  x?: number;
+  y?: number;
 };
 
 const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
@@ -55,7 +57,9 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
     search,
     searchChange,
     rowKey,
-    styles: customStyles
+    styles: customStyles,
+    x,
+    y
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -67,10 +71,10 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
     strategy: "fixed",
     modifiers: [
       {
-        name: "offset"
-        // options: {
-        //   offset: [x ? x : OFFSET[placement], 4]
-        // }
+        name: "offset",
+        options: {
+          offset: [x, y]
+        }
       },
       {
         name: "flip",
