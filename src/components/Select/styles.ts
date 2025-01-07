@@ -31,8 +31,8 @@ const menuStyles = cva("bu-border-[1px]", {
 const activeItemStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-bg-light-fill-secondary bu-text-light-primary",
-      dark: "bu-bg-dark-fill-secondary bu-text-dark-primary"
+      light: "bu-text-light-primary",
+      dark: "bu-text-dark-primary"
     }
   }
 });
@@ -43,8 +43,8 @@ const menuItemStyles = ({ theme, active }: { theme: BUITheme; active: boolean })
     {
       variants: {
         theme: {
-          light: "bu-bg-light-background hover:bu-bg-light-hover-fill-secondary",
-          dark: "bu-bg-dark-background bu-text-dark-label hover:bu-bg-dark-hover-fill-secondary"
+          light: "bu-bg-light-background hover:bu-bg-light-fill-secondary",
+          dark: "bu-bg-dark-background bu-text-dark-label hover:bu-bg-dark-fill-secondary"
         },
         active: {
           true: activeItemStyles({ theme }),
@@ -73,4 +73,21 @@ const searchIconStyles = cva("bu-mx-[8px]", {
   }
 });
 
-export { labelStyles, menuItemStyles, menuStyles, outlinedStyles, searchStyles, searchIconStyles };
+const popperStyles = cva("", {
+  variants: {
+    show: {
+      true: "bu-opacity-1 bu-visible bu-z-[10000]",
+      false: "bu-invisible bu-z-[-100] bu-opacity-0"
+    }
+  }
+});
+
+export {
+  labelStyles,
+  menuItemStyles,
+  menuStyles,
+  outlinedStyles,
+  searchStyles,
+  searchIconStyles,
+  popperStyles
+};

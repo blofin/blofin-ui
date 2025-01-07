@@ -5,17 +5,18 @@
     .rail {
       @apply bu-absolute;
       @apply bu-w-full;
-      @apply bu-h-1;
+      @apply bu-h-[2px];
       @apply bu-rounded-full;
       @apply bu-top-1/2;
       @apply -bu-translate-y-1/2 bu-transform;
     }
     .track {
       @apply bu-absolute;
-      @apply bu-h-1;
+      @apply bu-h-[2px];
       @apply bu-rounded-full;
       @apply bu-top-1/2;
       @apply -bu-translate-y-1/2 bu-transform;
+      @apply bu-transition-colors;
     }
     .mark-container {
       @apply bu-absolute;
@@ -26,14 +27,14 @@
       @apply -bu-translate-y-1/2 bu-transform;
       @apply bu-cursor-pointer;
       .mark {
-        @apply bu-w-2;
-        @apply bu-h-2;
-        @apply bu-rounded-full;
+        @apply bu-w-[6px];
+        @apply bu-h-[6px];
+        @apply bu-rounded-[1px];
         @apply bu-border;
         @apply bu-cursor-pointer;
         .mark-label {
           @apply bu-absolute;
-          @apply bu-text-xs;
+          @apply bu-text-[12px];
           @apply bu-top-3;
         }
       }
@@ -57,22 +58,22 @@
     }
     .thumb {
       @apply bu-absolute;
-      @apply bu-w-4;
-      @apply bu-h-4;
-      @apply bu-rounded-full;
+      @apply bu-w-[12px];
+      @apply bu-h-[12px];
+      @apply bu-rounded-[2px];
       @apply bu-border-2;
       @apply bu-top-1/2;
-      @apply -bu-translate-x-2 -bu-translate-y-1/2 bu-transform;
+      @apply -bu-translate-x-[6px] -bu-translate-y-1/2 bu-transform;
       @apply bu-cursor-pointer;
     }
 
     .tooltip {
-      @apply bu-absolute;
-      @apply bu-text-xs;
+      @apply bu-absolute bu-top-[3px];
+      @apply bu-text-[12px];
       @apply bu-rounded;
       @apply bu-text-white;
-      @apply bu-px-3;
-      @apply bu-py-2;
+      @apply bu-px-[8px];
+      @apply bu-py-[2px];
       @apply -bu-translate-x-[50%] -bu-translate-y-[150%] bu-transform;
       @apply bu-transition-all;
       @apply bu-opacity-0;
@@ -80,13 +81,14 @@
       @apply bu-z-10;
     }
 
-    .tooltip::after {
-      content: " ";
-      position: absolute;
-      top: 100%; /* At the bottom of the tooltip */
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-    }
+    // .tooltip::after {
+    //   content: " ";
+    //   position: absolute;
+    //   top: 100%; /* At the bottom of the tooltip */
+    //   left: 50%;
+    //   margin-top: -1px;
+    //   margin-left: -5px;
+    //   border-width: 5px;
+    // }
   }
 }

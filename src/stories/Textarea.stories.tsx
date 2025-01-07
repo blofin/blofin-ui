@@ -30,9 +30,11 @@ export const Primary: Story = {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           label="测试"
-          error={false}
-          helperText=""
-          endAdornment={<div className="bu-flex bu-justify-end bu-text-[12px]">{value.length}/50</div>}
+          error={true}
+          helperText="3333"
+          endAdornment={
+            <div className="bu-flex bu-justify-end bu-text-[12px]">{value.length}/50</div>
+          }
         />
       </ThemeProvider>
     );

@@ -22,7 +22,11 @@ const meta: Meta<typeof TextField> = {
     color: {
       options: ["primary", "secondary", "success", "warning", "danger", "info"],
       control: { type: "select" }
-    }
+    },
+    variant: {
+      options: ["filled", "outlined"],
+      control: { type: "radio" }
+    },
   },
   parameters: { controls: { sort: "requiredFirst" } }
 };
@@ -38,7 +42,8 @@ type Story = StoryObj<typeof TextField>;
  */
 export const Primary: Story = {
   args: {
-    type: "text"
+    type: "text",
+    variant:"outlined"
   }
 };
 

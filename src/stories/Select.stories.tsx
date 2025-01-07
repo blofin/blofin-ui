@@ -43,7 +43,7 @@ export const Primary: Story = {
               <Select
                 value={"alice"}
                 selectType="outlined"
-                hoverClassName='!bu-text-light-primary !dark:bu-text-dark-primary'
+                hoverClassName="!bu-text-light-primary !dark:bu-text-dark-primary"
                 activeColor={false}
                 align="left"
                 adsorb={true}
@@ -116,9 +116,13 @@ export const Controlled: Story = {
       );
     };
 
+    const handleClick = () => {
+      alert(1);
+    };
+
     return (
       <ThemeProvider value={{ theme: mode }}>
-        <div className="bu-flex">
+        <div className="bu-ml-[200px] bu-flex">
           <div className="bu-flex bu-h-[24px] bu-w-full bu-flex-col bu-gap-4">
             <label htmlFor="select">{selectedValue1}</label>
             <Select
@@ -140,10 +144,12 @@ export const Controlled: Story = {
           <div className="bu-flex bu-h-[24px] bu-w-full bu-flex-col bu-gap-4">
             <label htmlFor="select">{selectedValue2}</label>
             <Select
-              align="right"
+              align="left"
               labelClassName="!bu-text-[30px]"
               offsetParent={45}
+              selectType="filled"
               trigger="hover"
+              // search
               selectItems={[
                 { label: "gtc", value: "gtc" },
                 { label: "Bob", value: "bob" },
@@ -161,10 +167,12 @@ export const Controlled: Story = {
                 { label: "Bob13", value: "Bob13" }
               ]}
               menuWrapperClassName="bu-border bu-border-dark-line-primary bu-max-h-[200px] bu-overflow-y-scroll"
-              arrowClassName="!bu-text-dark-label"
+              // arrowClassName="!bu-text-dark-label"
               value={selectedValue2}
+              rowKey="value"
               handleChange={(value) => setSelectedValue2(value)}
             />
+            <div onClick={handleClick}>1111</div>
           </div>
         </div>
       </ThemeProvider>

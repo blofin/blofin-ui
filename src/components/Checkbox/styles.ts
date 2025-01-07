@@ -1,29 +1,44 @@
 import { cva } from "class-variance-authority";
-import { BUITheme } from "../..";
 
 const CheckboxCheckedStyles = cva("bu-select-none bu-text-sm", {
   variants: {
     theme: {
-      light: ["bu-text-black"],
-      dark: ["bu-text-white"]
+      light: ["bu-text-light-label"],
+      dark: ["bu-text-dark-label"]
     }
   }
 });
 
-const CheckMarkCheckedStyles = cva(
-  "bu-flex bu-h-3 bu-w-3 bu-items-center bu-justify-center bu-border",
+const CheckedMarkCheckedStyles = cva(
+  "bu-flex bu-h-[12px] bu-w-[12px] bu-items-center bu-justify-center bu-border",
   {
     variants: {
       theme: {
         light: ["bu-border-light-primary bu-bg-light-primary after:bu-border-light-background"],
-        dark: ["bu-border-dark-primary bu-bg-dark-primary after:bu-border-dark-background"]
+        dark: ["bu-border-light-background bu-bg-light-background after:bu-border-dark-background"]
+      }
+    }
+  }
+);
+
+const UncheckedMarkCheckedStyles = cva(
+  "bu-flex bu-h-[12px] bu-w-[12px] bu-items-center bu-justify-center bu-border",
+  {
+    variants: {
+      theme: {
+        light: [
+          "bu-border-light-label-40 after:bu-border-light-background hover:bu-border-light-primary"
+        ],
+        dark: [
+          "bu-border-dark-label-40  after:bu-border-dark-background hover:bu-border-light-background"
+        ]
       }
     }
   }
 );
 
 const CheckMarkVariants = cva(
-  "bu-flex bu-h-3 bu-w-3 bu-items-center bu-justify-center bu-border bu-bg-transparent",
+  "bu-flex bu-h-[12px] bu-w-[12px] bu-items-center bu-justify-center bu-border bu-bg-transparent",
   {
     variants: {
       theme: {
@@ -34,7 +49,16 @@ const CheckMarkVariants = cva(
   }
 );
 
-const CheckboxLabelVariants = cva("bu-select-none bu-text-sm", {
+const UncheckedboxLabelVariants = cva("bu-select-none bu-text-sm", {
+  variants: {
+    theme: {
+      light: ["bu-text-light-label"],
+      dark: ["bu-text-dark-label"]
+    }
+  }
+});
+
+const CheckboxDisabledLabelVariants = cva("bu-select-none bu-text-sm", {
   variants: {
     theme: {
       light: ["bu-text-light-label-40"],
@@ -44,13 +68,23 @@ const CheckboxLabelVariants = cva("bu-select-none bu-text-sm", {
 });
 
 const disabledMarkStyles = cva(
-  "bu-flex bu-h-3 bu-w-3 bu-items-center bu-justify-center bu-border bu-bg-transparent"
+  "bu-flex bu-h-[12px] bu-w-[12px] bu-items-center bu-justify-center bu-border",
+  {
+    variants: {
+      theme: {
+        light: ["bu-border-light-label-40 after:bu-border-light-label-40"],
+        dark: ["bu-border-dark-label-40  after:bu-border-dark-label-40"]
+      }
+    }
+  }
 );
 
 export {
   CheckMarkVariants,
-  CheckboxLabelVariants,
-  CheckMarkCheckedStyles,
+  UncheckedboxLabelVariants,
+  CheckboxDisabledLabelVariants,
+  CheckedMarkCheckedStyles,
+  UncheckedMarkCheckedStyles,
   CheckboxCheckedStyles,
   disabledMarkStyles
 };

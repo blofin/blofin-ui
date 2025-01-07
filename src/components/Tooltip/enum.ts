@@ -15,3 +15,7 @@ export enum OFFSET {
   bottomLeft = -5,
   bottomRight = 5
 }
+
+export const PLACEMENT_REVERSE: Record<string, string> = Object.fromEntries(
+  Object.entries(PLACEMENT).map(([key, value]) => [value, key])
+);

@@ -2,7 +2,7 @@ import { LegacyRef, ReactNode, forwardRef } from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
-import { InputBgVariants, InputVariant, AdornmentStyles } from "../LabelTextField/styles";
+import { InputBgVariants, InputVariant, AdornmentStyles, InputSizeTextStyle, InputSizeStyle, InputPlaceholderStyle, InputFocusedStyle } from "../LabelTextField/styles";
 
 export interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant: InputVariant;
@@ -58,17 +58,13 @@ const TextField = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
           {...otherProps}
           ref={ref as LegacyRef<HTMLInputElement>}
           className={`${cn(
-            "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-outline-none focus:bu-outline-0 focus-visible:bu-outline-0",
-            inputSize === "lg" ? "bu-text-md" : "bu-text-sm",
+            "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-outline-none",
+            InputSizeTextStyle({ inputSize }),
             inputClassName,
-            !startAdornment && (inputSize === "lg" ? "bu-pl-3" : "bu-pl-2"),
-            !endAdornment && (inputSize === "lg" ? "bu-pr-3" : "bu-pr-2"),
-            (mode ? mode : theme) === "light"
-              ? "bu-placeholder-light-label-40"
-              : "bu-placeholder-dark-label-40",
-            (mode ? mode : theme) === "light"
-              ? "focus:bu-caret-light-primary"
-              : "focus:dark:bu-caret-dark-primary"
+            !startAdornment && InputSizeStyle({ inputSize }),
+            !endAdornment && InputSizeStyle({ inputSize }),
+            InputPlaceholderStyle({ theme: mode ? mode : theme }),
+            InputFocusedStyle({ theme: mode ? mode : theme })
           )}`}
         />
         {endAdornment &&

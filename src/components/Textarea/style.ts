@@ -41,8 +41,8 @@ const textAreaStyles = cva(
 const HelperTextVariants = cva("", {
   variants: {
     theme: {
-      light: ["bu-text-light-danger"],
-      dark: ["bu-text-dark-danger"]
+      light: ["!bu-text-light-danger"],
+      dark: ["!bu-text-dark-danger"]
     }
   }
 });

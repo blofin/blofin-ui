@@ -48,8 +48,8 @@ const TypographyVariants = (props: {
         regular: "bu-font-normal"
       },
       theme: {
-        light: "bu-text-black",
-        dark: "bu-text-white"
+        light: "bu-text-light-label",
+        dark: "bu-text-dark-label"
       }
     },
     defaultVariants: {
