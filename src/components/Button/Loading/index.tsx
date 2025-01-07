@@ -7,9 +7,9 @@ const Loading: FC<{ size: ButtonSize }> = ({ size }) => {
     small: styles["loader-small"],
     medium: styles["loader-medium"],
     large: styles["loader-large"],
-    max: styles["loader-large"]
+    max: styles["loader-large"],
+    "m-small": styles["loader-m-small"]
   };
-  console.log(styleName[size]);
   return <span className={styleName[size]}></span>;
 };
 

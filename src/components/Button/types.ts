@@ -6,11 +6,12 @@ export type ButtonVariant =
   | "tertiary"
   | "text"
   | "ghost"
+  | "ghost2"
   | "info"
   | "buy"
   | "sell"
   | "function";
 
-export type ButtonSize = BUIComponentSize | "max";
+export type ButtonSize = BUIComponentSize | "max" | "m-small";
 
 export type ButtonShape = "normal" | "circle";

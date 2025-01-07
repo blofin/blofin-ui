@@ -46,51 +46,59 @@ export const All = {
 
     const [loading, setLoading] = useState(false);
 
-    const handleRequest=()=>{
+    const handleRequest = () => {
       setLoading(true);
-      setTimeout(()=>{
+      setTimeout(() => {
         setLoading(false);
-      },3000)
-    }
+      }, 3000);
+    };
 
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div style={{ display: "flex", gap: "10px" }}>
           <Button variant="ghost" onClick={handleRequest} loading={loading} size="small">
-            Button
+            ghost
           </Button>
-          <Button variant="primary" onClick={handleRequest} loading={loading} size="medium" type="submit">
-            Button
+          <Button variant="ghost2" onClick={handleRequest} loading={loading} size="m-small">
+            ghost2
+          </Button>
+          <Button
+            variant="primary"
+            onClick={handleRequest}
+            loading={loading}
+            size="medium"
+            type="submit">
+            primary
           </Button>
           <Button
             variant="secondary"
             size="medium"
             endIcon={<DemoIcon className="bu-h-[18px] bu-w-[18px]" />}>
-            Button
+            secondary
           </Button>
           <Button variant="tertiary" size="medium">
-            Button
+            tertiary
           </Button>
           <Button variant="ghost" size="medium">
-            Button
+            ghost
           </Button>
           <Button variant="text" size="medium">
-            Button
+            text
           </Button>
           <Button variant="info" size="medium" disabled>
-            Button
+            info
           </Button>
           <Button variant="primary" size="medium" startIcon="111">
-            Button
+            primary-startIcon
           </Button>
           <Button variant="primary" size="medium">
-            Button
+            primary
           </Button>
           <Button variant="buy" disabled size="medium">
-            Button
+            buy
           </Button>
           <Button variant="sell" size="medium">
-            Button
+            sell
           </Button>
           <Button variant="primary" size="small" shape="circle" icon={<i>2</i>}></Button>
           <Button.WhiteButton variant="primary" size="medium">
