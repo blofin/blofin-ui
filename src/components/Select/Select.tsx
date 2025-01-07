@@ -58,8 +58,8 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
     searchChange,
     rowKey,
     styles: customStyles,
-    x,
-    y
+    x = 0,
+    y = 0
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -166,6 +166,8 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   styles?: object;
   inputDisabled?: boolean;
   hoverClassName?: string;
+  x?: number;
+  y?: number;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -195,6 +197,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     styles,
     inputDisabled = false,
     hoverClassName,
+    x,
+    y,
     ...otherProps
   } = props;
 
@@ -321,6 +325,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
             menuWrapperClassName={menuWrapperClassName}
             rowKey={rowKey}
             styles={styles}
+            x={x}
+            y={y}
           />
         )}
       </div>
