@@ -248,7 +248,6 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     }
 
     if (selectRef.current && !selectRef.current.contains(event.target)) {
-      console.log(selectRef.current.contains(event.target));
       setEnter(false);
     }
     searchChange && searchChange("");
