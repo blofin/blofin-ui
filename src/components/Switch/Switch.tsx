@@ -7,9 +7,10 @@ interface SwitchProps {
   check: boolean;
   onChange: () => void;
   size?: "tiny" | "small" | "medium";
+  className?: string;
 }
 
-export const Switch: FC<SwitchProps> = ({ check, onChange, size = "medium" }) => {
+export const Switch: FC<SwitchProps> = ({ check, onChange, size = "medium", className = "" }) => {
   const { theme } = useTheme();
 
   const change = () => {
@@ -20,7 +21,7 @@ export const Switch: FC<SwitchProps> = ({ check, onChange, size = "medium" }) =>
     <div
       className={`${styles.switch} ${bgStyle({ theme: theme })} ${switchSize({ size })} ${
         check ? "bu-bg-light-primary" : ""
-      }`}
+      } ${className}`}
       onClick={change}>
       <div
         className={`${styles.thumb} ${check ? moveSize({ size }) : ""} ${thumbSize({
