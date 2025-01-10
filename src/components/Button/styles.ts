@@ -14,8 +14,16 @@ const primaryStyles = cva("bu-text-light-second", {
 const primaryDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-fill-secondary","bu-text-light-label-40", "hover:bu-bg-light-fill-secondary"],
-      dark: ["bu-bg-dark-fill-secondary","bu-text-dark-label-40", "hover:bu-bg-dark-fill-secondary"]
+      light: [
+        "bu-bg-light-fill-secondary",
+        "bu-text-light-label-40",
+        "hover:bu-bg-light-fill-secondary"
+      ],
+      dark: [
+        "bu-bg-dark-fill-secondary",
+        "bu-text-dark-label-40",
+        "hover:bu-bg-dark-fill-secondary"
+      ]
     }
   }
 });
@@ -36,8 +44,16 @@ const secondaryStyles = cva("", {
 const secondaryDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-fill-secondary","bu-text-light-label-40", "hover:bu-bg-light-fill-secondary"],
-      dark: ["bu-bg-dark-fill-secondary","bu-text-dark-label-40", "hover:bu-bg-dark-fill-secondary"]
+      light: [
+        "bu-bg-light-fill-secondary",
+        "bu-text-light-label-40",
+        "hover:bu-bg-light-fill-secondary"
+      ],
+      dark: [
+        "bu-bg-dark-fill-secondary",
+        "bu-text-dark-label-40",
+        "hover:bu-bg-dark-fill-secondary"
+      ]
     }
   }
 });
@@ -62,8 +78,16 @@ const tertiaryStyles = cva("", {
 const tertiaryDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-fill-secondary","bu-text-light-label-40", "hover:bu-bg-light-fill-secondary"],
-      dark: ["bu-bg-dark-fill-secondary","bu-text-dark-label-40", "hover:bu-bg-dark-fill-secondary"]
+      light: [
+        "bu-bg-light-fill-secondary",
+        "bu-text-light-label-40",
+        "hover:bu-bg-light-fill-secondary"
+      ],
+      dark: [
+        "bu-bg-dark-fill-secondary",
+        "bu-text-dark-label-40",
+        "hover:bu-bg-dark-fill-secondary"
+      ]
     }
   }
 });
@@ -122,6 +146,29 @@ const ghostStyles = cva("", {
         "bu-border-solid",
         "bu-border-dark-primary",
         "hover:bu-bg-dark-primary-10"
+      ]
+    }
+  }
+});
+
+const ghostStyles2 = cva("", {
+  variants: {
+    theme: {
+      light: [
+        "bu-text-light-second",
+        "hover:bu-text-light-second",
+        "bu-border",
+        "bu-border-solid",
+        "bu-border-light-line-secondary",
+        "hover:bu-bg-light-fill-primary"
+      ],
+      dark: [
+        "bu-text-dark-label",
+        "hover:bu-text-dark-label",
+        "bu-border",
+        "bu-border-solid",
+        "bu-border-dark-line-secondary",
+        "hover:bu-bg-dark-fill-primary"
       ]
     }
   }
@@ -222,6 +269,10 @@ const styles = {
     variant: ghostStyles,
     disabled: ghostDisabledStyles
   },
+  ghost2: {
+    variant: ghostStyles2,
+    disabled: ghostDisabledStyles
+  },
   info: {
     variant: infoStyles,
     disabled: infoDisabledStyles
@@ -259,6 +310,7 @@ const buttonVariants = (props: {
         tertiary: style,
         text: style,
         ghost: style,
+        ghost2: style,
         info: style,
         buy: style,
         sell: style,
@@ -266,16 +318,29 @@ const buttonVariants = (props: {
       },
       size: {
         small: `${
-          shape === "circle" ? "bu-h-[28px] bu-min-w-[30px]" : "bu-h-[28px] bu-min-w-[80px] bu-rounded-[6px]"
+          shape === "circle"
+            ? "bu-h-[28px] bu-min-w-[30px]"
+            : "bu-h-[28px] bu-min-w-[80px] bu-rounded-[6px]"
+        } bu-px-[12px] bu-text-[12px] bu-leading-[18px]`,
+        "m-small": `${
+          shape === "circle"
+            ? "bu-h-[32px] bu-min-w-[30px]"
+            : "bu-h-[32px] bu-min-w-[80px] bu-rounded-[6px]"
         } bu-px-[12px] bu-text-[12px] bu-leading-[18px]`,
         medium: `${
-          shape === "circle" ? "bu-h-[40px] bu-min-w-[40px]" : "bu-h-[40px] bu-min-w-[100px] bu-rounded-[8px]"
+          shape === "circle"
+            ? "bu-h-[40px] bu-min-w-[40px]"
+            : "bu-h-[40px] bu-min-w-[100px] bu-rounded-[8px]"
         } bu-px-[16px] bu-text-[14px] bu-leading-[20px]`,
         large: `${
-          shape === "circle" ? "bu-h-[48px] bu-min-w-[48px]" : "bu-h-[48px] bu-min-w-[140px] bu-rounded-[8px]"
+          shape === "circle"
+            ? "bu-h-[48px] bu-min-w-[48px]"
+            : "bu-h-[48px] bu-min-w-[140px] bu-rounded-[8px]"
         }  bu-px-[24px] bu-text-[16px] bu-leading-[24px]`,
         max: `${
-          shape === "circle" ? "bu-h-[56px] bu-min-w-[56px]" : "bu-h-[56px] bu-min-w-[180px] bu-rounded-[8px]"
+          shape === "circle"
+            ? "bu-h-[56px] bu-min-w-[56px]"
+            : "bu-h-[56px] bu-min-w-[180px] bu-rounded-[8px]"
         } bu-px-[24px] bu-text-[18px] bu-leading-[26px]`
       },
       shape: {

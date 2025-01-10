@@ -1,5 +1,5 @@
 import { Badge } from "./components/Badge/Badge";
-import { Button } from "./components/Button/Button";
+import { Button, ButtonProps } from "./components/Button/Button";
 import { Checkbox } from "./components/Checkbox";
 import { CssDropdown } from "./components/CssDropdown/CssDropdown";
 import DatePickerRange, {
@@ -25,7 +25,7 @@ import { TextField } from "./components/TextField";
 import { TextSelect, TextSelectRefProps } from "./components/TextSelect/TextSelect";
 import TextArea from "./components/Textarea";
 import { Tooltip } from "./components/Tooltip/Tooltip";
-import { Typography } from "./components/Typography/Typography";
+import { Typography, TypographyProps } from "./components/Typography/Typography";
 import useNotification from "./hooks/useNotification";
 import useToast from "./hooks/useToast";
 import Sortable from "./components/Sortable";
@@ -38,6 +38,7 @@ import "./scss/base.scss";
 import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component";
 import { SortsData } from "./components/Sort/reducer";
 import { Placement } from "@popperjs/core";
+import { InputBaseProps } from "./components/TextField/TextField";
 
 export {
   Badge,
@@ -72,6 +73,9 @@ export {
 };
 
 export type {
+  ButtonProps,
+  TypographyProps,
+  InputBaseProps,
   BUIComponentColor,
   BUIComponentSize,
   BUITheme,
