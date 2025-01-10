@@ -162,7 +162,7 @@ module.exports = {
           DEFAULT: "var(--dark-label-default)",
           60: "var(--dark-label-60)",
           40: "var(--dark-label-40)",
-          20: "var(--dark-label-20)",
+          20: "var(--dark-label-20)"
         },
         fill: {
           primary: "var(--dark-fill-primary)",
@@ -215,6 +215,103 @@ module.exports = {
           bgColor: "var(--dark-header-bgColor)"
         },
         text: "var(--dark-text)"
+      },
+      base: {
+        primary: {
+          DEFAULT: "var(--base-primary-default)",
+          60: "var(--base-primary-60)",
+          40: "var(--base-primary-40)",
+          14: "var(--base-primary-14)",
+          10: "var(--base-primary-10)",
+          4: "var(--base-primary-10)"
+        },
+        secondary: {
+          DEFAULT: "var(--base-secondary-default)",
+          14: "var(--base-secondary-14)"
+        },
+        tertiary: {
+          DEFAULT: "var(--base-tertiary-default)",
+          14: "var(--base-tertiary-14)"
+        },
+        success: {
+          DEFAULT: "var(--base-success-default)",
+          14: "var(--base-success-14)"
+        },
+        warning: {
+          DEFAULT: "var(--base-warning-default)",
+          14: "var(--base-warning-14)"
+        },
+        danger: {
+          DEFAULT: "var(--base-danger-default)",
+          14: "var(--base-danger-14)"
+        },
+        green: {
+          DEFAULT: "var(--base-green-default)",
+          alpha: "var(--base-green-alpha)"
+        },
+        red: {
+          DEFAULT: "var(--base-red-default)",
+          alpha: "var(--base-red-alpha)"
+        },
+        background: "var(--base-background)",
+        second: "var(--base-second)",
+        label: {
+          DEFAULT: "var(--base-label-default)",
+          60: "var(--base-label-60)",
+          40: "var(--base-label-40)",
+          20: "var(--base-label-20)"
+        },
+        fill: {
+          primary: "var(--base-fill-primary)",
+          secondary: "var(--base-fill-secondary)",
+          tertiary: "var(--base-fill-tertiary)",
+          quaternary: "var(--base-fill-quaternary)"
+        },
+        line: {
+          primary: "var(--base-line-primary)",
+          secondary: "var(--base-line-secondary)",
+          tertiary: "var(--base-line-tertiary)"
+        },
+        hover: {
+          primary: "var(--base-hover-primary)",
+          secondary: "var(--base-hover-secondary)",
+          tertiary: "var(--base-hover-tertiary)",
+          success: "var(--base-hover-success)",
+          warning: "var(--base-hover-warning)",
+          danger: "var(--base-hover-danger)",
+          green: "var(--base-hover-green)",
+          red: "var(--base-hover-red)",
+          fill: {
+            primary: "var(--base-hover-fill-primary)",
+            secondary: "var(--base-hover-fill-secondary)",
+            tertiary: "var(--base-hover-fill-tertiary)",
+            quaternary: "var(--base-hover-fill-quaternary)"
+          }
+        },
+        disabled: {
+          blue: "var(--base-disabled-blue)"
+        },
+        badge: {
+          "primary-bg": "var(--base-badge-primary-bg)",
+          "secondary-bg": "var(--base-badge-secondary-bg)",
+          "success-bg": "var(--base-badge-success-bg)",
+          "warning-bg": "var(--base-badge-warning-bg)",
+          "danger-bg": "var(--base-badge-danger-bg)",
+          "info-bg": "var(--base-badge-info-bg)"
+        },
+        pagination: {
+          primary: "var(--base-pagination-primary)",
+          "primary-hover": "var(--base-pagination-primary-hover)"
+        },
+        input: {
+          primary: "var(--base-input-primary)",
+          gray: "var(--base-input-gray)",
+          error: "var(--base-input-error)"
+        },
+        header: {
+          bgColor: "var(--base-header-bgColor)"
+        },
+        text: "var(--base-text)"
       }
     }
   }
