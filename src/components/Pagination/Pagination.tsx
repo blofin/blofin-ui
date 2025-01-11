@@ -35,6 +35,7 @@ export interface PaginationProps {
   onPageChange?: (currentPage: number, pageSize: number) => void;
   pageSizeChangeResetCurrent?: boolean;
   countPerPage?: string;
+  pageSize?: number;
 }
 
 const _defaultPageSize = 10;
@@ -62,9 +63,12 @@ export function Pagination({
   sizeCanChange,
   onPageChange,
   pageSizeChangeResetCurrent = true,
-  countPerPage = "Page"
+  countPerPage = "Page",
+  pageSize: propPageSize
 }: PaginationProps) {
-  const [pageSize, setPageSize] = useState(getAdjustPageSize(sizeOptions));
+  const [pageSize, setPageSize] = useState(
+    propPageSize ? propPageSize : getAdjustPageSize(sizeOptions)
+  );
 
   const [pageList, setPageList] = useState(() =>
     calcPageList(
@@ -82,7 +86,7 @@ export function Pagination({
   const isLastPage = useMemo(() => {
     const maxPage = sizeCanChange ? getAllPages(pageSize, total as number) : (totalPages as number);
     return currentPage === maxPage;
-  }, [currentPage, totalPages, sizeCanChange]);
+  }, [currentPage, totalPages, sizeCanChange, pageSize, total]);
 
   const handlePageChange = (target: number | "prev" | "next") => () => {
     const changePage = (newPage: number) => {
@@ -134,7 +138,7 @@ export function Pagination({
     return null;
   }
 
-  if (sizeCanChange && (!total || !onPageChange)) {
+  if (sizeCanChange && !onPageChange) {
     console.error(
       "Warning: you have provide current prop for pagination but without onPageSizeChange handler ," +
         " this will cause no-change when you change page. "
