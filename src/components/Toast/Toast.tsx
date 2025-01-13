@@ -51,8 +51,11 @@ const ToastMsg: FC<ToastMsgProps> = ({ children, type, remove }) => {
   }, []);
 
   return (
-    <div className={`bu-mx-auto bu-mb-[24px] bu-w-fit bu-rounded-[6px] bu-shadow-toast ${bgStyles({ theme })}`}>
-      <div className={toastVariants({ type })}>
+    <div
+      className={`bu-mx-auto bu-mb-[24px] bu-w-fit bu-rounded-[6px] bu-shadow-toast ${bgStyles({
+        theme
+      })}`}>
+      <div className={toastVariants({ theme })}>
         <Icon type={type} />
         <span className={textStyles({ theme })}>{children}</span>
       </div>
@@ -92,5 +95,5 @@ const ToastContainer = () => {
 };
 
 export const Toast = () => {
-  return  ReactDOM.createPortal(<ToastContainer />, document.body)
+  return ReactDOM.createPortal(<ToastContainer />, document.body);
 };
