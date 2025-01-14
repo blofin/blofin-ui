@@ -52,7 +52,7 @@ const ToastMsg: FC<ToastMsgProps> = ({ children, type, remove }) => {
 
   return (
     <div
-      className={`bu-mx-auto bu-mb-[24px] bu-w-fit bu-rounded-[6px] bu-shadow-toast ${bgStyles({
+      className={`bu-mx-auto bu-mb-[24px] bu-w-fit bu-rounded-[8px] bu-shadow-toast ${bgStyles({
         theme
       })}`}>
       <div className={toastVariants({ theme })}>
