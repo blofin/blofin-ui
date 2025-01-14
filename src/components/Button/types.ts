@@ -15,3 +15,5 @@ export type ButtonVariant =
 export type ButtonSize = BUIComponentSize | "max" | "m-small";
 
 export type ButtonShape = "normal" | "circle";
+
+export type LoadingType = "default" | "refresh";
