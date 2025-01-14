@@ -108,6 +108,14 @@ export const All = {
           <Button variant="function" size="medium">
             Button
           </Button>
+
+          <Button variant="primary" size="medium" disabled loading={true}>
+            Button
+          </Button>
+
+          <Button variant="primary" size="medium" disabled loading={true} loadingType="refresh">
+            Button
+          </Button>
         </div>
       </ThemeProvider>
     );
