@@ -17,7 +17,7 @@ export default meta;
 const DemoComponent = () => {
   const [arr, setArr] = useState([1, 2, 3, 4]);
 
-  const { methods } = useNotification('rightTop');
+  const { methods } = useNotification("rightTop");
 
   const info = () => {
     methods.info({
@@ -42,12 +42,11 @@ const DemoComponent = () => {
 };
 
 const ButtonGroup = () => {
-  const { methods } = useNotification('rightTop');
+  const { methods } = useNotification("rightTop");
 
   const info = () => {
     methods.info({
-      title: "InfoHeaderInfoHeaderInfoHeaderInfoHeaderInfoHeaderInfoHeader",
-      msg: "Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!"
+      title: "Info Header"
     });
   };
 
@@ -97,7 +96,7 @@ export const Primary = {
         <NoticeProvider>
           <div style={{ display: "flex", gap: "10px" }}>
             <DemoComponent />
-            <ButtonGroup/>
+            <ButtonGroup />
           </div>
         </NoticeProvider>
       </ThemeProvider>
