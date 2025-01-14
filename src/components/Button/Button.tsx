@@ -1,10 +1,11 @@
 import React, { ButtonHTMLAttributes, FC } from "react";
 import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";
-import buttonVariants from "./styles";
-import { ButtonShape, ButtonSize, ButtonVariant } from "./types";
+import buttonVariants, { refreshIconStyles } from "./styles";
+import { ButtonShape, ButtonSize, ButtonVariant, LoadingType } from "./types";
 import useTheme from "../../provider/useTheme";
 import Loading from "./Loading";
+import IconRefresh from "../../assets/icons/refresh-line.svg";
 
 export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -37,6 +38,8 @@ export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElemen
   children?: React.ReactNode;
 
   loading?: boolean;
+
+  loadingType?: LoadingType;
 }
 
 export const Button = ({
@@ -52,6 +55,7 @@ export const Button = ({
   className = "",
   theme: mode,
   loading,
+  loadingType = "default",
   ...props
 }: ButtonProps) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -82,7 +86,11 @@ export const Button = ({
       disabled={disabled}
       {...props}>
       {loading ? (
-        <Loading size={size} />
+        loadingType === "refresh" ? (
+          <IconRefresh className={cn(refreshIconStyles({ size }))} />
+        ) : (
+          <Loading size={size} />
+        )
       ) : (
         <>
           {startIcon && <span className="bu-mr-[9px]">{startIcon}</span>}

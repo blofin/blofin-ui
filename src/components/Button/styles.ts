@@ -355,3 +355,15 @@ const buttonVariants = (props: {
 };
 
 export default buttonVariants;
+
+export const refreshIconStyles = cva("bu-animate-spin", {
+  variants: {
+    size: {
+      small: "bu-h-[14px] bu-w-[14px]",
+      "m-small": "bu-h-[16px] bu-w-[16px]",
+      medium: "bu-h-[20px] bu-w-[20px]",
+      large: "bu-h-[24px] bu-w-[24px]",
+      max: "bu-h-[28px] bu-w-[28px]"
+    }
+  }
+});
