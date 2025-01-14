@@ -3,7 +3,7 @@ import { BUITheme } from "../..";
 import { BUIComponentType } from "../../types/component";
 
 const toastVariants = cva(
-  "bu-flex bu-rounded-[6px] bu-px-[18px] bu-py-[8px] bu-text-[16px] max-[634px]:bu-flex-col max-[634px]:bu-items-center max-[634px]:bu-px-[9px] max-[634px]:bu-py-[4px]  max-[634px]:bu-text-[12px]",
+  "bu-flex bu-rounded-[6px] bu-px-[16px] bu-py-[12px] bu-text-[16px] max-[634px]:bu-flex-col max-[634px]:bu-items-center max-[634px]:bu-px-[9px] max-[634px]:bu-py-[4px]  max-[634px]:bu-text-[12px]",
   {
     variants: {
       theme: {
@@ -49,7 +49,7 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
   };
 
   return cva(
-    "bu-w-[24px bu-mr-[16px] bu-h-[24px] bu-shrink-0 max-[634px]:bu-mb-[8px] max-[634px]:bu-mr-[0]",
+    "bu-w-[24px bu-mr-[8px] bu-h-[24px] bu-shrink-0 max-[634px]:bu-mb-[8px] max-[634px]:bu-mr-[0]",
     {
       variants: {
         theme: {

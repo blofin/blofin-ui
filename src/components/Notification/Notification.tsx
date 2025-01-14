@@ -54,12 +54,9 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
       <div className="bu-flex bu-rounded-[6px] bu-px-[24px] bu-py-[16px]">
         <Icon type={type} />
         <div className="w-full bu-flex bu-flex-col">
-          <div
-            className={`bu-flex bu-items-center bu-justify-between ${
-              children ? "bu-mb-[8px]" : ""
-            }`}>
+          <div className={`bu-flex bu-justify-between ${children ? "bu-mb-[8px]" : ""}`}>
             <span
-              className={`bu-flex bu-w-[250px] bu-justify-between bu-break-words bu-text-[16px] bu-font-medium bu-leading-[24px] bu-tracking-[-0.2px] ${textbg(
+              className={`bu-flex bu-w-[250px] bu-justify-between bu-break-all bu-text-[16px] bu-font-medium bu-leading-[24px] bu-tracking-[-0.2px] ${textbg(
                 { theme }
               )}`}>
               {title}
@@ -116,7 +113,7 @@ const NotificationContainer = () => {
         return (
           <CSSTransition
             key={id}
-            timeout={300}
+            timeout={500}
             classNames={{
               enter: styles[enter],
               enterActive: styles[enterActive],
