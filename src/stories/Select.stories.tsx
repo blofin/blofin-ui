@@ -136,6 +136,7 @@ export const Controlled: Story = {
                 );
               }}
               search={true}
+              searchClear={true}
               searchChange={searchChange}
               value={selectedValue1}
               handleChange={(value) => setSelectedValue1(value)}
@@ -170,7 +171,10 @@ export const Controlled: Story = {
               // arrowClassName="!bu-text-dark-label"
               value={selectedValue2}
               rowKey="value"
-              handleChange={(value) => setSelectedValue2(value)}
+              handleChange={(value, item) => {
+                setSelectedValue2(value);
+                console.log("item==>", item);
+              }}
             />
             <div onClick={handleClick}>1111</div>
           </div>
