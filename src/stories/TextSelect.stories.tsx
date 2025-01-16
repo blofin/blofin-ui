@@ -183,7 +183,8 @@ export const Primary: Story = {
                 selectItemClassName="!bu-h-[52px]"
                 searchClassName="!bu-px-[16px] bu-py-[8px] !bu-mb-0"
                 hideSelectedState={true}
-                base="div"
+                // base="div"
+                error={true}
                 inputDisabled={false}
                 // customLabel={(item) => {
                 //   console.log(item)
