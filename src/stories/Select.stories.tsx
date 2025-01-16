@@ -137,6 +137,7 @@ export const Controlled: Story = {
               }}
               search={true}
               searchClear={true}
+              searchEmpty={<div className="bu-h-[100px] bu-w-full">empty</div>}
               searchChange={searchChange}
               value={selectedValue1}
               handleChange={(value) => setSelectedValue1(value)}

@@ -20,6 +20,7 @@ import { usePopper } from "react-popper";
 import useDelayEvent from "../../hooks/useDelayEvent";
 import useClient from "../../hooks/useClient";
 import selectStyles from "./select.module.scss";
+import { set } from "date-fns";
 
 export type SelectItem = { label: string; value: string };
 
@@ -37,6 +38,7 @@ type SelectMenuProps = {
   customSelectItems?: (item: SelectItem) => ReactNode;
   search?: boolean;
   searchClear?: boolean;
+  searchEmpty?: ReactNode;
   searchChange?: (value: string) => void;
   rowKey?: string;
   styles?: object;
@@ -58,6 +60,7 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
     customSelectItems,
     search,
     searchClear,
+    searchEmpty,
     searchChange,
     rowKey,
     styles: customStyles,
@@ -120,12 +123,14 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
               className="bu-h-[38px]"
               startAdornment={<SearchIcon className={searchIconStyles({ theme })} />}
               endAdornment={
-                searchClear ? (
+                searchClear && inputRef.current && inputRef.current.value ? (
                   <CloseIcon
                     className={`${searchIconStyles({ theme })} bu-cursor-pointer`}
                     onClick={() => {
-                      handleSearch("");
                       inputRef.current && (inputRef.current.value = "");
+                      setTimeout(() => {
+                        handleSearch("");
+                      }, 0);
                     }}
                   />
                 ) : null
@@ -134,6 +139,8 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
             />
           </div>
         )}
+
+        {search && searchEmpty && !items.length && searchEmpty}
 
         <ul>
           {items?.map((item) => {
@@ -174,6 +181,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   labelId?: string;
   search?: boolean;
   searchClear?: boolean;
+  searchEmpty?: ReactNode;
   customSelectItems?: (item: SelectItem) => ReactNode;
   searchChange?: (value: string) => void;
   rowKey?: string;
@@ -207,6 +215,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     customSelectItems,
     search,
     searchClear,
+    searchEmpty,
     searchChange,
     rowKey,
     labelField = "label",
@@ -329,6 +338,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
             parent={selectRef.current}
             search={search}
             searchClear={searchClear}
+            searchEmpty={searchEmpty}
             searchChange={searchChange}
             value={String(value)}
             items={selectItems}
