@@ -6,6 +6,7 @@ import ArrowFill from "../../assets/icons/arrow-fill.svg";
 import { keyBy } from "../../utils/helper";
 import { cn } from "../../utils/utils";
 import SearchIcon from "../../assets/icons/search.svg";
+import CloseIcon from "../../assets/icons/close-bg.svg";
 import {
   labelStyles,
   menuItemStyles,
@@ -28,13 +29,14 @@ type SelectMenuProps = {
   enter: boolean;
   parent: HTMLDivElement | null;
   align: "left" | "right";
-  handleSelect: (value: string) => void;
+  handleSelect: (value: string, item?: SelectItem) => void;
   activeColor: boolean;
   theme: BUITheme;
   offsetParent?: number;
   menuWrapperClassName?: string;
   customSelectItems?: (item: SelectItem) => ReactNode;
   search?: boolean;
+  searchClear?: boolean;
   searchChange?: (value: string) => void;
   rowKey?: string;
   styles?: object;
@@ -55,6 +57,7 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
     menuWrapperClassName,
     customSelectItems,
     search,
+    searchClear,
     searchChange,
     rowKey,
     styles: customStyles,
@@ -116,6 +119,17 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
               variant="filled"
               className="bu-h-[38px]"
               startAdornment={<SearchIcon className={searchIconStyles({ theme })} />}
+              endAdornment={
+                searchClear ? (
+                  <CloseIcon
+                    className={`${searchIconStyles({ theme })} bu-cursor-pointer`}
+                    onClick={() => {
+                      handleSearch("");
+                      inputRef.current && (inputRef.current.value = "");
+                    }}
+                  />
+                ) : null
+              }
               onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
@@ -130,7 +144,7 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
                   active: activeColor ? value === item.value : activeColor
                 })}
                 key={item[(rowKey as keyof SelectItem) || value]}
-                onClick={() => handleSelect(item.value)}>
+                onClick={() => handleSelect(item.value, item)}>
                 {customSelectItems ? customSelectItems(item) : item.label}
               </li>
             );
@@ -146,7 +160,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   selectItems: SelectItem[];
   selectType?: "filled" | "outlined";
   theme?: BUITheme;
-  handleChange?: (value: string) => void;
+  handleChange?: (value: string, item?: SelectItem) => void;
   align?: "left" | "right";
   labelClassName?: string;
   arrowClassName?: string;
@@ -159,6 +173,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   adsorb?: boolean; // scroll with parent
   labelId?: string;
   search?: boolean;
+  searchClear?: boolean;
   customSelectItems?: (item: SelectItem) => ReactNode;
   searchChange?: (value: string) => void;
   rowKey?: string;
@@ -191,6 +206,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     labelId,
     customSelectItems,
     search,
+    searchClear,
     searchChange,
     rowKey,
     labelField = "label",
@@ -218,8 +234,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     return keyByItems;
   }, [value, selectItems]);
 
-  const handleSelect = (value: string) => {
-    handleChange && handleChange(value);
+  const handleSelect = (value: string, item?: SelectItem) => {
+    handleChange && handleChange(value, item);
     setEnter(false);
   };
 
@@ -312,6 +328,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
             enter={enter}
             parent={selectRef.current}
             search={search}
+            searchClear={searchClear}
             searchChange={searchChange}
             value={String(value)}
             items={selectItems}
