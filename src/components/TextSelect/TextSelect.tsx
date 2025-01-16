@@ -62,6 +62,7 @@ interface TextSelectProps {
   inputDisabled?: boolean;
   base?: "input" | "div";
   customLabel?: (item: Options) => ReactNode;
+  error?: boolean;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -241,7 +242,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     preventDuplicateSelection = true,
     inputDisabled = false,
     base = "input",
-    customLabel
+    customLabel,
+    error
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -276,7 +278,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
       return item.value === defaultValue;
     });
     if (option) {
-      setSelectedLabelNode(customLabel ? customLabel(option) : option.label)
+      setSelectedLabelNode(customLabel ? customLabel(option) : option.label);
     }
   }, [defaultValue, customLabel, options]);
 
@@ -320,6 +322,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         ref={inputRef}
         inputClassName={`${styles.input} ${valueClassName} ${base === "div" ? "bu-h-0" : ""}`}
         variant="outlined"
+        error={error}
         onFocus={() => {
           setShow(true);
           onFocus && onFocus();
