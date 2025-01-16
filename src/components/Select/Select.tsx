@@ -20,7 +20,6 @@ import { usePopper } from "react-popper";
 import useDelayEvent from "../../hooks/useDelayEvent";
 import useClient from "../../hooks/useClient";
 import selectStyles from "./select.module.scss";
-import { set } from "date-fns";
 
 export type SelectItem = { label: string; value: string };
 
