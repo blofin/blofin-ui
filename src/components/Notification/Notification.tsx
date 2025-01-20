@@ -35,7 +35,7 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
   useEffect(() => {
     const timer = setTimeout(() => {
       remove();
-    }, 3000);
+    }, 5000);
 
     return () => {
       clearTimeout(timer);
@@ -48,13 +48,15 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
 
   return (
     <div
-      className={`bu-mb-[24px] bu-w-full bu-rounded-[6px] bu-shadow-toast bu-border ${bgStyles({ theme })}`}>
+      className={`bu-mb-[24px] bu-w-full bu-rounded-[6px] bu-border bu-shadow-toast ${bgStyles({
+        theme
+      })}`}>
       <div className="bu-flex bu-rounded-[6px] bu-px-[24px] bu-py-[16px]">
         <Icon type={type} />
         <div className="w-full bu-flex bu-flex-col">
-          <div className="bu-mb-[8px] bu-flex bu-justify-between">
+          <div className={`bu-flex bu-justify-between ${children ? "bu-mb-[8px]" : ""}`}>
             <span
-              className={`bu-w-[250px] bu-break-words bu-text-[16px] bu-font-medium bu-leading-[24px] bu-tracking-[-0.2px] ${textbg(
+              className={`bu-flex bu-w-[250px] bu-justify-between bu-break-all bu-text-[16px] bu-font-medium bu-leading-[24px] bu-tracking-[-0.2px] ${textbg(
                 { theme }
               )}`}>
               {title}
@@ -74,10 +76,10 @@ const NotificationContainer = () => {
 
   const [positionStyle, enter, enterActive, exit, exitActive] = useMemo(() => {
     const positionStyleMap = {
-      leftTop: "bu-top-[32px] bu-left-[32px]",
-      leftBottom: "bu-bottom-[32px] bu-left-[32px]",
-      rightTop: "bu-top-[32px] bu-right-[8px]",
-      rightBottom: "bu-bottom-[32px] bu-right-[8px]"
+      leftTop: "bu-top-[32px] bu-left-[24px]",
+      leftBottom: "bu-bottom-[32px] bu-left-[24px]",
+      rightTop: "bu-top-[32px] bu-right-[24px]",
+      rightBottom: "bu-bottom-[32px] bu-right-[24px]"
     };
 
     const positionStyle = positionStyleMap[position as keyof typeof positionStyleMap];
@@ -111,7 +113,7 @@ const NotificationContainer = () => {
         return (
           <CSSTransition
             key={id}
-            timeout={300}
+            timeout={500}
             classNames={{
               enter: styles[enter],
               enterActive: styles[enterActive],

@@ -18,7 +18,7 @@ export interface ToastType {
 
 export type configType = {
   title: React.ReactNode;
-  msg: React.ReactNode;
+  msg?: React.ReactNode;
 };
 
 export type Methods = (config: configType, type: BUIComponentType, position?: string) => void;
@@ -115,11 +115,11 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
         setToastList,
         openToast,
         removeToast,
-        position,
+        position
       }}>
       {children}
       {visible && <Notification />}
-      {visible && <Toast/>}
+      {visible && <Toast />}
     </NoticeContext.Provider>
   );
 };

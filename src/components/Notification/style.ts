@@ -5,7 +5,7 @@ const bgStyles = cva("", {
   variants: {
     theme: {
       light: "bu-border-light-line-primary bu-bg-light-background",
-      dark: "bu-border-dark-line-primary bu-bg-dark-background"
+      dark: "bu-border-dark-fill-tertiary bu-bg-dark-fill-tertiary"
     }
   }
 });
@@ -15,8 +15,8 @@ const textStyles = cva(
   {
     variants: {
       theme: {
-        light: "bu-text-light-label",
-        dark: "bu-text-dark-label"
+        light: "bu-text-light-label-60",
+        dark: "bu-text-dark-label-60"
       }
     }
   }
@@ -47,7 +47,7 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
     }
   };
 
-  return cva("bu-w-[24px bu-mr-[16px] bu-h-[24px]", {
+  return cva("bu-w-[24px bu-mr-[12px] bu-h-[24px]", {
     variants: {
       theme: {
         light: colors[theme][type],
@@ -60,7 +60,7 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
 const closeIconStyles = cva("bu-shrink-0 bu-cursor-pointer", {
   variants: {
     theme: {
-      dark: "bu-text-dark-label",
+      dark: "bu-text-dark-label-40",
       light: "bu-text-light-label-40"
     }
   }
