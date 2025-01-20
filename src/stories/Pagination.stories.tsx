@@ -18,12 +18,13 @@ export default {
 
 export const Example = () => {
   const [page, setPage] = useState({
-    totalPages: 10,
-    currentPage: 1
+    currentPage: 1,
+    total: 10000,
+    pageSize: 15
   });
 
-  function handleChange(pageNum: number) {
-    setPage((prevState) => ({ ...prevState, currentPage: pageNum }));
+  function handleChange(pageNum: number, pageSize: number) {
+    setPage((prevState) => ({ ...prevState, currentPage: pageNum, pageSize }));
   }
 
   const mode = useMode();
@@ -31,7 +32,10 @@ export const Example = () => {
     <ThemeProvider value={{ theme: mode }}>
       <Pagination
         {...page}
-        onChange={handleChange}
+        sizeCanChange
+        onPageChange={handleChange}
+        countPerPage="Page"
+        sizeOptions={[15, 50, 100]}
         // activeStyle={{
         //   backgroundColor: "red"
         // }}
