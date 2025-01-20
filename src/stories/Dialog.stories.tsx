@@ -70,7 +70,8 @@ export const Primary: Story = {
     };
 
     const openDialog = () => {
-      Dialog.show({
+      // setOpen(true)
+      const close = Dialog.show({
         title: "Confirm Delete",
         content: "Are you sure you want to delete this item?",
         cancelText: "Cancel",
@@ -78,8 +79,20 @@ export const Primary: Story = {
         size: "medium",
         cancel: () => console.log("Cancel clicked"),
         confirm: () => console.log("Confirm clicked"),
-        footerLayout:"right",
-        footerSize:"medium",
+        footerLayout: "right",
+        footerSize: "medium",
+        footer: (
+          <div>
+            <Button
+              variant="primary"
+              size="medium"
+              onClick={() => {
+                close();
+              }}>
+              OK
+            </Button>
+          </div>
+        )
       });
     };
 

@@ -32,7 +32,7 @@ export interface DialogProps {
 }
 
 interface DialogComponent extends FC<DialogProps> {
-  show: (options: Omit<DialogProps, "open">) => void;
+  show: (options: Omit<DialogProps, "open">) => () => void;
 }
 
 const Dialog: DialogComponent = (props) => {
@@ -176,6 +176,8 @@ Dialog.show = (options: Omit<DialogProps, "open">) => {
     />,
     div
   );
+
+  return destroy;
 };
 
 export { Dialog };
