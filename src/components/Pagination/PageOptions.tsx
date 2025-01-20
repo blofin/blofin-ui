@@ -29,55 +29,53 @@ function PageOption(props: PageOptionProps) {
     countPerPage
   } = props;
 
-  return (
+  return sizeCanChange ? (
     <div className="bu-h-[34px] bu-w-[97px]">
-      {sizeCanChange && (
-        <TextSelect
-          ref={selectRef}
-          options={sizeOptions.map((item) => ({
-            value: String(item),
-            label: String(item)
-          }))}
-          defaultValue={
-            sizeOptions.indexOf(pageSize) !== -1 ? String(pageSize) : String(sizeOptions[0])
-          }
-          onChange={(value) => {
-            onPageSizeChange(Number(value) || 10);
-          }}
-          className="bu-max-h-[150px] bu-overflow-y-scroll"
-          base="div"
-          inputDisabled={disabled}
-          selectItemClassName="!bu-px-[8px] !bu-leading-[18px]"
-          valueClassName="!bu-h-[34px]"
-          inputClassName="!bu-h-[34px]"
-          customSelectItems={(item) => {
-            const size =
-              sizeOptions.indexOf(pageSize) !== -1 ? String(pageSize) : String(sizeOptions[0]);
-            return (
-              <div
-                className={
-                  size === item.value
-                    ? theme === "light"
-                      ? "!bu-text-light-primary"
-                      : "!bu-text-dark-primary"
-                    : ""
-                }>
-                {item.label} / {countPerPage}
-              </div>
-            );
-          }}
-          customLabel={(item) => {
-            return (
-              <div
-                className={`${theme === "light" ? "!bu-text-light-label" : "!bu-text-dark-label"}`}>
-                {item.label} / {countPerPage}
-              </div>
-            );
-          }}
-          auto={false}></TextSelect>
-      )}
+      <TextSelect
+        ref={selectRef}
+        options={sizeOptions.map((item) => ({
+          value: String(item),
+          label: String(item)
+        }))}
+        defaultValue={
+          sizeOptions.indexOf(pageSize) !== -1 ? String(pageSize) : String(sizeOptions[0])
+        }
+        onChange={(value) => {
+          onPageSizeChange(Number(value) || 10);
+        }}
+        className="bu-max-h-[150px] bu-overflow-y-scroll"
+        base="div"
+        inputDisabled={disabled}
+        selectItemClassName="!bu-px-[8px] !bu-leading-[18px]"
+        valueClassName="!bu-h-[34px]"
+        inputClassName="!bu-h-[34px]"
+        customSelectItems={(item) => {
+          const size =
+            sizeOptions.indexOf(pageSize) !== -1 ? String(pageSize) : String(sizeOptions[0]);
+          return (
+            <div
+              className={
+                size === item.value
+                  ? theme === "light"
+                    ? "!bu-text-light-primary"
+                    : "!bu-text-dark-primary"
+                  : ""
+              }>
+              {item.label} / {countPerPage}
+            </div>
+          );
+        }}
+        customLabel={(item) => {
+          return (
+            <div
+              className={`${theme === "light" ? "!bu-text-light-label" : "!bu-text-dark-label"}`}>
+              {item.label} / {countPerPage}
+            </div>
+          );
+        }}
+        auto={false}></TextSelect>
     </div>
-  );
+  ) : null;
 }
 
 export default PageOption;
