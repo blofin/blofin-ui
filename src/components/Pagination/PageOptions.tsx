@@ -46,7 +46,11 @@ function PageOption(props: PageOptionProps) {
         className="bu-max-h-[150px] bu-overflow-y-scroll"
         base="div"
         inputDisabled={disabled}
-        selectItemClassName="!bu-px-[8px] !bu-leading-[18px]"
+        selectItemClassName={`!bu-px-[8px] !bu-leading-[18px] ${
+          theme === "light"
+            ? "!bu-bg-light-background hover:!bu-bg-light-hover-fill-primary"
+            : "!bu-bg-dark-background hover:!bu-bg-dark-hover-fill-primary"
+        }`}
         valueClassName="!bu-h-[34px]"
         inputClassName="!bu-h-[34px]"
         customSelectItems={(item) => {
