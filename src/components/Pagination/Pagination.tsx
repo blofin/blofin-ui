@@ -146,11 +146,10 @@ export function Pagination({
   }
 
   return (
-    <div className="bu-flex bu-items-center bu-justify-center bu-gap-[16px]">
+    <div className={`bu-flex bu-items-center bu-justify-center bu-gap-[16px] ${className}`}>
       <ul
         className={clsx(
-          "bu-flex bu-items-center bu-justify-center bu-gap-[16px] bu-text-dark-label md:bu-gap-[24px]",
-          className
+          "bu-flex bu-items-center bu-justify-center bu-gap-[16px] bu-text-dark-label md:bu-gap-[24px]"
         )}>
         <li
           className={arrowVariants({ theme: theme || defaultTheme })}
