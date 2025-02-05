@@ -203,12 +203,14 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
 );
 export interface TextSelectRefProps {
   close: () => void;
+  clear: () => void;
 }
 
 const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) => {
   useImperativeHandle(ref, () => {
     return {
-      close: hide
+      close: hide,
+      clear: clear
     };
   });
 
@@ -286,6 +288,10 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     setShow(false);
     setIsFocus(false);
     searchChange && searchChange("");
+  };
+
+  const clear = () => {
+    setSelectedLabel("");
   };
 
   const handleClickOutside = (event: any) => {
