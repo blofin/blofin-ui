@@ -22,7 +22,11 @@ import { Switch } from "./components/Switch/Switch";
 import { Tab, TabRef } from "./components/Tab/Tab";
 import Table, { TableColumnProps } from "./components/Table";
 import { TextField } from "./components/TextField";
-import { TextSelect, TextSelectRefProps } from "./components/TextSelect/TextSelect";
+import {
+  TextSelect,
+  TextSelectProps,
+  TextSelectRefProps
+} from "./components/TextSelect/TextSelect";
 import TextArea from "./components/Textarea";
 import { Tooltip } from "./components/Tooltip/Tooltip";
 import { Typography, TypographyProps } from "./components/Typography/Typography";
@@ -89,7 +93,8 @@ export type {
   TabRef,
   SortsData,
   Placement,
-  PopoverRefProps
+  PopoverRefProps,
+  TextSelectProps
 };
 
 export { NoticeProvider, ThemeProvider };

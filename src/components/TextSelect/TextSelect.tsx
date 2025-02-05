@@ -31,7 +31,7 @@ interface Options extends CustomFields {
   value: string;
 }
 
-interface TextSelectProps {
+export interface TextSelectProps {
   id?: string;
   options: Options[];
   onChange: (value: string) => void;
