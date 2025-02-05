@@ -94,7 +94,7 @@ const InputBgVariants = ({
   noClassName?: boolean;
   size: "md" | "lg";
 }) => {
-  return cva("bu-w-full bu-rounded-[8px] bu-border", {
+  return cva("bu-w-full bu-overflow-hidden bu-rounded-[8px] bu-border", {
     variants: {
       variant: {
         filled: InputFilledStyles({ theme }),
