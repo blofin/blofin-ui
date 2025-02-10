@@ -11,7 +11,7 @@ const LabelVariants = cva("", {
     },
     size: {
       md: ["bu-mb-1"],
-      lg: ["bu-mb-2", "!bu-text-base bu-leading-[20px]"]
+      lg: ["bu-mb-1", "!bu-text-base bu-leading-[20px]"]
     }
   }
 });

@@ -58,7 +58,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
         </label>
       )}
       {label && typeof label !== "string" && (
-        <div className={inputSize === "lg" ? "bu-mb-2" : "bu-mb-1"}>{label}</div>
+        <div className={inputSize === "lg" ? "bu-mb-1" : "bu-mb-1"}>{label}</div>
       )}
       <div
         className={cn(
