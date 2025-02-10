@@ -43,6 +43,7 @@ type SelectMenuProps = {
   styles?: object;
   x?: number;
   y?: number;
+  container?: Element;
 };
 
 const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
@@ -64,7 +65,8 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
     rowKey,
     styles: customStyles,
     x = 0,
-    y = 0
+    y = 0,
+    container
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -158,7 +160,7 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
         </ul>
       </div>
     </div>,
-    document.body
+    container ? container : document.body
   );
 });
 
@@ -190,6 +192,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   hoverClassName?: string;
   x?: number;
   y?: number;
+  container?: Element;
 }
 
 const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
@@ -223,6 +226,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     hoverClassName,
     x,
     y,
+    container,
     ...otherProps
   } = props;
 
@@ -352,6 +356,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
             styles={styles}
             x={x}
             y={y}
+            container={container}
           />
         )}
       </div>
