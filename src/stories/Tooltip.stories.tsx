@@ -32,7 +32,7 @@ export const Primary: Story = {
           <Tooltip
             placement="left"
             theme={"light"}
-            distance={10}
+            y={10}
             // hideArrow
             flipPlacement={["bottom"]}
             isShow={isShow}
