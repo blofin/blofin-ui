@@ -21,12 +21,11 @@ interface TooltipProps {
   hideArrow?: boolean;
   scrollContainer?: HTMLDivElement | null;
   theme?: BUITheme;
+  /**
+   * @property {number} [y] 控制tooltip到元素的距离
+   * */
   y?: number;
   x?: number;
-  /**
-   * @property {number} [distance] 控制tooltip到元素的距离
-   * */
-  distance?: number;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
@@ -48,8 +47,7 @@ const Content: FC<ContentProps> = ({
   flipPlacement,
   theme,
   x,
-  y,
-  distance = 0
+  y = 0
 }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
@@ -60,7 +58,7 @@ const Content: FC<ContentProps> = ({
       {
         name: "offset",
         options: {
-          offset: [x ? x : OFFSET[placement], 4 + distance]
+          offset: [x ? x : OFFSET[placement], 4 + y]
         }
       },
       {
