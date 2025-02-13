@@ -23,6 +23,10 @@ interface TooltipProps {
   theme?: BUITheme;
   y?: number;
   x?: number;
+  /**
+   * @property {number} [distance] 控制tooltip到元素的距离
+   * */
+  distance?: number;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
@@ -44,7 +48,8 @@ const Content: FC<ContentProps> = ({
   flipPlacement,
   theme,
   x,
-  y
+  y,
+  distance = 0
 }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
@@ -55,7 +60,7 @@ const Content: FC<ContentProps> = ({
       {
         name: "offset",
         options: {
-          offset: [x ? x : OFFSET[placement], 4]
+          offset: [x ? x : OFFSET[placement], 4 + distance]
         }
       },
       {
@@ -95,7 +100,9 @@ const Content: FC<ContentProps> = ({
       {!hideArrow && state && (
         <div
           className={arrowPositionStyles({
-            placement: PLACEMENT_REVERSE[state.placement as keyof typeof PLACEMENT] as TooltipPlacement
+            placement: PLACEMENT_REVERSE[
+              state.placement as keyof typeof PLACEMENT
+            ] as TooltipPlacement
           })}>
           <ArrowIcon
             className={

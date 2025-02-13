@@ -4,7 +4,9 @@ export enum PLACEMENT {
   topLeft = "top-start",
   topRight = "top-end",
   bottomLeft = "bottom-start",
-  bottomRight = "bottom-end"
+  bottomRight = "bottom-end",
+  left = "left",
+  right = "right"
 }
 
 export enum OFFSET {
@@ -13,7 +15,9 @@ export enum OFFSET {
   topLeft = -5,
   topRight = 5,
   bottomLeft = -5,
-  bottomRight = 5
+  bottomRight = 5,
+  left = 0,
+  right = 0
 }
 
 export const PLACEMENT_REVERSE: Record<string, string> = Object.fromEntries(
