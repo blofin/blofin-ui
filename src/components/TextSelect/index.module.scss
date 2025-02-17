@@ -1,15 +1,15 @@
 .options {
-  @apply bu-absolute bu-rounded-[4px] bu-pb-[8px] bu-z-[99999];
+  @apply bu-absolute bu-z-[99999] bu-rounded-[8px] bu-pb-[8px];
 }
 
 .item {
   @apply bu-flex bu-h-[34px] bu-cursor-pointer bu-items-center bu-px-[16px] bu-py-[8px] bu-text-[12px];
 }
 
-.input{
+.input {
   @apply bu-cursor-pointer;
 }
 
-.roate{
+.roate {
   transform: rotate(180deg);
 }
