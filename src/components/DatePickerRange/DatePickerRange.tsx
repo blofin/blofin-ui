@@ -313,7 +313,9 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
         }
         content={
           <div
-            className={`bu-rounded bu-border bu-px-[16px] bu-pb-[8px] ${DatePickerBg({ theme })}`}>
+            className={`bu-rounded-[8px] bu-border bu-px-[16px] bu-pb-[8px] ${DatePickerBg({
+              theme
+            })}`}>
             <div className="bu-date-picker bu-flex">
               {startMonthShow && (
                 <div
