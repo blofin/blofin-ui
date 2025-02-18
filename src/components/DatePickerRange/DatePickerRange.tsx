@@ -287,7 +287,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
         title={
           <div
             id="date"
-            className={`bu-flex bu-h-[40px] bu-w-[260px] bu-cursor-pointer bu-items-center bu-justify-between bu-rounded-[4px] bu-border bu-p-[8px] ${DatePickerBg(
+            className={`bu-flex bu-h-[40px] bu-w-[260px] bu-cursor-pointer bu-items-center bu-justify-between bu-rounded-[8px] bu-border bu-p-[8px] ${DatePickerBg(
               { theme }
             )}${!date ? " bu-text-muted-foreground" : ""} ${dateClassName}`}>
             {date?.from ? (
@@ -313,7 +313,9 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
         }
         content={
           <div
-            className={`bu-rounded bu-border bu-px-[16px] bu-pb-[8px] ${DatePickerBg({ theme })}`}>
+            className={`bu-rounded-[8px] bu-border bu-px-[16px] bu-pb-[8px] ${DatePickerBg({
+              theme
+            })}`}>
             <div className="bu-date-picker bu-flex">
               {startMonthShow && (
                 <div
