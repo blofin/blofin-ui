@@ -120,7 +120,7 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
           <div className={searchStyles({ theme })}>
             <TextField
               ref={inputRef}
-              variant="filled"
+              variant="outlined"
               className="bu-h-[38px]"
               startAdornment={<SearchIcon className={searchIconStyles({ theme })} />}
               endAdornment={
