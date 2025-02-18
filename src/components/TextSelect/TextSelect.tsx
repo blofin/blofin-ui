@@ -167,7 +167,7 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
               {search && (
                 <div className={`${searchStyles({ theme })} ${searchClassName}`}>
                   <TextField
-                    variant="filled"
+                    variant="outlined"
                     startAdornment={<SearchIcon className={searchIconStyles({ theme })} />}
                     onChange={(e) => handleSearch(e.target.value)}
                   />
