@@ -7,10 +7,21 @@ export interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputEle
   label?: ReactNode;
   theme?: BUITheme;
   selected?: string;
+  arrow?: "circle" | "check";
 }
 
 const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) => {
-  const { label, theme: mode, id, value, selected, name, onChange, ...otherProps } = props;
+  const {
+    label,
+    theme: mode,
+    id,
+    value,
+    selected,
+    name,
+    onChange,
+    arrow = "check",
+    ...otherProps
+  } = props;
   const checked = value === selected;
   const { theme } = useTheme();
   return (
@@ -18,11 +29,11 @@ const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) 
       <label
         htmlFor={id ? id : `bui-radiobutton-${label}`}
         className={`${cn(
-          RadioButtonLabelVariants({ theme: mode || theme, checked: !!checked })
+          RadioButtonLabelVariants({ theme: mode || theme, checked: !!checked, arrow })
         )} bu-flex bu-cursor-pointer bu-items-center bu-gap-[4px]`}>
         <input
           type="radio"
-          className={cn(RadioButtonInputVariants({ theme: mode || theme }))}
+          className={cn(RadioButtonInputVariants({ theme: mode || theme, arrow, check: checked }))}
           id={id ? id : `bui-radiobutton-${label}`}
           name={name}
           ref={ref}
@@ -31,6 +42,7 @@ const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) 
           checked={checked}
           onChange={onChange}
         />
+        <span className="checkmark"></span>
         {label}
       </label>
     </div>
