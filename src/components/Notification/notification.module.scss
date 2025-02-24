@@ -1,6 +1,6 @@
 .notification-enter {
   opacity: 1;
-  margin-left: -50px;
+  margin-left: -100px;
 }
 .notification-enter-active {
   transition: all 0.3s linear;
@@ -14,12 +14,12 @@
 .notification-exit-active {
   transition: all 0.3s cubic-bezier(0.05, 0.03, 0.99, 0.28);
   opacity: 0;
-  margin-left: -50px;
+  margin-left: -100px;
 }
 
 .notification-enter-right {
   opacity: 1;
-  margin-left: 50px;
+  margin-left: 200px;
 }
 .notification-enter-active-right {
   transition: all 0.3s linear;
@@ -33,5 +33,5 @@
 .notification-exit-active-right {
   transition: all 0.3s cubic-bezier(0.05, 0.03, 0.99, 0.28);
   opacity: 0;
-  margin-left: 50px;
+  margin-left: 200px;
 }

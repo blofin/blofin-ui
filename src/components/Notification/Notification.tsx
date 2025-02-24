@@ -48,13 +48,15 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
 
   return (
     <div
-      className={`bu-mb-[24px] bu-w-full bu-rounded-[6px] bu-shadow-toast bu-border ${bgStyles({ theme })}`}>
-      <div className="bu-flex bu-rounded-[6px] bu-px-[24px] bu-py-[16px]">
+      className={`bu-mb-[12px] bu-w-full bu-rounded-[8px] bu-border bu-shadow-toast ${bgStyles({
+        theme
+      })}`}>
+      <div className="bu-flex bu-rounded-[8px] bu-px-[16px] bu-py-[12px]">
         <Icon type={type} />
         <div className="w-full bu-flex bu-flex-col">
-          <div className="bu-mb-[8px] bu-flex bu-justify-between">
+          <div className="bu-mb-[4px] bu-flex bu-justify-between">
             <span
-              className={`bu-w-[250px] bu-break-words bu-text-[16px] bu-font-medium bu-leading-[24px] bu-tracking-[-0.2px] ${textbg(
+              className={`bu-w-[260px] bu-break-words bu-text-[16px] bu-font-medium bu-leading-[24px] bu-tracking-[-0.2px] ${textbg(
                 { theme }
               )}`}>
               {title}
@@ -70,67 +72,121 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
 };
 
 const NotificationContainer = () => {
-  const { notificationList, remove, position } = useContext(NoticeContext);
-
-  const [positionStyle, enter, enterActive, exit, exitActive] = useMemo(() => {
-    const positionStyleMap = {
-      leftTop: "bu-top-[32px] bu-left-[32px]",
-      leftBottom: "bu-bottom-[32px] bu-left-[32px]",
-      rightTop: "bu-top-[32px] bu-right-[8px]",
-      rightBottom: "bu-bottom-[32px] bu-right-[8px]"
-    };
-
-    const positionStyle = positionStyleMap[position as keyof typeof positionStyleMap];
-
-    const enter =
-      position === "leftTop" || position === "leftBottom"
-        ? "notification-enter"
-        : "notification-enter-right";
-
-    const enterActive =
-      position === "leftTop" || position === "leftBottom"
-        ? "notification-enter-active"
-        : "notification-enter-active-right";
-
-    const exit =
-      position === "leftTop" || position === "leftBottom"
-        ? "notification-exit"
-        : "notification-exit-right";
-
-    const exitActive =
-      position === "leftTop" || position === "leftBottom"
-        ? "notification-exit-active"
-        : "notification-exit-active-right";
-
-    return [positionStyle, enter, enterActive, exit, exitActive];
-  }, [position, styles]);
+  const {
+    notificationListLeftBottom,
+    notificationListLeftTop,
+    notificationListRightBottom,
+    notificationListRightTop,
+    remove
+  } = useContext(NoticeContext);
 
   return (
-    <TransitionGroup className={`bu-fixed bu-z-[99999] bu-w-[384px] ${positionStyle}`}>
-      {notificationList.map(({ title, node, id, type }) => {
-        return (
-          <CSSTransition
-            key={id}
-            timeout={300}
-            classNames={{
-              enter: styles[enter],
-              enterActive: styles[enterActive],
-              exit: styles[exit],
-              exitActive: styles[exitActive]
-            }}
-            unmountOnExit>
-            <NotificationMsg
-              type={type}
-              title={title}
-              remove={() => {
-                remove(id);
-              }}>
-              {node}
-            </NotificationMsg>
-          </CSSTransition>
-        );
-      })}
-    </TransitionGroup>
+    <>
+      <TransitionGroup
+        className={`bu-fixed bu-bottom-[32px] bu-left-[32px] bu-z-[99999] bu-w-[360px]`}>
+        {notificationListLeftBottom.map(({ title, node, id, type }) => {
+          return (
+            <CSSTransition
+              key={id}
+              timeout={300}
+              classNames={{
+                enter: styles["notification-enter"],
+                enterActive: styles["notification-enter-active"],
+                exit: styles["notification-exit"],
+                exitActive: styles["notification-exit-active"]
+              }}
+              unmountOnExit>
+              <NotificationMsg
+                type={type}
+                title={title}
+                remove={() => {
+                  remove(id);
+                }}>
+                {node}
+              </NotificationMsg>
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
+      <TransitionGroup
+        className={`bu-fixed bu-left-[32px] bu-top-[32px] bu-z-[99999] bu-w-[360px]`}>
+        {notificationListLeftTop.map(({ title, node, id, type }) => {
+          return (
+            <CSSTransition
+              key={id}
+              timeout={300}
+              classNames={{
+                enter: styles["notification-enter"],
+                enterActive: styles["notification-enter-active"],
+                exit: styles["notification-exit"],
+                exitActive: styles["notification-exit-active"]
+              }}
+              unmountOnExit>
+              <NotificationMsg
+                type={type}
+                title={title}
+                remove={() => {
+                  remove(id);
+                }}>
+                {node}
+              </NotificationMsg>
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
+      <TransitionGroup
+        className={`bu-fixed bu-bottom-[32px] bu-right-[8px] bu-z-[99999] bu-w-[360px]`}>
+        {notificationListRightBottom.map(({ title, node, id, type }) => {
+          return (
+            <CSSTransition
+              key={id}
+              timeout={300}
+              classNames={{
+                enter: styles["notification-enter-right"],
+                enterActive: styles["notification-enter-active-right"],
+                exit: styles["notification-exit-right"],
+                exitActive: styles["notification-exit-active-right"]
+              }}
+              unmountOnExit>
+              <NotificationMsg
+                type={type}
+                title={title}
+                remove={() => {
+                  remove(id);
+                }}>
+                {node}
+              </NotificationMsg>
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
+      <TransitionGroup
+        className={`bu-fixed bu-right-[8px] bu-top-[32px] bu-z-[99999] bu-w-[360px]`}>
+        {notificationListRightTop.map(({ title, node, id, type }) => {
+          return (
+            <CSSTransition
+              key={id}
+              timeout={300}
+              classNames={{
+                enter: styles["notification-enter-right"],
+                enterActive: styles["notification-enter-active-right"],
+                exit: styles["notification-exit-right"],
+                exitActive: styles["notification-exit-active-right"]
+              }}
+              unmountOnExit>
+              <NotificationMsg
+                type={type}
+                title={title}
+                remove={() => {
+                  remove(id);
+                }}>
+                {node}
+              </NotificationMsg>
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
+    </>
   );
 };
 

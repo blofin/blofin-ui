@@ -17,7 +17,7 @@ export default meta;
 const DemoComponent = () => {
   const [arr, setArr] = useState([1, 2, 3, 4]);
 
-  const { methods } = useNotification('rightTop');
+  const { methods } = useNotification();
 
   const info = () => {
     methods.info({
@@ -42,7 +42,7 @@ const DemoComponent = () => {
 };
 
 const ButtonGroup = () => {
-  const { methods } = useNotification('rightTop');
+  const { methods } = useNotification();
 
   const info = () => {
     methods.info({
@@ -54,20 +54,34 @@ const ButtonGroup = () => {
   const warning = () => {
     methods.warning({
       title: "Warning Header",
-      msg: "我是短发舒服撒开了饭就睡啦开发!!!!!!!!!"
+      msg: "我是短发舒服撒开了饭就睡啦开发!!!!!!!!!",
+      position: "leftTop"
     });
   };
   const success = () => {
     methods.success({
       title: "Success Header",
-      msg: "Success!!!!!!!!!"
+      msg: "Success!!!!!!!!!",
+      position: "rightTop"
     });
   };
   const danger = () => {
     methods.danger({
-      title: "danger Header",
-      msg: "Danger!!!!!!!!!"
+      title: "danger Header danger Header  danger Header  danger Header",
+      msg: "Danger!!!!!!!!!",
+      position: "rightBottom"
     });
+  };
+
+  const [sum, setSum] = useState(1);
+
+  const maxLimit = () => {
+    methods.danger({
+      title: "danger Header ",
+      msg: sum,
+      position: "rightTop"
+    });
+    setSum(sum + 1);
   };
 
   return (
@@ -84,6 +98,9 @@ const ButtonGroup = () => {
       <Button size="medium" onClick={danger}>
         Danger
       </Button>
+      <Button size="medium" onClick={maxLimit}>
+        最多2个
+      </Button>
     </>
   );
 };
@@ -97,7 +114,7 @@ export const Primary = {
         <NoticeProvider>
           <div style={{ display: "flex", gap: "10px" }}>
             <DemoComponent />
-            <ButtonGroup/>
+            <ButtonGroup />
           </div>
         </NoticeProvider>
       </ThemeProvider>
