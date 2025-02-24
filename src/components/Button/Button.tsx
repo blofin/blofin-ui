@@ -89,7 +89,7 @@ export const Button = ({
         loadingType === "refresh" ? (
           <IconRefresh className={cn(refreshIconStyles({ size }))} />
         ) : (
-          <Loading size={size} />
+          <Loading size={size} theme={theme} />
         )
       ) : (
         <>

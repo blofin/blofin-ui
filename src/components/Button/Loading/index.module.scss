@@ -5,9 +5,16 @@
   border-radius: 50%;
   display: block;
   position: relative;
-  color: rgba(10, 10, 10, 0.6);
   box-sizing: border-box;
   animation: animloader-medium 1s linear infinite alternate;
+}
+
+.loader-light {
+  color: rgba(10, 10, 10, 0.6);
+}
+
+.loader-dark {
+  @apply bu-text-dark-label-20;
 }
 
 @keyframes animloader-medium {
@@ -32,7 +39,6 @@
   border-radius: 50%;
   display: block;
   position: relative;
-  color: rgba(10, 10, 10, 0.6);
   box-sizing: border-box;
   animation: animloader-large 1s linear infinite alternate;
 }
@@ -59,7 +65,6 @@
   border-radius: 50%;
   display: block;
   position: relative;
-  color: rgba(10, 10, 10, 0.6);
   box-sizing: border-box;
   animation: animloader-small 0.8s linear infinite alternate;
 }
@@ -85,7 +90,6 @@
   border-radius: 50%;
   display: block;
   position: relative;
-  color: rgba(10, 10, 10, 0.6);
   box-sizing: border-box;
   animation: animloader-m-small 0.8s linear infinite alternate;
 }

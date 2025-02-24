@@ -5,7 +5,7 @@ const bgStyles = cva("bu-border-[1px] bu-border-solid", {
   variants: {
     theme: {
       light: "bu-border-light-line-secondary bu-bg-light-background",
-      dark: "bu-border-dark-line-secondary bu-bg-dark-background"
+      dark: "bu-border-dark-line-primary bu-bg-dark-background"
     }
   }
 });

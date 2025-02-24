@@ -44,7 +44,7 @@ export const All = {
   render: () => {
     const mode = useMode();
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const handleRequest = () => {
       setLoading(true);
