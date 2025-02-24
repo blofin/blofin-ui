@@ -15,8 +15,8 @@ const textStyles = cva(
   {
     variants: {
       theme: {
-        light: "bu-text-light-label",
-        dark: "bu-text-dark-label"
+        light: "bu-text-light-label-60",
+        dark: "bu-text-dark-label-60"
       }
     }
   }
@@ -47,7 +47,7 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
     }
   };
 
-  return cva("bu-w-[24px bu-mr-[16px] bu-h-[24px]", {
+  return cva("bu-mr-[8px] bu-h-[24px] bu-w-[24px]", {
     variants: {
       theme: {
         light: colors[theme][type],
