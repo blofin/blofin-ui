@@ -78,7 +78,7 @@ export const Alert: FC<Props> = ({
           <Typography
             variant="body4"
             weight="medium"
-            className={`bu-leading-[18px] bu-text-base-primary ${
+            className={`bu-leading-[18px] !bu-text-base-primary ${
               showUnderline ? "bu-underline" : ""
             }`}>
             {buttonText}
