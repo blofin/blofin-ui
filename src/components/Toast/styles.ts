@@ -3,14 +3,12 @@ import { BUITheme } from "../..";
 import { BUIComponentType } from "../../types/component";
 
 const toastVariants = cva(
-  "bu-flex bu-rounded-[6px] bu-px-[18px] bu-py-[8px] bu-text-[16px] max-[600px]:bu-flex-col max-[600px]:bu-items-center max-[600px]:bu-px-[9px] max-[600px]:bu-py-[4px]  max-[600px]:bu-text-[12px]",
+  "bu-flex bu-rounded-[6px] bu-px-[16px] bu-py-[12px] bu-text-[16px] max-[634px]:bu-flex-col max-[634px]:bu-items-center max-[634px]:bu-px-[9px] max-[634px]:bu-py-[4px]  max-[634px]:bu-text-[12px]",
   {
     variants: {
-      type: {
-        info: "bu-bg-light-primary-14",
-        success: "bu-bg-light-success-14",
-        warning: "bu-bg-light-warning-14",
-        danger: "bu-bg-light-danger-14"
+      theme: {
+        light: "bu-border-[1px] bu-border-light-line-secondary bu-bg-light-background",
+        dark: "bu-bg-dark-fill-tertiary"
       }
     }
   }
@@ -20,7 +18,7 @@ const bgStyles = cva("", {
   variants: {
     theme: {
       light: "bu-bg-light-background",
-      dark: "bu-bg-dark-background"
+      dark: "bu-bg-dark-fill-tertiary"
     }
   }
 });
@@ -50,14 +48,17 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
     }
   };
 
-  return cva("bu-w-[24px bu-mr-[16px] bu-h-[24px] bu-shrink-0 max-[600px]:bu-mr-[0] max-[600px]:bu-mb-[8px]", {
-    variants: {
-      theme: {
-        light: colors[theme][type],
-        dark: colors[theme][type]
+  return cva(
+    "bu-w-[24px bu-mr-[8px] bu-h-[24px] bu-shrink-0 max-[634px]:bu-mb-[8px] max-[634px]:bu-mr-[0]",
+    {
+      variants: {
+        theme: {
+          light: colors[theme][type],
+          dark: colors[theme][type]
+        }
       }
     }
-  })({ theme });
+  )({ theme });
 };
 
 export { toastVariants, bgStyles, textStyles, iconstyles };
