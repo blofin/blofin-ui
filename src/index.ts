@@ -43,6 +43,7 @@ import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component
 import { SortsData } from "./components/Sort/reducer";
 import { Placement } from "@popperjs/core";
 import { InputBaseProps } from "./components/TextField/TextField";
+import { Alert } from "./components/Alert/index";
 
 export {
   Badge,
@@ -73,7 +74,8 @@ export {
   Typography,
   Sortable,
   SortItem,
-  Popup
+  Popup,
+  Alert
 };
 
 export type {

@@ -17,7 +17,9 @@ const arrowPositionStyles = cva("bu-absolute bu-h-[8px] bu-w-[8px]", {
       topRight: "bu-bottom-[-7px] bu-right-[16px]",
       bottom: "bu-left-[50%] bu-top-[-7.5px] bu-translate-x-[-50%] bu-rotate-[180deg]",
       bottomLeft: "bu-left-[16px] bu-top-[-7.5px] bu-rotate-[180deg]",
-      bottomRight: "bu-right-[16px] bu-top-[-7.5px] bu-rotate-[180deg]"
+      bottomRight: "bu-right-[16px] bu-top-[-7.5px] bu-rotate-[180deg]",
+      right: "bu-left-[-8px] bu-top-[50%] bu-translate-y-[-50%] bu-rotate-[90deg]",
+      left: "bu-right-[-8px] bu-top-[50%] bu-translate-y-[-50%] bu-rotate-[-90deg]"
     }
   }
 });

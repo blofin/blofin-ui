@@ -19,6 +19,7 @@ export interface ToastType {
 export type configType = {
   title: React.ReactNode;
   msg: React.ReactNode;
+  position?: string;
 };
 
 export type Methods = (config: configType, type: BUIComponentType, position?: string) => void;
@@ -26,20 +27,31 @@ export type Methods = (config: configType, type: BUIComponentType, position?: st
 export type ToastMthods = (msg: string, type: BUIComponentType) => void;
 
 interface NoticeContextProps {
-  notificationList: NotificationType[];
-  setNotificationList: (item: NotificationType[]) => void;
+  notificationListLeftBottom: NotificationType[];
+  setNotificationListLeftBottom: (item: NotificationType[]) => void;
+  notificationListLeftTop: NotificationType[];
+  setNotificationListLeftTop: (item: NotificationType[]) => void;
+  notificationListRightBottom: NotificationType[];
+  setNotificationListRightBottom: (item: NotificationType[]) => void;
+  notificationListRightTop: NotificationType[];
+  setNotificationListRightTop: (item: NotificationType[]) => void;
   open: Methods;
   remove: (id: number) => void;
   toastList: ToastType[];
   setToastList: (item: ToastType[]) => void;
   openToast: ToastMthods;
   removeToast: (id: number) => void;
-  position: string;
 }
 
 const NoticeContext = createContext<NoticeContextProps>({
-  notificationList: [],
-  setNotificationList: () => {},
+  notificationListLeftBottom: [],
+  setNotificationListLeftBottom: () => {},
+  notificationListLeftTop: [],
+  setNotificationListLeftTop: () => {},
+  notificationListRightBottom: [],
+  setNotificationListRightBottom: () => {},
+  notificationListRightTop: [],
+  setNotificationListRightTop: () => {},
   open: () => {
     console.warn("not methods");
   },
@@ -49,14 +61,23 @@ const NoticeContext = createContext<NoticeContextProps>({
   openToast: () => {
     console.warn("not methods");
   },
-  removeToast: () => {},
-  position: "leftBottom"
+  removeToast: () => {}
 });
 
-const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [notificationList, setNotificationList] = useState<NotificationType[]>([]);
+const MAX_NOTICE = 2;
 
-  const [position, setPosition] = useState<string>("leftBottom");
+const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [notificationListLeftBottom, setNotificationListLeftBottom] = useState<NotificationType[]>(
+    []
+  );
+
+  const [notificationListLeftTop, setNotificationListLeftTop] = useState<NotificationType[]>([]);
+
+  const [notificationListRightBottom, setNotificationListRightBottom] = useState<
+    NotificationType[]
+  >([]);
+
+  const [notificationListRightTop, setNotificationListRightTop] = useState<NotificationType[]>([]);
 
   const [toastList, setToastList] = useState<ToastType[]>([]);
 
@@ -67,21 +88,80 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const toastKey = useRef(0);
 
   const open = (config: configType, type: BUIComponentType, position?: string) => {
-    setNotificationList((list) => [
-      ...list,
-      {
-        title: config.title,
-        node: config.msg,
-        id: key.current,
-        type: type
-      }
-    ]);
+    if (config.position === "leftTop") {
+      setNotificationListLeftTop((list) => {
+        if (list.length >= MAX_NOTICE) {
+          list.shift();
+        }
+        return [
+          ...list,
+          {
+            title: config.title,
+            node: config.msg,
+            id: key.current,
+            type: type,
+            position: "leftTop"
+          }
+        ];
+      });
+    } else if (config.position === "rightBottom") {
+      setNotificationListRightBottom((list) => {
+        if (list.length >= MAX_NOTICE) {
+          list.shift();
+        }
+        return [
+          ...list,
+          {
+            title: config.title,
+            node: config.msg,
+            id: key.current,
+            type: type,
+            position: "rightBottom"
+          }
+        ];
+      });
+    } else if (config.position === "rightTop") {
+      setNotificationListRightTop((list) => {
+        if (list.length >= MAX_NOTICE) {
+          list.shift();
+        }
+        return [
+          ...list,
+          {
+            title: config.title,
+            node: config.msg,
+            id: key.current,
+            type: type,
+            position: "rightTop"
+          }
+        ];
+      });
+    } else {
+      setNotificationListLeftBottom((list) => {
+        if (list.length >= MAX_NOTICE) {
+          list.shift();
+        }
+        return [
+          ...list,
+          {
+            title: config.title,
+            node: config.msg,
+            id: key.current,
+            type: type,
+            position: "leftBottom"
+          }
+        ];
+      });
+    }
+
     key.current += 1;
-    position && setPosition(position);
   };
 
   const remove = (id: number) => {
-    setNotificationList((val) => val.filter((item) => item.id !== id));
+    setNotificationListLeftBottom((val) => val.filter((item) => item.id !== id));
+    setNotificationListLeftTop((val) => val.filter((item) => item.id !== id));
+    setNotificationListRightBottom((val) => val.filter((item) => item.id !== id));
+    setNotificationListRightTop((val) => val.filter((item) => item.id !== id));
   };
 
   const openToast = (config: string, type: BUIComponentType) => {
@@ -107,19 +187,24 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <NoticeContext.Provider
       value={{
-        notificationList,
-        setNotificationList,
+        notificationListLeftBottom,
+        setNotificationListLeftBottom,
+        notificationListLeftTop,
+        setNotificationListLeftTop,
+        notificationListRightBottom,
+        setNotificationListRightBottom,
+        notificationListRightTop,
+        setNotificationListRightTop,
         open,
         remove,
         toastList,
         setToastList,
         openToast,
-        removeToast,
-        position,
+        removeToast
       }}>
       {children}
       {visible && <Notification />}
-      {visible && <Toast/>}
+      {visible && <Toast />}
     </NoticeContext.Provider>
   );
 };
