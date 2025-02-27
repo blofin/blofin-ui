@@ -69,7 +69,7 @@ const AdornmentStyles = (props: { size: "md" | "lg"; position: "start" | "end" }
   return cva("", {
     variants: {
       size: {
-        md: ["bu-px-2 bu-text-sm bu-font-medium"],
+        md: ["bu-px-2 bu-text-md bu-font-normal"],
         lg:
           props.position === "start"
             ? ["bu-pl-3 bu-pr-2 bu-text-md bu-font-medium"]
