@@ -52,7 +52,7 @@ const ToastMsg: FC<ToastMsgProps> = ({ children, type, remove }) => {
 
   return (
     <div
-      className={`bu-mx-auto bu-mb-[24px] bu-w-fit bu-rounded-[8px] bu-shadow-toast ${bgStyles({
+      className={`bu-mx-auto bu-mb-[12px] bu-w-fit bu-rounded-[8px] bu-shadow-toast ${bgStyles({
         theme
       })}`}>
       <div className={toastVariants({ theme })}>
@@ -67,7 +67,7 @@ const ToastContainer = () => {
   const { toastList, removeToast } = useContext(NoticeContext);
 
   return (
-    <TransitionGroup className="bu-fixed bu-left-[50%] bu-top-[32px] bu-z-[99999] bu-translate-x-[-50%] bu-text-center">
+    <TransitionGroup className="bu-fixed bu-left-[50%] bu-top-[80px] bu-z-[99999] bu-translate-x-[-50%] bu-text-center">
       {toastList.map(({ node, id, type }) => {
         return (
           <CSSTransition
