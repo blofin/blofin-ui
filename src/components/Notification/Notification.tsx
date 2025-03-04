@@ -48,7 +48,7 @@ const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remo
 
   return (
     <div
-      className={`bu-mb-[12px] bu-w-full bu-rounded-[8px] bu-border bu-shadow-toast ${bgStyles({
+      className={`bu-mb-[12px] bu-w-full bu-rounded-[8px] ${bgStyles({
         theme
       })}`}>
       <div className="bu-flex bu-rounded-[8px] bu-px-[16px] bu-py-[12px]">

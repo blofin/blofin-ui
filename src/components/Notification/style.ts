@@ -4,8 +4,8 @@ import { BUIComponentType, BUITheme } from "../../types/component";
 const bgStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-border-light-line-primary bu-bg-light-background",
-      dark: "bu-border-dark-line-primary bu-bg-dark-background"
+      light: "bu-border bu-border-light-line-secondary bu-bg-light-background",
+      dark: "bu-bg-dark-fill-tertiary"
     }
   }
 });
@@ -60,7 +60,7 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
 const closeIconStyles = cva("bu-shrink-0 bu-cursor-pointer", {
   variants: {
     theme: {
-      dark: "bu-text-dark-label",
+      dark: "bu-text-dark-label-40",
       light: "bu-text-light-label-40"
     }
   }
