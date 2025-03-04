@@ -76,12 +76,19 @@ const ButtonGroup = () => {
   const [sum, setSum] = useState(1);
 
   const maxLimit = () => {
-    methods.danger({
-      title: "danger Header ",
-      msg: sum,
-      position: "rightTop"
-    });
-    setSum(sum + 1);
+    // methods.danger({
+    //   title: "danger Header ",
+    //   msg: sum,
+    //   position: "rightTop"
+    // });
+    // setSum(sum + 1);
+    for (let i = 0; i < 3; i++) {
+      methods.danger({
+        title: i,
+        msg: i,
+        position: "rightTop"
+      });
+    }
   };
 
   return (

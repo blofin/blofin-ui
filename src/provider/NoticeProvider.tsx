@@ -2,6 +2,7 @@ import { FC, createContext, useEffect, useRef, useState } from "react";
 import { BUIComponentType } from "../types/component";
 import { Notification } from "../components/Notification/Notification";
 import { Toast } from "../components/Toast/Toast";
+import { flushSync } from "react-dom";
 
 export interface NotificationType {
   title: React.ReactNode;
@@ -89,68 +90,76 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const open = (config: configType, type: BUIComponentType, position?: string) => {
     if (config.position === "leftTop") {
-      setNotificationListLeftTop((list) => {
-        if (list.length >= MAX_NOTICE) {
-          list.shift();
-        }
-        return [
-          ...list,
-          {
-            title: config.title,
-            node: config.msg,
-            id: key.current,
-            type: type,
-            position: "leftTop"
+      flushSync(() => {
+        setNotificationListLeftTop((list) => {
+          if (list.length >= MAX_NOTICE) {
+            list.shift();
           }
-        ];
+          return [
+            ...list,
+            {
+              title: config.title,
+              node: config.msg,
+              id: key.current,
+              type: type,
+              position: "leftTop"
+            }
+          ];
+        });
       });
     } else if (config.position === "rightBottom") {
-      setNotificationListRightBottom((list) => {
-        if (list.length >= MAX_NOTICE) {
-          list.shift();
-        }
-        return [
-          ...list,
-          {
-            title: config.title,
-            node: config.msg,
-            id: key.current,
-            type: type,
-            position: "rightBottom"
+      flushSync(() => {
+        setNotificationListRightBottom((list) => {
+          if (list.length >= MAX_NOTICE) {
+            list.shift();
           }
-        ];
+          return [
+            ...list,
+            {
+              title: config.title,
+              node: config.msg,
+              id: key.current,
+              type: type,
+              position: "rightBottom"
+            }
+          ];
+        });
       });
     } else if (config.position === "rightTop") {
-      setNotificationListRightTop((list) => {
-        if (list.length >= MAX_NOTICE) {
-          list.shift();
-        }
-        return [
-          ...list,
-          {
-            title: config.title,
-            node: config.msg,
-            id: key.current,
-            type: type,
-            position: "rightTop"
+      flushSync(() => {
+        setNotificationListRightTop((list) => {
+          if (list.length >= MAX_NOTICE) {
+            list.shift();
           }
-        ];
+          return [
+            ...list,
+            {
+              title: config.title,
+              node: config.msg,
+              id: key.current,
+              type: type,
+              position: "rightTop"
+            }
+          ];
+        });
       });
     } else {
-      setNotificationListLeftBottom((list) => {
-        if (list.length >= MAX_NOTICE) {
-          list.shift();
-        }
-        return [
-          ...list,
-          {
-            title: config.title,
-            node: config.msg,
-            id: key.current,
-            type: type,
-            position: "leftBottom"
+      flushSync(() => {
+        setNotificationListLeftBottom((list) => {
+          if (list.length >= MAX_NOTICE) {
+            list.shift();
           }
-        ];
+          return [
+            ...list,
+            {
+              title: config.title,
+              node: config.msg,
+              id: key.current,
+              type: type,
+              position: "leftBottom"
+            }
+          ];
+        });
       });
     }
 
