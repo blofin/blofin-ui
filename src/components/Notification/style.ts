@@ -4,7 +4,8 @@ import { BUIComponentType, BUITheme } from "../../types/component";
 const bgStyles = cva("", {
   variants: {
     theme: {
-      light: "bu-border bu-border-light-line-secondary bu-bg-light-background",
+      light:
+        "bu-border bu-border-light-line-secondary bu-bg-light-background bu-shadow-[0px_2px_8px_0px_rgba(48,53,71,0.04)]",
       dark: "bu-bg-dark-fill-tertiary"
     }
   }
