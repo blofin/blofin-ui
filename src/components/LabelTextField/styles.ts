@@ -1,5 +1,6 @@
 import { cva } from "class-variance-authority";
 import { BUITheme } from "../../types/component";
+import { InputSize } from "../TextField/TextField";
 
 export type InputVariant = "filled" | "outlined";
 
@@ -65,7 +66,7 @@ const InputOutlinedStyles = cva("", {
   }
 });
 
-const AdornmentStyles = (props: { size: "md" | "lg"; position: "start" | "end" }) => {
+const AdornmentStyles = (props: { size: InputSize; position: "start" | "end" }) => {
   return cva("", {
     variants: {
       size: {
@@ -73,7 +74,8 @@ const AdornmentStyles = (props: { size: "md" | "lg"; position: "start" | "end" }
         lg:
           props.position === "start"
             ? ["bu-pl-3 bu-pr-2 bu-text-md bu-font-medium"]
-            : ["bu-pl-2 bu-pr-3 bu-text-md bu-font-medium"]
+            : ["bu-pl-2 bu-pr-3 bu-text-md bu-font-medium"],
+        sm: ""
       }
     }
   })(props);
@@ -92,7 +94,7 @@ const InputBgVariants = ({
   error?: boolean;
   disabled?: boolean;
   noClassName?: boolean;
-  size: "md" | "lg";
+  size: "sm" | "md" | "lg";
 }) => {
   return cva("bu-w-full bu-overflow-hidden bu-rounded-[8px] bu-border", {
     variants: {
@@ -112,7 +114,7 @@ const InputBgVariants = ({
         false: ""
       },
       noClassName: {
-        true: size === "lg" ? "bu-h-[48px]" : "bu-h-[40px]"
+        true: size === "lg" ? "bu-h-[48px]" : size === "md" ? "bu-h-[40px]" : "bu-h-[32px]"
       }
     }
   })({ variant, theme, error, disabled, noClassName });
@@ -131,7 +133,8 @@ const InputSizeTextStyle = cva("", {
   variants: {
     inputSize: {
       lg: "bu-text-md",
-      md: "bu-text-base"
+      md: "bu-text-base",
+      sm: "bu-text-sm"
     }
   }
 });
@@ -140,7 +143,8 @@ const InputSizeStyle = cva("", {
   variants: {
     inputSize: {
       lg: "bu-pl-3",
-      md: "bu-pl-2"
+      md: "bu-pl-2",
+      sm: "bu-pl-2"
     }
   }
 });

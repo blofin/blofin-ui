@@ -85,7 +85,7 @@ const TextFieldWithTheme = ({
           variant="filled"
           startAdornment={startAdornment}
           endAdornment={endAdornment}
-          inputSize="lg"
+          inputSize="sm"
         />
       </div>
     </ThemeProvider>

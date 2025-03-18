@@ -185,6 +185,7 @@ export const Primary: Story = {
                 hideSelectedState={true}
                 // base="div"
                 error={true}
+                size="md"
                 inputDisabled={false}
                 // customLabel={(item) => {
                 //   console.log(item)

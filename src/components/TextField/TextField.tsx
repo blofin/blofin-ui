@@ -2,7 +2,17 @@ import { LegacyRef, ReactNode, forwardRef } from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
-import { InputBgVariants, InputVariant, AdornmentStyles, InputSizeTextStyle, InputSizeStyle, InputPlaceholderStyle, InputFocusedStyle } from "../LabelTextField/styles";
+import {
+  InputBgVariants,
+  InputVariant,
+  AdornmentStyles,
+  InputSizeTextStyle,
+  InputSizeStyle,
+  InputPlaceholderStyle,
+  InputFocusedStyle
+} from "../LabelTextField/styles";
+
+export type InputSize = "sm" | "md" | "lg";
 
 export interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant: InputVariant;
@@ -12,7 +22,7 @@ export interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputEleme
   disabled?: boolean;
   error?: boolean;
   inputClassName?: string;
-  inputSize?: "md" | "lg";
+  inputSize?: InputSize
 }
 
 const TextField = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {

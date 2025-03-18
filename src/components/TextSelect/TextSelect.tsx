@@ -25,6 +25,7 @@ import {
 import SelectArrow from "../../assets/icons/text-arrow.svg";
 import SearchIcon from "../../assets/icons/search.svg";
 import { CustomFields } from "../../types/component";
+import { InputSize } from "../TextField/TextField";
 
 interface Options extends CustomFields {
   label: string;
@@ -63,6 +64,7 @@ export interface TextSelectProps {
   base?: "input" | "div";
   customLabel?: (item: Options) => ReactNode;
   error?: boolean;
+  size?: InputSize;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -245,7 +247,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     inputDisabled = false,
     base = "input",
     customLabel,
-    error
+    error,
+    size = "md"
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -338,6 +341,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         onBlur={() => {
           onBlur && onBlur();
         }}
+        inputSize={size}
         placeholder={placeholder}
         value={readOnly === false ? value : selectedLabel}
         onChange={(e) => {
