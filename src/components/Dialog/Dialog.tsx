@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BUIComponentSize, BUITheme } from "../../types/component";
 import CloseIcon from "../../assets/icons/close.svg";
 import { Button } from "../Button/Button";
@@ -148,12 +149,14 @@ const Dialog: DialogComponent = (props) => {
     : null;
 };
 
-Dialog.show = (options: Omit<DialogProps, "open">) => {
+const show = (options: Omit<DialogProps, "open">) => {
   const div = document.createElement("div");
   document.body.appendChild(div);
 
+  const root = createRoot(div);
+
   const destroy = () => {
-    ReactDOM.unmountComponentAtNode(div);
+    root.unmount();
     document.body.removeChild(div);
   };
 
@@ -167,17 +170,18 @@ Dialog.show = (options: Omit<DialogProps, "open">) => {
     destroy();
   };
 
-  ReactDOM.render(
+  root.render(
     <Dialog
       {...options}
       open={true} // 强制打开对话框
       cancel={handleCancel}
       confirm={handleConfirm}
-    />,
-    div
+    />
   );
 
   return destroy;
 };
+
+Dialog.show = show;
 
 export { Dialog };

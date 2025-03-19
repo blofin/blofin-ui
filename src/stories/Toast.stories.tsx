@@ -16,11 +16,17 @@ const ButtonGroup = () => {
   const { methods } = useToast();
 
   const info = () => {
-    methods.info("Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!");
+    Toast.open({
+      type: "info",
+      customTheme:"dark",
+      children:
+        <div>"Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!"</div>
+    });
+    // methods.info("Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!");
   };
 
   const warning = () => {
-    methods.warning( "我是短发舒服撒开了饭就睡啦开发!!!!!!!!!");
+    methods.warning("我是短发舒服撒开了饭就睡啦开发!!!!!!!!!");
   };
   const success = () => {
     methods.success("Success!!!!!!!!!");
@@ -55,7 +61,7 @@ export const Primary = {
       <ThemeProvider value={{ theme: mode }}>
         <NoticeProvider>
           <div style={{ display: "flex", gap: "10px" }}>
-            <ButtonGroup/>
+            <ButtonGroup />
           </div>
         </NoticeProvider>
       </ThemeProvider>
