@@ -31,6 +31,7 @@ import TextArea from "./components/Textarea";
 import { Tooltip } from "./components/Tooltip/Tooltip";
 import { Typography, TypographyProps } from "./components/Typography/Typography";
 import useNotification from "./hooks/useNotification";
+import { Toast } from "./components/Toast/Toast";
 import useToast from "./hooks/useToast";
 import Sortable from "./components/Sortable";
 import SortItem from "./components/Sortable/SortItem";
@@ -75,7 +76,8 @@ export {
   Sortable,
   SortItem,
   Popup,
-  Alert
+  Alert,
+  Toast
 };
 
 export type {
