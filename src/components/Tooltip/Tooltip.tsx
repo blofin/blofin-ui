@@ -104,7 +104,7 @@ const Content: FC<ContentProps> = ({
           })}>
           <ArrowIcon
             className={
-              theme === "dark" ? "bu-text-dark-fill-tertiary" : "bu-text-light-fill-tertiary"
+              theme === "dark" ? "bu-text-dark-hover-fill-tertiary" : "bu-text-light-hover-fill-tertiary"
             }></ArrowIcon>
         </div>
       )}
