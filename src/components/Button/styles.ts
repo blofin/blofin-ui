@@ -320,27 +320,27 @@ const buttonVariants = (props: {
         small: `${
           shape === "circle"
             ? "bu-h-[28px] bu-min-w-[30px]"
-            : "bu-h-[28px] bu-min-w-[80px] bu-rounded-[6px]"
+            : "bu-h-[28px] bu-min-w-[80px] bu-rounded-[var(--btn-rounded-small)]"
         } bu-px-[12px] bu-text-[12px] bu-leading-[18px]`,
         "m-small": `${
           shape === "circle"
             ? "bu-h-[32px] bu-min-w-[30px]"
-            : "bu-h-[32px] bu-min-w-[80px] bu-rounded-[6px]"
+            : "bu-h-[32px] bu-min-w-[80px] bu-rounded-[var(--btn-rounded-small)]"
         } bu-px-[12px] bu-text-[12px] bu-leading-[18px]`,
         medium: `${
           shape === "circle"
             ? "bu-h-[40px] bu-min-w-[40px]"
-            : "bu-h-[40px] bu-min-w-[100px] bu-rounded-[8px]"
+            : "bu-h-[40px] bu-min-w-[100px] bu-rounded-[var(--btn-rounded-medium)]"
         } bu-px-[16px] bu-text-[14px] bu-leading-[20px]`,
         large: `${
           shape === "circle"
             ? "bu-h-[48px] bu-min-w-[48px]"
-            : "bu-h-[48px] bu-min-w-[140px] bu-rounded-[8px]"
+            : "bu-h-[48px] bu-min-w-[140px] bu-rounded-[var(--btn-rounded-medium)]"
         }  bu-px-[24px] bu-text-[16px] bu-leading-[24px]`,
         max: `${
           shape === "circle"
             ? "bu-h-[56px] bu-min-w-[56px]"
-            : "bu-h-[56px] bu-min-w-[180px] bu-rounded-[8px]"
+            : "bu-h-[56px] bu-min-w-[180px] bu-rounded-[var(--btn-rounded-medium)]"
         } bu-px-[24px] bu-text-[18px] bu-leading-[26px]`
       },
       shape: {

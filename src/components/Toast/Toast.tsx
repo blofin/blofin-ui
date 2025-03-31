@@ -154,7 +154,7 @@ Toast.open = (() => {
     if (!containerDiv) {
       containerDiv = document.createElement("div");
 
-      containerDiv.id = "blofin-ui-toast-open-container";
+      containerDiv.id = "toast-open-container";
 
       document.body.appendChild(containerDiv);
 

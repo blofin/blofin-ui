@@ -204,6 +204,9 @@
     --base-input-error: var(--light-input-error);
     --base-header-bgColor: var(--light-header-bgColor);
     --base-text: var(--light-text);
+
+    --btn-rounded-small: 6px;
+    --btn-rounded-medium: 8px;
   }
 
   [data-theme="dark"] {
