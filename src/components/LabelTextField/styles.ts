@@ -96,28 +96,31 @@ const InputBgVariants = ({
   noClassName?: boolean;
   size: "sm" | "md" | "lg";
 }) => {
-  return cva("bu-w-full bu-overflow-hidden bu-rounded-[8px] bu-border", {
-    variants: {
-      variant: {
-        filled: InputFilledStyles({ theme }),
-        outlined: InputOutlinedStyles({ theme })
-      },
-      theme: {
-        light: ["bu-text-light-label"],
-        dark: ["bu-text-dark-label"]
-      },
-      error: {
-        true: InputErrorStyles({ theme })
-      },
-      disabled: {
-        true: InputDisabledStyles({ theme, variant }),
-        false: ""
-      },
-      noClassName: {
-        true: size === "lg" ? "bu-h-[48px]" : size === "md" ? "bu-h-[40px]" : "bu-h-[32px]"
+  return cva(
+    "bu-w-full bu-overflow-hidden bu-rounded-[var(--textfiled-rounded-medium)] bu-border",
+    {
+      variants: {
+        variant: {
+          filled: InputFilledStyles({ theme }),
+          outlined: InputOutlinedStyles({ theme })
+        },
+        theme: {
+          light: ["bu-text-light-label"],
+          dark: ["bu-text-dark-label"]
+        },
+        error: {
+          true: InputErrorStyles({ theme })
+        },
+        disabled: {
+          true: InputDisabledStyles({ theme, variant }),
+          false: ""
+        },
+        noClassName: {
+          true: size === "lg" ? "bu-h-[48px]" : size === "md" ? "bu-h-[40px]" : "bu-h-[32px]"
+        }
       }
     }
-  })({ variant, theme, error, disabled, noClassName });
+  )({ variant, theme, error, disabled, noClassName });
 };
 
 const HelperTextVariants = cva("", {
