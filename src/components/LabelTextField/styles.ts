@@ -145,9 +145,9 @@ const InputSizeTextStyle = cva("", {
 const InputSizeStyle = cva("", {
   variants: {
     inputSize: {
-      lg: "bu-pl-3",
-      md: "bu-pl-2",
-      sm: "bu-pl-2"
+      lg: "bu-pl-[var(--textfiled-padding-left-lg)]",
+      md: "bu-pl-[var(--textfiled-padding-left-md)]",
+      sm: "bu-pl-[var(--textfiled-padding-left-sm)]"
     }
   }
 });
