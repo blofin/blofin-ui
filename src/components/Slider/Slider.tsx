@@ -87,7 +87,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
         handleDrag(e);
       }
     },
-    [mouseDown.current]
+    [mouseDown.current, handleDrag]
   );
 
   const handleMarkClick = (e: React.MouseEvent<HTMLDivElement>, percentage: number) => {
