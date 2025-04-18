@@ -104,7 +104,9 @@ const Content: FC<ContentProps> = ({
           })}>
           <ArrowIcon
             className={
-              theme === "dark" ? "bu-text-dark-hover-fill-tertiary" : "bu-text-light-hover-fill-tertiary"
+              theme === "dark"
+                ? "bu-text-dark-hover-fill-tertiary"
+                : "bu-text-light-hover-fill-tertiary"
             }></ArrowIcon>
         </div>
       )}
@@ -116,7 +118,7 @@ const Content: FC<ContentProps> = ({
 const Tooltip: FC<TooltipProps> = ({ children, isShow, theme: toolTipTheme, ...props }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const [enter, setEnter] = useDelayEvent<boolean>(false, 100);
+  const [enter, setEnter] = useDelayEvent<boolean>(false, 300, true, true);
 
   const [show, setShow] = useState(false);
 

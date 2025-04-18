@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const useDelayEvent = <T>(initialValue: T, delay: number, isDelay = true) => {
+const useDelayEvent = <T>(initialValue: T, delay: number, isDelay = true, delayPositive = false) => {
   const [state, setState] = useState(initialValue);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -11,15 +11,13 @@ const useDelayEvent = <T>(initialValue: T, delay: number, isDelay = true) => {
       return;
     }
 
-    if (newValue) {
-      setState(newValue);
-    }
-
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
-    if (!newValue) {
+    if ((newValue && !delayPositive) || (!newValue && delayPositive)) {
+      setState(newValue);
+    } else {
       timeoutRef.current = setTimeout(() => {
         setState(newValue);
       }, delay);
