@@ -51,7 +51,7 @@ export const Primary: Story = {
         <div className="bu-h-[500px] bu-w-full">
           <DatePickerRange
             defaultValue={date}
-            dateClassName={'bu-w-[260px]'}
+            dateClassName={"bu-w-[260px]"}
             setValues={handleChangeDate}
             limitDays={370}
             disabledDays={disabledDays}
@@ -63,7 +63,10 @@ export const Primary: Story = {
             confirmText="Confirm"
             toText="To"
             auto={false}
-            includesToday={false}></DatePickerRange>
+            includesToday={false}
+            // mode="normal"
+            // dateSuffix="(UTC+8)"
+          />
         </div>
       </ThemeProvider>
     );

@@ -14,7 +14,8 @@ import utcToZonedTime from "date-fns-tz/utcToZonedTime";
 import Popup, { PopupRef } from "../Popup";
 import ArrowUpLine from "../../assets/icons/arrow-up-l-line.svg";
 import SubtractLine from "../../assets/icons/subtract-line.svg";
-import { ArrowLine, DatePickerBg } from "./styles";
+import CalendarFill from "../../assets/icons/calendar-fill.svg";
+import { ArrowLine, DatePickerBg, TextDescribe } from "./styles";
 import useTheme from "../../provider/useTheme";
 import { loadLocale } from "../../utils/locales";
 
@@ -29,6 +30,7 @@ export type QuickSelection = {
 };
 
 export type DatePickerRangeProps = {
+  mode?: "simple" | "normal";
   className?: string;
   dateClassName?: string;
   defaultValue: DateValue;
@@ -47,9 +49,15 @@ export type DatePickerRangeProps = {
   toText: string;
   distance?: number;
   auto?: boolean;
+  startPlaceholder?: string;
+  endPlaceholder?: string;
+  dateSuffix?: string;
+  pointClassName?: string;
+  suffixIcon?: React.ReactNode;
 };
 
 const DatePickerRange: React.FC<DatePickerRangeProps> = ({
+  mode = "simple",
   className = "",
   dateClassName = "",
   defaultValue,
@@ -67,7 +75,12 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   cancelText = "Cancel",
   toText = "-",
   distance = 5,
-  auto = true
+  auto = true,
+  startPlaceholder = "Start Date",
+  endPlaceholder = "End Date",
+  dateSuffix = "",
+  pointClassName = "",
+  suffixIcon = null
 }) => {
   const [date, setDate] = React.useState<DateRange | undefined>();
 
@@ -289,25 +302,70 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
             id="date"
             className={`bu-flex bu-h-[40px] bu-w-[260px] bu-cursor-pointer bu-items-center bu-justify-between bu-rounded-[8px] bu-border bu-p-[8px] ${DatePickerBg(
               { theme }
-            )}${!date ? " bu-text-muted-foreground" : ""} ${dateClassName}`}>
-            {date?.from ? (
-              date.to ? (
-                <>
-                  <Typography variant="body4" weight="regular" className="bu-leading-[18px]">
+            )} ${dateClassName}`}>
+            {mode === "simple" ? (
+              date?.from ? (
+                date.to ? (
+                  <>
+                    <Typography
+                      variant="body3"
+                      weight="regular"
+                      className={`bu-leading-[20px] ${pointClassName}`}>
+                      {formatDate(date.from, "yyyy/MM/dd", undefined, lang)}
+                    </Typography>
+                    <SubtractLine
+                      className={`bu-h-4 bu-w-4 ${ArrowLine({ theme })}`}></SubtractLine>
+                    <Typography variant="body3" weight="regular" className="bu-leading-[20px]">
+                      {formatDate(date.to, "yyyy/MM/dd", undefined, lang)}
+                    </Typography>
+                  </>
+                ) : (
+                  <Typography
+                    variant="body3"
+                    weight="regular"
+                    className={`bu-leading-[20px] ${pointClassName}`}>
                     {formatDate(date.from, "yyyy/MM/dd", undefined, lang)}
                   </Typography>
-                  <SubtractLine className={`bu-h-4 bu-w-4 ${ArrowLine({ theme })}`}></SubtractLine>
-                  <Typography variant="body4" weight="regular" className="bu-leading-[18px]">
-                    {formatDate(date.to, "yyyy/MM/dd", undefined, lang)}
-                  </Typography>
-                </>
+                )
               ) : (
-                <Typography variant="body4" weight="regular" className="bu-leading-[18px]">
-                  {formatDate(date.from, "yyyy/MM/dd", undefined, lang)}
-                </Typography>
+                <span></span>
               )
             ) : (
-              <span></span>
+              <div className="bu-flex bu-items-center bu-gap-[10px]">
+                <div className="bu-flex bu-flex-1 bu-items-center bu-justify-evenly bu-gap-[10px]">
+                  <div
+                    className={`bu-flex bu-min-w-[138px] bu-items-center bu-justify-center bu-gap-[4px] ${pointClassName}`}>
+                    <Typography
+                      variant="body3"
+                      weight="regular"
+                      className={`bu-leading-[20px] ${date?.from ? "" : TextDescribe({ theme })}`}>
+                      {date?.from
+                        ? formatDate(date.from, "yyyy/MM/dd", undefined, lang)
+                        : startPlaceholder}
+                      {date?.from && <span className={TextDescribe({ theme })}> {dateSuffix}</span>}
+                    </Typography>
+                  </div>
+                  <SubtractLine className={`bu-h-4 bu-w-4 ${ArrowLine({ theme })}`} />
+                  <div
+                    className={`bu-flex bu-min-w-[138px] bu-items-center bu-justify-center bu-gap-[4px] ${pointClassName}`}>
+                    <Typography
+                      variant="body3"
+                      weight="regular"
+                      className={`bu-leading-[20px] ${date?.to ? "" : TextDescribe({ theme })}`}>
+                      {date?.to
+                        ? formatDate(date.to, "yyyy/MM/dd", undefined, lang)
+                        : endPlaceholder}
+                      {date?.to && <span className={TextDescribe({ theme })}> {dateSuffix}</span>}
+                    </Typography>
+                  </div>
+                </div>
+                {suffixIcon ? (
+                  suffixIcon
+                ) : (
+                  <CalendarFill
+                    className={`bu-h-4 bu-w-4 ${TextDescribe({ theme })}`}></CalendarFill>
+                )}
+              </div>
             )}
           </div>
         }

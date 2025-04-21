@@ -9,6 +9,15 @@ export const ArrowLine = cva("", {
   },
 });
 
+export const TextDescribe = cva("", {
+  variants: {
+    theme: {
+      light: "bu-text-light-label-40",
+      dark: "bu-text-dark-label-40"
+    }
+  },
+});
+
 export const DatePickerBg = cva("", {
   variants: {
     theme: {
