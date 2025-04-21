@@ -110,7 +110,7 @@ const Calendar: React.FC<CalendarProps> = ({
         nav: "bu-space-x-1 bu-flex bu-items-center",
         nav_button: `${NavButton({
           theme
-        })}  bu-inline-flex bu-items-center bu-justify-center bu-whitespace-nowrap bu-rounded-md bu-text-base bu-font-medium bu-ring-offset-background bu-transition-colors focus-visible:bu-outline-none focus-visible:bu-ring-2 focus-visible:bu-ring-ring focus-visible:bu-ring-offset-2 disabled:bu-pointer-events-none bu-h-7 bu-w-7 bu-bg-transparent bu-p-0 hover:bu-opacity-100 bu-border bu-border-input`,
+        })}  bu-inline-flex bu-items-center bu-justify-center bu-whitespace-nowrap bu-rounded-md bu-text-base bu-font-medium bu-ring-offset-background bu-transition-colors disabled:bu-pointer-events-none bu-h-7 bu-w-7 bu-bg-transparent bu-p-0 hover:bu-opacity-100 bu-border bu-border-input`,
         nav_button_previous: "bu-absolute bu-left-1",
         nav_button_next: "bu-absolute bu-right-1",
         table: "bu-w-full bu-border-collapse !bu-mt-[8px]",
@@ -124,7 +124,7 @@ const Calendar: React.FC<CalendarProps> = ({
         })}  bu-h-8 bu-w-8 bu-text-center bu-text-base bu-p-0 bu-relative [&:has([disabled])]:!bu-cursor-not-allowed [&:has([aria-selected].day-range-end)]:bu-rounded-r-[16px] first:[&:has([aria-selected])]:bu-rounded-l-[0px] last:[&:has([aria-selected])]:bu-rounded-r-[0px] focus-within:bu-relative focus-within:bu-z-20 [&:has([aria-selected].day-range-start)]:bu-rounded-l-[16px]`,
         day: `${Day({
           theme
-        })} bu-inline-flex bu-items-center bu-justify-center bu-whitespace-nowrap bu-rounded-[16px] bu-text-base bu-font-medium bu-ring-offset-background bu-transition-colors focus-visible:bu-outline-none focus:bu-outline-none focus-visible:bu-ring-2 focus-visible:bu-ring-ring focus-visible:bu-ring-offset-2 disabled:bu-pointer-events-none bu-h-8 bu-w-8 bu-p-0 bu-font-normal aria-selected:bu-opacity-100`,
+        })} bu-inline-flex bu-items-center bu-justify-center bu-whitespace-nowrap bu-rounded-[16px] bu-text-base bu-font-medium bu-ring-offset-background bu-transition-colors focus:bu-outline-none disabled:bu-pointer-events-none bu-h-8 bu-w-8 bu-p-0 bu-font-normal aria-selected:bu-opacity-100`,
         day_range_start: `day-range-start ${DayRangeStart({ theme })}`,
         day_range_end: `day-range-end ${DayRangeEnd({ theme })}`,
         day_selected: `${DaySelected({ theme })}`,
