@@ -15,6 +15,7 @@ interface NotificationMsgProps {
   title: React.ReactNode;
   children: React.ReactNode;
   type: BUIComponentType;
+  autoClose?: number | boolean;
   remove: () => void;
 }
 
@@ -30,12 +31,20 @@ const Icon: FC<{ type: BUIComponentType }> = ({ type }) => {
   return <>{icons[type]}</>;
 };
 
-const NotificationMsg: FC<NotificationMsgProps> = ({ title, children, type, remove }) => {
+const NotificationMsg: FC<NotificationMsgProps> = ({
+  title,
+  children,
+  autoClose,
+  type,
+  remove
+}) => {
   const { theme } = useTheme();
   useEffect(() => {
+    if (autoClose === false) return;
+    const delay = typeof autoClose === "number" ? autoClose : 3000;
     const timer = setTimeout(() => {
       remove();
-    }, 3000);
+    }, delay);
 
     return () => {
       clearTimeout(timer);
@@ -84,7 +93,7 @@ const NotificationContainer = () => {
     <>
       <TransitionGroup
         className={`bu-fixed bu-bottom-[32px] bu-left-[32px] bu-z-[99999] bu-w-[360px]`}>
-        {notificationListLeftBottom.map(({ title, node, id, type }) => {
+        {notificationListLeftBottom.map(({ title, node, id, type, autoClose, onClose }) => {
           return (
             <CSSTransition
               key={id}
@@ -99,7 +108,9 @@ const NotificationContainer = () => {
               <NotificationMsg
                 type={type}
                 title={title}
+                autoClose={autoClose}
                 remove={() => {
+                  onClose?.();
                   remove(id);
                 }}>
                 {node}
@@ -110,7 +121,7 @@ const NotificationContainer = () => {
       </TransitionGroup>
       <TransitionGroup
         className={`bu-fixed bu-left-[32px] bu-top-[32px] bu-z-[99999] bu-w-[360px]`}>
-        {notificationListLeftTop.map(({ title, node, id, type }) => {
+        {notificationListLeftTop.map(({ title, node, id, type, autoClose, onClose }) => {
           return (
             <CSSTransition
               key={id}
@@ -125,7 +136,9 @@ const NotificationContainer = () => {
               <NotificationMsg
                 type={type}
                 title={title}
+                autoClose={autoClose}
                 remove={() => {
+                  onClose?.();
                   remove(id);
                 }}>
                 {node}
@@ -136,7 +149,7 @@ const NotificationContainer = () => {
       </TransitionGroup>
       <TransitionGroup
         className={`bu-fixed bu-bottom-[32px] bu-right-[8px] bu-z-[99999] bu-w-[360px]`}>
-        {notificationListRightBottom.map(({ title, node, id, type }) => {
+        {notificationListRightBottom.map(({ title, node, id, type, autoClose, onClose }) => {
           return (
             <CSSTransition
               key={id}
@@ -151,7 +164,9 @@ const NotificationContainer = () => {
               <NotificationMsg
                 type={type}
                 title={title}
+                autoClose={autoClose}
                 remove={() => {
+                  onClose?.();
                   remove(id);
                 }}>
                 {node}
@@ -162,7 +177,7 @@ const NotificationContainer = () => {
       </TransitionGroup>
       <TransitionGroup
         className={`bu-fixed bu-right-[8px] bu-top-[32px] bu-z-[99999] bu-w-[360px]`}>
-        {notificationListRightTop.map(({ title, node, id, type }) => {
+        {notificationListRightTop.map(({ title, node, id, type, autoClose, onClose }) => {
           return (
             <CSSTransition
               key={id}
@@ -177,7 +192,9 @@ const NotificationContainer = () => {
               <NotificationMsg
                 type={type}
                 title={title}
+                autoClose={autoClose}
                 remove={() => {
+                  onClose?.();
                   remove(id);
                 }}>
                 {node}

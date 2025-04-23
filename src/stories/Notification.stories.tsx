@@ -72,6 +72,17 @@ const ButtonGroup = () => {
       position: "rightBottom"
     });
   };
+  const neverClose = () => {
+    methods.danger({
+      title: "Never close",
+      msg: "Danger!!!!!!!!!",
+      position: "rightBottom",
+      autoClose: false,
+      onClose: () => {
+        console.log("onClose");
+      }
+    });
+  }
 
   const [sum, setSum] = useState(1);
 
@@ -104,6 +115,9 @@ const ButtonGroup = () => {
       </Button>
       <Button size="medium" onClick={danger}>
         Danger
+      </Button>
+      <Button size="medium" onClick={neverClose}>
+        Never Close
       </Button>
       <Button size="medium" onClick={maxLimit}>
         最多2个
