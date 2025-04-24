@@ -54,6 +54,8 @@ export type DatePickerRangeProps = {
   dateSuffix?: string;
   pointClassName?: string;
   suffixIcon?: React.ReactNode;
+  timeZone?: string;
+  disabled?: boolean;
 };
 
 const DatePickerRange: React.FC<DatePickerRangeProps> = ({
@@ -80,7 +82,9 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   endPlaceholder = "End Date",
   dateSuffix = "",
   pointClassName = "",
-  suffixIcon = null
+  suffixIcon = null,
+  timeZone = "UTC",
+  disabled = false
 }) => {
   const [date, setDate] = React.useState<DateRange | undefined>();
 
@@ -111,11 +115,11 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
 
   const toUtc = (date: number): Date => {
     if (!isUtcTime) return new Date(date);
-    return utcToZonedTime(date, "UTC");
+    return utcToZonedTime(date, timeZone);
   };
 
   const modifiers = {
-    today: utcToZonedTime(new Date().getTime(), "UTC")
+    today: utcToZonedTime(new Date().getTime(), timeZone)
   };
 
   React.useEffect(() => {
@@ -297,6 +301,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
         distance={distance}
         cancel={handleClose}
         auto={auto}
+        disabled={disabled}
         title={
           <div
             id="date"
@@ -338,7 +343,9 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
                     <Typography
                       variant="body3"
                       weight="regular"
-                      className={`bu-leading-[20px] ${date?.from ? "" : TextDescribe({ theme })}`}>
+                      className={`bu-leading-[20px] ${
+                        !date?.from || disabled ? TextDescribe({ theme }) : ""
+                      }`}>
                       {date?.from
                         ? formatDate(date.from, "yyyy/MM/dd", undefined, lang)
                         : startPlaceholder}
@@ -351,7 +358,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
                     <Typography
                       variant="body3"
                       weight="regular"
-                      className={`bu-leading-[20px] ${date?.to ? "" : TextDescribe({ theme })}`}>
+                      className={`bu-leading-[20px] ${!date?.to || disabled ? TextDescribe({ theme }) : ""}`}>
                       {date?.to
                         ? formatDate(date.to, "yyyy/MM/dd", undefined, lang)
                         : endPlaceholder}
