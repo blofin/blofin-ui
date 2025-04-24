@@ -9,6 +9,8 @@ export interface NotificationType {
   node: React.ReactNode;
   id: number;
   type: BUIComponentType;
+  autoClose?: number | boolean;
+  onClose?: () => void;
 }
 
 export interface ToastType {
@@ -20,7 +22,9 @@ export interface ToastType {
 export type configType = {
   title: React.ReactNode;
   msg: React.ReactNode;
+  autoClose?: number | boolean;
   position?: string;
+  onClose?: () => void;
 };
 
 export type Methods = (config: configType, type: BUIComponentType, position?: string) => void;
@@ -98,11 +102,11 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
           return [
             ...list,
             {
-              title: config.title,
               node: config.msg,
               id: key.current,
               type: type,
-              position: "leftTop"
+              position: "leftTop",
+              ...config
             }
           ];
         });
@@ -116,11 +120,11 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
           return [
             ...list,
             {
-              title: config.title,
               node: config.msg,
               id: key.current,
               type: type,
-              position: "rightBottom"
+              position: "rightBottom",
+              ...config
             }
           ];
         });
@@ -134,11 +138,11 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
           return [
             ...list,
             {
-              title: config.title,
               node: config.msg,
               id: key.current,
               type: type,
-              position: "rightTop"
+              position: "rightTop",
+              ...config
             }
           ];
         });
@@ -152,11 +156,11 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
           return [
             ...list,
             {
-              title: config.title,
               node: config.msg,
               id: key.current,
               type: type,
-              position: "leftBottom"
+              position: "leftBottom",
+              ...config
             }
           ];
         });
