@@ -27,6 +27,12 @@ export interface SliderProps {
    * @returns void
    */
   onSliderChange: (value: number) => void;
+  
+  /**
+   * @param value number
+   * @returns void
+   */
+  onDragEnd?: (value: number) => void;
   /**
    * BUI theme
    */
@@ -35,7 +41,7 @@ export interface SliderProps {
 }
 
 export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
-  const { value, onSliderChange, theme: mode, id } = props;
+  const { value, onSliderChange, onDragEnd, theme: mode, id } = props;
   const { theme } = useTheme();
 
   const railRef = useRef<HTMLDivElement>(null);
@@ -74,6 +80,10 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
         mouseDown.current = false;
         setMouseDonw(false);
         document.removeEventListener("mousemove", handleMouseMove);
+        
+        if (onDragEnd) {
+          onDragEnd(value);
+        }
       },
       { once: true }
     );

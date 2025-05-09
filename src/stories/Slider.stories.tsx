@@ -31,12 +31,16 @@ export const Primary: Story = {
       console.log("parent value", value);
     }, [value]);
 
+    const onDragEnd = (value: number) => {
+      console.log(value);
+    };
+
     return (
       <div className="bu-py-10">
         <Typography variant="body1" className="bu-mb-4">
           Value: {value}
         </Typography>
-        <Slider value={value} onSliderChange={setValue} theme={mode} />
+        <Slider value={value} onDragEnd={onDragEnd} onSliderChange={setValue} theme={mode} />
       </div>
     );
   }
