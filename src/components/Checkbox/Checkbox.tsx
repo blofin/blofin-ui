@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from "react";
+import { InputHTMLAttributes, ReactNode, forwardRef } from "react";
 import { BUITheme, useTheme } from "../..";
 import { cn } from "../../utils/utils";
 import styles from "./Checkbox.module.scss";
@@ -8,16 +8,27 @@ import {
   CheckboxDisabledLabelVariants,
   UncheckedboxLabelVariants,
   UncheckedMarkCheckedStyles,
-  disabledMarkStyles
+  disabledMarkStyles,
+  CheckedMarkCheckedSizeStyles
 } from "./styles";
 
-export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   label?: ReactNode;
   theme?: BUITheme;
+  size?: "small" | "medium";
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const { label, theme: mode, id, checked, onChange, disabled, ...otherProps } = props;
+  const {
+    label,
+    theme: mode,
+    id,
+    checked,
+    onChange,
+    disabled,
+    size = "small",
+    ...otherProps
+  } = props;
   const { theme } = useTheme();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +50,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       <span
         className={cn(
           styles.checkmark,
+          CheckedMarkCheckedSizeStyles({ size }),
           checked
             ? disabled
               ? disabledMarkStyles({ theme: mode || theme })

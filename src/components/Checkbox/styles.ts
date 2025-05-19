@@ -9,13 +9,26 @@ const CheckboxCheckedStyles = cva("bu-select-none bu-text-sm", {
   }
 });
 
-const CheckedMarkCheckedStyles = cva(
-  "bu-flex bu-h-[10px] bu-w-[10px] bu-items-center bu-justify-center bu-border",
+const CheckedMarkCheckedStyles = cva("bu-flex bu-items-center bu-justify-center bu-border", {
+  variants: {
+    theme: {
+      light: ["bu-border-light-primary bu-bg-light-primary after:bu-border-light-background"],
+      dark: ["bu-border-light-background bu-bg-light-background after:bu-border-dark-background"]
+    }
+  }
+});
+
+const CheckedMarkCheckedSizeStyles = cva(
+  "bu-h-[10px] bu-w-[10px] after:bu-border-l-0 after:bu-border-t-0",
   {
     variants: {
-      theme: {
-        light: ["bu-border-light-primary bu-bg-light-primary after:bu-border-light-background"],
-        dark: ["bu-border-light-background bu-bg-light-background after:bu-border-dark-background"]
+      size: {
+        small: [
+          "bu-h-[10px] bu-w-[10px] bu-rounded-[2px] after:bu-h-[6px] after:bu-w-[4px] after:bu-border-b-[1.8px] after:bu-border-r-[1.8px]"
+        ],
+        medium: [
+          "bu-h-[18px] bu-w-[18px] bu-rounded-[3px] after:bu-h-[10px] after:bu-w-[8px] after:bu-border-b-[2px] after:bu-border-r-[2px]"
+        ]
       }
     }
   }
@@ -86,5 +99,6 @@ export {
   CheckedMarkCheckedStyles,
   UncheckedMarkCheckedStyles,
   CheckboxCheckedStyles,
+  CheckedMarkCheckedSizeStyles,
   disabledMarkStyles
 };

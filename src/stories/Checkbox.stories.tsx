@@ -26,7 +26,12 @@ export const Primary: Story = {
   render: () => {
     const [isChecked, setIsChecked] = useState(false);
     return (
-      <Checkbox label="Reduce Only" checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
+      <Checkbox
+        label="Reduce Only"
+        size="small"
+        checked={isChecked}
+        onChange={() => setIsChecked(!isChecked)}
+      />
     );
   }
 };

@@ -1,13 +1,4 @@
-import React, {
-  Children,
-  FC,
-  Fragment,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useState
-} from "react";
+import React, { Fragment, forwardRef, useImperativeHandle, useMemo, useState } from "react";
 import { BUIComponentSize } from "../..";
 import useTheme from "../../provider/useTheme";
 import { Base } from "../../types/component";
@@ -29,12 +20,13 @@ interface TabProps extends Base {
     label: React.ReactNode;
     children: React.ReactNode;
   }[];
-  size: BUIComponentSize | 'max';
+  size: BUIComponentSize | "max";
   change: (key: string) => void;
   children?: React.ReactNode;
   tabWrapperClass?: string;
   defaultIndex?: number;
   hideBorder?: boolean;
+  hideUnderline?: boolean;
 }
 
 export interface TabRef {
@@ -50,7 +42,8 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
     className,
     children,
     tabWrapperClass,
-    hideBorder = false
+    hideBorder = false,
+    hideUnderline = true
   } = props;
 
   useImperativeHandle(ref, () => {
@@ -74,9 +67,9 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
     if (size === "small") {
       return smallActStyles({ theme });
     } else {
-      return `${itemActStyles()} ${defaultActStyles({ theme })}`;
+      return `${hideUnderline ? itemActStyles() : ""} ${defaultActStyles({ theme })}`;
     }
-  }, [size, theme]);
+  }, [size, theme, hideUnderline]);
 
   const noAct = useMemo(() => {
     if (size === "small") {
