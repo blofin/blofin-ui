@@ -21,7 +21,7 @@ interface TabProps extends Base {
     children: React.ReactNode;
   }[];
   size: BUIComponentSize | "max";
-  change: (key: string) => void;
+  change?: (key: string) => void;
   children?: React.ReactNode;
   tabWrapperClass?: string;
   defaultIndex?: number;
@@ -43,7 +43,7 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
     children,
     tabWrapperClass,
     hideBorder = false,
-    hideUnderline = true
+    hideUnderline = false
   } = props;
 
   useImperativeHandle(ref, () => {
@@ -60,14 +60,14 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
 
   const toggle = (key: string) => {
     setActive(key);
-    change(key);
+    change?.(key);
   };
 
   const act = useMemo(() => {
     if (size === "small") {
       return smallActStyles({ theme });
     } else {
-      return `${hideUnderline ? itemActStyles() : ""} ${defaultActStyles({ theme })}`;
+      return `${!hideUnderline ? itemActStyles() : ""} ${defaultActStyles({ theme })}`;
     }
   }, [size, theme, hideUnderline]);
 
