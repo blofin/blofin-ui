@@ -177,12 +177,13 @@ export const Primary: Story = {
                 defaultValue={value1}
                 options={accountOptions1}
                 onChange={change1}
-                search={true}
+                // search={true}
                 searchChange={searchChange}
                 className="bu-max-h-[150px] bu-overflow-y-scroll"
                 selectItemClassName="!bu-h-[52px]"
-                searchClassName="!bu-px-[16px] bu-py-[8px] !bu-mb-0"
-                hideSelectedState={true}
+                highlightMode="text"
+                // searchClassName="!bu-px-[16px] bu-py-[8px] !bu-mb-0"
+                // hideSelectedState={true}
                 // base="div"
                 error={true}
                 size="md"
@@ -195,15 +196,15 @@ export const Primary: Story = {
                 //     </div>
                 //   );
                 // }}
-                customSelectItems={(item) => {
-                  return (
-                    <div className="bu-w-[440px]">
-                      {item.label} --- {item.subLabel}
-                    </div>
-                  );
-                }}
+                // customSelectItems={(item) => {
+                //   return (
+                //     <div className="bu-w-[440px]">
+                //       {item.label} --- {item.subLabel}
+                //     </div>
+                //   );
+                // }}
                 auto={false}>
-                <div>
+                {/* <div>
                   <span>custom</span>
                   <Button
                     variant="primary"
@@ -213,7 +214,7 @@ export const Primary: Story = {
                     }}>
                     Confirm
                   </Button>
-                </div>
+                </div> */}
               </TextSelect>
             </div>
           </div>

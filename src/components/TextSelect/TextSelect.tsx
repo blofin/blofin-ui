@@ -13,10 +13,10 @@ import ReactDOM from "react-dom";
 import { TextField, useTheme } from "../..";
 import useAlign from "../../hooks/useAlign";
 import {
-  activeStyles,
   bgStyles,
   disabledStyles,
-  iconStyles,
+  activeTextStyles,
+  activeBackgroundStyles,
   iconStylesVariants,
   itemStyles,
   searchIconStyles,
@@ -26,6 +26,7 @@ import SelectArrow from "../../assets/icons/text-arrow.svg";
 import SearchIcon from "../../assets/icons/search.svg";
 import { CustomFields } from "../../types/component";
 import { InputSize } from "../TextField/TextField";
+import clsx from "clsx";
 
 interface Options extends CustomFields {
   label: string;
@@ -65,6 +66,7 @@ export interface TextSelectProps {
   customLabel?: (item: Options) => ReactNode;
   error?: boolean;
   size?: InputSize;
+  highlightMode?: "text" | "background";
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -93,7 +95,8 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       searchClassName,
       hideSelectedState = false,
       offsetPixels = -2,
-      preventDuplicateSelection = true
+      preventDuplicateSelection = true,
+      highlightMode = "text"
     },
     ref
   ) => {
@@ -180,15 +183,16 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
                 return (
                   <div
                     onClick={(e) => handleClick(item.value, e)}
-                    className={`${styles.item} ${
-                      disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme })
-                    } ${
-                      hideSelectedState
-                        ? ""
-                        : defaultValue === item.value
-                        ? activeStyles({ theme })
-                        : ""
-                    } ${selectItemClassName}`}
+                    className={clsx(
+                      styles.item,
+                      selectItemClassName,
+                      disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme }),
+                      !hideSelectedState &&
+                        defaultValue === item.value &&
+                        (highlightMode === "text"
+                          ? activeTextStyles({ theme })
+                          : activeBackgroundStyles({ theme }))
+                    )}
                     style={{ width: width + offsetPixels + "px" }}
                     key={item.value}>
                     {customSelectItems ? customSelectItems(item) : item.label}
@@ -248,7 +252,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     base = "input",
     customLabel,
     error,
-    size = "md"
+    size = "md",
+    highlightMode
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -369,13 +374,15 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
       {base === "div" && (
         <div
           ref={divRef}
-          className={`${styles.input} ${valueClassName} ${
-            base === "div" ? "bu-absolute bu-left-0 bu-top-0" : ""
-          } bu-flex bu-h-full bu-w-full bu-items-center bu-justify-between ${
+          className={clsx(
+            styles.input,
+            valueClassName,
+            "bu-flex bu-h-full bu-w-full bu-items-center bu-justify-between bu-rounded bu-border-[1px]",
+            base === "div" && "bu-absolute bu-left-0 bu-top-0",
             theme === "light"
-              ? "bu-rounded bu-border-[1px] bu-border-light-line-secondary bu-bg-light-background"
-              : "bu-rounded bu-border-[1px] bu-border-dark-line-secondary bu-bg-dark-background"
-          }`}
+              ? "bu-border-light-line-secondary bu-bg-light-background"
+              : "bu-border-dark-line-secondary bu-bg-dark-background"
+          )}
           onClick={() => {
             if (inputDisabled) return;
             setTimeout(() => {
@@ -391,9 +398,10 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
                   !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
                 }, 0);
               }}
-              className={`${iconStylesVariants({ theme, disabled: inputDisabled })} ${
-                isFocus ? styles.roate : ""
-              }`}
+              className={clsx(
+                iconStylesVariants({ theme, disabled: inputDisabled }),
+                isFocus && styles.roate
+              )}
             />
           )}
         </div>
@@ -418,7 +426,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           search={search}
           searchChange={searchChange}
           searchClassName={searchClassName}
-          preventDuplicateSelection={preventDuplicateSelection}>
+          preventDuplicateSelection={preventDuplicateSelection}
+          highlightMode={highlightMode}>
           {children}
         </Options>
       )}

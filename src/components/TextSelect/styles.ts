@@ -19,11 +19,20 @@ const itemStyles = cva("", {
   }
 });
 
-const activeStyles = cva("", {
+const activeBackgroundStyles = cva("", {
   variants: {
     theme: {
       light: "bu-bg-light-hover-fill-primary",
       dark: "bu-bg-dark-hover-fill-primary"
+    }
+  }
+});
+
+const activeTextStyles = cva("", {
+  variants: {
+    theme: {
+      light: "bu-text-light-primary",
+      dark: "bu-text-dark-primary"
     }
   }
 });
@@ -91,7 +100,8 @@ export {
   itemStyles,
   iconStyles,
   disabledStyles,
-  activeStyles,
+  activeTextStyles,
+  activeBackgroundStyles,
   searchStyles,
   searchIconStyles,
   iconStylesVariants
