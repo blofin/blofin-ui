@@ -18,6 +18,7 @@ interface TooltipProps {
   children?: React.ReactNode;
   isShow?: boolean;
   className?: string;
+  containerClassName?: string;
   hideArrow?: boolean;
   scrollContainer?: HTMLDivElement | null;
   theme?: BUITheme;
@@ -115,7 +116,13 @@ const Content: FC<ContentProps> = ({
   );
 };
 
-const Tooltip: FC<TooltipProps> = ({ children, isShow, theme: toolTipTheme, ...props }) => {
+const Tooltip: FC<TooltipProps> = ({
+  children,
+  isShow,
+  theme: toolTipTheme,
+  containerClassName,
+  ...props
+}) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
   const [enter, setEnter] = useDelayEvent<boolean>(false, 300, true, true);
@@ -149,7 +156,7 @@ const Tooltip: FC<TooltipProps> = ({ children, isShow, theme: toolTipTheme, ...p
   return (
     <div
       ref={targetRef}
-      className="bu-inline-block"
+      className={`bu-inline-block ${containerClassName}`}
       onMouseEnter={mouseEnter}
       onMouseLeave={mouseLeave}>
       {children}
