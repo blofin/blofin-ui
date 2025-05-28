@@ -67,6 +67,7 @@ export interface TextSelectProps {
   error?: boolean;
   size?: InputSize;
   highlightMode?: "text" | "background";
+  preventHideFun?: boolean;
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -96,7 +97,8 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       hideSelectedState = false,
       offsetPixels = -2,
       preventDuplicateSelection = true,
-      highlightMode = "text"
+      highlightMode = "text",
+      preventHideFun = false
     },
     ref
   ) => {
@@ -124,7 +126,9 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
         onChange(value);
       }
 
-      hide();
+      if (!preventHideFun) {
+        hide();
+      }
     };
 
     const handleSearch = (value: string) => {
@@ -253,7 +257,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     customLabel,
     error,
     size = "md",
-    highlightMode
+    highlightMode,
+    preventHideFun
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -280,6 +285,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     const initialOption = options.find((item) => item.value === defaultValue);
     if (initialOption) {
       setSelectedLabel(initialOption.label);
+    } else {
+      setSelectedLabel("");
     }
   }, [defaultValue, options]);
 
@@ -427,7 +434,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           searchChange={searchChange}
           searchClassName={searchClassName}
           preventDuplicateSelection={preventDuplicateSelection}
-          highlightMode={highlightMode}>
+          highlightMode={highlightMode}
+          preventHideFun={preventHideFun}>
           {children}
         </Options>
       )}

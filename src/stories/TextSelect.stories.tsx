@@ -188,21 +188,30 @@ export const Primary: Story = {
                 error={true}
                 size="md"
                 inputDisabled={false}
-                // customLabel={(item) => {
-                //   console.log(item)
-                //   return (
-                //     <div className="bu-w-[440px]">
-                //       {item.label} --- {item.subLabel}
-                //     </div>
-                //   );
-                // }}
-                // customSelectItems={(item) => {
-                //   return (
-                //     <div className="bu-w-[440px]">
-                //       {item.label} --- {item.subLabel}
-                //     </div>
-                //   );
-                // }}
+                customLabel={(item) => {
+                  console.log(item);
+                  return (
+                    <div className="bu-w-[440px]">
+                      {item.label} --- {item.subLabel}
+                    </div>
+                  );
+                }}
+                customSelectItems={(item) => {
+                  return (
+                    <div
+                      className="bu-w-[440px]"
+                      onClick={
+                        value1 !== item.value
+                          ? undefined
+                          : (e) => {
+                              e.stopPropagation();
+                              setValue1("");
+                            }
+                      }>
+                      {item.label} --- {item.subLabel} ---{" "}
+                    </div>
+                  );
+                }}
                 auto={false}>
                 {/* <div>
                   <span>custom</span>
