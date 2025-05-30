@@ -16,6 +16,7 @@ export interface PopoverProps {
   placement?: Placement;
   flipPlacement?: Placement[];
   afterClose?: () => void;
+  contentClassName?: string;
 }
 
 export interface PopoverRefProps {
@@ -37,7 +38,8 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
     x,
     placement = "bottom-start",
     flipPlacement,
-    afterClose
+    afterClose,
+    contentClassName
   } = props;
 
   const isEnabled = useMemo(() => {
@@ -107,11 +109,11 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
     }
   };
 
-  useEffect(()=>{
-    if(!showPopover){
-      afterClose && afterClose()
+  useEffect(() => {
+    if (!showPopover) {
+      afterClose && afterClose();
     }
-  },[showPopover])
+  }, [showPopover]);
 
   return (
     <div ref={popoverRef} onClick={togglePopover}>
@@ -133,7 +135,7 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
               showPopover
                 ? popoverStyles["popover-content-visible"]
                 : popoverStyles["popover-content-hidden"]
-            }`}>
+            } ${contentClassName}`}>
             {content}
           </div>,
           document.body
