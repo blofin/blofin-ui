@@ -131,6 +131,14 @@ export const Primary: Story = {
           {
             label: "最新价",
             value: "limit"
+          },
+          {
+            label: "最新价1",
+            value: "limit1"
+          },
+          {
+            label: "市价1",
+            value: "market1"
           }
         ];
         setAccountOptions(arr);
@@ -143,7 +151,7 @@ export const Primary: Story = {
       <ThemeProvider value={{ theme: mode }}>
         <div ref={ref} className="bu-overflow-y-scroll">
           <div className="bu-flex-col bu-p-[200px] bu-pt-[1000px]">
-            {/* <div className="bu-mb-[50px]">
+            <div className="bu-mb-[50px]">
               <Tooltip placement="top" content="价格" scrollContainer={ref.current}>
                 <TextSelect
                   preventDuplicateSelection={false}
@@ -151,6 +159,7 @@ export const Primary: Story = {
                   inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
                   value={value}
                   options={accountOptions}
+                  disabled={"limit,limit1"}
                   onChange={change}
                   inputChange={inputChange}
                   hideEndAdornment={true}
@@ -165,14 +174,14 @@ export const Primary: Story = {
                 placeholder={placeholder}
                 inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
                 defaultValue={value}
+                disabled={"limit"}
                 options={accountOptions}
                 onChange={change}
                 inputChange={inputChange}>
                 <div>custom</div>
               </TextSelect>
-            </div> */}
-            <div>
-              <TextSelect
+            </div>
+            {/* <TextSelect
                 ref={selectRef}
                 defaultValue={value1}
                 options={accountOptions1}
@@ -213,19 +222,7 @@ export const Primary: Story = {
                   );
                 }}
                 auto={false}>
-                {/* <div>
-                  <span>custom</span>
-                  <Button
-                    variant="primary"
-                    size="small"
-                    onClick={() => {
-                      selectRef.current && selectRef.current.close();
-                    }}>
-                    Confirm
-                  </Button>
-                </div> */}
-              </TextSelect>
-            </div>
+              </TextSelect> */}
           </div>
         </div>
       </ThemeProvider>

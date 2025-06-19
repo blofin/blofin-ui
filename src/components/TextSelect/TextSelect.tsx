@@ -116,9 +116,14 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
 
     const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
+    const realDisabled = useMemo(() => {
+      return disabled?.split(",");
+    }, [disabled]);
+
     const handleClick = (value: string, e: React.MouseEvent) => {
       e.preventDefault();
-      if (disabled === value) {
+
+      if (realDisabled?.includes(value)) {
         return;
       }
 
@@ -190,7 +195,9 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
                     className={clsx(
                       styles.item,
                       selectItemClassName,
-                      disabled === item.value ? disabledStyles({ theme }) : itemStyles({ theme }),
+                      realDisabled?.includes(item.value)
+                        ? disabledStyles({ theme })
+                        : itemStyles({ theme }),
                       !hideSelectedState &&
                         defaultValue === item.value &&
                         (highlightMode === "text"
