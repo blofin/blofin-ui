@@ -7,7 +7,7 @@ interface TableColumnProps<T = any> {
   width?: string;
   align?: "center" | "flex-start" | "flex-end";
   render?: (record: T, index: number) => JSX.Element;
-  renderHeader?: (record: T) => JSX.Element;
+  renderHeader?: (record: T[]) => JSX.Element;
   filter?: boolean;
   type?: SortType;
   onCell?: (record: T, index: number) => number;

@@ -45,7 +45,7 @@ const ToastMsg: FC<ToastMsgProps> = ({ children, type, remove, customTheme }) =>
   useEffect(() => {
     const timer = setTimeout(() => {
       remove();
-    }, 3000);
+    }, 4000);
 
     return () => {
       clearTimeout(timer);
@@ -81,7 +81,7 @@ const ToastList: FC<{
       {toasts.map(({ node, id, type, customTheme }) => (
         <CSSTransition
           key={id}
-          timeout={300}
+          timeout={400}
           classNames={{
             enter: styles["toast-enter"],
             enterActive: styles["toast-enter-active"],

@@ -65,7 +65,7 @@ const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) =>
                   width="100%"
                   iconStyle={{ width: "10px", height: "5px" }}>
                   {item.renderHeader ? (
-                    item.renderHeader(data[index])
+                    item.renderHeader(data)
                   ) : (
                     <span className={styles.sort}>{item.title}</span>
                   )}
