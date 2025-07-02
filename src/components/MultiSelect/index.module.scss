@@ -1,3 +1,10 @@
-.options {
-  @apply bu-absolute bu-z-[99999] bu-rounded-[8px] bu-pb-[8px] bu-h-[300px] bu-overflow-hidden;
+.menus {
+  @apply bu-absolute bu-z-[99999] bu-h-[300px] bu-overflow-hidden bu-rounded-[8px] bu-pb-[8px];
+}
+
+.options-wrapper {
+  @apply bu-flex bu-flex-[1] bu-flex-col bu-overflow-y-auto;
+  &::-webkit-scrollbar {
+    @apply bu-w-[2px];
+  }
 }

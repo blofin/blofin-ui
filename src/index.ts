@@ -45,6 +45,7 @@ import { SortsData } from "./components/Sort/reducer";
 import { Placement } from "@popperjs/core";
 import { InputBaseProps } from "./components/TextField/TextField";
 import { Alert } from "./components/Alert/index";
+import MultiSelect from "./components/MultiSelect/MultiSelect";
 
 export {
   Badge,
@@ -77,7 +78,8 @@ export {
   SortItem,
   Popup,
   Alert,
-  Toast
+  Toast,
+  MultiSelect,
 };
 
 export type {

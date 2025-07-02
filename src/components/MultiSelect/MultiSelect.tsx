@@ -16,21 +16,36 @@ import { cn } from "../../utils/utils";
 import { BUITheme } from "../../types/component";
 import {
   MultiWrapperStyles,
+  InnerWrapperStyles,
+  InputActiveStyles,
   ArrowWrapperStyles,
   bgStyles,
   placeholderStyles,
   searchStyles,
   searchIconStyles,
-  clearSearchIconStyles
+  clearSearchIconStyles,
+  optionsRowStyles
 } from "./styles";
 import IconArrowDown from "../../assets/icons/arrow-down-l-line.svg";
 import IocnArrowClose from "../../assets/icons/close-bg.svg";
+import IconArrowClosePure from "../../assets/icons/close.svg";
 import useAlign from "../../hooks/useAlign";
 import TextField from "../TextField/TextField";
 import SearchIcon from "../../assets/icons/search.svg";
 
 export type TypesVariant = "filled" | "outlined";
 
+interface Option {
+  label: string;
+  value: string;
+  icon?: string;
+  disabled?: boolean;
+  [key: string]: any;
+}
+
+interface optionsFormatParams extends Option {
+  isSelected?: boolean;
+}
 export interface MultiSelectProps {
   id?: string;
   size?: InputSize;
@@ -46,6 +61,11 @@ export interface MultiSelectProps {
   search?: boolean;
   searchClassName?: string;
   searchChange?: (value: string) => void;
+  options: Option[];
+  optionsFormat?: (option: optionsFormatParams) => ReactNode;
+  multiLimit?: number;
+  values?: string[];
+  onChange?: (value: string[]) => void;
 }
 
 export interface MultiSelectRefProps {
@@ -55,11 +75,15 @@ export interface MultiSelectRefProps {
 
 interface OptionsProps extends MultiSelectProps {
   parent: HTMLDivElement | null;
+  currentSelected?: string[];
+  setCurrentSelected: (value: string[]) => void;
+  setIsShowOptions: (value: boolean) => void;
 }
 
 const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
   const {
     parent,
+    theme: propsTheme,
     size,
     scrollContainer,
     auto,
@@ -67,10 +91,20 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
     menusClassName,
     search = true,
     searchClassName,
-    searchChange
+    searchChange,
+    options,
+    optionsFormat,
+    currentSelected,
+    setCurrentSelected,
+    setIsShowOptions,
+    multiLimit
   } = props;
 
   const { theme } = useTheme();
+
+  const realTheme = propsTheme ? propsTheme : theme;
+
+  const [realOptions, setRealOptions] = useState<Option[]>(options);
 
   const targetRef = useRef<HTMLDivElement | null>(null);
 
@@ -79,14 +113,48 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
   const { offset, resize } = useAlign(parent);
 
   const { offsetX, offsetY } = offset;
-  console.log("offsetX:", offsetX, "offsetY:", offsetY);
 
   const [isBottomed, setIsBottomed] = useState(false);
 
   const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
+  const [searchValue, setSearchValue] = useState("");
+
   const handleSearch = (value: string) => {
-    searchChange && searchChange(value);
+    setSearchValue(value);
+    if (searchChange && typeof searchChange === "function") {
+      searchChange(value);
+    } else {
+      if (!value) {
+        setRealOptions(options);
+        return;
+      }
+      const filteredOptions = options.filter((option) => {
+        return option.label.toLowerCase().includes(value.toLowerCase());
+      });
+      const sortedOptions = filteredOptions.sort((a, b) => {
+        if (a.label.toLowerCase() === value.toLowerCase()) return -1;
+        if (b.label.toLowerCase() === value.toLowerCase()) return 1;
+        if (a.label.toLowerCase().startsWith(value.toLowerCase())) return -1;
+        if (b.label.toLowerCase().startsWith(value.toLowerCase())) return 1;
+        return a.label.localeCompare(b.label);
+      });
+      setRealOptions(sortedOptions);
+    }
+  };
+
+  const onOptionRowClick = (option: Option) => {
+    if (option.disabled) return;
+    if (setCurrentSelected && currentSelected) {
+      if (multiLimit && currentSelected.length >= multiLimit) {
+        return;
+      }
+      const isHave = !!currentSelected.includes(option.value);
+      if (!isHave) {
+        setCurrentSelected([...currentSelected, option.value]);
+      }
+      setIsShowOptions(false);
+    }
   };
 
   useEffect(() => {
@@ -120,7 +188,7 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
   return offsetX !== 0 && offsetY !== 0
     ? ReactDOM.createPortal(
         <div
-          className={`${styles.options} ${menusClassName} ${bgStyles({ theme })}`}
+          className={`${styles["menus"]} ${menusClassName} ${bgStyles({ theme })}`}
           style={{
             top: isBottomed ? offsetY - optionHeight - 4 : offsetY + height + 4 + "px",
             left: offsetX + "px"
@@ -137,17 +205,76 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
           onTouchCancel={(e) => e.stopPropagation()}
           onContextMenu={(e) => e.stopPropagation()}
           ref={targetRef}>
-          <div ref={ref} style={{ width: width + offsetPixels + "px" }}>
+          <div
+            ref={ref}
+            style={{ width: width + offsetPixels + "px" }}
+            className="bu-flex bu-h-full bu-flex-col bu-gap-[8px]">
             {search && (
               <div className={`${searchStyles({ theme })} ${searchClassName}`}>
                 <TextField
+                  value={searchValue}
                   variant="outlined"
                   startAdornment={<SearchIcon className={searchIconStyles({ theme })} />}
-                  endAdornment={<IocnArrowClose className={clearSearchIconStyles({ theme })} />}
+                  endAdornment={
+                    searchValue ? (
+                      <IocnArrowClose
+                        className={clearSearchIconStyles({ theme })}
+                        onClick={() => handleSearch("")}
+                      />
+                    ) : null
+                  }
                   onChange={(e) => handleSearch(e.target.value)}
                 />
               </div>
             )}
+            <ul className={styles["options-wrapper"]}>
+              {realOptions.map((option, index) => {
+                const isSelected = currentSelected?.includes(option.value);
+
+                if (optionsFormat) {
+                  return (
+                    <li
+                      className={cn(
+                        optionsRowStyles({
+                          theme: realTheme,
+                          disabled: !!option.disabled,
+                          isSelected: !!isSelected
+                        })
+                      )}
+                      onClick={() => {
+                        onOptionRowClick(option);
+                      }}
+                      key={`${index}-${option.value}`}>
+                      {optionsFormat({ ...option, isSelected })}
+                    </li>
+                  );
+                }
+
+                return (
+                  <li
+                    className={cn(
+                      optionsRowStyles({
+                        theme: realTheme,
+                        disabled: !!option.disabled,
+                        isSelected: !!isSelected
+                      })
+                    )}
+                    onClick={() => {
+                      onOptionRowClick(option);
+                    }}
+                    key={`${index}-${option.value}`}>
+                    {option.icon && (
+                      <img
+                        src={option.icon}
+                        alt={option.label}
+                        className="bu-mr-[4px] bu-h-[20px] bu-w-[20px]"
+                      />
+                    )}
+                    <div>{option.label}</div>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>,
         document.body
@@ -168,7 +295,9 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
     theme: propsTheme,
     variant = "outlined",
     clearIcon = true,
-    placeholder = "placeholder"
+    placeholder = "placeholder",
+    values,
+    onChange
   } = props;
 
   const { theme } = useTheme();
@@ -183,9 +312,19 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
 
   const [currentSelected, setCurrentSelected] = useState<string[]>([]);
 
-  const hide = () => {};
+  const hide = () => {
+    setIsShowOptions(false);
+    setIsHover(false);
+    setCurrentSelected([]);
+    if (targetRef.current) {
+      targetRef.current.blur();
+    }
+  };
 
-  const clear = () => {};
+  const clear = () => {
+    setCurrentSelected([]);
+    setIsShowOptions(false);
+  };
 
   const onMultiSelectClick = () => {
     setIsShowOptions(!isShowOptions);
@@ -197,17 +336,70 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
     setIsShowOptions(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (targetRef.current && !targetRef.current.contains(event.target as Node)) {
+        setIsShowOptions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (values && Array.isArray(values)) {
+      setCurrentSelected(values);
+    }
+  }, [values]);
+
+  useEffect(() => {
+    if (onChange && typeof onChange === "function") {
+      onChange(currentSelected);
+    }
+  }, [currentSelected, onChange]);
+
   return (
     <div
       ref={targetRef}
-      className={cn(MultiWrapperStyles({ theme: realTheme, size, variant }), className)}
+      className={cn(
+        MultiWrapperStyles({ theme: realTheme, size, variant }),
+        isShowOptions ? InputActiveStyles({ theme }) : null,
+        className
+      )}
       id={id}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onClick={onMultiSelectClick}>
-      <div className="bu-flex bu-flex-[1] bu-flex-wrap bu-items-center bu-justify-start">
+      <div className={InnerWrapperStyles({ size })}>
         {currentSelected.length > 0 ? (
-          <div></div>
+          currentSelected.map((value) => (
+            <div
+              key={value}
+              className={`bu-flex bu-items-center bu-gap-[2px] bu-rounded-[4px] bu-px-[4px] bu-py-[2px] ${
+                realTheme === "dark"
+                  ? "bu-bg-dark-hover-fill-primary"
+                  : "bu-bg-light-hover-fill-primary"
+              }`}>
+              <div
+                className={`bu-text-[16px] bu-leading-[24px] ${
+                  realTheme === "dark" ? "bu-text-dark-label" : "bu-text-light-label"
+                }`}>
+                {value}
+              </div>
+              <IconArrowClosePure
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentSelected((prev) => prev.filter((item) => item !== value));
+                }}
+                className={`bu-h-[20px] bu-w-[20px] bu-cursor-pointer ${
+                  realTheme === "dark" ? "bu-text-dark-label-40" : "bu-text-light-label-40"
+                }`}
+              />
+            </div>
+          ))
         ) : (
           <div className={placeholderStyles({ theme: realTheme, size })}>{placeholder}</div>
         )}
@@ -229,7 +421,15 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
         )}
       </div>
 
-      {isShowOptions && <Menus {...props} parent={targetRef.current} />}
+      {isShowOptions && (
+        <Menus
+          {...props}
+          parent={targetRef.current}
+          currentSelected={currentSelected}
+          setCurrentSelected={setCurrentSelected}
+          setIsShowOptions={setIsShowOptions}
+        />
+      )}
     </div>
   );
 });

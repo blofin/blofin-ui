@@ -26,6 +26,15 @@ const InputOutlinedStyles = cva("", {
   }
 });
 
+const InputActiveStyles = cva("", {
+  variants: {
+    theme: {
+      light: "bu-border-light-primary",
+      dark: "bu-border-dark-primary"
+    }
+  }
+});
+
 const MultiWrapperStyles = ({
   theme,
   size,
@@ -46,9 +55,9 @@ const MultiWrapperStyles = ({
         dark: []
       },
       size: {
-        sm: ["bu-h-[32px]", "bu-px-[8px]"],
-        md: ["bu-h-[40px]", "bu-px-[8px]"],
-        lg: ["bu-h-[48px]", "bu-px-[12px]"]
+        sm: ["bu-min-h-[32px]", "bu-px-[8px]"],
+        md: ["bu-min-h-[40px]", "bu-px-[8px]"],
+        lg: ["bu-min-h-[48px]", "bu-px-[12px]"]
       }
     },
     defaultVariants: {
@@ -57,6 +66,22 @@ const MultiWrapperStyles = ({
     }
   })({ theme, size, variant });
 };
+
+const InnerWrapperStyles = cva(
+  "bu-flex bu-flex-[1] bu-flex-wrap bu-items-center bu-justify-start bu-gap-[4px]",
+  {
+    variants: {
+      size: {
+        sm: "bu-py-[3px]",
+        md: "bu-py-[7px]",
+        lg: "bu-py-[9px]"
+      }
+    },
+    defaultVariants: {
+      size: "md"
+    }
+  }
+);
 
 const ArrowWrapperStyles = cva("bu-flex bu-items-center bu-justify-center", {
   variants: {
@@ -121,12 +146,66 @@ const clearSearchIconStyles = cva("bu-mx-[8px] bu-cursor-pointer", {
   }
 });
 
+const disabledStyles = cva("!bu-cursor-not-allowed", {
+  variants: {
+    theme: {
+      light: "bu-text-light-label-40",
+      dark: "bu-text-dark-label-40"
+    }
+  }
+});
+
+const selectedStyles = cva("", {
+  variants: {
+    theme: {
+      light: "bu-text-light-primary",
+      dark: "bu-text-dark-primary"
+    }
+  }
+});
+
+const optionsRowStyles = ({
+  theme,
+  disabled,
+  isSelected
+}: {
+  theme: BUITheme;
+  disabled: boolean;
+  isSelected: boolean;
+}) => {
+  return cva(
+    "bu-flex bu-cursor-pointer bu-items-center bu-justify-start bu-p-[8px] bu-text-[12px] bu-leading-[18px]",
+    {
+      variants: {
+        theme: {
+          light: "bu-text-light-label hover:bu-bg-light-fill-secondary",
+          dark: "bu-text-dark-label hover:bu-bg-dark-fill-secondary"
+        },
+        disabled: {
+          true: disabledStyles({ theme }),
+          false: ""
+        },
+        isSelected: {
+          true: selectedStyles({ theme }),
+          false: ""
+        }
+      },
+      defaultVariants: {
+        theme: "light"
+      }
+    }
+  )({ theme, disabled, isSelected });
+};
+
 export {
   MultiWrapperStyles,
+  InnerWrapperStyles,
+  InputActiveStyles,
   ArrowWrapperStyles,
   bgStyles,
   placeholderStyles,
   searchStyles,
   searchIconStyles,
-  clearSearchIconStyles
+  clearSearchIconStyles,
+  optionsRowStyles
 };
