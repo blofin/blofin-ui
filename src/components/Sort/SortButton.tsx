@@ -4,6 +4,9 @@ import { CSSProperties, FC, useContext, useMemo } from "react";
 import { Context, SortEnum, SortsData } from "./reducer";
 import styles from "./Sort.module.scss";
 import { keyBy } from "../../utils/helper";
+import useTheme from "../../provider/useTheme";
+import { BUITheme } from "../../types/component";
+import clsx from "clsx";
 
 export type TextAlign = "flex-start" | "flex-end" | "center";
 
@@ -15,6 +18,7 @@ export interface SortButtonProps {
   textAlign?: TextAlign;
   width?: string;
   iconStyle?: CSSProperties;
+  theme?: BUITheme;
 }
 
 const SortButton: FC<SortButtonProps> = ({
@@ -24,8 +28,11 @@ const SortButton: FC<SortButtonProps> = ({
   hideSort = false,
   textAlign = "center",
   width = "100%",
-  iconStyle
+  iconStyle,
+  theme: mode
 }) => {
+  const { theme } = useTheme();
+  const currentTheme = mode || theme;
   const { state, dispatch } = useContext(Context);
 
   const { sorts, type } = state;
@@ -116,7 +123,7 @@ const SortButton: FC<SortButtonProps> = ({
         }}>
         {children}
         {!hideSort && (
-          <div className={styles["sort-wrap"]}>
+          <div className={clsx(styles["sort-wrap"], styles[`sort-wrap-${currentTheme}`])}>
             <ArrowUp
               style={iconStyle}
               className={`${styles.icon} ${
@@ -127,7 +134,7 @@ const SortButton: FC<SortButtonProps> = ({
             />
             <ArrowDown
               style={iconStyle}
-              className={`${styles.icon}  ${
+              className={`${styles.icon} ${
                 sortsKeyBy[sortKey]?.sortType === SortEnum.desc &&
                 sortKeys.includes(sortKey) &&
                 styles["sort-active"]
