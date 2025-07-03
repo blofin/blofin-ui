@@ -66,6 +66,7 @@ export interface MultiSelectProps {
   multiLimit?: number;
   values?: string[];
   onChange?: (value: string[]) => void;
+  labelShowKey?: string;
 }
 
 export interface MultiSelectRefProps {
@@ -78,6 +79,7 @@ interface OptionsProps extends MultiSelectProps {
   currentSelected?: string[];
   setCurrentSelected: (value: string[]) => void;
   setIsShowOptions: (value: boolean) => void;
+  setIsHover?: (value: boolean) => void;
 }
 
 const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
@@ -97,6 +99,7 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
     currentSelected,
     setCurrentSelected,
     setIsShowOptions,
+    setIsHover,
     multiLimit
   } = props;
 
@@ -153,6 +156,7 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
       if (!isHave) {
         setCurrentSelected([...currentSelected, option.value]);
       }
+      setIsHover && setIsHover(false);
       setIsShowOptions(false);
     }
   };
@@ -297,7 +301,9 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
     clearIcon = true,
     placeholder = "placeholder",
     values,
-    onChange
+    onChange,
+    labelShowKey,
+    options
   } = props;
 
   const { theme } = useTheme();
@@ -359,7 +365,7 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
     if (onChange && typeof onChange === "function") {
       onChange(currentSelected);
     }
-  }, [currentSelected, onChange]);
+  }, [currentSelected]);
 
   return (
     <div
@@ -375,31 +381,34 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
       onClick={onMultiSelectClick}>
       <div className={InnerWrapperStyles({ size })}>
         {currentSelected.length > 0 ? (
-          currentSelected.map((value) => (
-            <div
-              key={value}
-              className={`bu-flex bu-items-center bu-gap-[2px] bu-rounded-[4px] bu-px-[4px] bu-py-[2px] ${
-                realTheme === "dark"
-                  ? "bu-bg-dark-hover-fill-primary"
-                  : "bu-bg-light-hover-fill-primary"
-              }`}>
+          currentSelected.map((value) => {
+            const itemOption = options.find((op) => op.value === value);
+            return (
               <div
-                className={`bu-text-[16px] bu-leading-[24px] ${
-                  realTheme === "dark" ? "bu-text-dark-label" : "bu-text-light-label"
+                key={value}
+                className={`bu-flex bu-items-center bu-gap-[2px] bu-rounded-[4px] bu-px-[4px] bu-py-[2px] ${
+                  realTheme === "dark"
+                    ? "bu-bg-dark-hover-fill-primary"
+                    : "bu-bg-light-hover-fill-primary"
                 }`}>
-                {value}
+                <div
+                  className={`bu-text-[16px] bu-leading-[24px] ${
+                    realTheme === "dark" ? "bu-text-dark-label" : "bu-text-light-label"
+                  }`}>
+                  {itemOption && labelShowKey ? itemOption[labelShowKey] : value}
+                </div>
+                <IconArrowClosePure
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentSelected((prev) => prev.filter((item) => item !== value));
+                  }}
+                  className={`bu-h-[20px] bu-w-[20px] bu-cursor-pointer ${
+                    realTheme === "dark" ? "bu-text-dark-label-40" : "bu-text-light-label-40"
+                  }`}
+                />
               </div>
-              <IconArrowClosePure
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentSelected((prev) => prev.filter((item) => item !== value));
-                }}
-                className={`bu-h-[20px] bu-w-[20px] bu-cursor-pointer ${
-                  realTheme === "dark" ? "bu-text-dark-label-40" : "bu-text-light-label-40"
-                }`}
-              />
-            </div>
-          ))
+            );
+          })
         ) : (
           <div className={placeholderStyles({ theme: realTheme, size })}>{placeholder}</div>
         )}
@@ -428,6 +437,7 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
           currentSelected={currentSelected}
           setCurrentSelected={setCurrentSelected}
           setIsShowOptions={setIsShowOptions}
+          setIsHover={setIsHover}
         />
       )}
     </div>
