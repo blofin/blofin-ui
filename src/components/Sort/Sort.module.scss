@@ -3,16 +3,28 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 10px;
+  height: 14px;
   .icon {
-    width: 8px;
-    height: 4px;
+    width: 10px;
+    height: 6px;
     display: flex;
     align-items: center;
     margin-left: 5px;
-    color: #BDBDBF;
   }
-  .sort-active {
-      @apply bu-text-light-primary;
+
+  &.sort-wrap-light {
+    @apply bu-text-light-label-20;
+
+    .sort-active {
+      @apply bu-text-light-label-60;
+    }
+  }
+
+  &.sort-wrap-dark {
+    @apply bu-text-dark-label-20;
+
+    .sort-active {
+      @apply bu-text-dark-label-60;
+    }
   }
 }

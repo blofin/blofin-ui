@@ -60,14 +60,14 @@ export const Primary: Story = {
       }
     ];
 
-    const sortChange = (data: SortsData[]|SortsData) => {
-      console.log(data,'data');
+    const sortChange = (data: SortsData[] | SortsData) => {
+      console.log(data, "data");
     };
 
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-flex">
-          <SortGroup >
+          <SortGroup>
             <Fragment>
               {sortMenus.map((item) => {
                 return (
@@ -77,7 +77,8 @@ export const Primary: Story = {
                     sortKey={item.key}
                     hideSort={item.hideSort}
                     textAlign={item.textAlign as TextAlign}
-                    width={item.width}>
+                    width={item.width}
+                    theme={mode}>
                     <span>{item.text}</span>
                   </SortButton>
                 );
