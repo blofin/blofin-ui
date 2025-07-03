@@ -18,43 +18,43 @@ export const Primary: Story = {
     const options = [
       {
         label: "BTCUSDT",
-        value: "BTCUSDT",
+        value: "BTC-USDT",
         icon: "https://s2.blofin.com/static/currency/icon/BTC-y1Z7we69.png"
       },
       {
         label: "ETHUSDT",
-        value: "ETHUSDT",
+        value: "ETH-USDT",
         disabled: true,
         icon: "https://s2.blofin.com/static/currency/icon/BTC-y1Z7we69.png"
       },
       {
         label: "SOLUSDT",
-        value: "SOLUSDT",
+        value: "SOL-USDT",
         icon: "https://s2.blofin.com/static/currency/icon/BTC-y1Z7we69.png"
       },
       {
         label: "HUSDT",
-        value: "HUSDT"
+        value: "H-USDT"
       },
       {
         label: "BNBUSDT",
-        value: "BNBUSDT"
+        value: "BNB-USDT"
       },
       {
         label: "DOGEUSDT",
-        value: "DOGEUSDT"
+        value: "DOG-EUSDT"
       },
       {
         label: "XRPUSDT",
-        value: "XRPUSDT"
+        value: "XRP-USDT"
       },
       {
         label: "TRXUSDT",
-        value: "TRXUSDT"
+        value: "TRX-USDT"
       },
       {
         label: "ADAUSDT",
-        value: "ADAUSDT"
+        value: "ADA-USDT"
       }
     ];
 
@@ -90,6 +90,7 @@ export const Primary: Story = {
             onChange={(vals) => {
               console.log("Selected values:", vals);
             }}
+            labelShowKey='label'
           />
         </div>
       </div>
