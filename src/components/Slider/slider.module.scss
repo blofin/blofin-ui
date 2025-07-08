@@ -20,22 +20,36 @@
     }
     .mark-container {
       @apply bu-absolute;
-      @apply bu-flex;
-      @apply bu-justify-between;
+      @apply bu-h-[6px];
       @apply bu-w-full;
       @apply bu-top-1/2;
       @apply -bu-translate-y-1/2 bu-transform;
       @apply bu-cursor-pointer;
       .mark {
+        @apply bu-absolute;
         @apply bu-w-[6px];
         @apply bu-h-[6px];
         @apply bu-rounded-[1px];
         @apply bu-border;
         @apply bu-cursor-pointer;
-        .mark-label {
-          @apply bu-absolute;
-          @apply bu-text-[12px];
-          @apply bu-top-3;
+        @apply -bu-translate-x-[50%];
+        &:first-of-type {
+          @apply -bu-translate-x-[0];
+        }
+        &:last-of-type {
+          @apply -bu-translate-x-[100%];
+        }
+      }
+      .mark-label {
+        @apply bu-absolute;
+        @apply bu-text-[12px];
+        @apply bu-top-3;
+        @apply -bu-translate-x-[50%];
+        &:first-of-type {
+          @apply -bu-translate-x-[0];
+        }
+        &:last-of-type {
+          @apply -bu-translate-x-[100%];
         }
       }
       .mark:first-of-type {
