@@ -70,3 +70,38 @@ export const OuterWidth: Story = {
     );
   }
 };
+
+export const MinimumValue: Story = {
+  render: () => {
+    const mode = useTheme();
+    const [value, setValue] = useState<number>(1.5);
+
+    return (
+      <>
+        <Typography variant="body1" className="bu-mb-4">
+          Value: {value}
+        </Typography>
+        <button onClick={() => setValue(0)}>set to 0</button>
+        <input
+          className="bu-border bu-border-lime-500"
+          type="text"
+          value={value}
+          onChange={(e) => setValue(Number(e.target.value))}
+        />
+        <div className="bu-w-698 bu-mx-auto bu-flex bu-items-center bu-justify-center bu-py-10">
+          <Slider
+            value={value}
+            onSliderChange={setValue}
+            theme={mode}
+            min={0.1}
+            max={5}
+            marks={[0.1, 2.5, 5]}
+            labels={[0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]}
+            step={0.1}
+            renderLabel={(value) => value}
+          />
+        </div>
+      </>
+    );
+  }
+};
