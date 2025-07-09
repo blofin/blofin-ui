@@ -23,8 +23,24 @@ const TrackVariantsDefault = cva("", {
     theme: {
       light: ["bu-bg-light-label-60"],
       dark: ["bu-bg-dark-label"]
+    },
+    disabled: {
+      true: ["bu-bg-light-fill-secondary"],
+      false: ""
     }
-  }
+  },
+  compoundVariants: [
+    {
+      theme: "light",
+      disabled: true,
+      class: "bu-bg-light-fill-secondary"
+    },
+    {
+      theme: "dark",
+      disabled: true,
+      class: "bu-bg-dark-fill-secondary"
+    }
+  ]
 });
 
 const SliderMarkVariants = cva("", {
@@ -77,8 +93,24 @@ const SliderThumbVariantsDefault = cva("", {
     theme: {
       light: ["!bu-border-light-label-60 bu-bg-light-background"],
       dark: ["!bu-border-dark-label bu-bg-dark-background"]
+    },
+    disabled: {
+      true: ["bu-bg-light-fill-tertiary"],
+      false: ""
     }
-  }
+  },
+  compoundVariants: [
+    {
+      theme: "light",
+      disabled: true,
+      class: "bu-bg-light-fill-tertiary"
+    },
+    {
+      theme: "dark",
+      disabled: true,
+      class: "bu-bg-dark-fill-tertiary"
+    }
+  ]
 });
 
 const SliderTooltipVariants = cva("after:border", {
@@ -97,12 +129,12 @@ const SliderTooltipVariants = cva("after:border", {
 export {
   MarkLabelVariants,
   RailVariants,
+  SliderActivityMarkVariants,
   SliderMarkVariants,
+  SliderMarkVariantsDefault,
   SliderThumbVariants,
+  SliderThumbVariantsDefault,
   SliderTooltipVariants,
   TrackVariants,
-  TrackVariantsDefault,
-  SliderActivityMarkVariants,
-  SliderThumbVariantsDefault,
-  SliderMarkVariantsDefault
+  TrackVariantsDefault
 };

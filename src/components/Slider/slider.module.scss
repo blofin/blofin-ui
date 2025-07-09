@@ -52,16 +52,6 @@
           @apply -bu-translate-x-[100%];
         }
       }
-      .mark:first-of-type {
-        .mark-label {
-          @apply bu-left-0;
-        }
-      }
-      .mark:last-of-type {
-        .mark-label {
-          @apply bu-right-0;
-        }
-      }
     }
     .thumb-container {
       @apply bu-relative;
@@ -104,5 +94,17 @@
     //   margin-left: -5px;
     //   border-width: 5px;
     // }
+  }
+
+  &.disabled {
+    .mark-container {
+      cursor: default !important;
+    }
+    .thumb {
+      cursor: default !important;
+    }
+    .mark {
+      cursor: default !important;
+    }
   }
 }
