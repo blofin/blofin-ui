@@ -67,6 +67,7 @@ export interface SliderProps {
    * @returns React.ReactNode
    */
   renderLabel?: (value: number) => React.ReactNode;
+  disabled?: boolean;
 }
 
 function clamp(val: number, min: number, max: number) {
@@ -119,7 +120,8 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     marks = [25, 50, 75],
     labels = [0, 100],
     className,
-    renderLabel = (value: number) => `${value}%`
+    renderLabel = (value: number) => `${value}%`,
+    disabled = false
   } = props;
   const { theme } = useTheme();
 
@@ -162,7 +164,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
   const getTrackStyle = () => {
     return onMouseDown
       ? cn(TrackVariants({ theme: mode || theme }))
-      : TrackVariantsDefault({ theme: mode || theme });
+      : TrackVariantsDefault({ theme: mode || theme, disabled });
   };
 
   const mouseDown = useRef<boolean>(false);
@@ -242,18 +244,18 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
   return (
     <div
       id={id ? `${id}-slider-container` : ""}
-      className={cn(styles["slider-container"], className)}>
+      className={cn(styles["slider-container"], disabled && styles["disabled"], className)}>
       <div className={styles["slider-content"]}>
         <div
           ref={railRef}
-          className={`${styles["rail"]} ${cn(RailVariants({ theme: mode || theme }))}`}></div>
+          className={`${styles["rail"]} ${cn(RailVariants({ theme: mode || theme }))} rail`}></div>
         <div
-          className={`${styles["track"]} ${getTrackStyle()}`}
+          className={`${styles["track"]} ${getTrackStyle()} track`}
           style={{ width: `${percent}%` }}></div>
         <div
           id={id ? `${id}-mark-container` : ""}
-          className={styles["mark-container"]}
-          onClick={handleContainerClick}>
+          className={`${styles["mark-container"]} mark-container`}
+          onClick={disabled ? undefined : handleContainerClick}>
           {marksArray.map((mark) => {
             const markPercent = getPercent(mark.value, min, max, step);
             return (
@@ -261,9 +263,11 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
                 {mark.showMark && (
                   <div
                     key={mark.value}
-                    className={`${styles["mark"]} ${getMarkStyle(mark.value)} mark`}
+                    className={`${styles["mark"]} ${getMarkStyle(mark.value)} mark ${
+                      mark.value <= value ? "mark-active" : ""
+                    }`}
                     style={{ left: `${markPercent}%` }}
-                    onClick={(e) => handleMarkClick(e, mark.value)}
+                    onClick={(e) => (disabled ? undefined : handleMarkClick(e, mark.value))}
                   />
                 )}
 
@@ -282,7 +286,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
         </div>
         <div
           id={id ? `${id}-thumb-container` : ""}
-          className={styles["thumb-container"]}
+          className={`${styles["thumb-container"]} thumb-container`}
           style={{
             left: `${percent}%`
           }}>
@@ -295,7 +299,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           <div
             id={id ? `${id}-thumb` : ""}
             className={`${styles["thumb"]} ${getThumbStyle()} thumb`}
-            onMouseDown={handleMouseDown}></div>
+            onMouseDown={disabled ? undefined : handleMouseDown}></div>
         </div>
       </div>
       <input type="hidden" value={value} ref={ref} />
