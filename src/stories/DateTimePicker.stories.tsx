@@ -16,7 +16,7 @@ type Story = StoryObj<typeof DateTimePicker>;
 
 export const Primary: Story = {
   render: () => {
-    const [date, setDate] = useState<number | undefined>(new Date('2025-1-2').getTime());
+    const [date, setDate] = useState<number | undefined>(new Date("2025-1-2").getTime());
 
     const handleChangeDate = (date?: number) => {
       setDate(date);
@@ -40,24 +40,53 @@ export const Primary: Story = {
 
     return (
       <ThemeProvider value={{ theme: "light" }}>
-        <div className="bu-h-[500px] bu-w-full">
-          <Popover
-            ref={popupref}
-            placement="bottom"
-            label={<span className="iconfont icon-calendar-fill text-light-label text-[20px] cursor-pointer">1111</span>}
-            content={
-              <DateTimePicker
-                defaultValue={date}
-                setValues={handleChangeDate}
-                disabledDays={disabledDays}
-                hidePast
-                lang={lang}
-                cancelText="Cancel"
-                confirmText="Confirm"
-                submitText="Ok"
-              />
-            }
-          />
+        <div className="bu-flex bu-h-[500px] bu-w-full bu-justify-center bu-gap-[100px]">
+          <div className="bu-mt-[100px]">
+            <Popover
+              ref={popupref}
+              placement="bottom"
+              label={
+                <span className="iconfont icon-calendar-fill text-light-label text-[20px] cursor-pointer">
+                  1111
+                </span>
+              }
+              content={
+                <DateTimePicker
+                  defaultValue={date}
+                  setValues={handleChangeDate}
+                  disabledDays={disabledDays}
+                  hidePast
+                  lang={lang}
+                  cancelText="Cancel"
+                  confirmText="Confirm"
+                  submitText="Ok"
+                />
+              }
+            />
+          </div>
+          <div className="bu-mt-[100px]">
+            <Popover
+              ref={popupref}
+              placement="bottom"
+              label={
+                <span className="iconfont icon-calendar-fill text-light-label text-[20px] cursor-pointer">
+                  1111
+                </span>
+              }
+              content={
+                <DateTimePicker
+                  defaultValue={date}
+                  setValues={handleChangeDate}
+                  hidePast
+                  lang={lang}
+                  cancelText="Cancel"
+                  confirmText="Confirm"
+                  submitText="Ok"
+                  hideHoursAndMinutes={true}
+                />
+              }
+            />
+          </div>
         </div>
       </ThemeProvider>
     );
