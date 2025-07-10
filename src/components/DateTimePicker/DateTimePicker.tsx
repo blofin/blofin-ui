@@ -16,6 +16,7 @@ import ScrollableList from "./ScrollableList";
 import useDateTimePicker from "./hooks/useDateTimePicker";
 
 export type DateTimePickerProps = {
+  id?: string;
   className?: string;
   defaultValue?: number;
   setValues: (values: number | undefined) => void;
@@ -28,9 +29,11 @@ export type DateTimePickerProps = {
   submitText: string;
   minuteInterval?: number;
   hidePast?: boolean;
+  hideHoursAndMinutes?: boolean;
 };
 
 const DateTimePicker: React.FC<DateTimePickerProps> = ({
+  id,
   className = "",
   defaultValue,
   setValues,
@@ -42,7 +45,8 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   cancelText = "Cancel",
   submitText = "Ok",
   minuteInterval = 1,
-  hidePast = true
+  hidePast = true,
+  hideHoursAndMinutes = false
 }) => {
   const {
     date,
@@ -106,7 +110,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   };
 
   return (
-    <div className={`bu-date-picker-range ${className}`}>
+    <div id={id} className={`bu-date-picker-range ${className}`}>
       <div className={`bu-rounded bu-border bu-px-[16px] bu-pb-[8px] ${DatePickerBg({ theme })}`}>
         <div className="bu-date-picker bu-relative">
           {startMonthShow && (
@@ -158,6 +162,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             modifiers={isUtcTime ? modifiers : undefined}
             fixedWeeks
             showOutsideDays
+            hideHoursAndMinutes={hideHoursAndMinutes}
           />
           <div
             className={`bu-absolute bu-right-0 bu-top-[56px] bu-h-[236px] bu-w-[109px] ${
@@ -169,38 +174,40 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
               })}`}>
               {" "}
             </div>
-            <div className="bu-flex bu-pl-1 bu-pt-2">
-              <ScrollableList
-                theme={theme}
-                items={hours}
-                selectedItem={currentHour}
-                onSelect={(val) => {
-                  const hour = new Date().getHours();
-                  const minute = new Date().getMinutes();
-                  setCurrentHour(disabledHour && val < hour ? hour : val);
-                  if (disabledHour && val === hour && currentMinute < minute) {
-                    setCurrentMinute(minute);
-                  }
-                }}
-                disablePast={disabledHour}
-                current={new Date().getHours()}
-              />
-              <span
-                className={`bu-mx-1 bu-h-[236px] bu-w-[1px] bu-border-r ${HeadCell({
-                  theme
-                })}`}></span>
-              <ScrollableList
-                theme={theme}
-                items={minutes}
-                selectedItem={currentMinute}
-                onSelect={(val) => {
-                  const minute = new Date().getMinutes();
-                  setCurrentMinute(disabledMinute && val < minute ? minute : val);
-                }}
-                disablePast={disabledMinute}
-                current={new Date().getMinutes()}
-              />
-            </div>
+            {!hideHoursAndMinutes && (
+              <div className="bu-flex bu-pl-1 bu-pt-2">
+                <ScrollableList
+                  theme={theme}
+                  items={hours}
+                  selectedItem={currentHour}
+                  onSelect={(val) => {
+                    const hour = new Date().getHours();
+                    const minute = new Date().getMinutes();
+                    setCurrentHour(disabledHour && val < hour ? hour : val);
+                    if (disabledHour && val === hour && currentMinute < minute) {
+                      setCurrentMinute(minute);
+                    }
+                  }}
+                  disablePast={disabledHour}
+                  current={new Date().getHours()}
+                />
+                <span
+                  className={`bu-mx-1 bu-h-[236px] bu-w-[1px] bu-border-r ${HeadCell({
+                    theme
+                  })}`}></span>
+                <ScrollableList
+                  theme={theme}
+                  items={minutes}
+                  selectedItem={currentMinute}
+                  onSelect={(val) => {
+                    const minute = new Date().getMinutes();
+                    setCurrentMinute(disabledMinute && val < minute ? minute : val);
+                  }}
+                  disablePast={disabledMinute}
+                  current={new Date().getMinutes()}
+                />
+              </div>
+            )}
           </div>
         </div>
         {!startMonthShow && (
