@@ -68,19 +68,17 @@ export interface SliderProps {
    */
   renderLabel?: (value: number) => React.ReactNode;
   disabled?: boolean;
+  showTooltip?: boolean;
 }
 
 function clamp(val: number, min: number, max: number) {
   return Math.max(min, Math.min(val, max));
 }
 
-function getPercent(value: number, min: number, max: number, step?: number) {
+function getPercent(value: number, min: number, max: number, decimalPlaces?: number) {
   if (max === min) return 0;
   let percent = ((value - min) / (max - min)) * 100;
-  if (typeof step === "number") {
-    percent = Number(percent.toFixed(getDecimalPlaces(step)));
-  }
-  return percent;
+  return percent.toFixed(decimalPlaces);
 }
 
 function getDecimalPlaces(num: number) {
@@ -95,7 +93,8 @@ function getValueFromPosition(
   max: number,
   railMin: number,
   railMax: number,
-  step: number
+  step: number,
+  decimalPlaces: number
 ) {
   if (railMax === railMin) return min;
   let percent = (clientX - railMin) / (railMax - railMin);
@@ -103,9 +102,45 @@ function getValueFromPosition(
   let value = min + percent * (max - min);
   // Snap to step
   value = Math.round((value - min) / step) * step + min;
-  value = Number(value.toFixed(getDecimalPlaces(step)));
+  value = Number(value.toFixed(decimalPlaces));
   return clamp(value, min, max);
 }
+
+// Helper to get the style for the thumb
+const getThumbStyle = (onMouseDown: boolean, theme: BUITheme, mode?: BUITheme) => {
+  return onMouseDown
+    ? cn(SliderThumbVariants({ theme: mode || theme }), "thumb-drag")
+    : SliderThumbVariantsDefault({ theme: mode || theme });
+};
+
+// Helper to get the style for the track
+const getTrackStyle = (
+  onMouseDown: boolean,
+  theme: BUITheme,
+  disabled: boolean,
+  mode?: BUITheme
+) => {
+  return onMouseDown
+    ? cn(TrackVariants({ theme: mode || theme }), "track-drag")
+    : TrackVariantsDefault({ theme: mode || theme, disabled });
+};
+
+const getMarkStyle = (
+  markValue: number,
+  theme: BUITheme,
+  onMouseDown: boolean,
+  value: number,
+  mode?: BUITheme
+) => {
+  return cn(
+    SliderMarkVariants({ theme: mode || theme }),
+    value >= markValue
+      ? onMouseDown
+        ? cn(SliderActivityMarkVariants({ theme: mode || theme }), "mark-drag")
+        : SliderThumbVariantsDefault({ theme: mode || theme })
+      : ""
+  );
+};
 
 export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
   const {
@@ -121,7 +156,8 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     labels = [0, 100],
     className,
     renderLabel = (value: number) => `${value}%`,
-    disabled = false
+    disabled = false,
+    showTooltip = true
   } = props;
   const { theme } = useTheme();
 
@@ -142,33 +178,10 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     return arr;
   }, [marks, min, max, step, labels]);
 
-  const getMarkStyle = (markValue: number) => {
-    return cn(
-      SliderMarkVariants({ theme: mode || theme }),
-      value >= markValue
-        ? onMouseDown
-          ? SliderActivityMarkVariants({ theme: mode || theme })
-          : SliderThumbVariantsDefault({ theme: mode || theme })
-        : ""
-    );
-  };
-
-  // Helper to get the style for the thumb
-  const getThumbStyle = () => {
-    return onMouseDown
-      ? cn(SliderThumbVariants({ theme: mode || theme }))
-      : SliderThumbVariantsDefault({ theme: mode || theme });
-  };
-
-  // Helper to get the style for the track
-  const getTrackStyle = () => {
-    return onMouseDown
-      ? cn(TrackVariants({ theme: mode || theme }))
-      : TrackVariantsDefault({ theme: mode || theme, disabled });
-  };
-
   const mouseDown = useRef<boolean>(false);
   const [onMouseDown, setMouseDonw] = useState(false);
+
+  const decimalPlaces = useMemo(() => getDecimalPlaces(step), [step]);
 
   const handleDrag = useCallback(
     (e: MouseEvent) => {
@@ -177,10 +190,18 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
       const rect = railRef.current?.getBoundingClientRect();
       if (!rect) return;
       const { left: railMin, right: railMax } = rect;
-      const newValue = getValueFromPosition(e.clientX, min, max, railMin, railMax, step);
+      const newValue = getValueFromPosition(
+        e.clientX,
+        min,
+        max,
+        railMin,
+        railMax,
+        step,
+        decimalPlaces
+      );
       onSliderChange(newValue);
     },
-    [min, max, step, onSliderChange]
+    [min, max, step, onSliderChange, decimalPlaces]
   );
 
   const handleMouseMove = useCallback(
@@ -231,7 +252,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     if (!rect) return;
     const { left: railMin, right: railMax } = rect;
     const clientX = (e as any).clientX;
-    const newValue = getValueFromPosition(clientX, min, max, railMin, railMax, step);
+    const newValue = getValueFromPosition(clientX, min, max, railMin, railMax, step, decimalPlaces);
     onSliderChange(newValue);
     if (onDragEnd) {
       onDragEnd(newValue);
@@ -239,7 +260,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
   };
 
   // Calculate percent for value
-  const percent = getPercent(value, min, max, step);
+  const percent = getPercent(value, min, max, decimalPlaces);
 
   return (
     <div
@@ -250,22 +271,31 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           ref={railRef}
           className={`${styles["rail"]} ${cn(RailVariants({ theme: mode || theme }))} rail`}></div>
         <div
-          className={`${styles["track"]} ${getTrackStyle()} track`}
+          className={`${styles["track"]} ${getTrackStyle(
+            onMouseDown,
+            theme,
+            disabled,
+            mode
+          )} track`}
           style={{ width: `${percent}%` }}></div>
         <div
           id={id ? `${id}-mark-container` : ""}
           className={`${styles["mark-container"]} mark-container`}
           onClick={disabled ? undefined : handleContainerClick}>
           {marksArray.map((mark) => {
-            const markPercent = getPercent(mark.value, min, max, step);
+            const markPercent = getPercent(mark.value, min, max, decimalPlaces);
             return (
               <>
-                {mark.showMark && (
+                {mark.showMark && mark.value !== value && (
                   <div
                     key={mark.value}
-                    className={`${styles["mark"]} ${getMarkStyle(mark.value)} mark ${
-                      mark.value <= value ? "mark-active" : ""
-                    }`}
+                    className={`${styles["mark"]} ${getMarkStyle(
+                      mark.value,
+                      theme,
+                      onMouseDown,
+                      value,
+                      mode
+                    )} mark ${mark.value <= value ? "mark-active" : ""}`}
                     style={{ left: `${markPercent}%` }}
                     onClick={(e) => (disabled ? undefined : handleMarkClick(e, mark.value))}
                   />
@@ -290,15 +320,17 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           style={{
             left: `${percent}%`
           }}>
-          <div
-            className={`${styles["tooltip"]} ${cn(
-              SliderTooltipVariants({ theme: mode || theme })
-            )}`}>
-            {renderLabel(value)}
-          </div>
+          {showTooltip && (
+            <div
+              className={`${styles["tooltip"]} ${cn(
+                SliderTooltipVariants({ theme: mode || theme })
+              )}`}>
+              {renderLabel(value)}
+            </div>
+          )}
           <div
             id={id ? `${id}-thumb` : ""}
-            className={`${styles["thumb"]} ${getThumbStyle()} thumb`}
+            className={`${styles["thumb"]} ${getThumbStyle(onMouseDown, theme, mode)} thumb`}
             onMouseDown={disabled ? undefined : handleMouseDown}></div>
         </div>
       </div>
