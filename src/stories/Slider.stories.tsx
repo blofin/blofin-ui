@@ -94,12 +94,13 @@ export const MinimumValue: Story = {
             onSliderChange={setValue}
             theme={mode}
             min={0.1}
-            disabled={true}
+            // disabled={true}
             max={5}
             marks={[0.1, 2.5, 5]}
             labels={[0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]}
             step={0.1}
             renderLabel={(value) => value}
+            showTooltip={false}
           />
         </div>
       </>
