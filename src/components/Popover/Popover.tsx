@@ -1,11 +1,11 @@
+import { Placement } from "@popperjs/core";
 import React, { FC, forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from "react";
-import popoverStyles from "./popover.module.scss";
-import useClient from "../../hooks/useClient";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
+import useClient from "../../hooks/useClient";
 import useDelayEvent from "../../hooks/useDelayEvent";
 import useOutsideClick from "../../hooks/useOutsideClick";
-import { Placement } from "@popperjs/core";
+import popoverStyles from "./popover.module.scss";
 
 export interface PopoverProps {
   label: string | React.ReactNode;
@@ -17,6 +17,7 @@ export interface PopoverProps {
   flipPlacement?: Placement[];
   afterClose?: () => void;
   contentClassName?: string;
+  onVisibleChange?: (visible: boolean) => void;
 }
 
 export interface PopoverRefProps {
@@ -39,7 +40,8 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
     placement = "bottom-start",
     flipPlacement,
     afterClose,
-    contentClassName
+    contentClassName,
+    onVisibleChange
   } = props;
 
   const isEnabled = useMemo(() => {
@@ -113,6 +115,7 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
     if (!showPopover) {
       afterClose && afterClose();
     }
+    onVisibleChange?.(showPopover);
   }, [showPopover]);
 
   return (
