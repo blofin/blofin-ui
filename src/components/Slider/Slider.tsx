@@ -152,8 +152,8 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     min = 0,
     max = 100,
     step = 1,
-    marks = [25, 50, 75],
-    labels = [0, 100],
+    marks = [0, 25, 50, 75, 100],
+    labels = [],
     className,
     renderLabel = (value: number) => `${value}%`,
     disabled = false,
@@ -164,13 +164,13 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
   const railRef = useRef<HTMLDivElement>(null);
 
   const marksArray = useMemo(() => {
-    const num = Array.from(new Set(marks.concat([min, ...labels, max]))).sort((a, b) => a - b);
+    const num = Array.from(new Set(marks.concat(labels))).sort((a, b) => a - b);
     const arr: { value: number; showLabel: boolean; showMark: boolean }[] = [];
     num.forEach((item) => {
       if (item >= min && item <= max) {
         arr.push({
           value: item,
-          showLabel: labels.includes(item) || item === min || item === max,
+          showLabel: labels.includes(item),
           showMark: marks.includes(item) || item === min || item === max
         });
       }
@@ -305,7 +305,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
                   <span
                     className={`${styles["mark-label"]} ${cn(
                       MarkLabelVariants({ theme: mode || theme })
-                    )} mark-label`}
+                    )} mark-label ${mark.value <= value ? "mark-label-active" : ""}`}
                     style={{ left: `${markPercent}%` }}>
                     {renderLabel(mark.value)}
                   </span>
@@ -322,7 +322,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
           }}>
           {showTooltip && (
             <div
-              className={`${styles["tooltip"]} ${cn(
+              className={`${styles["tooltip"]} ${onMouseDown ? styles["tooltip-drag"] : ""} ${cn(
                 SliderTooltipVariants({ theme: mode || theme })
               )}`}>
               {renderLabel(value)}
