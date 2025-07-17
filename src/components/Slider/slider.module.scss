@@ -1,4 +1,5 @@
 .slider-container {
+  padding: 0 6px;
   @apply bu-flex bu-w-full;
   .slider-content {
     @apply bu-relative bu-w-full;
@@ -83,6 +84,10 @@
       @apply bu-opacity-0;
       @apply bu-pointer-events-none;
       @apply bu-z-10;
+      &.tooltip-drag {
+        @apply bu-opacity-100;
+        @apply bu-pointer-events-auto;
+      }
     }
 
     // .tooltip::after {
