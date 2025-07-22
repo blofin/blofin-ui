@@ -12,23 +12,41 @@ const RadioButtonCheckedStyles = cva("", {
 
 const RadioButtonLabelVariants = ({
   theme,
-  checked
+  checked,
+  disabled
 }: {
   theme: BUITheme;
   checked: boolean;
   arrow: "circle" | "check";
+  disabled: boolean;
 }) => {
   return cva("bu-cursor-pointer bu-select-none bu-text-sm", {
     variants: {
       theme: {
-        light: ["bu-text-light-label-60 group-hover:!bu-text-light-label"],
-        dark: ["bu-text-dark-label-60 group-hover:!bu-text-dark-label"]
+        light: ["bu-text-light-label-60"],
+        dark: ["bu-text-dark-label-60"]
+      },
+      disabled: {
+        true: ["!bu-cursor-not-allowed"],
+        false: ["group-hover:bu-text-light-label"]
       },
       checked: {
         true: RadioButtonCheckedStyles({ theme })
       }
-    }
-  })({ theme, checked });
+    },
+    compoundVariants: [
+      {
+        theme: "light",
+        disabled: false,
+        class: "group-hover:!bu-text-light-label"
+      },
+      {
+        theme: "dark",
+        disabled: false,
+        class: "group-hover:!bu-text-dark-label"
+      }
+    ]
+  })({ theme, checked, disabled });
 };
 
 const RadioButtonCircleCheckedStyles = cva("", {
@@ -43,11 +61,13 @@ const RadioButtonCircleCheckedStyles = cva("", {
 const RadioButtonInputVariants = ({
   theme,
   arrow,
-  check
+  check,
+  disabled
 }: {
   theme: BUITheme;
   arrow: "circle" | "check";
   check: boolean;
+  disabled: boolean;
 }) => {
   return cva(
     "bu-relative bu-h-[12px] bu-w-[12px] bu-cursor-pointer bu-appearance-none bu-rounded-full bu-border-[1px]",
@@ -55,10 +75,14 @@ const RadioButtonInputVariants = ({
       variants: {
         theme: {
           light: [
-            "!bu-border-light-label-60 checked:!bu-border-light-primary checked:after:!bu-bg-light-primary group-hover:!bu-border-light-primary"
+            "!bu-border-light-label-60",
+            "checked:!bu-border-light-primary",
+            "checked:after:!bu-bg-light-primary"
           ],
           dark: [
-            "!bu-border-dark-label-60 checked:!bu-border-dark-primary checked:after:!bu-bg-dark-primary group-hover:!bu-border-dark-primary"
+            "!bu-border-dark-label-60",
+            "checked:!bu-border-dark-primary",
+            "checked:after:!bu-bg-dark-primary"
           ]
         },
         arrow: {
@@ -69,9 +93,26 @@ const RadioButtonInputVariants = ({
         },
         check: {
           true: RadioButtonCircleCheckedStyles({ theme })
+        },
+        disabled: {
+          true: "!bu-cursor-not-allowed",
+          false: "bu-cursor-pointer"
         }
-      }
+      },
+      compoundVariants: [
+        {
+          theme: "light",
+          disabled: false,
+          class: "group-hover:!bu-border-light-primary"
+        },
+        {
+          theme: "dark",
+          disabled: false,
+          class: "group-hover:!bu-border-dark-primary"
+        }
+      ]
     }
-  )({ theme, arrow, check });
+  )({ theme, arrow, check, disabled });
 };
+
 export { RadioButtonInputVariants, RadioButtonLabelVariants };

@@ -42,6 +42,7 @@ export const Vertical: Story = {
               name="TP/SL"
               value={"buy"}
               selected={currentValue}
+              disabled={true}
               onChange={(e) => setCurrentValue(e.target.value)}
             />
             <RadioButton
