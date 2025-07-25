@@ -48,8 +48,24 @@ const SliderMarkVariants = cva("", {
     theme: {
       light: ["bu-border-light-line-secondary bu-bg-light-background"],
       dark: ["bu-border-dark-line-secondary bu-bg-dark-background"]
+    },
+    current: {
+      true: ["!bu-border-transparent !bu-bg-transparent"],
+      false: ""
     }
-  }
+  },
+  compoundVariants: [
+    {
+      theme: "light",
+      current: true,
+      class: ["!bu-border-transparent !bu-bg-transparent"]
+    },
+    {
+      theme: "dark",
+      current: true,
+      class: ["!bu-border-transparent !bu-bg-transparent"]
+    }
+  ]
 });
 
 const SliderActivityMarkVariants = cva("bu-transition-colors", {

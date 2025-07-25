@@ -133,8 +133,8 @@ const getMarkStyle = (
   mode?: BUITheme
 ) => {
   return cn(
-    SliderMarkVariants({ theme: mode || theme }),
-    value >= markValue
+    SliderMarkVariants({ theme: mode || theme, current: value === markValue }),
+    value > markValue
       ? onMouseDown
         ? cn(SliderActivityMarkVariants({ theme: mode || theme }), "mark-drag")
         : SliderThumbVariantsDefault({ theme: mode || theme })
@@ -286,7 +286,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
             const markPercent = getPercent(mark.value, min, max, decimalPlaces);
             return (
               <>
-                {mark.showMark && mark.value !== value && (
+                {mark.showMark && (
                   <div
                     key={mark.value}
                     className={`${styles["mark"]} ${getMarkStyle(
