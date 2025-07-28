@@ -305,7 +305,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
                   <span
                     className={`${styles["mark-label"]} ${cn(
                       MarkLabelVariants({ theme: mode || theme })
-                    )} mark-label ${mark.value <= value ? "mark-label-active" : ""}`}
+                    )} mark-label ${mark.value < value ? "mark-label-active" : ""}`}
                     style={{ left: `${markPercent}%` }}>
                     {renderLabel(mark.value)}
                   </span>
