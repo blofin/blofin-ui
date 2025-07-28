@@ -295,7 +295,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
                       onMouseDown,
                       value,
                       mode
-                    )} mark ${mark.value <= value ? "mark-active" : ""}`}
+                    )} mark ${mark.value < value ? "mark-active" : ""}`}
                     style={{ left: `${markPercent}%` }}
                     onClick={(e) => (disabled ? undefined : handleMarkClick(e, mark.value))}
                   />
@@ -305,7 +305,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
                   <span
                     className={`${styles["mark-label"]} ${cn(
                       MarkLabelVariants({ theme: mode || theme })
-                    )} mark-label ${mark.value < value ? "mark-label-active" : ""}`}
+                    )} mark-label ${mark.value <= value ? "mark-label-active" : ""}`}
                     style={{ left: `${markPercent}%` }}>
                     {renderLabel(mark.value)}
                   </span>
