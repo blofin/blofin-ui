@@ -302,7 +302,7 @@ const buttonVariants = (props: {
 
   const style = disabled ? "" : styles[variant].variant({ theme });
 
-  return cva("bu-box-border bu-inline-flex bu-items-center bu-justify-center", {
+  return cva("bu-box-border bu-inline-flex bu-items-center bu-justify-center bu-font-medium", {
     variants: {
       variant: {
         primary: style,
