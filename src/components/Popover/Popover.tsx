@@ -17,6 +17,7 @@ export interface PopoverProps {
   flipPlacement?: Placement[];
   afterClose?: () => void;
   contentClassName?: string;
+  className?: string;
   onVisibleChange?: (visible: boolean) => void;
 }
 
@@ -41,6 +42,7 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
     flipPlacement,
     afterClose,
     contentClassName,
+    className,
     onVisibleChange
   } = props;
 
@@ -119,7 +121,7 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
   }, [showPopover]);
 
   return (
-    <div ref={popoverRef} onClick={togglePopover}>
+    <div ref={popoverRef} onClick={togglePopover} className={className}>
       <label
         className="bu-cursor-pointer"
         onMouseEnter={handleMouseEnter}
