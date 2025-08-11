@@ -164,17 +164,17 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             showOutsideDays
             hideHoursAndMinutes={hideHoursAndMinutes}
           />
-          <div
-            className={`bu-absolute bu-right-0 bu-top-[56px] bu-h-[236px] bu-w-[109px] ${
-              startMonthShow ? "bu-hidden" : ""
-            }`}>
+          {!hideHoursAndMinutes && (
             <div
-              className={`bu-h-[36px] bu-border-b ${HeadCell({
-                theme
-              })}`}>
-              {" "}
-            </div>
-            {!hideHoursAndMinutes && (
+              className={`bu-absolute bu-right-0 bu-top-[56px] bu-h-[236px] bu-w-[109px] ${
+                startMonthShow ? "bu-hidden" : ""
+              }`}>
+              <div
+                className={`bu-h-[36px] bu-border-b ${HeadCell({
+                  theme
+                })}`}>
+                {" "}
+              </div>
               <div className="bu-flex bu-pl-1 bu-pt-2">
                 <ScrollableList
                   theme={theme}
@@ -207,8 +207,8 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
                   current={new Date().getMinutes()}
                 />
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
         {!startMonthShow && (
           <>
