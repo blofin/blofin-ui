@@ -18,7 +18,7 @@ const useAlign = (target: HTMLDivElement | null) => {
     const top = rect.top + scrollTop;
     return { left: left, top: top };
   };
-
+  
   const resize = () => {
     const wrapper = target;
     if (wrapper) {
