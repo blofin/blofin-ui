@@ -56,7 +56,7 @@ export const All = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div style={{ display: "flex", gap: "10px" }}>
-          <Button.CheckButton checked={true} size="medium">
+          <Button.CheckButton checked={false} size="medium">
             CheckButton
           </Button.CheckButton>
           <Button variant="ghost" onClick={handleRequest} loading={loading} size="small">

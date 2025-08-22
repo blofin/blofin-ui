@@ -182,7 +182,6 @@ const ghostStyles3 = cva("", {
         "hover:bu-text-light-label",
         "bu-border",
         "bu-border-solid",
-        "bu-border-light-label",
         "hover:bu-bg-light-fill-secondary"
       ],
       dark: [
@@ -190,11 +189,36 @@ const ghostStyles3 = cva("", {
         "hover:bu-text-dark-label",
         "bu-border",
         "bu-border-solid",
-        "bu-border-dark-label",
         "hover:bu-bg-dark-fill-secondary"
       ]
+    },
+    checked: {
+      true: "",
+      false: ""
     }
-  }
+  },
+  compoundVariants: [
+    {
+      theme: "light",
+      checked: true,
+      class: ["bu-border-light-label"]
+    },
+    {
+      theme: "light",
+      checked: false,
+      class: ["bu-border-light-line-secondary"]
+    },
+    {
+      theme: "dark",
+      checked: true,
+      class: ["bu-border-dark-label"]
+    },
+    {
+      theme: "dark",
+      checked: false,
+      class: ["bu-border-dark-line-secondary"]
+    }
+  ]
 });
 
 const ghostDisabledStyles = cva("", {
@@ -324,10 +348,11 @@ const buttonVariants = (props: {
   theme: BUITheme;
   shape: ButtonShape;
   disabled: boolean;
+  checked?: boolean;
 }) => {
-  const { theme, variant, disabled, shape } = props;
+  const { theme, variant, disabled, shape, checked } = props;
 
-  const style = disabled ? "" : styles[variant].variant({ theme });
+  const style = disabled ? "" : styles[variant].variant({ theme, checked });
 
   return cva("bu-box-border bu-inline-flex bu-items-center bu-justify-center bu-font-medium", {
     variants: {

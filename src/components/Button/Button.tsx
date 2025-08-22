@@ -43,6 +43,8 @@ export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElemen
   loading?: boolean;
 
   loadingType?: LoadingType;
+
+  checked?: boolean;
 }
 
 export const Button = ({
@@ -59,6 +61,7 @@ export const Button = ({
   theme: mode,
   loading,
   loadingType = "default",
+  checked = true,
   ...props
 }: ButtonProps) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -78,7 +81,8 @@ export const Button = ({
     size,
     theme: mode ? mode : theme,
     shape,
-    disabled: loading ? true : disabled
+    disabled: loading ? true : disabled,
+    checked
   };
 
   return (
@@ -120,7 +124,15 @@ const CheckButton: FC<ButtonProps & { checked: boolean }> = (props) => {
           "bu-rounded-bl-[8px] bu-rounded-br-none bu-rounded-tl-none bu-rounded-tr-[8px]",
           "bu-flex bu-items-center bu-justify-center"
         )}>
-        {checked ? (theme === "light" ? <IconCheckLight /> : <IconCheckDark />) : null}
+        {theme === "light" ? (
+          <IconCheckLight
+            className={clsx(checked ? "" : "bu-text-light-line-secondary")}
+          />
+        ) : (
+          <IconCheckDark
+            className={clsx(checked ? "" : "bu-text-dark-line-secondary")}
+          />
+        )}
       </div>
     </div>
   );
