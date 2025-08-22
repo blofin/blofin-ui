@@ -7,6 +7,7 @@ export type ButtonVariant =
   | "text"
   | "ghost"
   | "ghost2"
+  | "ghost3"
   | "info"
   | "buy"
   | "sell"

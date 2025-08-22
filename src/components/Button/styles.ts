@@ -174,6 +174,29 @@ const ghostStyles2 = cva("", {
   }
 });
 
+const ghostStyles3 = cva("", {
+  variants: {
+    theme: {
+      light: [
+        "bu-text-light-label",
+        "hover:bu-text-light-label",
+        "bu-border",
+        "bu-border-solid",
+        "bu-border-light-label",
+        "hover:bu-bg-light-fill-secondary"
+      ],
+      dark: [
+        "bu-text-dark-label",
+        "hover:bu-text-dark-label",
+        "bu-border",
+        "bu-border-solid",
+        "bu-border-dark-label",
+        "hover:bu-bg-dark-fill-secondary"
+      ]
+    }
+  }
+});
+
 const ghostDisabledStyles = cva("", {
   variants: {
     theme: {
@@ -273,6 +296,10 @@ const styles = {
     variant: ghostStyles2,
     disabled: ghostDisabledStyles
   },
+  ghost3: {
+    variant: ghostStyles3,
+    disabled: ghostDisabledStyles
+  },
   info: {
     variant: infoStyles,
     disabled: infoDisabledStyles
@@ -311,6 +338,7 @@ const buttonVariants = (props: {
         text: style,
         ghost: style,
         ghost2: style,
+        ghost3: style,
         info: style,
         buy: style,
         sell: style,

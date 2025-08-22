@@ -33,10 +33,10 @@ export default meta;
 export const Primary = {
   args: {
     label: "Button",
-    variant: "primary",
+    variant: "ghost3",
     size: "medium",
     children: "Button",
-    disabled: true
+    disabled: false
   }
 };
 
@@ -56,6 +56,9 @@ export const All = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div style={{ display: "flex", gap: "10px" }}>
+          <Button.CheckButton checked={true} size="medium">
+            CheckButton
+          </Button.CheckButton>
           <Button variant="ghost" onClick={handleRequest} loading={loading} size="small">
             ghost
           </Button>

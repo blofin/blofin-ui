@@ -6,6 +6,9 @@ import { ButtonShape, ButtonSize, ButtonVariant, LoadingType } from "./types";
 import useTheme from "../../provider/useTheme";
 import Loading from "./Loading";
 import IconRefresh from "../../assets/icons/refresh-line.svg";
+import IconCheckLight from "../../assets/icons/check-line-light.svg";
+import IconCheckDark from "../../assets/icons/check-line-dark.svg";
+import clsx from "clsx";
 
 export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -103,6 +106,26 @@ export const Button = ({
   );
 };
 
+const CheckButton: FC<ButtonProps & { checked: boolean }> = (props) => {
+  const { theme } = useTheme();
+
+  const { checked } = props;
+  return (
+    <div className="bu-relative">
+      <Button {...props} variant="ghost3"></Button>
+      <div
+        className={clsx(
+          "bu-absolute bu-right-0 bu-top-0",
+          theme === "light" ? "bu-text-light-label" : "bu-text-dark-label",
+          "bu-rounded-bl-[8px] bu-rounded-br-none bu-rounded-tl-none bu-rounded-tr-[8px]",
+          "bu-flex bu-items-center bu-justify-center"
+        )}>
+        {checked ? (theme === "light" ? <IconCheckLight /> : <IconCheckDark />) : null}
+      </div>
+    </div>
+  );
+};
+
 const WhiteButton: FC<ButtonProps> = (props) => {
   const { theme } = useTheme();
   return (
@@ -116,3 +139,5 @@ const WhiteButton: FC<ButtonProps> = (props) => {
 };
 
 Button.WhiteButton = WhiteButton;
+
+Button.CheckButton = CheckButton;
