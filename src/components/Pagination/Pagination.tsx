@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState, CSSProperties, useMemo } from "react";
+"use client";
+
+import React, { FC, useState, useEffect, useMemo } from "react";
 import clsx from "clsx";
 import useTheme from "../../provider/useTheme";
 import Arrow from "../../assets/icons/text-arrow.svg";

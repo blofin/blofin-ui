@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { FC, ReactNode } from "react";
 import { BUITheme } from "../..";
 import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";

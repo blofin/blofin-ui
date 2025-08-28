@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC, useContext, useEffect, useImperativeHandle, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { bgStyles, iconstyles, textStyles, toastVariants } from "./styles";

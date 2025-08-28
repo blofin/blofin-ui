@@ -1,4 +1,6 @@
-import { FC, ReactNode } from "react";
+"use client";
+
+import React, { FC, ReactNode } from "react";
 
 interface SortItemProps {
   children: ReactNode;

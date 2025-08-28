@@ -1,3 +1,5 @@
+"use client";
+
 import { forwardRef, useCallback, useMemo, useRef, useState } from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";

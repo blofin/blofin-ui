@@ -1,4 +1,6 @@
-import { FC } from "react";
+"use client";
+
+import React, { FC, ReactNode } from "react";
 import Control from "./Control";
 import FormItemLabel from "./FormLabel";
 import { FormItemProps } from "./interface";

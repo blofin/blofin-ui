@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState, FC, ReactNode, useEffect } from "react";
 
 import { Typography } from "../Typography/Typography";

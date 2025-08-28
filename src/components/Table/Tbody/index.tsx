@@ -1,4 +1,6 @@
-import { FC, forwardRef } from "react";
+"use client";
+
+import React, { FC, forwardRef } from "react";
 import { bgStyles, cssPosition } from "../css";
 import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";

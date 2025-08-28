@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 const useAlign = (target: HTMLDivElement | null) => {
@@ -18,7 +20,7 @@ const useAlign = (target: HTMLDivElement | null) => {
     const top = rect.top + scrollTop;
     return { left: left, top: top };
   };
-  
+
   const resize = () => {
     const wrapper = target;
     if (wrapper) {

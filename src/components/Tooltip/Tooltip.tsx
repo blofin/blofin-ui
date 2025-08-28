@@ -1,4 +1,6 @@
-import { FC, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+"use client";
+
+import React, { FC, useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BUITheme, useTheme } from "../..";
 import ArrowIcon from "../../assets/icons/arrow-dark.svg";
@@ -14,7 +16,7 @@ interface TooltipProps {
   placement: TooltipPlacement;
   flipPlacement?: TooltipPlacement[];
   title?: string;
-  content?: ReactNode;
+  content?: React.ReactNode;
   children?: React.ReactNode;
   isShow?: boolean;
   className?: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import { format } from "date-fns";
-import * as React from "react";
+import React, { FC, useState, useEffect } from "react";
 import { Typography } from "./../Typography/Typography";
 import ArrowDownLine from "../../assets/icons/arrow-down-l-line.svg";
 import ArrowLeftLine from "../../assets/icons/arrow-left-l-line.svg";

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { Fragment, forwardRef, useImperativeHandle, useMemo, useState } from "react";
 import { BUIComponentSize } from "../..";
 import useTheme from "../../provider/useTheme";

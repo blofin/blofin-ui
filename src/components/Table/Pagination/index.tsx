@@ -1,4 +1,6 @@
-import { FC } from "react";
+"use client";
+
+import React, { FC, ReactNode } from "react";
 import styles from "../index.module.scss";
 import { Direction } from "../interface";
 import { Button } from "../../Button";

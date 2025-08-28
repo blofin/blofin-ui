@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import styles from "./index.module.scss";
 import { contentStyles } from "./styles";

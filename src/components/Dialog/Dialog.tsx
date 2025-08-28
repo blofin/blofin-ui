@@ -1,4 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
+"use client";
+
+import React, { FC, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 import { BUIComponentSize, BUITheme } from "../../types/component";

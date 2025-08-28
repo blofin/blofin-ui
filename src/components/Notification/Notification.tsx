@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC, useContext, useEffect, useMemo } from "react";
 import ReactDOM from "react-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";

@@ -1,3 +1,5 @@
+"use client";
+
 import { useContext } from "react";
 import { NoticeContext, configType } from "../provider/NoticeProvider";
 

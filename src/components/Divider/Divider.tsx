@@ -1,3 +1,6 @@
+"use client";
+
+import React, { FC } from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";

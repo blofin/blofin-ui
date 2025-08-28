@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { FC, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import CloseIcon from "../../assets/icons/close.svg";
 import useTheme from "../../provider/useTheme";

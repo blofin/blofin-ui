@@ -1,3 +1,5 @@
+"use client";
+
 import { InputHTMLAttributes, ReactNode, forwardRef } from "react";
 import { BUITheme, useTheme } from "../..";
 import { cn } from "../../utils/utils";

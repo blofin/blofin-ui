@@ -1,4 +1,6 @@
-import { FC, useEffect, useRef } from "react";
+"use client";
+
+import React, { FC, ReactNode, useEffect, useRef, useState } from "react";
 import sortable from "sortablejs";
 
 interface SortableProps {

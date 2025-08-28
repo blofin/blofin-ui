@@ -1,4 +1,6 @@
-import { FC } from 'react';
+"use client";
+
+import React, { FC } from 'react';
 import styles from './index.module.scss';
 
 const Empty: FC<{ children?: React.ReactNode }> = (props) => {
