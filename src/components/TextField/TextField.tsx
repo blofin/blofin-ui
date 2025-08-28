@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from "react";
+import React, { FC, forwardRef, ForwardRefRenderFunction, InputHTMLAttributes, LegacyRef, ReactNode } from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";

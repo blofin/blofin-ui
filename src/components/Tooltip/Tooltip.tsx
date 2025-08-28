@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useState, useRef, useEffect } from "react";
+import React, { FC, useState, useRef, useEffect, useMemo } from "react";
 import ReactDOM from "react-dom";
 import { BUITheme, useTheme } from "../..";
 import ArrowIcon from "../../assets/icons/arrow-dark.svg";

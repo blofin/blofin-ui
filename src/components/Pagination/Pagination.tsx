@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useState, useEffect, useMemo } from "react";
+import React, { FC, useState, useEffect, useMemo, CSSProperties, useRef } from "react";
 import clsx from "clsx";
 import useTheme from "../../provider/useTheme";
 import Arrow from "../../assets/icons/text-arrow.svg";
