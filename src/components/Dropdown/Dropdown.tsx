@@ -1,4 +1,6 @@
-import { FC, useEffect, useRef, useState } from "react";
+"use client";
+
+import React, { FC, useState, useRef, useEffect } from "react";
 import ArrowFill from "../../assets/icons/arrow-fill.svg";
 import ArrowLine from "../../assets/icons/arrow-line.svg";
 import useAlign from "../../hooks/useAlign";

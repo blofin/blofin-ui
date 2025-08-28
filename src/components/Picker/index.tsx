@@ -1,4 +1,6 @@
-import { useEffect, useMemo } from "react";
+"use client";
+
+import React, { FC, useState, useEffect, useRef } from "react";
 import usePickerMethod from "./hooks/usePickerMethod";
 import styles from "./index.module.scss";
 import useTheme from "../../provider/useTheme";

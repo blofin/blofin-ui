@@ -1,4 +1,6 @@
-import { forwardRef, LegacyRef, ReactNode } from "react";
+"use client";
+
+import React, { FC, forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from "react";
 import { BUITheme } from "../..";
 import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";

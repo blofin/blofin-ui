@@ -1,3 +1,5 @@
+"use client";
+
 import { TableColumnProps } from "../interface";
 import { defaultWidth } from "../Table";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import cloneDeep from "lodash/cloneDeep";
 import isArray from "lodash/isArray";
 import { FormProps, innerCallbackType } from "./interface";

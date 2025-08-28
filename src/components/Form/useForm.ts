@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef } from 'react';
 import { FormInstance } from './interface';
 import Store from './store';

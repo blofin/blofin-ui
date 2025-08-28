@@ -1,3 +1,5 @@
+"use client";
+
 import debounce from 'lodash/debounce';
 import throttle from 'lodash/throttle';
 import { useRef, useEffect, useCallback, useState, EffectCallback } from 'react';

@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { FC, useState, useEffect, useRef } from "react";
 import { addDays } from "date-fns";
 import { DateRange, Matcher } from "react-day-picker";
 import { Calendar } from "../Calendar";

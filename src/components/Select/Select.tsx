@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, ReactNode, forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BUITheme, TextField, Typography, useTheme } from "../..";

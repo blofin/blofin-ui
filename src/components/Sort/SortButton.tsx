@@ -1,3 +1,5 @@
+"use client";
+
 import ArrowDown from "../../assets/icons/arrow-down.svg";
 import ArrowUp from "../../assets/icons/arrow-up.svg";
 import { CSSProperties, FC, useContext, useMemo } from "react";

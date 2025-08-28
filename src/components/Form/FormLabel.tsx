@@ -1,4 +1,6 @@
-import { FC } from "react";
+"use client";
+
+import React, { FC, ReactNode } from "react";
 import { FormItemLabelProps } from "./interface";
 
 const FormItemLabel: FC<FormItemLabelProps> = (props) => {

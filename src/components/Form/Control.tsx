@@ -1,3 +1,5 @@
+"use client";
+
 import isObject from "lodash/isObject";
 import React, { cloneElement } from "react";
 import { FormContext } from "./context";

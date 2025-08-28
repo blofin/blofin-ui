@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";

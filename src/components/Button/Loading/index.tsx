@@ -1,3 +1,5 @@
+"use client";
+
 import { FC } from "react";
 import { ButtonSize } from "../types";
 import styles from "./index.module.scss";

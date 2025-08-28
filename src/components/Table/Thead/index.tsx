@@ -1,3 +1,5 @@
+"use client";
+
 import SortButton, { TextAlign } from "../../Sort/SortButton";
 import SortGroup from "../../Sort/SortGroup";
 import { forwardRef, useImperativeHandle, useRef } from "react";

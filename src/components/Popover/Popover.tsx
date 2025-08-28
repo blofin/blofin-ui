@@ -1,3 +1,5 @@
+"use client";
+
 import { Placement } from "@popperjs/core";
 import React, { FC, forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";

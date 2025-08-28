@@ -1,4 +1,6 @@
-import { FC, useReducer, forwardRef, useImperativeHandle, useEffect } from "react";
+"use client";
+
+import React, { FC, useReducer, forwardRef, useImperativeHandle, useEffect } from "react";
 import { Context, reducer, SortEnum, State } from "./reducer";
 
 interface SortGroupProps {

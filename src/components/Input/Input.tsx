@@ -1,4 +1,6 @@
-import { FC, InputHTMLAttributes, useEffect, useState } from "react";
+"use client";
+
+import React, { FC, forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from "react";
 import styles from "./styles";
 
 export interface InputProps
