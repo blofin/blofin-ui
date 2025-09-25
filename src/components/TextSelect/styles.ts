@@ -38,11 +38,21 @@ const activeTextStyles = cva("", {
 });
 
 const baseIconStyles = "bu-mr-[8px] bu-h-[16px] bu-w-[16px]";
+const baseIconStylesFill = "bu-mr-[8px] bu-h-[12px] bu-w-[12px]";
 
 const iconStyles = cva("", {
   variants: {
     theme: {
       light: "bu-text-dark-background",
+      dark: "bu-text-light-background"
+    }
+  }
+});
+
+const fillIconStyles = cva("", {
+  variants: {
+    theme: {
+      light: "bu-text-light-label-40",
       dark: "bu-text-light-background"
     }
   }
@@ -59,13 +69,16 @@ const disabledIconStyles = cva("", {
 
 const iconStylesVariants = ({
   theme,
-  disabled = false
+  disabled = false,
+  variant = "line"
 }: {
   theme: BUITheme;
   disabled?: boolean;
+  variant?: "line" | "fill";
 }) => {
-  const styles = disabled ? disabledIconStyles({ theme }) : iconStyles({ theme });
-  return `${baseIconStyles} ${styles}`;
+  const iconStylesDefault = variant === "fill" ? fillIconStyles({ theme }) : iconStyles({ theme });
+  const styles = disabled ? disabledIconStyles({ theme }) : iconStylesDefault;
+  return `${variant === "fill" ? baseIconStylesFill : baseIconStyles} ${styles}`;
 };
 
 const searchStyles = cva("bu-sticky bu-top-0 bu-mb-[8px] bu-px-[8px] bu-pt-[8px]", {
