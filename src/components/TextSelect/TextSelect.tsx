@@ -382,7 +382,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
                   !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
                 }, 0);
               }}
-              className={`${iconStylesVariants({ theme, disabled: inputDisabled })} ${
+              className={`${iconStylesVariants({ theme, disabled: inputDisabled, variant })} ${
                 isFocus ? styles.roate : ""
               }`}
             />
