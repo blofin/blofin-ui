@@ -237,7 +237,7 @@ const ghostDisabledStyles = cva("", {
         "hover:bu-text-dark-label-40",
         "bu-border",
         "bu-border-solid",
-        "bu-border-dark-fill-secondary",
+        "bu-border-dark-line-secondary",
         "hover:bu-bg-transparent"
       ]
     }
