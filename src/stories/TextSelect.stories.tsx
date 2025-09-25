@@ -181,6 +181,20 @@ export const Primary: Story = {
                 <div>custom</div>
               </TextSelect>
             </div>
+            <div>
+              <TextSelect
+                preventDuplicateSelection={false}
+                placeholder={placeholder}
+                inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
+                defaultValue={value}
+                disabled={"limit"}
+                options={accountOptions}
+                onChange={change}
+                inputChange={inputChange}
+                variant="fill">
+                <div>custom</div>
+              </TextSelect>
+            </div>
             {/* <TextSelect
                 ref={selectRef}
                 defaultValue={value1}

@@ -23,6 +23,7 @@ import {
   searchStyles
 } from "./styles";
 import SelectArrow from "../../assets/icons/text-arrow.svg";
+import ArrowDown from "../../assets/icons/arrow-down.svg";
 import SearchIcon from "../../assets/icons/search.svg";
 import { CustomFields } from "../../types/component";
 import { InputSize } from "../TextField/TextField";
@@ -68,6 +69,7 @@ export interface TextSelectProps {
   size?: InputSize;
   highlightMode?: "text" | "background";
   preventHideFun?: boolean;
+  variant?: "fill" | "line";
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -265,7 +267,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     error,
     size = "md",
     highlightMode,
-    preventHideFun
+    preventHideFun,
+    variant = "line"
   } = props;
 
   const targetRef = useRef<HTMLDivElement | null>(null);
@@ -342,6 +345,8 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     };
   }, []);
 
+  const ArrorIcon = variant === "fill" ? ArrowDown : SelectArrow;
+
   return (
     <div className="bu-relative bu-cursor-pointer" ref={targetRef}>
       <TextField
@@ -370,7 +375,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         endAdornment={
           !hideEndAdornment &&
           base === "input" && (
-            <SelectArrow
+            <ArrorIcon
               onClick={() => {
                 if (inputDisabled) return;
                 setTimeout(() => {
@@ -405,7 +410,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
           }}>
           <div className="bu-pl-[8px] bu-text-[12px]">{selectedLabelNode}</div>
           {!hideEndAdornment && (
-            <SelectArrow
+            <ArrorIcon
               onClick={() => {
                 if (inputDisabled) return;
                 setTimeout(() => {
