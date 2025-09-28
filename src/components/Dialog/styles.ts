@@ -31,7 +31,7 @@ export const iconStyles = cva(
   {
     variants: {
       theme: {
-        dark: "bu-text-dark-label",
+        dark: "bu-text-dark-label-40",
         light: "bu-text-light-label-40"
       }
     }
