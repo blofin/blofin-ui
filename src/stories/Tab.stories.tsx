@@ -67,26 +67,31 @@ export const Primary: Story = {
   render: () => {
     const mode = useMode();
 
-    const [index,setIndex]=useState(0)
+    const [index, setIndex] = useState(0);
 
-    const ref=useRef<TabRef>(null)
+    const ref = useRef<TabRef>(null);
 
     const change = (key: string) => {
       console.log(key);
     };
-    
 
-    useEffect(()=>{
-      setTimeout(()=>{
-        ref.current?.setTab(1)
-      },1000)
-    },[])
-
+    useEffect(() => {
+      setTimeout(() => {
+        ref.current?.setTab(1);
+      }, 1000);
+    }, []);
 
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div className="bu-w-full">
-          <Tab ref={ref} items={items} size="max" hideBorder tabWrapperClass='bu-justify-end' defaultIndex={index} change={change}>
+          <Tab
+            ref={ref}
+            items={items}
+            size="max"
+            hideBorder
+            tabWrapperClass="bu-justify-end"
+            defaultIndex={index}
+            change={change}>
             <input type="checkbox" />
           </Tab>
         </div>

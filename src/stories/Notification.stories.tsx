@@ -82,7 +82,7 @@ const ButtonGroup = () => {
         console.log("onClose");
       }
     });
-  }
+  };
 
   const [sum, setSum] = useState(1);
 

@@ -27,7 +27,7 @@ export const Primary: Story = {
     }, []);
 
     const cancel = () => {
-      console.log("cancel!!!!",show);
+      console.log("cancel!!!!", show);
     };
 
     return (

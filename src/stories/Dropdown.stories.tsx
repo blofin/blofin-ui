@@ -44,8 +44,7 @@ export const Primary = {
                   label: "Text3"
                 }
               ]}
-              variant="line"
-              >
+              variant="line">
               Here me
             </Dropdown>
           </div>

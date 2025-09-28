@@ -1,10 +1,8 @@
-import { DocsContainer, DocsContainerProps } from "@storybook/addon-docs";
-import { addons } from "@storybook/addons";
+import { DocsContainer } from "@storybook/addon-docs";
+import { addons } from "@storybook/manager-api";
 import { Preview } from "@storybook/react";
 import { themes } from "@storybook/theming";
-import { Renderer } from "@storybook/types";
 import { ReactNode, useEffect, useState } from "react";
-import { JSX } from "react/jsx-runtime";
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode";
 import useMode from "../src/hooks/useMode";
 import { ThemeProvider } from "../src/provider/ThemeProvider";
@@ -14,7 +12,6 @@ import "./index.scss";
 const channel = addons.getChannel();
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -31,9 +28,7 @@ export const parameters = {
     light: { ...themes.light }
   },
   docs: {
-    container: (
-      props: JSX.IntrinsicAttributes & DocsContainerProps<Renderer> & { children?: ReactNode }
-    ) => {
+    container: (props: any) => {
       const [isDark, setDark] = useState();
 
       useEffect(() => {
@@ -58,3 +53,4 @@ export const preview: Preview = {
     }
   ]
 };
+export const tags = ["autodocs"];

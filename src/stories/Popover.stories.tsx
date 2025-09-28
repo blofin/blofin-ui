@@ -83,7 +83,6 @@ export const Primary: Story = {
                       ref={childRef}
                       x={-6}
                       y={16}
-                     
                       content={
                         <ul>
                           <li className="bu-flex bu-justify-between">

@@ -8,7 +8,7 @@ const FormItem = Form.Item;
 export const Example = () => {
   const initialValues = {
     name: "hly",
-    age: 25,
+    age: 25
   };
 
   const formRef = useRef<FormInstance>(null);
@@ -44,5 +44,5 @@ export const Example = () => {
 };
 
 export default {
-  title: "Components/Form(Beta)",
+  title: "Components/Form(Beta)"
 };

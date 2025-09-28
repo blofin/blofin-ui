@@ -18,9 +18,12 @@ const ButtonGroup = () => {
   const info = () => {
     Toast.open({
       type: "info",
-      customTheme:"dark",
-      children:
-        <div>"Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!"</div>
+      customTheme: "dark",
+      children: (
+        <div>
+          "Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!"
+        </div>
+      )
     });
     // methods.info("Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!");
   };

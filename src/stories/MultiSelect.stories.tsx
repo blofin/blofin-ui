@@ -90,7 +90,7 @@ export const Primary: Story = {
             onChange={(vals) => {
               console.log("Selected values:", vals);
             }}
-            labelShowKey='label'
+            labelShowKey="label"
           />
         </div>
       </div>

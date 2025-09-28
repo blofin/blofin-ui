@@ -26,7 +26,7 @@ const meta: Meta<typeof TextField> = {
     variant: {
       options: ["filled", "outlined"],
       control: { type: "radio" }
-    },
+    }
   },
   parameters: { controls: { sort: "requiredFirst" } }
 };
@@ -43,7 +43,7 @@ type Story = StoryObj<typeof TextField>;
 export const Primary: Story = {
   args: {
     type: "text",
-    variant:"outlined"
+    variant: "outlined"
   }
 };
 
@@ -107,7 +107,7 @@ export const All: Story = {
     const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
     const mode = useMode();
     return (
-        /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+      /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
       <ThemeProvider value={{ theme: mode }}>
         <form
           className="bu-flex bu-max-w-sm bu-flex-col bu-gap-4"
