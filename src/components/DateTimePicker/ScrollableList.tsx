@@ -60,7 +60,9 @@ const ScrollableList: React.FC<ScrollableListProps> = ({
         return (
           <li
             key={item}
-            ref={(el) => (liRefs.current[index] = el)}
+            ref={(el) => {
+              liRefs.current[index] = el;
+            }}
             className={`bu-mb-2 bu-flex bu-h-[32px] bu-w-[48px]  bu-items-center bu-justify-center ${
               selectedItem === Number(item) ? TimeSelect({ theme }) : ""
             } ${isDisabled ? "bu-cursor-not-allowed" : "bu-cursor-pointer"}`}

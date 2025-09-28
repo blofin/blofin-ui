@@ -59,7 +59,7 @@ export interface FormItemProps<FormData = any> {
   label?: string;
   labelAlign?: 'left' | 'right';
   store?: FormInstance<FormData>;
-  children?: JSX.Element;
+  children?: React.ReactElement;
   field?: string;
 }
 

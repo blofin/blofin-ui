@@ -6,8 +6,8 @@ interface TableColumnProps<T = any> {
   fixed?: "right" | "left";
   width?: string;
   align?: "center" | "flex-start" | "flex-end";
-  render?: (record: T, index: number) => JSX.Element;
-  renderHeader?: (record: T[]) => JSX.Element;
+  render?: (record: T, index: number) => React.ReactElement;
+  renderHeader?: (record: T[]) => React.ReactElement;
   filter?: boolean;
   type?: SortType;
   onCell?: (record: T, index: number) => number;
@@ -29,7 +29,7 @@ interface TableProps<T = any> {
   changePagination?: (direction: Direction) => void;
   hidePagination?: boolean;
   paginationPosition?: "flex-start" | "center" | "flex-end";
-  renderEmpty?: JSX.Element;
+  renderEmpty?: React.ReactElement;
   theadClass?: string;
   tdClass?: string;
   scroll?: boolean;

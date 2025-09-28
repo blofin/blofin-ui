@@ -2,7 +2,7 @@ import { FC, useReducer, forwardRef, useImperativeHandle, useEffect } from "reac
 import { Context, reducer, SortEnum, State } from "./reducer";
 
 interface SortGroupProps {
-  children: JSX.Element;
+  children: React.ReactElement;
   type?: "single" | "multiple";
 }
 

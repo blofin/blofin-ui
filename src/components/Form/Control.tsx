@@ -25,11 +25,11 @@ class Control extends React.Component<ControlProps & FormItemProps> {
   cloneNode = () => {
     const { children, field } = this.props;
     const { store } = this.context;
-    if (isObject(children)) {
+    if (React.isValidElement(children)) {
       return cloneElement(children, {
         defaultValue: store?.getFieldValue(field as string),
         onChange: this.onChange,
-      });
+      } as any);
     } else {
       return children;
     }

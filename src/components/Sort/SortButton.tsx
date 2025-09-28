@@ -11,7 +11,7 @@ import clsx from "clsx";
 export type TextAlign = "flex-start" | "flex-end" | "center";
 
 export interface SortButtonProps {
-  children: JSX.Element;
+  children: React.ReactElement;
   onSortChange: (data: SortsData[] | SortsData) => void;
   sortKey: string;
   hideSort?: boolean;

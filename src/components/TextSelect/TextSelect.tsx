@@ -51,7 +51,7 @@ export interface TextSelectProps {
   hideEndAdornment?: boolean;
   readOnly?: boolean;
   scrollContainer?: HTMLDivElement | null;
-  children?: JSX.Element | ReactNode;
+  children?: React.ReactElement | ReactNode;
   auto?: boolean;
   search?: boolean;
   searchChange?: (value: string) => void;
