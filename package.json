@@ -56,8 +56,8 @@
     "tailwind-merge": "^1.13.1"
   },
   "peerDependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3",
