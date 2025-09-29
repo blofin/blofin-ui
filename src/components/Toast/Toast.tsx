@@ -1,31 +1,21 @@
-import React, { FC, useContext, useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { bgStyles, iconstyles, textStyles, toastVariants } from "./styles";
 import Info from "../../assets/icons/info.svg";
 import Warning from "../../assets/icons/warning.svg";
 import Success from "../../assets/icons/success.svg";
 import Danger from "../../assets/icons/danger.svg";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import styles from "./toast.module.scss";
 import useTheme from "../../provider/useTheme";
 import { BUIComponentType, BUITheme } from "../../types/component";
 import { NoticeContext } from "../../provider/NoticeProvider";
 import { createRoot } from "react-dom/client";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 interface ToastMsgProps {
   children: React.ReactNode;
   type: BUIComponentType;
   remove: () => void;
   customTheme?: BUITheme;
-}
-
-type Methods = (msg: string, type: BUIComponentType) => void;
-
-interface ToastRef {
-  info: Methods;
-  success: Methods;
-  warning: Methods;
-  danger: Methods;
 }
 
 const Icon: FC<{ type: BUIComponentType }> = ({ type }) => {
@@ -72,29 +62,50 @@ interface ToastItem {
   customTheme?: BUITheme;
 }
 
+const easingExit = [0.05, 0.03, 0.99, 0.28] as const;
+
+const variants: Variants = {
+  initial: { opacity: 0, y: -10 },
+  enter: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: "linear"
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    transition: {
+      duration: 0.4,
+      ease: easingExit
+    }
+  }
+};
+
 const ToastList: FC<{
   toasts: ToastItem[];
   onRemove: (id: number) => void;
 }> = ({ toasts, onRemove }) => {
   return (
-    <TransitionGroup className="bu-fixed bu-left-[50%] bu-top-[40px] bu-z-[99999] bu-translate-x-[-50%] bu-text-center">
-      {toasts.map(({ node, id, type, customTheme }) => (
-        <CSSTransition
+    <div className="bu-fixed bu-left-[50%] bu-top-[40px] bu-z-[99999] bu-translate-x-[-50%] bu-text-center">
+      <AnimatePresence initial={false}>
+        {toasts.map(({ node, id, type, customTheme }) => (
+          <motion.div
           key={id}
-          timeout={400}
-          classNames={{
-            enter: styles["toast-enter"],
-            enterActive: styles["toast-enter-active"],
-            exit: styles["toast-exit"],
-            exitActive: styles["toast-exit-active"]
-          }}
-          unmountOnExit>
-          <ToastMsg type={type} customTheme={customTheme} remove={() => onRemove(id)}>
-            {node}
-          </ToastMsg>
-        </CSSTransition>
-      ))}
-    </TransitionGroup>
+          variants={variants}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+          style={{ willChange: "transform, opacity" }}>
+            <ToastMsg type={type} customTheme={customTheme} remove={() => onRemove(id)}>
+              {node}
+            </ToastMsg>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
   );
 };
 
