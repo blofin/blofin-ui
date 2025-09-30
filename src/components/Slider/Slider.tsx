@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useMemo, useRef, useState } from "react";
+import * as React from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
@@ -142,7 +142,7 @@ const getMarkStyle = (
   );
 };
 
-export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
+export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, ref) => {
   const {
     value,
     onSliderChange,
@@ -161,9 +161,9 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
   } = props;
   const { theme } = useTheme();
 
-  const railRef = useRef<HTMLDivElement>(null);
+  const railRef = React.useRef<HTMLDivElement>(null);
 
-  const marksArray = useMemo(() => {
+  const marksArray = React.useMemo(() => {
     const num = Array.from(new Set(marks.concat(labels))).sort((a, b) => a - b);
     const arr: { value: number; showLabel: boolean; showMark: boolean }[] = [];
     num.forEach((item) => {
@@ -178,12 +178,12 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     return arr;
   }, [marks, min, max, step, labels]);
 
-  const mouseDown = useRef<boolean>(false);
-  const [onMouseDown, setMouseDonw] = useState(false);
+  const mouseDown = React.useRef<boolean>(false);
+  const [onMouseDown, setMouseDonw] = React.useState(false);
 
-  const decimalPlaces = useMemo(() => getDecimalPlaces(step), [step]);
+  const decimalPlaces = React.useMemo(() => getDecimalPlaces(step), [step]);
 
-  const handleDrag = useCallback(
+  const handleDrag = React.useCallback(
     (e: MouseEvent) => {
       e.stopPropagation();
       e.preventDefault();
@@ -204,7 +204,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     [min, max, step, onSliderChange, decimalPlaces]
   );
 
-  const handleMouseMove = useCallback(
+  const handleMouseMove = React.useCallback(
     (e: MouseEvent) => {
       if (mouseDown.current) {
         handleDrag(e);

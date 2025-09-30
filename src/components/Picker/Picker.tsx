@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import * as React from "react";
 import usePickerMethod from "./hooks/usePickerMethod";
 import styles from "./index.module.scss";
 import useTheme from "../../provider/useTheme";
@@ -18,7 +18,7 @@ const Picker = ({ list, selectedValue, setValue }: PickerProps) => {
 
   const { theme } = useTheme();
 
-  const getCols = useMemo(() => {
+  const getCols = React.useMemo(() => {
     const result = [];
     for (let i = 0; i < list.length; i++) {
       result.push(
@@ -43,11 +43,11 @@ const Picker = ({ list, selectedValue, setValue }: PickerProps) => {
     return result;
   }, [list, selected]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setValue(selected);
   }, [selected]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const index = list.findIndex((item) => item.value === selectedValue);
     const num = index > -1 ? index : list.length - 1;
     selectIndex(num);
@@ -65,4 +65,4 @@ const Picker = ({ list, selectedValue, setValue }: PickerProps) => {
   );
 };
 
-export default Picker;
+export { Picker };

@@ -1,4 +1,4 @@
-import { FC, ReactNode, forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import * as React from "react";
 import { createPortal } from "react-dom";
 import { BUITheme } from "../../types/component";
 import useTheme from "../../provider/useTheme";
@@ -37,10 +37,10 @@ type SelectMenuProps = {
   theme: BUITheme;
   offsetParent?: number;
   menuWrapperClassName?: string;
-  customSelectItems?: (item: SelectItem) => ReactNode;
+  customSelectItems?: (item: SelectItem) => React.ReactNode;
   search?: boolean;
   searchClear?: boolean;
-  searchEmpty?: ReactNode;
+  searchEmpty?: React.ReactNode;
   searchChange?: (value: string) => void;
   rowKey?: string;
   styles?: object;
@@ -49,7 +49,7 @@ type SelectMenuProps = {
   container?: Element;
 };
 
-const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
+const SelectMenu = React.forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
   const {
     value,
     items,
@@ -72,9 +72,9 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
     container
   } = props;
 
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const targetRef = React.useRef<HTMLDivElement | null>(null);
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const { styles, attributes, update, state } = usePopper(parent, targetRef.current, {
     placement: align === "left" ? "bottom-start" : "bottom-end",
@@ -99,7 +99,7 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
     searchChange && searchChange(value);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (update) {
       update();
     }
@@ -177,7 +177,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   arrowClassName?: string;
   menuWrapperClassName?: string;
   scrollable?: boolean;
-  wrapper?: (children: ReactNode) => ReactNode;
+  wrapper?: (children: React.ReactNode) => React.ReactNode;
   activeColor?: boolean;
   offsetParent?: number;
   trigger?: "click" | "hover";
@@ -185,8 +185,8 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   labelId?: string;
   search?: boolean;
   searchClear?: boolean;
-  searchEmpty?: ReactNode;
-  customSelectItems?: (item: SelectItem) => ReactNode;
+  searchEmpty?: React.ReactNode;
+  customSelectItems?: (item: SelectItem) => React.ReactNode;
   searchChange?: (value: string) => void;
   rowKey?: string;
   labelField?: string;
@@ -198,7 +198,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   container?: Element;
 }
 
-const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
+const Select = React.forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   const {
     name,
     value,
@@ -237,15 +237,15 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
 
   const { isClient } = useClient();
 
-  const selectRef = useRef<HTMLDivElement | null>(null);
+  const selectRef = React.useRef<HTMLDivElement | null>(null);
 
-  const customeRef = useRef<HTMLDivElement | null>(null);
+  const customeRef = React. useRef<HTMLDivElement | null>(null);
 
   const [enter, setEnter] = useDelayEvent<boolean>(false, 100);
 
   const keyByItems = keyBy(selectItems, "value");
 
-  const keyByItemsMemo = useMemo(() => {
+  const keyByItemsMemo = React.useMemo(() => {
     return keyByItems;
   }, [value, selectItems]);
 
@@ -284,7 +284,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     searchChange && searchChange("");
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (trigger === "click") {
       document.addEventListener("click", handleClickOutside);
     }

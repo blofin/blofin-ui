@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { ButtonHTMLAttributes, FC } from 'react';
 import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";
 import buttonVariants, { refreshIconStyles } from "./styles";
@@ -11,7 +10,7 @@ import IconCheckLight from "../../assets/icons/check-line-light.svg";
 import IconCheckDark from "../../assets/icons/check-line-dark.svg";
 import clsx from "clsx";
 
-export interface ButtonProps extends Base, ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends Base, React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button type
    */
@@ -111,7 +110,7 @@ export const Button = ({
   );
 };
 
-const CheckButton: FC<ButtonProps & { checked: boolean }> = (props) => {
+const CheckButton: React.FC<ButtonProps & { checked: boolean }> = (props) => {
   const { theme } = useTheme();
 
   const { checked } = props;
@@ -139,7 +138,7 @@ const CheckButton: FC<ButtonProps & { checked: boolean }> = (props) => {
   );
 };
 
-const WhiteButton: FC<ButtonProps> = (props) => {
+const WhiteButton: React.FC<ButtonProps> = (props) => {
   const { theme } = useTheme();
   return (
     <Button

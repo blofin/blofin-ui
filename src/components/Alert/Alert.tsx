@@ -1,4 +1,4 @@
-import { useRef, useState, FC, ReactNode, useEffect } from "react";
+import * as React from "react";
 
 import { Typography } from "../Typography/Typography";
 import { alertIconVariants, alertBgVariants } from "./styles";
@@ -16,7 +16,7 @@ export type AlertType = "doubt" | "warning" | "success" | "danger";
 
 export interface Props {
   type: AlertType;
-  content: string | ReactNode;
+  content: string | React.ReactNode;
   buttonText?: string;
   showCloseIcon?: boolean;
   showUnderline?: boolean;
@@ -24,7 +24,7 @@ export interface Props {
   buttonCallback?: () => void;
 }
 
-export const Alert: FC<Props> = ({
+export const Alert: React.FC<Props> = ({
   type,
   content,
   buttonText,
@@ -33,9 +33,9 @@ export const Alert: FC<Props> = ({
   showUnderline = true,
   buttonCallback
 }) => {
-  const [isClose, setIsClose] = useState(false);
-  const [isMultiRow, setIsMultiRow] = useState(false);
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [isClose, setIsClose] = React.useState(false);
+  const [isMultiRow, setIsMultiRow] = React.useState(false);
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   const icons = {
     doubt: <Question className={alertIconVariants({ type })} />,
@@ -52,7 +52,7 @@ export const Alert: FC<Props> = ({
     buttonCallback && buttonCallback();
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const height = containerRef.current?.getBoundingClientRect()?.height || BarHeight;
     setIsMultiRow(height > BarHeight);
   }, []);

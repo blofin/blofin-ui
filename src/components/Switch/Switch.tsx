@@ -1,4 +1,4 @@
-import { FC } from "react";
+import * as React from "react";
 import styles from "./index.module.scss";
 import { bgStyle, moveSize, switchSize, thumbSize } from "./styles";
 import useTheme from "../../provider/useTheme";
@@ -10,7 +10,7 @@ interface SwitchProps {
   className?: string;
 }
 
-export const Switch: FC<SwitchProps> = ({ check, onChange, size = "medium", className = "" }) => {
+export const Switch: React.FC<SwitchProps> = ({ check, onChange, size = "medium", className = "" }) => {
   const { theme } = useTheme();
 
   const change = () => {

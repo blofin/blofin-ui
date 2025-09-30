@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode, forwardRef } from "react";
+import * as React from "react";
 import { cn } from "../../utils/utils";
 import styles from "./Checkbox.module.scss";
 import {
@@ -13,13 +13,13 @@ import {
 import { BUITheme } from "../../types/component";
 import useTheme from "../../provider/useTheme";
 
-export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-  label?: ReactNode;
+export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+  label?: React.ReactNode;
   theme?: BUITheme;
   size?: "small" | "medium";
 }
 
-const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
+const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const {
     label,
     theme: mode,

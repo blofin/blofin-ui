@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import { BUITheme } from "../../types/component";
 import useTheme from "../../provider/useTheme";
@@ -15,7 +15,7 @@ interface TooltipProps {
   placement: TooltipPlacement;
   flipPlacement?: TooltipPlacement[];
   title?: string;
-  content?: ReactNode;
+  content?: React.ReactNode;
   children?: React.ReactNode;
   isShow?: boolean;
   className?: string;
@@ -36,7 +36,7 @@ type ContentProps = Omit<TooltipProps, "children"> & {
   theme?: BUITheme;
 };
 
-const Content: FC<ContentProps> = ({
+const Content: React.FC<ContentProps> = ({
   title,
   content,
   placement,
@@ -51,7 +51,7 @@ const Content: FC<ContentProps> = ({
   x,
   y = 0
 }) => {
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const targetRef = React.useRef<HTMLDivElement | null>(null);
 
   const { styles, attributes, update, state } = usePopper(parent, targetRef.current, {
     placement: PLACEMENT[placement],
@@ -72,7 +72,7 @@ const Content: FC<ContentProps> = ({
     ]
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (update) {
       update();
     }
@@ -117,18 +117,18 @@ const Content: FC<ContentProps> = ({
   );
 };
 
-const Tooltip: FC<TooltipProps> = ({
+const Tooltip: React.FC<TooltipProps> = ({
   children,
   isShow,
   theme: toolTipTheme,
   containerClassName,
   ...props
 }) => {
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const targetRef = React.useRef<HTMLDivElement | null>(null);
 
   const [enter, setEnter] = useDelayEvent<boolean>(false, 300, true, true);
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = React.useState(false);
 
   const { isClient } = useClient();
 
@@ -142,11 +142,11 @@ const Tooltip: FC<TooltipProps> = ({
 
   const { theme: mode } = useTheme();
 
-  const theme = useMemo(() => {
+  const theme = React.useMemo(() => {
     return toolTipTheme ? toolTipTheme : mode;
   }, [toolTipTheme, mode]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isShow !== undefined) {
       setTimeout(() => {
         setShow(isShow);

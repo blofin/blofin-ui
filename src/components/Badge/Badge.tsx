@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
@@ -16,7 +16,7 @@ export interface BadgeProps {
   /**
    * Badge contents
    */
-  label: ReactNode;
+  label: React.ReactNode;
 
   theme?: BUITheme;
 

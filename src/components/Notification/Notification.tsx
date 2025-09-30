@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useMemo } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import useTheme from "../../provider/useTheme";
 import Info from "../../assets/icons/info.svg";
@@ -20,7 +20,7 @@ interface NotificationMsgProps {
   remove: () => void;
 }
 
-const Icon: FC<{ type: BUIComponentType }> = ({ type }) => {
+const Icon: React.FC<{ type: BUIComponentType }> = ({ type }) => {
   const { theme } = useTheme();
   const icons = {
     info: <Info className={iconstyles(type, theme)} />,
@@ -31,7 +31,7 @@ const Icon: FC<{ type: BUIComponentType }> = ({ type }) => {
   return <>{icons[type]}</>;
 };
 
-const NotificationMsg: FC<NotificationMsgProps> = ({
+const NotificationMsg: React.FC<NotificationMsgProps> = ({
   title,
   children,
   autoClose,
@@ -40,7 +40,7 @@ const NotificationMsg: FC<NotificationMsgProps> = ({
 }) => {
   const { theme } = useTheme();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (autoClose === false) return;
     const delay = typeof autoClose === "number" ? autoClose : 3000;
     const timer = setTimeout(() => {
@@ -98,7 +98,7 @@ const rightVariants: Variants = {
   exit: { opacity: 0, x: 16, transition: { duration: DURATION, ease: EASING_EXIT } }
 };
 
-const StackLeft: FC<{
+const StackLeft: React.FC<{
   items: {
     title: React.ReactNode;
     node: React.ReactNode;
@@ -110,7 +110,7 @@ const StackLeft: FC<{
   positionClass: string;
   remove: (id: number) => void;
 }> = ({ items, positionClass, remove }) => {
-  const sorted = useMemo(() => [...items].sort((a, b) => a.id - b.id), [items]);
+  const sorted = React.useMemo(() => [...items].sort((a, b) => a.id - b.id), [items]);
   return (
     <div
       className={`${positionClass} bu-z-[99999] bu-w-[360px] bu-flex bu-flex-col bu-gap-[12px]`}
@@ -145,7 +145,7 @@ const StackLeft: FC<{
   );
 };
 
-const StackRight: FC<{
+const StackRight: React.FC<{
   items: {
     title: React.ReactNode;
     node: React.ReactNode;
@@ -158,7 +158,7 @@ const StackRight: FC<{
   remove: (id: number) => void;
   reverse?: boolean; 
 }> = ({ items, positionClass, remove, reverse }) => {
-  const sorted = useMemo(() => [...items].sort((a, b) => a.id - b.id), [items]);
+  const sorted = React.useMemo(() => [...items].sort((a, b) => a.id - b.id), [items]);
   return (
     <div
       className={`${positionClass} bu-z-[99999] bu-w-[360px] bu-flex ${
@@ -202,7 +202,7 @@ const NotificationContainer = () => {
     notificationListRightBottom,
     notificationListRightTop,
     remove
-  } = useContext(NoticeContext);
+  } = React.useContext(NoticeContext);
 
   return (
     <>

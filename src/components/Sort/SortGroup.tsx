@@ -1,4 +1,4 @@
-import { FC, useReducer, forwardRef, useImperativeHandle, useEffect } from "react";
+import * as React from "react";
 import { Context, reducer, SortEnum, State } from "./reducer";
 
 interface SortGroupProps {
@@ -6,21 +6,21 @@ interface SortGroupProps {
   type?: "single" | "multiple";
 }
 
-const SortGroup = forwardRef<{ restSort: (callBack:()=>void) => void }, SortGroupProps>(
+const SortGroup = React.forwardRef<{ restSort: (callBack: () => void) => void }, SortGroupProps>(
   ({ children, type = "single" }, ref) => {
-    const [state, dispatch] = useReducer(reducer, { ...State, type });
+    const [state, dispatch] = React.useReducer(reducer, { ...State, type });
 
-    const restSort = (callBack:()=>void) => {
+    const restSort = (callBack: () => void) => {
       dispatch({
         type: "restSort",
         payload: { sort: "", sortType: SortEnum.default },
         reset: () => {
-          callBack()
+          callBack();
         }
       });
     };
 
-    useImperativeHandle(ref, () => {
+    React.useImperativeHandle(ref, () => {
       return {
         restSort
       };
@@ -30,4 +30,4 @@ const SortGroup = forwardRef<{ restSort: (callBack:()=>void) => void }, SortGrou
   }
 );
 
-export default SortGroup;
+export { SortGroup };

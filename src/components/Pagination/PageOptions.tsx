@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import * as React from "react";
 import { TextSelect, TextSelectRefProps } from "../TextSelect/TextSelect";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
@@ -17,7 +17,7 @@ export interface PageOptionProps {
 }
 
 function PageOption(props: PageOptionProps) {
-  const selectRef = useRef<TextSelectRefProps>(null);
+  const selectRef = React.useRef<TextSelectRefProps>(null);
   const { theme: defaultTheme } = useTheme();
   const {
     sizeCanChange = false,
@@ -82,4 +82,4 @@ function PageOption(props: PageOptionProps) {
   ) : null;
 }
 
-export default PageOption;
+export { PageOption };

@@ -1,5 +1,5 @@
 import { Placement } from "@popperjs/core";
-import React, { FC, forwardRef, useEffect, useImperativeHandle, useMemo, useRef } from "react";
+import * as React from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
 import useClient from "../../hooks/useClient";
@@ -25,8 +25,8 @@ export interface PopoverRefProps {
   close: () => void;
 }
 
-const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
-  useImperativeHandle(ref, () => {
+const Popover = React.forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
+  React.useImperativeHandle(ref, () => {
     return {
       close: hide
     };
@@ -46,15 +46,15 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
     onVisibleChange
   } = props;
 
-  const isEnabled = useMemo(() => {
+  const isEnabled = React.useMemo(() => {
     return trigger === "click" ? false : true;
   }, [trigger]);
 
   const [showPopover, setShowPopover] = useDelayEvent<boolean>(false, 100, isEnabled);
 
-  const popoverRef = useRef<HTMLDivElement | null>(null);
+  const popoverRef = React.useRef<HTMLDivElement | null>(null);
 
-  const popoverElement = useRef<HTMLDivElement | null>(null);
+  const popoverElement = React.useRef<HTMLDivElement | null>(null);
 
   useOutsideClick(
     showPopover,
@@ -89,7 +89,7 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
     setShowPopover(false);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (update) {
       update();
     }
@@ -113,7 +113,7 @@ const Popover = forwardRef<PopoverRefProps, PopoverProps>((props, ref) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!showPopover) {
       afterClose && afterClose();
     }

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Sortable from "../components/Sortable";
+import { Sortable } from "../components/Sortable";
 import { useEffect, useState } from "react";
 import Checkbox from "../components/Checkbox/Checkbox";
 
-import SortItem from "../components/Sortable/SortItem";
+import { SortItem } from "../components/Sortable/SortItem";
 
 const meta: Meta<typeof Sortable> = {
   /* 👇 The title prop is optional.

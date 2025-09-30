@@ -1,4 +1,4 @@
-import { LegacyRef, ReactNode, forwardRef } from "react";
+import * as React from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { Typography } from "../Typography/Typography";
@@ -7,18 +7,18 @@ import styles from "./index.module.scss";
 
 export interface TextareaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   //   variant: InputVariant;
-  label?: ReactNode;
+  label?: React.ReactNode;
   theme?: BUITheme;
-  endAdornment?: ReactNode;
+  endAdornment?: React.ReactNode;
   disabled?: boolean;
   error?: boolean;
   textareaClassName?: string;
   helperText?: string;
-  row?:number
-  className?:string;
+  row?: number;
+  className?: string;
 }
 
-const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => {
+const TextArea = React.forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => {
   const { theme } = useTheme();
 
   const {
@@ -29,7 +29,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
     error,
     theme: mode,
     helperText,
-    row=4,
+    row = 4,
     className,
     ...otherProps
   } = props;
@@ -52,10 +52,12 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
         }>
         <textarea
           id={typeof label === "string" ? (id ? id : `bui-${label}`) : undefined}
-          ref={ref as LegacyRef<HTMLTextAreaElement>}
+          ref={ref as React.LegacyRef<HTMLTextAreaElement>}
           disabled={disabled}
           rows={row}
-          className={`${styles.hideScrollbar} ${textAreaStyles({ theme: mode ? mode : theme })} ${className}`}
+          className={`${styles.hideScrollbar} ${textAreaStyles({
+            theme: mode ? mode : theme
+          })} ${className}`}
           {...otherProps}></textarea>
         {endAdornment && (
           <span
@@ -79,4 +81,4 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
   );
 });
 
-export default TextArea;
+export { TextArea };

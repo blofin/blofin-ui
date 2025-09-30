@@ -1,11 +1,11 @@
-import { ReactNode, forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import * as React from "react";
 import styles from "./index.module.scss";
 import { contentStyles } from "./styles";
 import useLatest from "../../hooks/useLatest";
 
 interface PopupProps {
-  title: ReactNode;
-  content: ReactNode;
+  title: React.ReactNode;
+  content: React.ReactNode;
   cancel?: () => void;
   distance?: number;
   disabled?: boolean;
@@ -17,8 +17,8 @@ export interface PopupRef {
   close: () => void;
 }
 
-const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
-  useImperativeHandle(ref, () => {
+const Popup = React.forwardRef<PopupRef, PopupProps>((props, ref) => {
+  React.useImperativeHandle(ref, () => {
     return {
       open: () => {
         setShow(true);
@@ -31,19 +31,19 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
 
   const { title, content, cancel, distance = 10, disabled = false, auto } = props;
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = React.useState(false);
 
-  const [isToped, setIsToped] = useState(false);
+  const [isToped, setIsToped] = React.useState(false);
 
-  const [isRight, setIsRight] = useState(false);
+  const [isRight, setIsRight] = React.useState(false);
 
-  const targetRef = useRef<HTMLDivElement>(null);
+  const targetRef = React.useRef<HTMLDivElement>(null);
 
-  const [targetRefHeight, setTargetRefHeight] = useState(0);
+  const [targetRefHeight, setTargetRefHeight] = React.useState(0);
 
-  const popupRef = useRef<HTMLDivElement>(null);
+  const popupRef = React.useRef<HTMLDivElement>(null);
 
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
   const cancelRef = useLatest(cancel);
 
@@ -68,7 +68,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (targetRef.current) {
       setTargetRefHeight(targetRef.current.clientHeight);
     }
@@ -97,7 +97,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
     }
   }, [show, auto]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (popupRef.current) {
       document.removeEventListener("click", handleClickOutside);
       document.addEventListener("click", handleClickOutside);
@@ -128,4 +128,4 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
   );
 });
 
-export default Popup;
+export { Popup };

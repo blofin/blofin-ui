@@ -1,13 +1,4 @@
-import {
-  FC,
-  ReactNode,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import * as React from "react";
 import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
 import { InputSize } from "../TextField/TextField";
@@ -62,7 +53,7 @@ export interface MultiSelectProps {
   searchClassName?: string;
   searchChange?: (value: string) => void;
   options: Option[];
-  optionsFormat?: (option: optionsFormatParams) => ReactNode;
+  optionsFormat?: (option: optionsFormatParams) => React.ReactNode;
   multiLimit?: number;
   values?: string[];
   onChange?: (value: string[]) => void;
@@ -82,7 +73,7 @@ interface OptionsProps extends MultiSelectProps {
   setIsHover?: (value: boolean) => void;
 }
 
-const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
+const Menus = React.forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
   const {
     parent,
     theme: propsTheme,
@@ -107,21 +98,21 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
 
   const realTheme = propsTheme ? propsTheme : theme;
 
-  const [realOptions, setRealOptions] = useState<Option[]>(options);
+  const [realOptions, setRealOptions] = React.useState<Option[]>(options);
 
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const targetRef = React.useRef<HTMLDivElement | null>(null);
 
-  const [optionHeight, setOptionHeight] = useState(0);
+  const [optionHeight, setOptionHeight] = React.useState(0);
 
   const { offset, resize } = useAlign(parent);
 
   const { offsetX, offsetY } = offset;
 
-  const [isBottomed, setIsBottomed] = useState(false);
+  const [isBottomed, setIsBottomed] = React.useState(false);
 
   const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = React.useState("");
 
   const handleSearch = (value: string) => {
     setSearchValue(value);
@@ -161,7 +152,7 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (scrollContainer) {
       scrollContainer.addEventListener("scroll", resize);
     }
@@ -172,7 +163,7 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
     };
   }, [scrollContainer]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (auto) {
       setTimeout(() => {
         if (targetRef.current) {
@@ -286,8 +277,8 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
     : null;
 });
 
-const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, ref) => {
-  useImperativeHandle(ref, () => ({
+const MultiSelect = React.forwardRef<MultiSelectRefProps, MultiSelectProps>((props, ref) => {
+  React.useImperativeHandle(ref, () => ({
     close: hide,
     clear: clear
   }));
@@ -308,15 +299,15 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
 
   const { theme } = useTheme();
 
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const targetRef = React.useRef<HTMLDivElement | null>(null);
 
   const realTheme = propsTheme ? propsTheme : theme;
 
-  const [isShowOptions, setIsShowOptions] = useState(false);
+  const [isShowOptions, setIsShowOptions] = React.useState(false);
 
-  const [isHover, setIsHover] = useState(false);
+  const [isHover, setIsHover] = React.useState(false);
 
-  const [currentSelected, setCurrentSelected] = useState<string[]>([]);
+  const [currentSelected, setCurrentSelected] = React.useState<string[]>([]);
 
   const hide = () => {
     setIsShowOptions(false);
@@ -342,7 +333,7 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
     setIsShowOptions(false);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (targetRef.current && !targetRef.current.contains(event.target as Node)) {
         setIsShowOptions(false);
@@ -355,13 +346,13 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
     };
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (values && Array.isArray(values)) {
       setCurrentSelected(values);
     }
   }, [values]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (onChange && typeof onChange === "function") {
       onChange(currentSelected);
     }
@@ -444,4 +435,4 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
   );
 });
 
-export default MultiSelect;
+export { MultiSelect };

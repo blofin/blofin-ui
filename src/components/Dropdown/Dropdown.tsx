@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import * as React from "react";
 import ArrowFill from "../../assets/icons/arrow-fill.svg";
 import ArrowLine from "../../assets/icons/arrow-line.svg";
 import useAlign from "../../hooks/useAlign";
@@ -19,7 +19,7 @@ interface DropdownProps {
   bodyScrollDisabled?: boolean;
 }
 
-const DropMenu: FC<{
+const DropMenu: React.FC<{
   menus: Menus[];
   offsetX: number;
   offsetY: number;
@@ -53,16 +53,16 @@ const DropMenu: FC<{
   );
 };
 
-const Dropdown: FC<DropdownProps> = (props) => {
+const Dropdown: React.FC<DropdownProps> = (props) => {
   const { menus, children, hideIcon = false, variant = "fill", bodyScrollDisabled } = props;
 
-  const [hide, setHide] = useState(false);
+  const [hide, setHide] = React.useState(false);
 
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const targetRef = React.useRef<HTMLDivElement | null>(null);
 
   const { getOffset } = useAlign(targetRef.current);
 
-  const [offset, setOffset] = useState({
+  const [offset, setOffset] = React.useState({
     offsetX: 0,
     offsetY: 0
   });
@@ -73,13 +73,13 @@ const Dropdown: FC<DropdownProps> = (props) => {
     setHide(!hide);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!bodyScrollDisabled) {
       document.body.style.overflow = hide ? "hidden" : "";
     }
   }, [hide]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (targetRef.current) {
       const { offsetY, offsetX } = getOffset(targetRef.current);
       setOffset({

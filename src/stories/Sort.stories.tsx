@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import SortGroup from "../components/Sort/SortGroup";
+import { SortGroup } from "../components/Sort/SortGroup";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { Fragment } from "react";
-import SortButton, { TextAlign } from "../components/Sort/SortButton";
+import { SortButton, TextAlign } from "../components/Sort/SortButton";
 import { SortsData, SortsState } from "../components/Sort/reducer";
 
 const meta: Meta<typeof SortGroup> = {

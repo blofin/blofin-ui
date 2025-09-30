@@ -1,4 +1,4 @@
-import { forwardRef, LegacyRef, ReactNode } from "react";
+import * as React from "react";
 import { BUITheme } from "../../types/component";
 import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
@@ -16,11 +16,11 @@ import {
 } from "./styles";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: ReactNode;
+  label?: React.ReactNode;
   variant: InputVariant;
   theme?: BUITheme;
-  startAdornment?: ReactNode;
-  endAdornment?: ReactNode;
+  startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
   error?: boolean;
   helperText?: string;
   disabled?: boolean;
@@ -28,7 +28,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   inputSize?: "md" | "lg";
 }
 
-const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const LabelTextField = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
     id,
     label,
@@ -88,7 +88,7 @@ const LabelTextField = forwardRef<HTMLInputElement, InputProps>((props, ref) => 
             disabled={disabled}
             type={type}
             {...otherProps}
-            ref={ref as LegacyRef<HTMLInputElement>}
+            ref={ref as React.LegacyRef<HTMLInputElement>}
             className={cn(
               "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-outline-none focus:bu-outline-0 focus-visible:bu-outline-0",
               InputSizeTextStyle({ inputSize }),

@@ -1,6 +1,6 @@
-import SortButton, { TextAlign } from "../../Sort/SortButton";
-import SortGroup from "../../Sort/SortGroup";
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { SortButton, TextAlign } from "../../Sort/SortButton";
+import { SortGroup } from "../../Sort/SortGroup";
+import * as React from "react";
 import { bgStyles, cssPosition } from "../css";
 import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
@@ -20,17 +20,17 @@ interface TheadProps {
   moveEnd?: (prev: number, next: number) => void;
   drag?: boolean;
   type?: SortType;
-  methodRef?:any
+  methodRef?: any;
 }
 
-const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) => {
-  const { columns, customeTheme, data, moveEnd, drag, onChange, type,methodRef } = props;
+const Thead = React.forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) => {
+  const { columns, customeTheme, data, moveEnd, drag, onChange, type, methodRef } = props;
 
   const { theme } = useTheme();
 
-  const theadRef = useRef<HTMLTableRowElement | null>(null);
+  const theadRef = React.useRef<HTMLTableRowElement | null>(null);
 
-  useImperativeHandle(ref, () => {
+  React.useImperativeHandle(ref, () => {
     return theadRef.current as HTMLTableRowElement;
   });
 

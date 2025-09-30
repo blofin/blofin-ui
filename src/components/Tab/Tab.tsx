@@ -1,4 +1,4 @@
-import React, { Fragment, forwardRef, useImperativeHandle, useMemo, useState } from "react";
+import * as React from "react";
 import { BUIComponentSize } from "../../types/component";
 import useTheme from "../../provider/useTheme";
 import { Base } from "../../types/component";
@@ -33,7 +33,7 @@ export interface TabRef {
   setTab: (tab: number) => void;
 }
 
-const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
+const Tab = React.forwardRef<TabRef, TabProps>((props, ref) => {
   const {
     defaultIndex,
     items,
@@ -46,7 +46,7 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
     hideUnderline = false
   } = props;
 
-  useImperativeHandle(ref, () => {
+  React.useImperativeHandle(ref, () => {
     return {
       setTab: (tab: number) => {
         setActive(items[tab]?.key);
@@ -54,7 +54,7 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
     };
   });
 
-  const [active, setActive] = useState(items[defaultIndex || 0]?.key || items[0].key);
+  const [active, setActive] = React.useState(items[defaultIndex || 0]?.key || items[0].key);
 
   const { theme } = useTheme();
 
@@ -63,7 +63,7 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
     change?.(key);
   };
 
-  const act = useMemo(() => {
+  const act = React.useMemo(() => {
     if (size === "small") {
       return smallActStyles({ theme });
     } else {
@@ -71,7 +71,7 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
     }
   }, [size, theme, hideUnderline]);
 
-  const noAct = useMemo(() => {
+  const noAct = React.useMemo(() => {
     if (size === "small") {
       return noSmallActStyles({ theme });
     } else {
@@ -102,7 +102,7 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
       </div>
       <div className={cn("bu-h-full bu-w-full", className)}>
         {items.map((item, index) => {
-          return <Fragment key={index}>{active === item.key ? item.children : null}</Fragment>;
+          return <React.Fragment key={index}>{active === item.key ? item.children : null}</React.Fragment>;
         })}
       </div>
     </div>

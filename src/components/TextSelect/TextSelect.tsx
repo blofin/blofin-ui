@@ -1,13 +1,4 @@
-import {
-  FC,
-  ReactNode,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import * as React from "react";
 import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
 import TextField from "../TextField/TextField";
@@ -52,20 +43,20 @@ export interface TextSelectProps {
   hideEndAdornment?: boolean;
   readOnly?: boolean;
   scrollContainer?: HTMLDivElement | null;
-  children?: React.ReactElement | ReactNode;
+  children?: React.ReactElement | React.ReactNode;
   auto?: boolean;
   search?: boolean;
   searchChange?: (value: string) => void;
   searchClassName?: string;
-  startAdornment?: ReactNode;
-  customSelectItems?: (item: Options) => ReactNode;
+  startAdornment?: React.ReactNode;
+  customSelectItems?: (item: Options) => React.ReactNode;
   selectItemClassName?: string;
   hideSelectedState?: boolean;
   offsetPixels?: number;
   preventDuplicateSelection?: boolean;
   inputDisabled?: boolean;
   base?: "input" | "div";
-  customLabel?: (item: Options) => ReactNode;
+  customLabel?: (item: Options) => React.ReactNode;
   error?: boolean;
   size?: InputSize;
   highlightMode?: "text" | "background";
@@ -79,7 +70,7 @@ type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
   hide: () => void;
 };
 
-const Options = forwardRef<HTMLDivElement, OptionsProps>(
+const Options = React.forwardRef<HTMLDivElement, OptionsProps>(
   (
     {
       parent,
@@ -107,19 +98,19 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
   ) => {
     const { theme } = useTheme();
 
-    const targetRef = useRef<HTMLDivElement | null>(null);
+    const targetRef = React.useRef<HTMLDivElement | null>(null);
 
-    const [optionHeight, setOptionHeight] = useState(0);
+    const [optionHeight, setOptionHeight] = React.useState(0);
 
     const { offset, resize } = useAlign(parent);
 
     const { offsetX, offsetY } = offset;
 
-    const [isBottomed, setIsBottomed] = useState(false);
+    const [isBottomed, setIsBottomed] = React.useState(false);
 
     const { height, width } = parent ? parent.getBoundingClientRect() : { width: 0, height: 0 };
 
-    const realDisabled = useMemo(() => {
+    const realDisabled = React.useMemo(() => {
       return disabled?.split(",");
     }, [disabled]);
 
@@ -143,7 +134,7 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       searchChange && searchChange(value);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
       if (scrollContainer) {
         scrollContainer.addEventListener("scroll", resize);
       }
@@ -154,7 +145,7 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
       };
     }, [scrollContainer]);
 
-    useEffect(() => {
+    React.useEffect(() => {
       if (auto) {
         setTimeout(() => {
           if (targetRef.current) {
@@ -226,8 +217,8 @@ export interface TextSelectRefProps {
   clear: () => void;
 }
 
-const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) => {
-  useImperativeHandle(ref, () => {
+const TextSelect = React.forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) => {
+  React.useImperativeHandle(ref, () => {
     return {
       close: hide,
       clear: clear
@@ -272,27 +263,27 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     variant = "line"
   } = props;
 
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const targetRef = React.useRef<HTMLDivElement | null>(null);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const divRef = useRef<HTMLDivElement>(null);
+  const divRef = React.useRef<HTMLDivElement>(null);
 
-  const customeRef = useRef<HTMLDivElement | null>(null);
+  const customeRef = React.useRef<HTMLDivElement | null>(null);
 
-  const searchRef = useRef<HTMLDivElement | null>(null);
+  const searchRef = React.useRef<HTMLDivElement | null>(null);
 
-  const [isFocus, setIsFocus] = useState(false);
+  const [isFocus, setIsFocus] = React.useState(false);
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = React.useState(false);
 
   const { theme } = useTheme();
 
-  const [selectedLabel, setSelectedLabel] = useState("");
+  const [selectedLabel, setSelectedLabel] = React.useState("");
 
-  const [selectedLabelNode, setSelectedLabelNode] = useState<string | ReactNode>("");
+  const [selectedLabelNode, setSelectedLabelNode] = React.useState<string | React.ReactNode>("");
 
-  useEffect(() => {
+  React.useEffect(() => {
     const initialOption = options.find((item) => item.value === defaultValue);
     if (initialOption) {
       setSelectedLabel(initialOption.label);
@@ -301,7 +292,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     }
   }, [defaultValue, options]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const option = options.find((item) => {
       return item.value === defaultValue;
     });
@@ -333,7 +324,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (inputRef.current) {
       document.addEventListener("click", handleClickOutside);
       inputRef.current.addEventListener("focus", () => {

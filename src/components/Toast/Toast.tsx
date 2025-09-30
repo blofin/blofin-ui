@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import { bgStyles, iconstyles, textStyles, toastVariants } from "./styles";
 import Info from "../../assets/icons/info.svg";
@@ -18,7 +18,7 @@ interface ToastMsgProps {
   customTheme?: BUITheme;
 }
 
-const Icon: FC<{ type: BUIComponentType }> = ({ type }) => {
+const Icon: React.FC<{ type: BUIComponentType }> = ({ type }) => {
   const { theme } = useTheme();
   const icons = {
     info: <Info className={iconstyles(type, theme)} />,
@@ -30,9 +30,9 @@ const Icon: FC<{ type: BUIComponentType }> = ({ type }) => {
   return <>{icons[type]}</>;
 };
 
-const ToastMsg: FC<ToastMsgProps> = ({ children, type, remove, customTheme }) => {
+const ToastMsg: React.FC<ToastMsgProps> = ({ children, type, remove, customTheme }) => {
   const { theme } = useTheme();
-  useEffect(() => {
+  React.useEffect(() => {
     const timer = setTimeout(() => {
       remove();
     }, 4000);
@@ -84,7 +84,7 @@ const variants: Variants = {
   }
 };
 
-const ToastList: FC<{
+const ToastList: React.FC<{
   toasts: ToastItem[];
   onRemove: (id: number) => void;
 }> = ({ toasts, onRemove }) => {
@@ -110,7 +110,7 @@ const ToastList: FC<{
 };
 
 const ToastContainer = () => {
-  const { toastList, removeToast } = useContext(NoticeContext);
+  const { toastList, removeToast } = React.useContext(NoticeContext);
 
   return <ToastList toasts={toastList} onRemove={removeToast} />;
 };
@@ -134,14 +134,14 @@ Toast.open = (() => {
     subscribers.forEach((callback) => callback([...toasts]));
   };
 
-  const ToastOpenContainer: FC = () => {
-    const [items, setItems] = useState<ToastItem[]>([]);
+  const ToastOpenContainer: React.FC = () => {
+    const [items, setItems] = React.useState<ToastItem[]>([]);
 
     const updateToasts = (newToasts: ToastItem[]) => {
       setItems(newToasts);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
       subscribers.add(updateToasts);
       updateToasts(toasts);
 

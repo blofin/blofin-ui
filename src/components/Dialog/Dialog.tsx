@@ -1,4 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
+"use client";
+
+import * as React from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 import { BUIComponentSize, BUITheme } from "../../types/component";
@@ -33,7 +35,7 @@ export interface DialogProps {
   modalClassName?: string;
 }
 
-interface DialogComponent extends FC<DialogProps> {
+interface DialogComponent extends React.FC<DialogProps> {
   show: (options: Omit<DialogProps, "open">) => () => void;
 }
 
@@ -63,7 +65,7 @@ const Dialog: DialogComponent = (props) => {
   } = props;
 
   const { theme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const getTheme = () => {
     return mode ? mode : theme;
@@ -85,7 +87,7 @@ const Dialog: DialogComponent = (props) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     setIsOpen(open);
     return () => {

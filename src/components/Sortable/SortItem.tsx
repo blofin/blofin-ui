@@ -1,11 +1,11 @@
-import { FC, ReactNode } from "react";
+import * as React from "react";
 
 interface SortItemProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-const SortItem: FC<SortItemProps> = ({ children }) => {
+const SortItem: React.FC<SortItemProps> = ({ children }) => {
   return <div>{children}</div>;
 };
 
-export default SortItem;
+export { SortItem };

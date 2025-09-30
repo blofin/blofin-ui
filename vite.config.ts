@@ -109,16 +109,15 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ["react", "react-dom", "tailwindcss", "react-hook-form", "zod"],
+      external: ["react", "react-dom", "tailwindcss"],
       output: {
+        banner: '"use client";',
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          tailwindcss: "tailwindcss",
-          "react-hook-form": "react-hook-form",
-          zod: "zod"
+          tailwindcss: "tailwindcss"
         },
         assetFileNames: "blofin.css"
         // chunkFileNames: "[name].js",

@@ -1,5 +1,5 @@
 'use client';
-import { createContext, Dispatch } from 'react';
+import * as React from 'react';
 
 type StateType = {
   isScroll: boolean;
@@ -14,7 +14,7 @@ const State = {
   isScroll: false,
 };
 
-const Context = createContext<{ state: StateType; dispatch: Dispatch<ActionType> }>({
+const Context = React.createContext<{ state: StateType; dispatch: React.Dispatch<ActionType> }>({
   state: State,
   dispatch: () => undefined,
 });

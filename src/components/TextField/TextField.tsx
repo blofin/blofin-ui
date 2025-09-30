@@ -1,4 +1,4 @@
-import { LegacyRef, ReactNode, forwardRef } from "react";
+import * as React from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
@@ -17,15 +17,15 @@ export type InputSize = "sm" | "md" | "lg";
 export interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputElement> {
   variant: InputVariant;
   theme?: BUITheme;
-  startAdornment?: ReactNode;
-  endAdornment?: ReactNode;
+  startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
   disabled?: boolean;
   error?: boolean;
   inputClassName?: string;
   inputSize?: InputSize
 }
 
-const TextField = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
+const TextField = React.forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
   const {
     variant,
     theme: mode,
@@ -66,7 +66,7 @@ const TextField = forwardRef<HTMLInputElement, InputBaseProps>((props, ref) => {
           disabled={disabled}
           type={type}
           {...otherProps}
-          ref={ref as LegacyRef<HTMLInputElement>}
+          ref={ref as React.LegacyRef<HTMLInputElement>}
           className={`${cn(
             "bu-h-full bu-w-full bu-flex-1 bu-bg-transparent bu-outline-none",
             InputSizeTextStyle({ inputSize }),

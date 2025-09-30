@@ -17,10 +17,38 @@
     "./theme": "./dist/config/theme.js",
     "./Badge": "./dist/Badge.es.js",
     "./Button": "./dist/Button.es.js",
+    "./Calendar": "./dist/Calendar.es.js",
+    "./Checkbox": "./dist/Checkbox.es.js",
+    "./CssDropdown": "./dist/CssDropdown.es.js",
+    "./DatePickerRange": "./dist/DatePickerRange.es.js",
+    "./DateTimePicker": "./dist/DateTimePicker.es.js",
     "./Dialog": "./dist/Dialog.es.js",
     "./Divider": "./dist/Divider.es.js",
     "./Drawer": "./dist/Drawer.es.js",
-    "./Slider": "./dist/Slider.es.js"
+    "./Dropdown": "./dist/Dropdown.es.js",
+    "./Empty": "./dist/Empty.es.js",
+    "./LabelTextField": "./dist/LabelTextField.es.js",
+    "./MonthPicker": "./dist/MonthPicker.es.js",
+    "./MultiSelect": "./dist/MultiSelect.es.js",
+    "./Notification": "./dist/Notification.es.js",
+    "./Pagination": "./dist/Pagination.es.js",
+    "./Picker": "./dist/Picker.es.js",
+    "./Popover": "./dist/Popover.es.js",
+    "./Popup": "./dist/Popup.es.js",
+    "./RadioButton": "./dist/RadioButton.es.js",
+    "./Select": "./dist/Select.es.js",
+    "./Slider": "./dist/Slider.es.js",
+    "./Sort": "./dist/Sort.es.js",
+    "./Sortable": "./dist/Sortable.es.js",
+    "./Switch": "./dist/Switch.es.js",
+    "./Tab": "./dist/Tab.es.js",
+    "./Table": "./dist/Table.es.js",
+    "./TextField": "./dist/TextField.es.js",
+    "./TextSelect": "./dist/TextSelect.es.js",
+    "./Textarea": "./dist/Textarea.es.js",
+    "./Toast": "./dist/Toast.es.js",
+    "./Tooltip": "./dist/Tooltip.es.js",
+    "./Typography": "./dist/Typography.es.js"
   },
   "files": [
     "dist"
@@ -56,8 +84,8 @@
     "tailwind-merge": "^1.13.1"
   },
   "peerDependencies": {
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0"
+    "react": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0 || 19.2.0-canary-0bdb9206-20250818",
+    "react-dom": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0 || 19.2.0-canary-0bdb9206-20250818"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3",

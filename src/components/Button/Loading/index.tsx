@@ -1,9 +1,10 @@
-import { FC } from "react";
+"use client";
+import * as React from "react";
 import { ButtonSize } from "../types";
 import styles from "./index.module.scss";
 import { BUITheme } from "../../../types/component";
 
-const Loading: FC<{ size: ButtonSize; theme: BUITheme }> = ({ size, theme }) => {
+const Loading: React.FC<{ size: ButtonSize; theme: BUITheme }> = ({ size, theme }) => {
   const styleName = {
     small: styles["loader-small"],
     medium: styles["loader-medium"],

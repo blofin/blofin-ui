@@ -1,6 +1,6 @@
 import ArrowDown from "../../assets/icons/arrow-down.svg";
 import ArrowUp from "../../assets/icons/arrow-up.svg";
-import { CSSProperties, FC, useContext, useMemo } from "react";
+import * as React from "react";
 import { Context, SortEnum, SortsData } from "./reducer";
 import styles from "./Sort.module.scss";
 import { keyBy } from "../../utils/helper";
@@ -17,11 +17,11 @@ export interface SortButtonProps {
   hideSort?: boolean;
   textAlign?: TextAlign;
   width?: string;
-  iconStyle?: CSSProperties;
+  iconStyle?: React.CSSProperties;
   theme?: BUITheme;
 }
 
-const SortButton: FC<SortButtonProps> = ({
+const SortButton: React.FC<SortButtonProps> = ({
   children,
   onSortChange,
   sortKey,
@@ -33,11 +33,11 @@ const SortButton: FC<SortButtonProps> = ({
 }) => {
   const { theme } = useTheme();
   const currentTheme = mode || theme;
-  const { state, dispatch } = useContext(Context);
+  const { state, dispatch } = React.useContext(Context);
 
   const { sorts, type } = state;
 
-  const sortKeys = useMemo(() => {
+  const sortKeys = React.useMemo(() => {
     if (sorts.length > 0) {
       return sorts.map((item) => item.sort);
     } else {
@@ -45,7 +45,7 @@ const SortButton: FC<SortButtonProps> = ({
     }
   }, [sorts]);
 
-  const sortsKeyBy = useMemo(() => {
+  const sortsKeyBy = React.useMemo(() => {
     return keyBy(sorts, "sort");
   }, [sorts]);
 
@@ -147,4 +147,4 @@ const SortButton: FC<SortButtonProps> = ({
   );
 };
 
-export default SortButton;
+export { SortButton };

@@ -1,4 +1,4 @@
-import { FC, forwardRef } from "react";
+import * as React from "react";
 import { bgStyles, cssPosition } from "../css";
 import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
@@ -18,7 +18,7 @@ interface TbodyProps {
   rowIdPrefix?: string;
 }
 
-const Tbody = forwardRef<HTMLTableRowElement | null, TbodyProps>((props, ref) => {
+const Tbody = React.forwardRef<HTMLTableRowElement | null, TbodyProps>((props, ref) => {
   const { data, columns, customeTheme, tbodyClass } = props;
 
   const { theme } = useTheme();

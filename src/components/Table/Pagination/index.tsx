@@ -1,9 +1,9 @@
-import { FC } from "react";
+import * as React from "react";
 import styles from "../index.module.scss";
 import { Direction } from "../interface";
 import { Button } from "../../Button";
 
-const Pagination: FC<{
+const Pagination: React.FC<{
   isLastPage: boolean;
   isFirstPage: boolean;
   onChange: (direction: Direction) => void;

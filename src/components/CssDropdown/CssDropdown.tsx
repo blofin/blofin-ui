@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import * as React from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
@@ -8,11 +8,11 @@ interface CssDropdownProps {
   /**
    * CssDropdown label
    */
-  label: ReactNode;
+  label: React.ReactNode;
   /**
    * CssDropdown content
    */
-  content: ReactNode;
+  content: React.ReactNode;
   /**
    * CssDropdown theme
    */

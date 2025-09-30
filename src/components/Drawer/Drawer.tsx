@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import CloseIcon from "../../assets/icons/close.svg";
 import useTheme from "../../provider/useTheme";

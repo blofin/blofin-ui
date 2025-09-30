@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Table, { TableColumnProps } from "../components/Table";
+import { Table, TableColumnProps } from "../components/Table";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { useEffect, useRef, useState } from "react";

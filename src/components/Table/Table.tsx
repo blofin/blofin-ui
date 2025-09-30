@@ -1,13 +1,5 @@
-import {
-  forwardRef,
-  UIEvent,
-  useEffect,
-  useImperativeHandle,
-  useReducer,
-  useRef,
-  useState
-} from "react";
-import Empty from "../Empty";
+import * as React from "react";
+import { Empty } from "../Empty";
 // import StyledPagination from '../StyledPagination/StylePagination';
 import { Context, reducer, State } from "./context";
 import styles from "./index.module.scss";
@@ -18,8 +10,8 @@ import Thead from "./Thead";
 import Sortable from "sortablejs";
 import useStickyClassName from "./hooks/useStickyClassName";
 import { bgStyles, cssPosition } from "./css";
-import SortButton, { TextAlign } from "../Sort/SortButton";
-import SortGroup from "../Sort/SortGroup";
+import { SortButton, TextAlign } from "../Sort/SortButton";
+import { SortGroup } from "../Sort/SortGroup";
 import useTheme from "../../provider/useTheme";
 import useStickyOffset from "./hooks/useStickyOffset";
 import { SortsData } from "../Sort/reducer";
@@ -28,14 +20,14 @@ export const defaultWidth = "150";
 
 export const PageSize = 50;
 
-const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
-  const [state, dispatch] = useReducer(reducer, State);
+const Table = React.forwardRef<HTMLDivElement, TableProps>((props, ref) => {
+  const [state, dispatch] = React.useReducer(reducer, State);
 
-  const dragTableRef = useRef<HTMLTableElement>(null);
+  const dragTableRef = React.useRef<HTMLTableElement>(null);
 
-  const theadRef = useRef<HTMLTableRowElement | null>(null);
+  const theadRef = React.useRef<HTMLTableRowElement | null>(null);
 
-  const tbodyRef = useRef<HTMLTableRowElement | null>(null);
+  const tbodyRef = React.useRef<HTMLTableRowElement | null>(null);
 
   const {
     columns,
@@ -55,11 +47,11 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
 
   const getClass = useStickyClassName(columns);
 
-  const [isDraged, setIsDraged] = useState(false);
+  const [isDraged, setIsDraged] = React.useState(false);
 
   const offets = useStickyOffset(columns);
 
-  const sortableRef = useRef<any>(null);
+  const sortableRef = React.useRef<any>(null);
 
   const tableWidth =
     columns.reduce((a: number | string, b) => {
@@ -68,7 +60,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
 
   const isFixed = columns.find((item) => item.fixed);
 
-  const onScroll = (e: UIEvent<HTMLElement>) => {
+  const onScroll = (e: React.UIEvent<HTMLElement>) => {
     if (e.currentTarget.scrollLeft === 0) {
       dispatch({
         type: "checkScroll",
@@ -94,14 +86,14 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     }
   };
 
-  const oldRef = useRef<HTMLElement | null>(null);
-  const newRef = useRef<HTMLElement | null>(null);
+  const oldRef = React.useRef<HTMLElement | null>(null);
+  const newRef = React.useRef<HTMLElement | null>(null);
 
   const sortChange = (data: SortsData[] | SortsData) => {
     props.onChange && props.onChange(data);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     setTimeout(() => {
       if (tbodyRef.current && drag && data.length > 0) {
         const tdWidths = Array.from(tbodyRef.current.children).map(
@@ -122,7 +114,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     }, 0);
   }, [drag, data, isDraged]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (data.length === 0) {
       sortableRef.current = null;
     }

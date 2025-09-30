@@ -1,8 +1,8 @@
-import { FC, useMemo } from "react";
-import Picker from "../Picker";
-import { Button } from "./../Button";
-import { formatDate } from "./../../utils/format";
+import * as React from "react";
+import { Button } from "../Button";
+import { formatDate } from "../../utils/format";
 import { Locale } from "date-fns";
+import { Picker } from "../Picker/Picker";
 
 type MonthPickerProps = {
   data: { [key: number]: number[] };
@@ -16,7 +16,7 @@ type MonthPickerProps = {
   confirm: () => void;
 };
 
-const MonthPicker: FC<MonthPickerProps> = ({
+const MonthPicker: React.FC<MonthPickerProps> = ({
   data,
   currentYear,
   currentMonth,
@@ -34,7 +34,7 @@ const MonthPicker: FC<MonthPickerProps> = ({
     };
   });
 
-  const monthList = useMemo(() => {
+  const monthList = React.useMemo(() => {
     return data[currentYear]
       ? data[currentYear].map((item) => {
           return {
@@ -76,4 +76,4 @@ const MonthPicker: FC<MonthPickerProps> = ({
   );
 };
 
-export default MonthPicker;
+export { MonthPicker };

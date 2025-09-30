@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import useTheme from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import Popup, { PopupRef } from "../components/Popup";
+import { Popup, PopupRef } from "../components/Popup";
 import { useEffect, useRef, useState } from "react";
 
 const meta: Meta<typeof Popup> = {

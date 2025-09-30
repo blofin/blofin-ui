@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { useState } from "react";
-import TextArea from "../components/Textarea";
+import { TextArea } from "../components/Textarea";
 
 const meta: Meta<typeof TextArea> = {
   title: "Components/TextArea",

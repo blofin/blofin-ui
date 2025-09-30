@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState, CSSProperties, useMemo } from "react";
+import * as React from "react";
 import clsx from "clsx";
 import useTheme from "../../provider/useTheme";
 import Arrow from "../../assets/icons/text-arrow.svg";
 import { BUITheme } from "../../types/component";
 import { paginationVariants, arrowVariants } from "./styles";
-import PageOption from "./PageOptions";
+import { PageOption } from "./PageOptions";
 
 export interface PaginationProps {
   /**
@@ -28,7 +28,7 @@ export interface PaginationProps {
    */
   className?: string;
   theme?: BUITheme;
-  activeStyle?: CSSProperties;
+  activeStyle?: React.CSSProperties;
   total?: number;
   sizeOptions?: number[];
   sizeCanChange?: boolean;
@@ -66,24 +66,24 @@ export function Pagination({
   countPerPage = "Page",
   pageSize: propPageSize
 }: PaginationProps) {
-  const [pageSize, setPageSize] = useState(
+  const [pageSize, setPageSize] = React.useState(
     propPageSize ? propPageSize : getAdjustPageSize(sizeOptions)
   );
 
-  const [pageList, setPageList] = useState(() =>
+  const [pageList, setPageList] = React.useState(() =>
     calcPageList(
       currentPage,
       sizeCanChange ? getAllPages(pageSize, total as number) : (totalPages as number)
     )
   );
 
-  const isFirstRendering = useRef(true);
+  const isFirstRendering = React.useRef(true);
 
   const { theme: defaultTheme } = useTheme();
 
   const isFirstPage = currentPage === 1;
 
-  const isLastPage = useMemo(() => {
+  const isLastPage = React.useMemo(() => {
     const maxPage = sizeCanChange ? getAllPages(pageSize, total as number) : (totalPages as number);
     return currentPage === maxPage;
   }, [currentPage, totalPages, sizeCanChange, pageSize, total]);
@@ -121,7 +121,7 @@ export function Pagination({
       );
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isFirstRendering.current) {
       isFirstRendering.current = false;
     } else {

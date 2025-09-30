@@ -1,17 +1,17 @@
-import { ReactNode, forwardRef } from "react";
+import * as React from "react";
 import { BUITheme } from "../../types/component";
 import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
 import { RadioButtonInputVariants, RadioButtonLabelVariants } from "./styles";
 
 export interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: ReactNode;
+  label?: React.ReactNode;
   theme?: BUITheme;
   selected?: string;
   arrow?: "circle" | "check";
 }
 
-const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) => {
+const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) => {
   const {
     label,
     theme: mode,

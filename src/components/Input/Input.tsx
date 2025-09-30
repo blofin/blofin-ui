@@ -1,9 +1,9 @@
-import { FC, InputHTMLAttributes, useEffect, useState } from "react";
+import * as React from "react";
 import styles from "./styles";
 
 export interface InputProps
   extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
+    React.InputHTMLAttributes<HTMLInputElement>,
     "size" | "prefix" | "type" | "onChange" | "onFocus" | "onBlur"
   > {
   width?: string;
@@ -16,12 +16,12 @@ export interface InputProps
   placeholder?: string;
 }
 
-const Input: FC<InputProps> = (props) => {
+const Input: React.FC<InputProps> = (props) => {
   const { width, height, size = "medium", placeholder } = props;
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = React.useState("");
 
-  const [focus, setFocus] = useState(false);
+  const [focus, setFocus] = React.useState(false);
 
   const onFocus = () => {
     props.onFocus && props.onFocus();
@@ -40,7 +40,7 @@ const Input: FC<InputProps> = (props) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     setValue(props.defaultValue || "");
   }, [props.defaultValue]);
 
