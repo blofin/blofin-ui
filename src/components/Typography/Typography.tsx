@@ -1,5 +1,5 @@
 import React from "react";
-import { BUITheme } from "../..";
+import { BUITheme } from "../../types/component";
 import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
 import TypographyVariants, { TypographyTagType } from "./styles";

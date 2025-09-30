@@ -1,4 +1,5 @@
-import React, { ButtonHTMLAttributes, FC } from "react";
+import * as React from 'react';
+import type { ButtonHTMLAttributes, FC } from 'react';
 import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";
 import buttonVariants, { refreshIconStyles } from "./styles";

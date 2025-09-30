@@ -1,5 +1,4 @@
 import { InputHTMLAttributes, ReactNode, forwardRef } from "react";
-import { BUITheme, useTheme } from "../..";
 import { cn } from "../../utils/utils";
 import styles from "./Checkbox.module.scss";
 import {
@@ -11,6 +10,8 @@ import {
   disabledMarkStyles,
   CheckedMarkCheckedSizeStyles
 } from "./styles";
+import { BUITheme } from "../../types/component";
+import useTheme from "../../provider/useTheme";
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   label?: ReactNode;

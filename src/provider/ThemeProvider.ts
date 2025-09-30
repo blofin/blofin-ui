@@ -1,5 +1,6 @@
+'use client';
 import { createContext } from "react";
-import { BUITheme } from "..";
+import { BUITheme } from "../types/component";
 
 interface ThemeContextProps {
   theme: BUITheme;

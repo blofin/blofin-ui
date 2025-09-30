@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Children, useEffect, useRef, useState } from "react";
-import { ThemeProvider } from "..";
+import { ThemeProvider } from "../provider/ThemeProvider";
 import { Button } from "../components/Button/Button";
 import { Drawer } from "../components/Drawer/Drawer";
 import { Switch } from "../components/Switch/Switch";

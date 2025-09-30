@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import { BUITheme } from "../..";
+import { BUITheme } from "../../types/component";
 import { BUIComponentType } from "../../types/component";
 
 const toastVariants = cva(

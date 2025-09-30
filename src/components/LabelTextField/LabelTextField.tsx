@@ -1,5 +1,5 @@
 import { forwardRef, LegacyRef, ReactNode } from "react";
-import { BUITheme } from "../..";
+import { BUITheme } from "../../types/component";
 import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
 import { Typography } from "../Typography/Typography";

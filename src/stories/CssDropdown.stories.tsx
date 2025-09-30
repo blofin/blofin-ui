@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/react";
-import { Button, Typography } from "..";
+import { Button } from "../components/Button/Button";
+import { Typography } from "../components/Typography/Typography";
 import { CssDropdown } from "../components/CssDropdown";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";

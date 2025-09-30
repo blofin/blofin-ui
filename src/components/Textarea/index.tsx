@@ -1,7 +1,7 @@
 import { LegacyRef, ReactNode, forwardRef } from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
-import { Typography } from "../..";
+import { Typography } from "../Typography/Typography";
 import { HelperTextVariants, borderStyles, errorBorderStyles, textAreaStyles } from "./style";
 import styles from "./index.module.scss";
 

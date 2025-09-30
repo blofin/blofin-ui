@@ -2,7 +2,8 @@ import { Meta } from "@storybook/react";
 import { Button } from "../components/Button";
 import useMode from "../hooks/useMode";
 import { Toast } from "../components/Toast/Toast";
-import { NoticeProvider, ThemeProvider } from "..";
+import { ThemeProvider } from "../provider/ThemeProvider";
+import { NoticeProvider } from "../provider/NoticeProvider";
 import useToast from "../hooks/useToast";
 
 const meta: Meta<typeof Toast> = {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Tab, TabRef } from "../components/Tab/Tab";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import { Select } from "..";
+import Select from "../components/Select/Select";
 import { useEffect, useRef, useState } from "react";
 
 const meta: Meta<typeof Tab> = {

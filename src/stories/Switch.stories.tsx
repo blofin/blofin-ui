@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { ThemeProvider } from "..";
+import { ThemeProvider } from "../provider/ThemeProvider";
 import { Switch } from "../components/Switch/Switch";
 import useTheme from "../hooks/useMode";
 

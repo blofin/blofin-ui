@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { useState } from "react";
-import { Dialog } from "..";
 import TextArea from "../components/Textarea";
 
 const meta: Meta<typeof TextArea> = {

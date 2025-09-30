@@ -10,7 +10,8 @@ import {
 } from "react";
 import styles from "./index.module.scss";
 import ReactDOM from "react-dom";
-import { TextField, useTheme } from "../..";
+import TextField from "../TextField/TextField";
+import useTheme from "../../provider/useTheme";
 import useAlign from "../../hooks/useAlign";
 import {
   bgStyles,

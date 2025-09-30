@@ -1,5 +1,5 @@
 import React, { Fragment, forwardRef, useImperativeHandle, useMemo, useState } from "react";
-import { BUIComponentSize } from "../..";
+import { BUIComponentSize } from "../../types/component";
 import useTheme from "../../provider/useTheme";
 import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";

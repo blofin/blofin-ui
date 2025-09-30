@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import useTheme from "../hooks/useMode";
-import { ThemeProvider } from "..";
+import { ThemeProvider } from "../provider/ThemeProvider";
 import Popup, { PopupRef } from "../components/Popup";
 import { useEffect, useRef, useState } from "react";
 

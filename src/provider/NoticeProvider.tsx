@@ -1,3 +1,4 @@
+'use client';
 import { FC, createContext, useEffect, useRef, useState } from "react";
 import { BUIComponentType } from "../types/component";
 import { Notification } from "../components/Notification/Notification";

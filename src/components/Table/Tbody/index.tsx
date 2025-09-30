@@ -4,7 +4,8 @@ import useStickyClassName from "../hooks/useStickyClassName";
 import useStickyOffset from "../hooks/useStickyOffset";
 import styles from "../index.module.scss";
 import { TableColumnProps } from "../interface";
-import { BUITheme, useTheme } from "../../..";
+import { BUITheme } from "../../../types/component";
+import useTheme from "../../../provider/useTheme";
 
 interface TbodyProps {
   data: Record<string, string>[];

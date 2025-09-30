@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 import { Button } from "../components/Button";
 import { Notification } from "../components/Notification/Notification";
-import { ThemeProvider } from "..";
+import { ThemeProvider } from "../provider/ThemeProvider";
 import useMode from "../hooks/useMode";
 import { useState } from "react";
 import { NoticeProvider } from "../provider/NoticeProvider";

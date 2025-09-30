@@ -3,7 +3,9 @@ import { ReactNode, useRef, useState } from "react";
 import { Select } from "../components/Select";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
-import { Button, Dialog, Tooltip } from "..";
+import { Button } from "../components/Button/Button";
+import { Dialog } from "../components/Dialog/Dialog";
+import { Tooltip } from "../components/Tooltip/Tooltip";
 
 const meta: Meta<typeof Select> = {
   /* 👇 The title prop is optional.

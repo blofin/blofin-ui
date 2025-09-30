@@ -1,3 +1,5 @@
-import { Button } from "./Button";
+'use client';
 
+import { Button } from "./Button";
 export { Button };
+

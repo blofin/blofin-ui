@@ -1,4 +1,4 @@
-import { BUITheme } from "../..";
+import { BUITheme } from "../../types/component";
 import { SortType, SortsData } from "../Sort/reducer";
 interface TableColumnProps<T = any> {
   key?: string;

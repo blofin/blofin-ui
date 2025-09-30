@@ -1,7 +1,4 @@
 import { cva } from "class-variance-authority";
-import { BUITheme } from "../..";
-
-import { AlertType } from "./Alert";
 
 export const alertBgVariants = cva(
   "bu-flex bu-min-h-[36px] bu-w-full  bu-justify-between bu-rounded-[6px] bu-px-[12px] bu-py-[8px]",

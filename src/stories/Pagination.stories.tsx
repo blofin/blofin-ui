@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Pagination } from "../components/Pagination/Pagination";
-import { ThemeProvider } from "..";
+import { ThemeProvider } from "../provider/ThemeProvider";
 import useMode from "../hooks/useMode";
 
 export default {

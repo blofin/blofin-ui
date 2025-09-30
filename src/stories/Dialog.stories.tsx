@@ -4,7 +4,7 @@ import { Button } from "../components/Button/Button";
 import { Dialog } from "../components/Dialog/Dialog";
 import Select from "../components/Select/Select";
 import useTheme from "../hooks/useMode";
-import { ThemeProvider } from "..";
+import { ThemeProvider } from "../provider/ThemeProvider";
 
 const tpsl_options = [
   {

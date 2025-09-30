@@ -3,7 +3,7 @@ import { TextSelect, TextSelectRefProps } from "../components/TextSelect/TextSel
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { useEffect, useRef, useState } from "react";
-import { Button, Dialog, TextField, Tooltip } from "..";
+import { Tooltip } from "../components/Tooltip/Tooltip";
 
 const meta: Meta<typeof TextSelect> = {
   /* 👇 The title prop is Tab.

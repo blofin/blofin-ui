@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Sortable from "../components/Sortable";
 import { useEffect, useState } from "react";
-import { Checkbox } from "..";
+import Checkbox from "../components/Checkbox/Checkbox";
 
 import SortItem from "../components/Sortable/SortItem";
 

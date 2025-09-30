@@ -4,7 +4,7 @@ import ArrowLine from "../../assets/icons/arrow-line.svg";
 import useAlign from "../../hooks/useAlign";
 import ReactDOM from "react-dom";
 import { labelStyles, menuItemStyles } from "./style";
-import { useTheme } from "../..";
+import useTheme from "../../provider/useTheme";
 
 interface Menus {
   key: string;

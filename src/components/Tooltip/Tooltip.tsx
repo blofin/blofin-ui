@@ -1,6 +1,7 @@
 import { FC, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { BUITheme, useTheme } from "../..";
+import { BUITheme } from "../../types/component";
+import useTheme from "../../provider/useTheme";
 import ArrowIcon from "../../assets/icons/arrow-dark.svg";
 import toolTipStyles from "./index.module.scss";
 import { arrowPositionStyles, bgStyles, popperStyles } from "./styles";

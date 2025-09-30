@@ -1,5 +1,6 @@
 import { ReactNode, forwardRef } from "react";
-import { BUITheme, useTheme } from "../..";
+import { BUITheme } from "../../types/component";
+import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
 import { RadioButtonInputVariants, RadioButtonLabelVariants } from "./styles";
 

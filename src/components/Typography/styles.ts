@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import { BUITheme } from "../..";
+import { BUITheme } from "../../types/component";
 
 export type TypographyTagType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
 

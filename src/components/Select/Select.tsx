@@ -1,6 +1,9 @@
 import { FC, ReactNode, forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { BUITheme, TextField, Typography, useTheme } from "../..";
+import { BUITheme } from "../../types/component";
+import useTheme from "../../provider/useTheme";
+import TextField from "../TextField/TextField";
+import { Typography } from "../Typography/Typography";
 import SelectArrow from "../../assets/icons/select-arrow.svg";
 import ArrowFill from "../../assets/icons/arrow-fill.svg";
 import { keyBy } from "../../utils/helper";
