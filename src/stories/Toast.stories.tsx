@@ -4,7 +4,7 @@ import useMode from "../hooks/useMode";
 import { Toast } from "../components/Toast/Toast";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { NoticeProvider } from "../provider/NoticeProvider";
-import useToast from "../hooks/useToast";
+import { useToast } from "../hooks/useToast";
 
 const meta: Meta<typeof Toast> = {
   title: "Components/Toast",
@@ -17,16 +17,7 @@ const ButtonGroup = () => {
   const { methods } = useToast();
 
   const info = () => {
-    Toast.open({
-      type: "info",
-      customTheme: "dark",
-      children: (
-        <div>
-          "Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!"
-        </div>
-      )
-    });
-    // methods.info("Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!");
+    methods.info("Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!Info!!!!!!!!!");
   };
 
   const warning = () => {

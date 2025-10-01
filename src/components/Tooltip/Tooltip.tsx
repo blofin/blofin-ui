@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import { BUITheme } from "../../types/component";
 import useTheme from "../../provider/useTheme";
 import ArrowIcon from "../../assets/icons/arrow-dark.svg";
@@ -78,7 +78,7 @@ const Content: React.FC<ContentProps> = ({
     }
   }, [enter, isShow]);
 
-  return ReactDOM.createPortal(
+  return createPortal(
     <div
       ref={targetRef}
       className={`${toolTipStyles["tooltip-wrapper"]} ${popperStyles({

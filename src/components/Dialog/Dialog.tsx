@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import ReactDOM from "react-dom";
-import { createRoot } from "react-dom/client";
+import { createPortal } from "react-dom";
 import { BUIComponentSize, BUITheme } from "../../types/component";
 import CloseIcon from "../../assets/icons/close.svg";
 import { Button } from "../Button/Button";
@@ -96,7 +95,7 @@ const Dialog: DialogComponent = (props) => {
   }, [open]);
 
   return isOpen
-    ? ReactDOM.createPortal(
+    ? createPortal(
         <div className={`${styles.mock} ${modalClassName}`} onClick={closeMask}>
           <div
             className={`${styles.dialog} ${dialogVariants({
@@ -153,39 +152,91 @@ const Dialog: DialogComponent = (props) => {
     : null;
 };
 
-const show = (options: Omit<DialogProps, "open">) => {
-  const div = document.createElement("div");
-  document.body.appendChild(div);
+// ==================== 全局状态管理 ====================
 
-  const root = createRoot(div);
+type DialogInstance = {
+  id: number;
+  props: Omit<DialogProps, "open">;
+};
 
-  const destroy = () => {
-    root.unmount();
-    document.body.removeChild(div);
-  };
+const dialogInstances: DialogInstance[] = [];
+let dialogIdCounter = 0;
+const subscribers = new Set<() => void>();
 
-  const handleCancel = () => {
-    if (options.cancel) options.cancel();
-    destroy();
-  };
+const notifySubscribers = () => {
+  subscribers.forEach((cb) => cb());
+};
 
-  const handleConfirm = () => {
-    if (options.confirm) options.confirm();
-    destroy();
-  };
+const removeDialog = (id: number) => {
+  const index = dialogInstances.findIndex((d) => d.id === id);
+  if (index !== -1) {
+    dialogInstances.splice(index, 1);
+    notifySubscribers();
+  }
+};
 
-  root.render(
-    <Dialog
-      {...options}
-      open={true} // 强制打开对话框
-      cancel={handleCancel}
-      confirm={handleConfirm}
-    />
+// 全局容器组件
+const GlobalDialogContainer: React.FC = () => {
+  const [, forceUpdate] = React.useReducer((x) => x + 1, 0);
+
+  React.useEffect(() => {
+    subscribers.add(forceUpdate);
+    return () => {
+      subscribers.delete(forceUpdate);
+    };
+  }, []);
+
+  return (
+    <>
+      {dialogInstances.map((instance) => {
+        const handleCancel = () => {
+          instance.props.cancel?.();
+          removeDialog(instance.id);
+        };
+
+        const handleConfirm = () => {
+          instance.props.confirm?.();
+          removeDialog(instance.id);
+        };
+
+        return (
+          <Dialog
+            key={instance.id}
+            {...instance.props}
+            open={true}
+            cancel={handleCancel}
+            confirm={handleConfirm}
+          />
+        );
+      })}
+    </>
   );
+};
 
-  return destroy;
+// Dialog.show 方法
+const show = (options: Omit<DialogProps, "open">) => {
+  if (typeof window === "undefined") {
+    console.warn("Dialog.show 仅能在浏览器端调用");
+    return () => {};
+  }
+
+  const id = dialogIdCounter++;
+  dialogInstances.push({ id, props: options });
+  notifySubscribers();
+
+  return () => removeDialog(id);
 };
 
 Dialog.show = show;
+
+// DialogProvider 用于在应用根部挂载全局容器
+export const DialogProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+  return (
+    <>
+      {children}
+      <GlobalDialogContainer />
+    </>
+  );
+};
 
 export { Dialog };

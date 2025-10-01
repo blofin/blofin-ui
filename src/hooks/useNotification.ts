@@ -1,3 +1,4 @@
+"use client";
 import { useContext } from "react";
 import { NoticeContext, configType } from "../provider/NoticeProvider";
 
@@ -30,4 +31,4 @@ const useNotification = () => {
   };
 };
 
-export default useNotification;
+export { useNotification };

@@ -1,6 +1,6 @@
 import * as React from "react";
 import styles from "./index.module.scss";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import TextField from "../TextField/TextField";
 import useTheme from "../../provider/useTheme";
 import useAlign from "../../hooks/useAlign";
@@ -163,7 +163,7 @@ const Options = React.forwardRef<HTMLDivElement, OptionsProps>(
     }, [auto]);
 
     return offsetX !== 0 && offsetY !== 0
-      ? ReactDOM.createPortal(
+      ? createPortal(
           <div
             className={`${styles.options} ${className} ${bgStyles({ theme })}`}
             style={{

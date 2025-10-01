@@ -1,6 +1,6 @@
 import * as React from "react";
 import styles from "./index.module.scss";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import { InputSize } from "../TextField/TextField";
 import useTheme from "../../provider/useTheme";
 import { cn } from "../../utils/utils";
@@ -181,7 +181,7 @@ const Menus = React.forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
   }, [auto]);
 
   return offsetX !== 0 && offsetY !== 0
-    ? ReactDOM.createPortal(
+    ? createPortal(
         <div
           className={`${styles["menus"]} ${menusClassName} ${bgStyles({ theme })}`}
           style={{

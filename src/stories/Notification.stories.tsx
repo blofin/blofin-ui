@@ -5,7 +5,7 @@ import { ThemeProvider } from "../provider/ThemeProvider";
 import useMode from "../hooks/useMode";
 import { useState } from "react";
 import { NoticeProvider } from "../provider/NoticeProvider";
-import useNotification from "../hooks/useNotification";
+import { useNotification } from "../hooks/useNotification";
 
 const meta: Meta<typeof Notification> = {
   title: "Components/Notification",

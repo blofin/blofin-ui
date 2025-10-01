@@ -2,7 +2,7 @@ import * as React from "react";
 import ArrowFill from "../../assets/icons/arrow-fill.svg";
 import ArrowLine from "../../assets/icons/arrow-line.svg";
 import useAlign from "../../hooks/useAlign";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import { labelStyles, menuItemStyles } from "./style";
 import useTheme from "../../provider/useTheme";
 
@@ -29,7 +29,7 @@ const DropMenu: React.FC<{
 }> = ({ menus, offsetX, offsetY, close, variant }) => {
   const { theme } = useTheme();
 
-  return ReactDOM.createPortal(
+  return createPortal(
     <div
       className="bu-absolute bu-bottom-0 bu-left-0 bu-right-0 bu-top-0 bu-z-[99999]"
       onClick={close}>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import CloseIcon from "../../assets/icons/close.svg";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
@@ -53,7 +53,7 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
     opacity: open ? 1 : 0
   };
   return open
-    ? ReactDOM.createPortal(
+    ? createPortal(
         <div className={styles.mock} onClick={handleOverlayClick}>
           <div
             className={`${styles.drawerContent}

@@ -1,3 +1,4 @@
+"use client";
 import { useContext } from "react";
 import { NoticeContext } from "../provider/NoticeProvider";
 
@@ -8,15 +9,15 @@ const useToast = () => {
     openToast(config, "info");
   };
 
-  const success = (config:string) => {
+  const success = (config: string) => {
     openToast(config, "success");
   };
 
-  const warning = (config:string) => {
+  const warning = (config: string) => {
     openToast(config, "warning");
   };
 
-  const danger = (config:string) => {
+  const danger = (config: string) => {
     openToast(config, "danger");
   };
 
@@ -30,4 +31,4 @@ const useToast = () => {
   };
 };
 
-export default useToast;
+export { useToast };

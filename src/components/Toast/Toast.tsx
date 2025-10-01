@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import { bgStyles, iconstyles, textStyles, toastVariants } from "./styles";
 import Info from "../../assets/icons/info.svg";
 import Warning from "../../assets/icons/warning.svg";
@@ -8,7 +8,6 @@ import Danger from "../../assets/icons/danger.svg";
 import useTheme from "../../provider/useTheme";
 import { BUIComponentType, BUITheme } from "../../types/component";
 import { NoticeContext } from "../../provider/NoticeProvider";
-import { createRoot } from "react-dom/client";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
 interface ToastMsgProps {
@@ -116,86 +115,5 @@ const ToastContainer = () => {
 };
 
 export const Toast = () => {
-  return ReactDOM.createPortal(<ToastContainer />, document.body);
+  return createPortal(<ToastContainer />, document.body);
 };
-
-Toast.open = (() => {
-  let containerDiv: HTMLDivElement | null = null;
-
-  let root: ReturnType<typeof createRoot> | null = null;
-
-  let toastIdCounter = 0;
-
-  const subscribers = new Set<(toasts: ToastItem[]) => void>();
-
-  const toasts: ToastItem[] = [];
-
-  const notifySubscribers = () => {
-    subscribers.forEach((callback) => callback([...toasts]));
-  };
-
-  const ToastOpenContainer: React.FC = () => {
-    const [items, setItems] = React.useState<ToastItem[]>([]);
-
-    const updateToasts = (newToasts: ToastItem[]) => {
-      setItems(newToasts);
-    };
-
-    React.useEffect(() => {
-      subscribers.add(updateToasts);
-      updateToasts(toasts);
-
-      return () => {
-        subscribers.delete(updateToasts);
-      };
-    }, []);
-
-    const removeToast = (id: number) => {
-      const index = toasts.findIndex((toast) => toast.id === id);
-      if (index !== -1) {
-        toasts.splice(index, 1);
-        notifySubscribers();
-      }
-    };
-
-    return <ToastList toasts={items} onRemove={removeToast} />;
-  };
-
-  const ensureContainer = () => {
-    if (!containerDiv) {
-      containerDiv = document.createElement("div");
-
-      containerDiv.id = "toast-open-container";
-
-      document.body.appendChild(containerDiv);
-
-      root = createRoot(containerDiv);
-
-      root.render(<ToastOpenContainer />);
-    }
-  };
-
-  return (options: Omit<ToastMsgProps, "remove">) => {
-    ensureContainer();
-
-    const id = toastIdCounter++;
-
-    toasts.push({
-      id,
-      node: options.children,
-      type: options.type,
-      customTheme: options.customTheme
-    });
-
-    notifySubscribers();
-
-    return () => {
-      const index = toasts.findIndex((toast) => toast.id === id);
-
-      if (index !== -1) {
-        toasts.splice(index, 1);
-        notifySubscribers();
-      }
-    };
-  };
-})();

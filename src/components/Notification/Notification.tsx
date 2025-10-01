@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import useTheme from "../../provider/useTheme";
 import Info from "../../assets/icons/info.svg";
 import Warning from "../../assets/icons/warning.svg";
@@ -235,5 +235,5 @@ const NotificationContainer = () => {
 };
 
 export const Notification = () => {
-  return ReactDOM.createPortal(<NotificationContainer />, document.body);
+  return createPortal(<NotificationContainer />, document.body);
 };
