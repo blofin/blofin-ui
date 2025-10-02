@@ -1,6 +1,6 @@
 import * as React from "react";
 import clsx from "clsx";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import Arrow from "../../assets/icons/text-arrow.svg";
 import { BUITheme } from "../../types/component";
 import { paginationVariants, arrowVariants } from "./styles";

@@ -7,7 +7,7 @@ import useStickyOffset from "../hooks/useStickyOffset";
 import styles from "../index.module.scss";
 import { SortProps, TableColumnProps } from "../interface";
 import { BUITheme } from "../../../types/component";
-import useTheme from "../../../provider/useTheme";
+import { useTheme } from "../../../provider/useTheme";
 import { SortType, SortsData } from "../../Sort/reducer";
 
 interface TheadProps {

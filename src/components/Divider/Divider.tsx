@@ -1,4 +1,4 @@
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
 import { DividerVariants, VerticalDividerVariants } from "./styles";

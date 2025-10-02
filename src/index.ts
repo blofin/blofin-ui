@@ -2,6 +2,8 @@
 
 import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component";
 
+import "./scss/base.scss";
+
 export * from "./components/Badge";
 export * from "./components/Button";
 export * from "./components/Checkbox";

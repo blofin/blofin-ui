@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BUIComponentSize } from "../../types/component";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";
 import styles from "./index.module.scss";

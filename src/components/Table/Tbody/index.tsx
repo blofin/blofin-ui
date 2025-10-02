@@ -5,7 +5,7 @@ import useStickyOffset from "../hooks/useStickyOffset";
 import styles from "../index.module.scss";
 import { TableColumnProps } from "../interface";
 import { BUITheme } from "../../../types/component";
-import useTheme from "../../../provider/useTheme";
+import { useTheme } from "../../../provider/useTheme";
 
 interface TbodyProps {
   data: Record<string, string>[];

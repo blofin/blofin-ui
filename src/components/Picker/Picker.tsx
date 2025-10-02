@@ -1,7 +1,7 @@
 import * as React from "react";
 import usePickerMethod from "./hooks/usePickerMethod";
 import styles from "./index.module.scss";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { TextLabel } from "./styles";
 
 type PickerProps = {

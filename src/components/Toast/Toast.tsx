@@ -5,7 +5,7 @@ import Info from "../../assets/icons/info.svg";
 import Warning from "../../assets/icons/warning.svg";
 import Success from "../../assets/icons/success.svg";
 import Danger from "../../assets/icons/danger.svg";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { BUIComponentType, BUITheme } from "../../types/component";
 import { NoticeContext } from "../../provider/NoticeProvider";
 import { AnimatePresence, motion, Variants } from "framer-motion";

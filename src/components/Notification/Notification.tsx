@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import Info from "../../assets/icons/info.svg";
 import Warning from "../../assets/icons/warning.svg";
 import Success from "../../assets/icons/success.svg";

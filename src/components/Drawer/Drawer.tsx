@@ -1,7 +1,7 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
 import CloseIcon from "../../assets/icons/close.svg";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import styles from "./index.module.scss";
 import { drawerVariants, iconStyles } from "./styles";

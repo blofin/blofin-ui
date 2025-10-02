@@ -3,7 +3,7 @@ import { Base } from "../../types/component";
 import { cn } from "../../utils/utils";
 import buttonVariants, { refreshIconStyles } from "./styles";
 import { ButtonShape, ButtonSize, ButtonVariant, LoadingType } from "./types";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import Loading from "./Loading";
 import IconRefresh from "../../assets/icons/refresh-line.svg";
 import IconCheckLight from "../../assets/icons/check-line-light.svg";

@@ -16,7 +16,7 @@ import ArrowUpLine from "../../assets/icons/arrow-up-l-line.svg";
 import SubtractLine from "../../assets/icons/subtract-line.svg";
 import CalendarFill from "../../assets/icons/calendar-fill.svg";
 import { ArrowLine, DatePickerBg, TextDescribe } from "./styles";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { loadLocale } from "../../utils/locales";
 
 export type DateValue = {

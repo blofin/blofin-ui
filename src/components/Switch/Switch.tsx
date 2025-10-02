@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./index.module.scss";
 import { bgStyle, moveSize, switchSize, thumbSize } from "./styles";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 
 interface SwitchProps {
   check: boolean;

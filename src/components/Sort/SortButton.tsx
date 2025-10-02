@@ -4,7 +4,7 @@ import * as React from "react";
 import { Context, SortEnum, SortsData } from "./reducer";
 import styles from "./Sort.module.scss";
 import { keyBy } from "../../utils/helper";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import clsx from "clsx";
 

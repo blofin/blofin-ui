@@ -6,7 +6,7 @@ import { BUIComponentSize, BUITheme } from "../../types/component";
 import CloseIcon from "../../assets/icons/close.svg";
 import { Button } from "../Button/Button";
 import { dialogVariants, footerStyles, iconStyles, textStyles } from "./styles";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { ButtonSize } from "../Button/types";
 import styles from "./index.module.scss";
 

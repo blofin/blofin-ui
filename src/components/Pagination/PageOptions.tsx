@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TextSelect, TextSelectRefProps } from "../TextSelect/TextSelect";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 
 const noop = () => {};

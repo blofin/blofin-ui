@@ -1,5 +1,5 @@
 import * as React from "react";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { cn } from "../../utils/utils";
 import styles from "./slider.module.scss";
@@ -178,6 +178,8 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
     return arr;
   }, [marks, min, max, step, labels]);
 
+  console.log(marksArray);
+
   const mouseDown = React.useRef<boolean>(false);
   const [onMouseDown, setMouseDonw] = React.useState(false);
 
@@ -282,13 +284,13 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
           id={id ? `${id}-mark-container` : ""}
           className={`${styles["mark-container"]} mark-container`}
           onClick={disabled ? undefined : handleContainerClick}>
-          {marksArray.map((mark) => {
+          {marksArray.map((mark, index) => {
             const markPercent = getPercent(mark.value, min, max, decimalPlaces);
             return (
               <>
                 {mark.showMark && (
                   <div
-                    key={mark.value}
+                    key={mark.value || index}
                     className={`${styles["mark"]} ${getMarkStyle(
                       mark.value,
                       theme,

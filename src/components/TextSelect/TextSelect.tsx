@@ -2,7 +2,7 @@ import * as React from "react";
 import styles from "./index.module.scss";
 import { createPortal } from "react-dom";
 import TextField from "../TextField/TextField";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import useAlign from "../../hooks/useAlign";
 import {
   bgStyles,

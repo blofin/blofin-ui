@@ -22,7 +22,7 @@ import {
   HeadCell,
   NavButton
 } from "./styles";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
   startMonthShow: boolean;

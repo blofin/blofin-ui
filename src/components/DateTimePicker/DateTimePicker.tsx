@@ -11,7 +11,7 @@ import { MonthPicker } from "../MonthPicker/MonthPicker";
 import enUS from "date-fns/locale/en-US";
 import ArrowUpLine from "../../assets/icons/arrow-up-l-line.svg";
 import { ArrowLine, DatePickerBg, HeadCell } from "./styles";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import ScrollableList from "./ScrollableList";
 import useDateTimePicker from "./hooks/useDateTimePicker";
 

@@ -12,7 +12,7 @@ import useStickyClassName from "./hooks/useStickyClassName";
 import { bgStyles, cssPosition } from "./css";
 import { SortButton, TextAlign } from "../Sort/SortButton";
 import { SortGroup } from "../Sort/SortGroup";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import useStickyOffset from "./hooks/useStickyOffset";
 import { SortsData } from "../Sort/reducer";
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import useTheme from "../../provider/useTheme";
+import { useTheme } from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { Typography } from "../Typography/Typography";
 import { HelperTextVariants, borderStyles, errorBorderStyles, textAreaStyles } from "./style";
