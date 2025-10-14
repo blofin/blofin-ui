@@ -46,6 +46,15 @@ import { Placement } from "@popperjs/core";
 import { InputBaseProps } from "./components/TextField/TextField";
 import { Alert } from "./components/Alert/index";
 import MultiSelect from "./components/MultiSelect/MultiSelect";
+import ProTable from "./components/ProTable/ProTable";
+import type {
+  ProTableProps,
+  ProTableColumnProps,
+  SortProps,
+  SortType,
+  SortState
+} from "./components/ProTable/types";
+import { SortEnum } from "./components/ProTable/types";
 
 export {
   Badge,
@@ -80,6 +89,7 @@ export {
   Alert,
   Toast,
   MultiSelect,
+  ProTable
 };
 
 export type {
@@ -100,9 +110,16 @@ export type {
   SortsData,
   Placement,
   PopoverRefProps,
-  TextSelectProps
+  TextSelectProps,
+  ProTableProps,
+  ProTableColumnProps,
+  SortProps,
+  SortType,
+  SortState
 };
 
 export { NoticeProvider, ThemeProvider };
 
 export { useNotification, useTheme, useToast };
+
+export { SortEnum };
