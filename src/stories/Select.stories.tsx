@@ -48,7 +48,7 @@ export const Primary: Story = {
                 align="left"
                 adsorb={true}
                 selectItems={[
-                  { label: "Alice", value: "alice" },
+                  { label: "Alice", value: "alice", disabled: true },
                   { label: "Bob", value: "bob" }
                 ]}
                 inputDisabled={true}
