@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TableColumnProps, SortEnum, TheadProps } from "../types";
+import { ProTableColumnProps, SortEnum, TheadProps } from "../types";
 import proTableStyles from "../styles";
 import clsx from "clsx";
 import { useSortable, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
@@ -27,12 +27,12 @@ const DragHandleIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 // 单个可拖拽的表头单元格组件
 interface SortableThCellProps {
-  column: TableColumnProps;
+  column: ProTableColumnProps;
   index: number;
-  columns: TableColumnProps[];
+  columns: ProTableColumnProps[];
   sortState?: string;
-  onSort: (column: TableColumnProps) => void;
-  renderSortIcon: (column: TableColumnProps) => React.ReactNode;
+  onSort: (column: ProTableColumnProps) => void;
+  renderSortIcon: (column: ProTableColumnProps) => React.ReactNode;
   isDragging?: boolean;
   draggable?: boolean;
   dragHandleIcon?: React.ReactNode;
@@ -203,13 +203,13 @@ const Thead: React.FC<TheadProps> = (props) => {
     theme = "light"
   } = props;
 
-  const handleSort = (column: TableColumnProps) => {
+  const handleSort = (column: ProTableColumnProps) => {
     if (column.filter && column.key) {
       onSort(column.key, column.type);
     }
   };
 
-  const renderSortIcon = (column: TableColumnProps) => {
+  const renderSortIcon = (column: ProTableColumnProps) => {
     if (!column.filter || !column.key) return null;
 
     const sortState = sortStates[column.key] || SortEnum.default;

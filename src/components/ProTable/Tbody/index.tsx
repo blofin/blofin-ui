@@ -1,12 +1,12 @@
 import * as React from "react";
-import { TableColumnProps, TbodyProps } from "../types";
+import { ProTableColumnProps, TbodyProps } from "../types";
 import proTableStyles from "../styles";
 import clsx from "clsx";
 
 const Tbody: React.FC<TbodyProps> = (props) => {
   const { columns, data, rowKey, tdClass, tbodyClass, theme = "light" } = props;
 
-  const getTdStyle = (column: TableColumnProps, index: number): React.CSSProperties => {
+  const getTdStyle = (column: ProTableColumnProps, index: number): React.CSSProperties => {
     const style: React.CSSProperties = {
       textAlign: proTableStyles.getTextAlign(column.align) as React.CSSProperties['textAlign']
     };
@@ -32,14 +32,14 @@ const Tbody: React.FC<TbodyProps> = (props) => {
     return style;
   };
 
-  const renderCell = (column: TableColumnProps, record: any, rowIndex: number) => {
+  const renderCell = (column: ProTableColumnProps, record: any, rowIndex: number) => {
     if (column.render) {
       return column.render(record, rowIndex);
     }
     return column.key ? record[column.key] : null;
   };
 
-  const handleColSpan = (column: TableColumnProps, record: any, rowIndex: number) => {
+  const handleColSpan = (column: ProTableColumnProps, record: any, rowIndex: number) => {
     if (column.onCell) {
       return column.onCell(record, rowIndex);
     }
