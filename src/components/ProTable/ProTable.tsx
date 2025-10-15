@@ -11,14 +11,11 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
-  DragStartEvent,
-} from '@dnd-kit/core';
-import {
-  arrayMove,
-  SortableContext,
-  horizontalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
+  DragStartEvent
+} from "@dnd-kit/core";
+import { arrayMove, SortableContext, horizontalListSortingStrategy } from "@dnd-kit/sortable";
+import { restrictToHorizontalAxis } from "@dnd-kit/modifiers";
+import useTheme from "../../provider/useTheme";
 
 const ProTable: React.FC<ProTableProps> = (props) => {
   const {
@@ -29,7 +26,6 @@ const ProTable: React.FC<ProTableProps> = (props) => {
     tdClass,
     tbodyClass,
     renderEmpty,
-    theme = "light",
     onSortChange,
     tableLayout = "auto",
     draggable = false, // 默认不启用拖拽
@@ -38,6 +34,8 @@ const ProTable: React.FC<ProTableProps> = (props) => {
     maxHeight
   } = props;
 
+  const { theme } = useTheme();
+
   const [columns, setColumns] = React.useState(initialColumns);
   const [sortStates, setSortStates] = React.useState<Record<string, SortState>>({});
   const [activeId, setActiveId] = React.useState<string | null>(null);
@@ -45,8 +43,8 @@ const ProTable: React.FC<ProTableProps> = (props) => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 8, // 8px 移动后才激活拖拽
-      },
+        distance: 8 // 8px 移动后才激活拖拽
+      }
     }),
     useSensor(KeyboardSensor)
   );
@@ -80,7 +78,7 @@ const ProTable: React.FC<ProTableProps> = (props) => {
     } else {
       // 多列排序：保留其他列的排序状态
       newSortStates = { ...sortStates, [key]: newSort };
-      
+
       // 如果新状态是default，则删除该key
       if (newSort === SortEnum.default) {
         delete newSortStates[key];
@@ -111,7 +109,7 @@ const ProTable: React.FC<ProTableProps> = (props) => {
   // 拖拽结束
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    
+
     setActiveId(null);
 
     if (!over || active.id === over.id) {
@@ -129,51 +127,49 @@ const ProTable: React.FC<ProTableProps> = (props) => {
 
       // 使用 dnd-kit 的 arrayMove 工具函数
       const newColumns = arrayMove(items, oldIndex, newIndex);
-      
+
       // 触发列顺序改变回调
       if (onColumnsChange) {
         onColumnsChange(newColumns);
       }
-      
+
       return newColumns;
     });
   };
 
   // 只允许拖拽非 fixed 的列
   const sortableItems = columns
-    .filter(col => !col.fixed && col.key)
-    .map(col => col.key as string);
+    .filter((col) => !col.fixed && col.key)
+    .map((col) => col.key as string);
 
   // 渲染表格内容
   const renderTable = () => (
-    <div 
+    <div
       className={proTableStyles.container({ theme })}
-      style={maxHeight ? { maxHeight, overflow: 'auto' } : undefined}
-    >
-      <table className={proTableStyles.table()} style={{ tableLayout }}>
-        <Thead
-          columns={columns}
-          sortStates={sortStates}
-          onSort={handleSort}
-          activeId={draggable ? activeId : null}
-          theadClass={theadClass}
-          draggable={draggable}
-          dragHandleIcon={dragHandleIcon}
-          theme={theme}
-        />
-        <Tbody
-          columns={columns}
-          data={data}
-          rowKey={rowKey}
-          tdClass={tdClass}
-          tbodyClass={tbodyClass}
-          theme={theme}
-        />
-      </table>
-      {data.length === 0 && (
-        <div className={proTableStyles.empty({ theme })}>
-          {renderEmpty || "No Data"}
-        </div>
+      style={maxHeight ? { maxHeight, overflow: "auto" } : undefined}>
+      {data.length > 0 ? (
+        <table className={proTableStyles.table()} style={{ tableLayout }}>
+          <Thead
+            columns={columns}
+            sortStates={sortStates}
+            onSort={handleSort}
+            activeId={draggable ? activeId : null}
+            theadClass={theadClass}
+            draggable={draggable}
+            dragHandleIcon={dragHandleIcon}
+            theme={theme}
+          />
+          <Tbody
+            columns={columns}
+            data={data}
+            rowKey={rowKey}
+            tdClass={tdClass}
+            tbodyClass={tbodyClass}
+            theme={theme}
+          />
+        </table>
+      ) : (
+        <div className={proTableStyles.empty({ theme })}>{renderEmpty || "No Data"}</div>
       )}
     </div>
   );
@@ -192,7 +188,7 @@ const ProTable: React.FC<ProTableProps> = (props) => {
       onDragEnd={handleDragEnd}
       modifiers={[restrictToHorizontalAxis]} // 限制为横向拖拽
     >
-      <SortableContext 
+      <SortableContext
         items={sortableItems}
         strategy={horizontalListSortingStrategy} // 横向排序策略
       >

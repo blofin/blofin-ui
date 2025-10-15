@@ -211,9 +211,9 @@ export const getThClasses = (props: {
     classes.push(thFixedRightStyles({ theme }));
   }
 
-  if (sortable) {
-    classes.push(thSortableStyles({ theme }));
-  }
+  // if (sortable) {
+  //   classes.push(thSortableStyles({ theme }));
+  // }
 
   if (isDragging) {
     classes.push(draggingStyles({ theme }));

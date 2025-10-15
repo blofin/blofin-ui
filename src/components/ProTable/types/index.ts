@@ -26,6 +26,7 @@ interface ProTableColumnProps<T = any> {
   align?: "center" | "flex-start" | "flex-end";
   render?: (record: T, index: number) => React.ReactElement | React.ReactNode;
   renderHeader?: (record: T[]) => React.ReactElement | React.ReactNode;
+  renderEndIcon?: () => React.ReactElement | React.ReactNode;
   filter?: boolean;
   type?: SortType;
   onCell?: (record: T, index: number) => number | undefined;
