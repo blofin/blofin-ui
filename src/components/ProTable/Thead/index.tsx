@@ -50,7 +50,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
   dragHandleIcon,
   theme = "light"
 }) => {
-  const nodeRef = React.useRef<HTMLTableCellElement>(null);
+  const nodeRef = React.useRef<HTMLTableCellElement | null>(null);
   const [computedWidth, setComputedWidth] = React.useState<number | null>(null);
 
   const animateLayoutChanges: AnimateLayoutChanges = (args) => {

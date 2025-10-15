@@ -55,7 +55,7 @@ const ProTable: React.FC<ProTableProps> = (props) => {
   // 如果需要重置，父组件应该改变 ProTable 的 key
   React.useEffect(() => {
     setColumns(initialColumns);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [initialColumns]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 处理排序
   const handleSort = (key: string, type?: "single" | "multiple") => {

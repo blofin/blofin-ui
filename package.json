@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "0.7.45",
+  "version": "0.7.46-beta.0",
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -21,6 +21,7 @@
     "./Divider": "./dist/Divider.es.js",
     "./Drawer": "./dist/Drawer.es.js",
     "./Form": "./dist/Form.es.js",
+    "./ProTable": "./dist/ProTable.es.js",
     "./Slider": "./dist/Slider.es.js"
   },
   "files": [
@@ -92,6 +93,7 @@
     "eslint-plugin-react-refresh": "^0.3.4",
     "eslint-plugin-storybook": "^0.6.13",
     "jsdom": "^22.1.0",
+    "minimatch": "^10.0.3",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
