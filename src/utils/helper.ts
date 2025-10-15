@@ -1,5 +1,5 @@
 interface ArrayItem {
-  [key: string]: string;
+  [key: string]: any;
 }
 
 export function keyBy(arr: ArrayItem[], key: keyof ArrayItem): { [key: string]: ArrayItem } {
