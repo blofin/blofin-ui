@@ -151,7 +151,7 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
                   theme,
                   active: activeColor ? value === item.value : activeColor
                 })}
-                key={item[(rowKey as keyof SelectItem) || value]}
+                key={item[(rowKey as keyof Omit<SelectItem, "disabled">) || value]}
                 onClick={() => !item.disabled && handleSelect(item.value, item)}>
                 {customSelectItems ? customSelectItems(item) : item.label}
               </li>
