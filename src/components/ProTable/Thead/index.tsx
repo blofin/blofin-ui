@@ -1,56 +1,51 @@
 import * as React from "react";
-import { TableColumnProps, SortEnum, TheadProps } from "../types";
+import { ProTableColumnProps, SortEnum, TheadProps } from "../types";
 import proTableStyles from "../styles";
 import clsx from "clsx";
-import { useSortable, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import type { AnimateLayoutChanges } from '@dnd-kit/sortable';
+import { useSortable, defaultAnimateLayoutChanges } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import type { AnimateLayoutChanges } from "@dnd-kit/sortable";
 
 // 拖拽手柄图标组件
 const DragHandleIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg 
-    width="16" 
-    height="16" 
-    viewBox="0 0 16 16" 
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
     fill="currentColor"
     className={className}
-    style={{ flexShrink: 0 }}
-  >
-    <circle cx="6" cy="4" r="1.5" />
-    <circle cx="10" cy="4" r="1.5" />
-    <circle cx="6" cy="8" r="1.5" />
-    <circle cx="10" cy="8" r="1.5" />
-    <circle cx="6" cy="12" r="1.5" />
-    <circle cx="10" cy="12" r="1.5" />
+    style={{ flexShrink: 0 }}>
+    <rect x="4" y="5" width="8" height="2" rx="1" />
+    <rect x="4" y="9" width="8" height="2" rx="1" />
   </svg>
 );
 
 // 单个可拖拽的表头单元格组件
 interface SortableThCellProps {
-  column: TableColumnProps;
+  column: ProTableColumnProps;
   index: number;
-  columns: TableColumnProps[];
+  columns: ProTableColumnProps[];
   sortState?: string;
-  onSort: (column: TableColumnProps) => void;
-  renderSortIcon: (column: TableColumnProps) => React.ReactNode;
+  onSort: (column: ProTableColumnProps) => void;
+  renderSortIcon: (column: ProTableColumnProps) => React.ReactNode;
   isDragging?: boolean;
   draggable?: boolean;
   dragHandleIcon?: React.ReactNode;
   theme?: "light" | "dark";
 }
 
-const SortableThCell: React.FC<SortableThCellProps> = ({ 
-  column, 
-  index, 
-  columns, 
-  sortState, 
-  onSort, 
+const SortableThCell: React.FC<SortableThCellProps> = ({
+  column,
+  index,
+  columns,
+  sortState,
+  onSort,
   renderSortIcon,
   draggable = false,
   dragHandleIcon,
   theme = "light"
 }) => {
-  const nodeRef = React.useRef<HTMLTableCellElement>(null);
+  const nodeRef = React.useRef<HTMLTableCellElement | null>(null);
   const [computedWidth, setComputedWidth] = React.useState<number | null>(null);
 
   const animateLayoutChanges: AnimateLayoutChanges = (args) => {
@@ -67,21 +62,24 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
     setNodeRef: setSortableRef,
     transform,
     transition,
-    isDragging,
+    isDragging
   } = useSortable({
     id: column.key || `col-${index}`,
     disabled: !draggable || !!column.fixed,
     animateLayoutChanges,
     transition: {
       duration: 250,
-      easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
-    },
+      easing: "cubic-bezier(0.25, 1, 0.5, 1)"
+    }
   });
 
-  const setRefs = React.useCallback((node: HTMLTableCellElement | null) => {
-    nodeRef.current = node;
-    setSortableRef(node);
-  }, [setSortableRef]);
+  const setRefs = React.useCallback(
+    (node: HTMLTableCellElement | null) => {
+      nodeRef.current = node;
+      setSortableRef(node);
+    },
+    [setSortableRef]
+  );
 
   React.useEffect(() => {
     if (isDragging && nodeRef.current) {
@@ -93,36 +91,35 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
   }, [isDragging]);
 
   const getThStyle = (): React.CSSProperties => {
-    const effectiveWidth = isDragging && computedWidth
-      ? `${computedWidth}px`
-      : (column.width || "auto");
-  
-    let zIndex: number | string = 'auto';
+    const effectiveWidth =
+      isDragging && computedWidth ? `${computedWidth}px` : column.width || "auto";
+
+    let zIndex: number | string = "auto";
     if (column.fixed) {
       zIndex = isDragging ? 1001 : 1000;
     } else if (isDragging) {
       zIndex = 100;
     }
-  
+
     const style: React.CSSProperties = {
       transform: transform ? CSS.Translate.toString(transform) : undefined,
-      transition: transition || 'transform 250ms cubic-bezier(0.25, 1, 0.5, 1)',
-      willChange: 'transform',
+      transition: transition || "transform 250ms cubic-bezier(0.25, 1, 0.5, 1)",
+      willChange: "transform",
       width: effectiveWidth,
-      textAlign: proTableStyles.getTextAlign(column.align) as React.CSSProperties['textAlign'],
+      textAlign: proTableStyles.getTextAlign(column.align) as React.CSSProperties["textAlign"],
       opacity: isDragging ? 0.5 : 1,
       // cursor 由 className 控制，不在 inline style 中设置
       zIndex: zIndex,
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis"
     };
-  
+
     if (isDragging && computedWidth) {
       style.minWidth = `${computedWidth}px`;
       style.maxWidth = `${computedWidth}px`;
     }
-  
+
     if (column.fixed === "left") {
       let leftOffset = 0;
       for (let i = 0; i < index; i++) {
@@ -140,7 +137,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
       }
       style.right = `${rightOffset}px`;
     }
-  
+
     return style;
   };
 
@@ -164,26 +161,30 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
       style={getThStyle()}
       {...attributes}
       {...listeners}
-      onClick={() => onSort(column)}
-    >
-      <div className="bu-flex bu-items-center bu-gap-2 bu-relative" style={{ justifyContent: column.align || "center" }}>
-        <div className="bu-flex">
+      onClick={() => onSort(column)}>
+      <div
+        className="bu-relative bu-flex bu-items-center bu-gap-2"
+        style={{ justifyContent: column.align || "center" }}>
+        <div className="bu-flex bu-items-center">
           {column.renderHeader ? column.renderHeader([]) : column.title}
           {renderSortIcon(column)}
+          {column.renderEndIcon ? column.renderEndIcon() : null}
         </div>
-        
+
         {showDragHandle && (
-          <span 
-            className={clsx(proTableStyles.dragHandle({ 
-              theme, 
-            }),'group-hover:bu-opacity-100')}
+          <span
+            className={clsx(
+              proTableStyles.dragHandle({
+                theme
+              }),
+              "group-hover:bu-opacity-100"
+            )}
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginLeft: '4px'
-            }}
-          >
-            {dragHandleIcon || <DragHandleIcon />}
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "4px"
+            }}>
+            {dragHandleIcon !== null && (dragHandleIcon || <DragHandleIcon />)}
           </span>
         )}
       </div>
@@ -203,33 +204,38 @@ const Thead: React.FC<TheadProps> = (props) => {
     theme = "light"
   } = props;
 
-  const handleSort = (column: TableColumnProps) => {
+  const handleSort = (column: ProTableColumnProps) => {
     if (column.filter && column.key) {
       onSort(column.key, column.type);
     }
   };
 
-  const renderSortIcon = (column: TableColumnProps) => {
+  const renderSortIcon = (column: ProTableColumnProps) => {
     if (!column.filter || !column.key) return null;
 
     const sortState = sortStates[column.key] || SortEnum.default;
+    const defaultColor = theme === "dark" ? "#EBECF5" : "#0A0A0A";
+    const activeColor = "#F80";
 
     return (
-      <span className={proTableStyles.sortIcon()}>
-        <span
-          className={proTableStyles.sortArrow({
-            direction: "asc",
-            theme,
-            active: sortState === SortEnum.asc
-          })}
-        />
-        <span
-          className={proTableStyles.sortArrow({
-            direction: "desc",
-            theme,
-            active: sortState === SortEnum.desc
-          })}
-        />
+      <span className="bu-ml-2 bu-inline-flex bu-align-middle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="6"
+          height="10"
+          viewBox="0 0 6 10"
+          fill="none">
+          <path
+            d="M5.4847 3.04301V4.10942H0.151367V3.04301L2.81803 0.376343L5.4847 3.04301Z"
+            fill={sortState === SortEnum.asc ? activeColor : defaultColor}
+            fillOpacity={sortState === SortEnum.asc ? "1" : "0.2"}
+          />
+          <path
+            d="M5.4847 5.89067V6.95707L2.81803 9.62374L0.151367 6.95707V5.89067H5.4847Z"
+            fill={sortState === SortEnum.desc ? activeColor : defaultColor}
+            fillOpacity={sortState === SortEnum.desc ? "1" : "0.2"}
+          />
+        </svg>
       </span>
     );
   };

@@ -4,7 +4,7 @@
     "type": "git",
     "url": "git+https://github.com/blofinex/blofin-ui.git"
   },
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "module": "./dist/index.es.js",
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -35,6 +35,7 @@
     "./Picker": "./dist/Picker.es.js",
     "./Popover": "./dist/Popover.es.js",
     "./Popup": "./dist/Popup.es.js",
+    "./ProTable": "./dist/ProTable.es.js",
     "./RadioButton": "./dist/RadioButton.es.js",
     "./Select": "./dist/Select.es.js",
     "./Slider": "./dist/Slider.es.js",

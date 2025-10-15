@@ -34,11 +34,11 @@ export * from "./components/Sortable";
 export * from "./components/Alert";
 export * from "./components/MultiSelect";
 
-export * from './provider/NoticeProvider';
+export * from "./provider/NoticeProvider";
 export * from "./provider/ThemeProvider";
 export * from "./provider/useTheme";
-export * from './hooks/useNotification';
-export * from './hooks/useToast';
+export * from "./hooks/useNotification";
+export * from "./hooks/useToast";
+export * from "./components/ProTable";
 
 export type { BUIComponentColor, BUIComponentSize, BUITheme };
-

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import ProTable from "../components/ProTable/ProTable";
-import { SortEnum, TableColumnProps } from "../components/ProTable/types";
+import { SortEnum, ProTableColumnProps } from "../components/ProTable/types";
 import * as React from "react";
 
 const meta: Meta<typeof ProTable> = {
@@ -758,7 +758,7 @@ export const FullFeatured: Story = {
 // 可拖拽列排序的表格
 export const WithDraggableColumns: Story = {
   render: () => {
-    const [columns, setColumns] = React.useState<TableColumnProps[]>([
+    const [columns, setColumns] = React.useState<ProTableColumnProps[]>([
       {
         key: "name",
         title: "姓名",
@@ -816,7 +816,7 @@ export const WithDraggableColumns: Story = {
 // 固定列 + 可拖拽
 export const WithFixedAndDraggable: Story = {
   render: () => {
-    const [columns, setColumns] = React.useState<TableColumnProps[]>([
+    const [columns, setColumns] = React.useState<ProTableColumnProps[]>([
       {
         key: "name",
         title: "姓名",
@@ -874,7 +874,7 @@ export const WithFixedAndDraggable: Story = {
 // 自定义拖拽图标
 export const WithCustomDragIcon: Story = {
   render: () => {
-    const [columns, setColumns] = React.useState<TableColumnProps[]>([
+    const [columns, setColumns] = React.useState<ProTableColumnProps[]>([
       {
         key: "name",
         title: "姓名",
