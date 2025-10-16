@@ -21,7 +21,7 @@ import useDelayEvent from "../../hooks/useDelayEvent";
 import useClient from "../../hooks/useClient";
 import selectStyles from "./select.module.scss";
 
-export type SelectItem = { label: string; value: string; disabled?: boolean };
+export type SelectItem = { label: string; value: string; disabled?: boolean; className?: string };
 
 type SelectMenuProps = {
   value: string;
@@ -147,10 +147,10 @@ const SelectMenu = forwardRef<HTMLDivElement, SelectMenuProps>((props, ref) => {
           {items?.map((item) => {
             return (
               <li
-                className={menuItemStyles({
+                className={`${menuItemStyles({
                   theme,
                   active: activeColor ? value === item.value : activeColor
-                })}
+                })} ${item.className || ""}`}
                 key={item[(rowKey as keyof Omit<SelectItem, "disabled">) || value]}
                 onClick={() => !item.disabled && handleSelect(item.value, item)}>
                 {customSelectItems ? customSelectItems(item) : item.label}
