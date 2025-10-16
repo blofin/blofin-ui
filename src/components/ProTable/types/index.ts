@@ -47,6 +47,7 @@ interface ProTableProps {
   onColumnsChange?: (columns: ProTableColumnProps[]) => void; // 列顺序改变的回调
   dragHandleIcon?: React.ReactNode; // 自定义拖拽图标
   maxHeight?: string | number; // 表格最大高度，超出后内容滚动，表头固定
+  rowIdPrefix?: string;
 }
 
 interface TheadProps {
@@ -67,6 +68,7 @@ interface TbodyProps {
   tdClass?: string;
   tbodyClass?: string;
   theme?: BUITheme;
+  rowIdPrefix?: string;
 }
 
 export type { ProTableProps, ProTableColumnProps, SortProps, SortsData, SortType, SortState, TheadProps, TbodyProps };

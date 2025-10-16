@@ -216,9 +216,15 @@ const Thead: React.FC<TheadProps> = (props) => {
     const sortState = sortStates[column.key] || SortEnum.default;
     const defaultColor = theme === "dark" ? "#EBECF5" : "#0A0A0A";
     const activeColor = "#F80";
+    const isActive = sortState !== SortEnum.default;
 
     return (
-      <span className="bu-ml-2 bu-inline-flex bu-align-middle">
+      <span
+        className={clsx(
+          "bu-inline-flex bu-align-middle bu-transition-opacity bu-duration-200",
+          "bu-ml-[4px]",
+          isActive ? "bu-opacity-100" : "bu-opacity-0 group-hover:bu-opacity-100"
+        )}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="6"

@@ -8,7 +8,7 @@ const Tbody: React.FC<TbodyProps> = (props) => {
 
   const getTdStyle = (column: ProTableColumnProps, index: number): React.CSSProperties => {
     const style: React.CSSProperties = {
-      textAlign: proTableStyles.getTextAlign(column.align) as React.CSSProperties['textAlign']
+      textAlign: proTableStyles.getTextAlign(column.align) as React.CSSProperties["textAlign"]
     };
 
     if (column.fixed === "left") {
@@ -49,13 +49,13 @@ const Tbody: React.FC<TbodyProps> = (props) => {
   return (
     <tbody className={clsx(proTableStyles.tbody({ theme }), tbodyClass)}>
       {data.map((record, rowIndex) => (
-        <tr 
-          key={record[rowKey] || rowIndex} 
-          className={proTableStyles.tr({ theme })}
-        >
+        <tr
+          id={props.rowIdPrefix ? `${props.rowIdPrefix}-${rowIndex}` : ""}
+          key={record[rowKey] || rowIndex}
+          className={proTableStyles.tr({ theme })}>
           {columns.map((column, colIndex) => {
             const colSpan = handleColSpan(column, record, rowIndex);
-            
+
             if (colSpan === 0) {
               return null;
             }
@@ -69,8 +69,7 @@ const Tbody: React.FC<TbodyProps> = (props) => {
                   customClass: tdClass
                 })}
                 style={getTdStyle(column, colIndex)}
-                colSpan={colSpan}
-              >
+                colSpan={colSpan}>
                 {renderCell(column, record, rowIndex)}
               </td>
             );
