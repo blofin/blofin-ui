@@ -49,18 +49,15 @@ const ProTable: React.FC<ProTableProps> = (props) => {
     useSensor(KeyboardSensor)
   );
 
-  // 只在初始化时设置列，不响应后续的 props 变化
-  // 如果需要重置，父组件应该改变 ProTable 的 key
   React.useEffect(() => {
     setColumns(initialColumns);
-  }, [initialColumns]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [initialColumns]);
 
   // 处理排序
   const handleSort = (key: string, type?: "single" | "multiple") => {
     const currentSort = sortStates[key] || SortEnum.default;
     let newSort: SortState;
 
-    // 循环: default -> desc -> asc -> default
     if (currentSort === SortEnum.default) {
       newSort = SortEnum.desc;
     } else if (currentSort === SortEnum.desc) {

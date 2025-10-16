@@ -108,7 +108,6 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
       width: effectiveWidth,
       textAlign: proTableStyles.getTextAlign(column.align) as React.CSSProperties["textAlign"],
       opacity: isDragging ? 0.5 : 1,
-      // cursor 由 className 控制，不在 inline style 中设置
       zIndex: zIndex,
       whiteSpace: "nowrap",
       overflow: "hidden",
@@ -177,13 +176,9 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
               proTableStyles.dragHandle({
                 theme
               }),
-              "group-hover:bu-opacity-100"
-            )}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginLeft: "4px"
-            }}>
+              "group-hover:bu-opacity-100",
+              "bu-ml-[4px] bu-flex bu-items-center"
+            )}>
             {dragHandleIcon !== null && (dragHandleIcon || <DragHandleIcon />)}
           </span>
         )}
@@ -216,9 +211,15 @@ const Thead: React.FC<TheadProps> = (props) => {
     const sortState = sortStates[column.key] || SortEnum.default;
     const defaultColor = theme === "dark" ? "#EBECF5" : "#0A0A0A";
     const activeColor = "#F80";
+    const isActive = sortState !== SortEnum.default;
 
     return (
-      <span className="bu-ml-2 bu-inline-flex bu-align-middle">
+      <span
+        className={clsx(
+          "bu-inline-flex bu-align-middle bu-transition-opacity bu-duration-200",
+          "bu-ml-[4px]",
+          isActive ? "bu-opacity-100" : "bu-opacity-0 group-hover:bu-opacity-100"
+        )}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="6"
