@@ -42,8 +42,11 @@ export const Primary: Story = {
               <div className="bu-h-[100px] bu-w-full"></div>
               <Select
                 value={"alice"}
+                className="bu-group"
                 selectType="outlined"
                 hoverClassName="!bu-text-light-primary !dark:bu-text-dark-primary"
+                labelClassName="group-hover:!bu-text-red-500"
+                arrowClassName="group-hover:!bu-text-red-500"
                 activeColor={false}
                 align="left"
                 adsorb={true}
