@@ -190,6 +190,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   styles?: object;
   inputDisabled?: boolean;
   hoverClassName?: string;
+  className?: string;
   x?: number;
   y?: number;
   container?: Element;
@@ -224,6 +225,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
     styles,
     inputDisabled = false,
     hoverClassName,
+    className,
     x,
     y,
     container,
@@ -298,7 +300,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
       <div
         id={labelId}
         ref={selectRef}
-        className={`bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center`}
+        className={`bu-group bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center ${className}`}
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
         onClick={handleClick}>
