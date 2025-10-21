@@ -27,7 +27,7 @@ interface SortableThCellProps {
   columns: ProTableColumnProps[];
   sortState?: string;
   onSort: (column: ProTableColumnProps) => void;
-  renderSortIcon: (column: ProTableColumnProps) => React.ReactNode;
+  renderSortIcon: (column: ProTableColumnProps, onSort: (column: ProTableColumnProps) => void) => React.ReactNode;
   isDragging?: boolean;
   draggable?: boolean;
   dragHandleIcon?: React.ReactNode;
@@ -160,14 +160,13 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
       className={className}
       style={getThStyle()}
       {...attributes}
-      {...listeners}
-      onClick={() => onSort(column)}>
+      {...listeners}>
       <div
         className="bu-relative bu-flex bu-items-center bu-gap-2"
         style={{ justifyContent: column.align || "center" }}>
         <div className="bu-flex bu-items-center">
           {column.renderHeader ? column.renderHeader([]) : column.title}
-          {renderSortIcon(column)}
+          {renderSortIcon(column, onSort)}
           {column.renderEndIcon ? column.renderEndIcon() : null}
         </div>
 
@@ -210,7 +209,7 @@ const Thead: React.FC<TheadProps> = (props) => {
     }
   };
 
-  const renderSortIcon = (column: ProTableColumnProps) => {
+  const renderSortIcon = (column: ProTableColumnProps, onSortClick: (column: ProTableColumnProps) => void) => {
     if (!column.filter || !column.key) return null;
 
     const sortState = sortStates[column.key] || SortEnum.default;
@@ -222,15 +221,22 @@ const Thead: React.FC<TheadProps> = (props) => {
       <span
         className={clsx(
           "bu-inline-flex bu-align-middle bu-transition-opacity bu-duration-200",
-          "bu-ml-[4px]",
-          isActive ? "bu-opacity-100" : "bu-opacity-0 group-hover:bu-opacity-100"
-        )}>
+          "bu-ml-[4px] bu-cursor-pointer"
+        )}
+        onClick={(e) => {
+          e.stopPropagation();
+          onSortClick(column);
+        }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="6"
           height="10"
           viewBox="0 0 6 10"
-          fill="none">
+          fill="none"
+          className={clsx(
+            "bu-transition-opacity bu-duration-200",
+            isActive ? "bu-opacity-100" : "bu-opacity-0 group-hover:bu-opacity-100"
+          )}>
           <path
             d="M5.4847 3.04301V4.10942H0.151367V3.04301L2.81803 0.376343L5.4847 3.04301Z"
             fill={sortState === SortEnum.asc ? activeColor : defaultColor}
