@@ -172,7 +172,6 @@ const ProTable: React.FC<ProTableProps> = (props) => {
           className={proTableStyles.table()} 
           style={{ 
             tableLayout, 
-            width: tableLayout === "fixed" ? tableWidth : undefined,
             minWidth: tableLayout === "fixed" ? tableWidth : undefined
           }}>
           <Thead
