@@ -27,7 +27,7 @@ interface SortableThCellProps {
   columns: ProTableColumnProps[];
   sortState?: string;
   onSort: (column: ProTableColumnProps) => void;
-  renderSortIcon: (column: ProTableColumnProps, onSort: (column: ProTableColumnProps) => void) => React.ReactNode;
+  renderSortIcon: (column: ProTableColumnProps) => React.ReactNode;
   isDragging?: boolean;
   draggable?: boolean;
   dragHandleIcon?: React.ReactNode;
@@ -153,6 +153,18 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
   );
 
   const showDragHandle = draggable && !column.fixed;
+  const isSortable = column.filter && column.key;
+
+  const handleThClick = (e: React.MouseEvent) => {
+    if (isSortable) {
+      // 如果点击的是拖拽手柄，不触发排序
+      const target = e.target as HTMLElement;
+      const isDragHandle = target.closest('.drag-handle-icon');
+      if (!isDragHandle) {
+        onSort(column);
+      }
+    }
+  };
 
   return (
     <th
@@ -160,24 +172,26 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
       className={className}
       style={getThStyle()}
       {...attributes}
-      {...listeners}>
+      {...listeners}
+      onClick={handleThClick}>
       <div
         className="bu-relative bu-flex bu-items-center bu-gap-2"
         style={{ justifyContent: column.align || "center" }}>
         <div className="bu-flex bu-items-center">
           {column.renderHeader ? column.renderHeader([]) : column.title}
-          {renderSortIcon(column, onSort)}
+          {renderSortIcon(column)}
           {column.renderEndIcon ? column.renderEndIcon() : null}
         </div>
 
         {showDragHandle && (
           <span
-            className={clsx(
+            data-drag-handle
+            className={`${clsx(
               proTableStyles.dragHandle({
                 theme
               }),
-              "group-hover:bu-opacity-100"
-            )}
+              "group-hover:bu-opacity-100",
+            )} drag-handle-icon`}
             style={{
               display: "flex",
               alignItems: "center",
@@ -209,7 +223,7 @@ const Thead: React.FC<TheadProps> = (props) => {
     }
   };
 
-  const renderSortIcon = (column: ProTableColumnProps, onSortClick: (column: ProTableColumnProps) => void) => {
+  const renderSortIcon = (column: ProTableColumnProps) => {
     if (!column.filter || !column.key) return null;
 
     const sortState = sortStates[column.key] || SortEnum.default;
@@ -221,12 +235,8 @@ const Thead: React.FC<TheadProps> = (props) => {
       <span
         className={clsx(
           "bu-inline-flex bu-align-middle bu-transition-opacity bu-duration-200",
-          "bu-ml-[4px] bu-cursor-pointer"
-        )}
-        onClick={(e) => {
-          e.stopPropagation();
-          onSortClick(column);
-        }}>
+          "bu-ml-[4px]"
+        )}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="6"
