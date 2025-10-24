@@ -183,6 +183,7 @@ const ProTable: React.FC<ProTableProps> = (props) => {
             draggable={draggable}
             dragHandleIcon={dragHandleIcon}
             theme={theme}
+            rowIdPrefix={rowIdPrefix}
           />
           <Tbody
             columns={columns}

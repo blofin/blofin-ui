@@ -59,6 +59,7 @@ interface TheadProps {
   draggable?: boolean;
   dragHandleIcon?: React.ReactNode; // 自定义拖拽图标
   theme?: BUITheme;
+  rowIdPrefix?: string;
 }
 
 interface TbodyProps {

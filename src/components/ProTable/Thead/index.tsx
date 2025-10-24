@@ -159,7 +159,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
     if (isSortable) {
       // 如果点击的是拖拽手柄，不触发排序
       const target = e.target as HTMLElement;
-      const isDragHandle = target.closest('.drag-handle-icon');
+      const isDragHandle = target.closest(".drag-handle-icon");
       if (!isDragHandle) {
         onSort(column);
       }
@@ -190,7 +190,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
               proTableStyles.dragHandle({
                 theme
               }),
-              "group-hover:bu-opacity-100",
+              "group-hover:bu-opacity-100"
             )} drag-handle-icon`}
             style={{
               display: "flex",
@@ -214,7 +214,8 @@ const Thead: React.FC<TheadProps> = (props) => {
     theadClass,
     draggable = false,
     dragHandleIcon,
-    theme = "light"
+    theme = "light",
+    rowIdPrefix
   } = props;
 
   const handleSort = (column: ProTableColumnProps) => {
@@ -264,7 +265,7 @@ const Thead: React.FC<TheadProps> = (props) => {
 
   return (
     <thead className={clsx(proTableStyles.thead({ theme }), theadClass)}>
-      <tr>
+      <tr id={rowIdPrefix ? `${rowIdPrefix}-thead` : ""}>
         {columns.map((column, index) => (
           <SortableThCell
             key={column.key || index}
