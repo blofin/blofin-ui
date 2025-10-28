@@ -228,8 +228,8 @@ const Thead: React.FC<TheadProps> = (props) => {
     if (!column.filter || !column.key) return null;
 
     const sortState = sortStates[column.key] || SortEnum.default;
-    const defaultColor = theme === "dark" ? "#EBECF5" : "#0A0A0A";
-    const activeColor = "#F80";
+    const defaultColor = theme === "dark" ? "rgba(235, 236, 245, 0.20)" : "rgba(10, 10, 10, 0.20)";
+    const activeColor = theme === "dark" ? "rgba(235, 236, 245, 0.60)" : "rgba(10, 10, 10, 0.60)";
     const isActive = sortState !== SortEnum.default;
 
     return (
@@ -251,12 +251,10 @@ const Thead: React.FC<TheadProps> = (props) => {
           <path
             d="M5.4847 3.04301V4.10942H0.151367V3.04301L2.81803 0.376343L5.4847 3.04301Z"
             fill={sortState === SortEnum.asc ? activeColor : defaultColor}
-            fillOpacity={sortState === SortEnum.asc ? "1" : "0.2"}
           />
           <path
             d="M5.4847 5.89067V6.95707L2.81803 9.62374L0.151367 6.95707V5.89067H5.4847Z"
             fill={sortState === SortEnum.desc ? activeColor : defaultColor}
-            fillOpacity={sortState === SortEnum.desc ? "1" : "0.2"}
           />
         </svg>
       </span>
