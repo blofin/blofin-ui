@@ -18,25 +18,26 @@
   width: 0;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  display: none;
+/* Checkbox icon container */
+.checkmark {
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-  @apply bu-flex bu-items-center bu-justify-center;
+/* Hover effect for unchecked state */
+.unchecked {
+  transition: all 0.15s ease;
+  cursor: pointer;
 }
 
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-  @apply bu-border-solid;
-  // width: 4px;
-  // height: 6px;
-  margin-bottom: 2px;
-  // border-width: 0 1.8px 1.8px 0;
-  -webkit-transform: rotate(35deg);
-  -ms-transform: rotate(35deg);
-  transform: rotate(35deg);
+/* Light theme hover */
+.container:hover .unchecked path[fill="#0A0A0A"] {
+  fill: #FF8800;
+  fill-opacity: 1;
+}
+
+/* Dark theme hover */
+.container:hover .unchecked path[fill="#EBECF5"] {
+  fill: #FCFDFF;
+  fill-opacity: 1;
 }

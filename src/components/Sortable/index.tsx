@@ -7,9 +7,17 @@ interface SortableProps {
   moveEnd: (prev: number, next: number) => void;
   ghostClass?: string;
   dragClass?: string;
+  customHandle?: string;
 }
 
-const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass, dragClass }) => {
+const Sortable: FC<SortableProps> = ({
+  children,
+  direction,
+  moveEnd,
+  ghostClass,
+  dragClass,
+  customHandle
+}) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const sortableRef = useRef<any>(null);
@@ -20,7 +28,7 @@ const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass,
         animation: 200,
         ghostClass: ghostClass,
         dragClass: dragClass,
-        handle: ".drag-item",
+        handle: customHandle ? customHandle : ".drag-item",
         forceFallback: true,
         onStart: () => {},
         onEnd: (event) => {
@@ -34,7 +42,7 @@ const Sortable: FC<SortableProps> = ({ children, direction, moveEnd, ghostClass,
   return (
     <div
       ref={ref}
-      className={`drag-item bu-flex bu-h-full bu-w-full ${
+      className={`${!customHandle ? "drag-item" : ""} bu-flex bu-h-full bu-w-full ${
         direction === "horizontal" ? "bu-flex-row" : "bu-flex-col"
       }`}>
       {children}

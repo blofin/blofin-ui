@@ -55,3 +55,35 @@ export const Vertical: Story = {
     );
   }
 };
+
+export const CustomSize: Story = {
+  render: () => {
+    const [isChecked, setIsChecked] = useState(false);
+    const mode = useMode();
+
+    return (
+      <div className="bu-flex bu-flex-col bu-gap-4">
+        <ThemeProvider value={{ theme: mode }}>
+          <Checkbox
+            label="Custom Size 16x16"
+            checked={isChecked}
+            customSize={{ width: 16, height: 16 }}
+            onChange={() => setIsChecked(!isChecked)}
+          />
+          <Checkbox
+            label="Custom Size 20x20"
+            checked={isChecked}
+            customSize={{ width: 20, height: 20 }}
+            onChange={() => setIsChecked(!isChecked)}
+          />
+          <Checkbox
+            label="Custom Size 24x24"
+            checked={isChecked}
+            customSize={{ width: 24, height: 24 }}
+            onChange={() => setIsChecked(!isChecked)}
+          />
+        </ThemeProvider>
+      </div>
+    );
+  }
+};
