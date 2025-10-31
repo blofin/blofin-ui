@@ -108,6 +108,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
       width: effectiveWidth,
       textAlign: proTableStyles.getTextAlign(column.align) as React.CSSProperties["textAlign"],
       opacity: isDragging ? 0.5 : 1,
+      // cursor 由 className 控制，不在 inline style 中设置
       zIndex: zIndex,
       whiteSpace: "nowrap",
       overflow: "hidden",
@@ -152,6 +153,18 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
   );
 
   const showDragHandle = draggable && !column.fixed;
+  const isSortable = column.filter && column.key;
+
+  const handleThClick = (e: React.MouseEvent) => {
+    if (isSortable) {
+      // 如果点击的是拖拽手柄，不触发排序
+      const target = e.target as HTMLElement;
+      const isDragHandle = target.closest(".drag-handle-icon");
+      if (!isDragHandle) {
+        onSort(column);
+      }
+    }
+  };
 
   return (
     <th
@@ -160,7 +173,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
       style={getThStyle()}
       {...attributes}
       {...listeners}
-      onClick={() => onSort(column)}>
+      onClick={handleThClick}>
       <div
         className="bu-relative bu-flex bu-items-center bu-gap-2"
         style={{ justifyContent: column.align || "center" }}>
@@ -172,13 +185,18 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
 
         {showDragHandle && (
           <span
-            className={clsx(
+            data-drag-handle
+            className={`${clsx(
               proTableStyles.dragHandle({
                 theme
               }),
-              "group-hover:bu-opacity-100",
-              "bu-ml-[4px] bu-flex bu-items-center"
-            )}>
+              "group-hover:bu-opacity-100"
+            )} drag-handle-icon`}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "4px"
+            }}>
             {dragHandleIcon !== null && (dragHandleIcon || <DragHandleIcon />)}
           </span>
         )}
@@ -196,7 +214,8 @@ const Thead: React.FC<TheadProps> = (props) => {
     theadClass,
     draggable = false,
     dragHandleIcon,
-    theme = "light"
+    theme = "light",
+    rowIdPrefix
   } = props;
 
   const handleSort = (column: ProTableColumnProps) => {
@@ -209,32 +228,33 @@ const Thead: React.FC<TheadProps> = (props) => {
     if (!column.filter || !column.key) return null;
 
     const sortState = sortStates[column.key] || SortEnum.default;
-    const defaultColor = theme === "dark" ? "#EBECF5" : "#0A0A0A";
-    const activeColor = "#F80";
+    const defaultColor = theme === "dark" ? "rgba(235, 236, 245, 0.20)" : "rgba(10, 10, 10, 0.20)";
+    const activeColor = theme === "dark" ? "rgba(235, 236, 245, 0.60)" : "rgba(10, 10, 10, 0.60)";
     const isActive = sortState !== SortEnum.default;
 
     return (
       <span
         className={clsx(
           "bu-inline-flex bu-align-middle bu-transition-opacity bu-duration-200",
-          "bu-ml-[4px]",
-          isActive ? "bu-opacity-100" : "bu-opacity-0 group-hover:bu-opacity-100"
+          "bu-ml-[4px]"
         )}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="6"
           height="10"
           viewBox="0 0 6 10"
-          fill="none">
+          fill="none"
+          className={clsx(
+            "bu-transition-opacity bu-duration-200",
+            isActive ? "bu-opacity-100" : "bu-opacity-0 group-hover:bu-opacity-100"
+          )}>
           <path
             d="M5.4847 3.04301V4.10942H0.151367V3.04301L2.81803 0.376343L5.4847 3.04301Z"
             fill={sortState === SortEnum.asc ? activeColor : defaultColor}
-            fillOpacity={sortState === SortEnum.asc ? "1" : "0.2"}
           />
           <path
             d="M5.4847 5.89067V6.95707L2.81803 9.62374L0.151367 6.95707V5.89067H5.4847Z"
             fill={sortState === SortEnum.desc ? activeColor : defaultColor}
-            fillOpacity={sortState === SortEnum.desc ? "1" : "0.2"}
           />
         </svg>
       </span>
@@ -243,7 +263,7 @@ const Thead: React.FC<TheadProps> = (props) => {
 
   return (
     <thead className={clsx(proTableStyles.thead({ theme }), theadClass)}>
-      <tr>
+      <tr id={rowIdPrefix ? `${rowIdPrefix}-thead` : ""}>
         {columns.map((column, index) => (
           <SortableThCell
             key={column.key || index}

@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { BUITheme } from "../../types/component";
 
 // Container 容器样式
-export const containerStyles = cva("bu-w-full bu-overflow-auto bu-rounded-lg", {
+export const containerStyles = cva("bu-w-full bu-rounded-lg", {
   variants: {
     theme: {
       light: "bu-bg-light-background",

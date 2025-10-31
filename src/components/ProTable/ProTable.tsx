@@ -31,7 +31,8 @@ const ProTable: React.FC<ProTableProps> = (props) => {
     draggable = false, // 默认不启用拖拽
     onColumnsChange,
     dragHandleIcon,
-    maxHeight
+    maxHeight,
+    rowIdPrefix
   } = props;
 
   const { theme } = useTheme();
@@ -49,15 +50,18 @@ const ProTable: React.FC<ProTableProps> = (props) => {
     useSensor(KeyboardSensor)
   );
 
+  // 只在初始化时设置列，不响应后续的 props 变化
+  // 如果需要重置，父组件应该改变 ProTable 的 key
   React.useEffect(() => {
     setColumns(initialColumns);
-  }, [initialColumns]);
+  }, [initialColumns]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 处理排序
   const handleSort = (key: string, type?: "single" | "multiple") => {
     const currentSort = sortStates[key] || SortEnum.default;
     let newSort: SortState;
 
+    // 循环: default -> desc -> asc -> default
     if (currentSort === SortEnum.default) {
       newSort = SortEnum.desc;
     } else if (currentSort === SortEnum.desc) {
@@ -139,13 +143,37 @@ const ProTable: React.FC<ProTableProps> = (props) => {
     .filter((col) => !col.fixed && col.key)
     .map((col) => col.key as string);
 
+  // 计算表格总宽度
+  const calculateTableWidth = () => {
+    const totalWidth = columns.reduce((sum, col) => {
+      if (col.width) {
+        const width = parseInt(col.width);
+        return sum + (isNaN(width) ? 150 : width);
+      }
+      // 没有设置 width 的列默认按 150px 计算
+      return sum + 150;
+    }, 0);
+    return totalWidth > 0 ? `${totalWidth}px` : undefined;
+  };
+
+  const tableWidth = calculateTableWidth();
+
   // 渲染表格内容
   const renderTable = () => (
     <div
       className={proTableStyles.container({ theme })}
-      style={maxHeight ? { maxHeight, overflow: "auto" } : undefined}>
+      style={
+        maxHeight 
+          ? { maxHeight, overflowX: "auto", overflowY: "auto" } 
+          : { overflowX: "auto" }
+      }>
       {data.length > 0 ? (
-        <table className={proTableStyles.table()} style={{ tableLayout }}>
+        <table 
+          className={proTableStyles.table()} 
+          style={{ 
+            tableLayout, 
+            minWidth: tableLayout === "fixed" ? tableWidth : undefined
+          }}>
           <Thead
             columns={columns}
             sortStates={sortStates}
@@ -155,6 +183,7 @@ const ProTable: React.FC<ProTableProps> = (props) => {
             draggable={draggable}
             dragHandleIcon={dragHandleIcon}
             theme={theme}
+            rowIdPrefix={rowIdPrefix}
           />
           <Tbody
             columns={columns}
@@ -163,6 +192,7 @@ const ProTable: React.FC<ProTableProps> = (props) => {
             tdClass={tdClass}
             tbodyClass={tbodyClass}
             theme={theme}
+            rowIdPrefix={rowIdPrefix}
           />
         </table>
       ) : (
