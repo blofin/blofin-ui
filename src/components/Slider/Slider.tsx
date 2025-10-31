@@ -178,8 +178,6 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
     return arr;
   }, [marks, min, max, step, labels]);
 
-  console.log(marksArray);
-
   const mouseDown = React.useRef<boolean>(false);
   const [onMouseDown, setMouseDonw] = React.useState(false);
 
