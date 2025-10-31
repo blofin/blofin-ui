@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FC, useEffect, useRef } from "react";
 import sortable from "sortablejs";
 
 interface SortableProps {
@@ -7,20 +7,28 @@ interface SortableProps {
   moveEnd: (prev: number, next: number) => void;
   ghostClass?: string;
   dragClass?: string;
+  customHandle?: string;
 }
 
-const Sortable: React.FC<SortableProps> = ({ children, direction, moveEnd, ghostClass, dragClass }) => {
-  const ref = React.useRef<HTMLDivElement>(null);
+const Sortable: FC<SortableProps> = ({
+  children,
+  direction,
+  moveEnd,
+  ghostClass,
+  dragClass,
+  customHandle
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
 
-  const sortableRef = React.useRef<any>(null);
+  const sortableRef = useRef<any>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (ref.current && !sortableRef.current) {
       sortableRef.current = sortable.create(ref.current, {
         animation: 200,
         ghostClass: ghostClass,
         dragClass: dragClass,
-        handle: ".drag-item",
+        handle: customHandle ? customHandle : ".drag-item",
         forceFallback: true,
         onStart: () => {},
         onEnd: (event) => {
@@ -34,7 +42,7 @@ const Sortable: React.FC<SortableProps> = ({ children, direction, moveEnd, ghost
   return (
     <div
       ref={ref}
-      className={`drag-item bu-flex bu-h-full bu-w-full ${
+      className={`${!customHandle ? "drag-item" : ""} bu-flex bu-h-full bu-w-full ${
         direction === "horizontal" ? "bu-flex-row" : "bu-flex-col"
       }`}>
       {children}
