@@ -285,10 +285,9 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
           {marksArray.map((mark, index) => {
             const markPercent = getPercent(mark.value, min, max, decimalPlaces);
             return (
-              <>
+              <React.Fragment key={mark.value ?? index}>
                 {mark.showMark && (
                   <div
-                    key={mark.value || index}
                     className={`${styles["mark"]} ${getMarkStyle(
                       mark.value,
                       theme,
@@ -310,7 +309,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
                     {renderLabel(mark.value)}
                   </span>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
         </div>
