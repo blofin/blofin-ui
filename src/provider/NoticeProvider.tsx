@@ -27,7 +27,7 @@ export type configType = {
   onClose?: () => void;
 };
 
-export type Methods = (config: configType, type: BUIComponentType, position?: string) => void;
+export type Methods = (config: configType, type: BUIComponentType, position?: string) => number;
 
 export type ToastMthods = (msg: string, type: BUIComponentType) => void;
 
@@ -59,6 +59,7 @@ const NoticeContext = createContext<NoticeContextProps>({
   setNotificationListRightTop: () => {},
   open: () => {
     console.warn("not methods");
+    return 0;
   },
   remove: () => {},
   toastList: [],
@@ -168,6 +169,8 @@ const NoticeProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
     }
 
     key.current += 1;
+
+    return key.current - 1;
   };
 
   const remove = (id: number) => {
