@@ -5,6 +5,7 @@ import Info from "../../assets/icons/info.svg";
 import Warning from "../../assets/icons/warning.svg";
 import Success from "../../assets/icons/success.svg";
 import Danger from "../../assets/icons/danger.svg";
+import Loading from "../../assets/icons/loading-line.svg";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styles from "./toast.module.scss";
 import useTheme from "../../provider/useTheme";
@@ -34,7 +35,8 @@ const Icon: FC<{ type: BUIComponentType }> = ({ type }) => {
     info: <Info className={iconstyles(type, theme)} />,
     warning: <Warning className={iconstyles(type, theme)} />,
     success: <Success className={iconstyles(type, theme)} />,
-    danger: <Danger className={iconstyles(type, theme)} />
+    danger: <Danger className={iconstyles(type, theme)} />,
+    loading: <Loading className={iconstyles(type, theme)} />
   };
 
   return <>{icons[type]}</>;

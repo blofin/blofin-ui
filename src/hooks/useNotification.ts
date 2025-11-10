@@ -2,22 +2,26 @@ import { useContext } from "react";
 import { NoticeContext, configType } from "../provider/NoticeProvider";
 
 const useNotification = () => {
-  const { open } = useContext(NoticeContext);
+  const { open, remove } = useContext(NoticeContext);
 
   const info = (config: configType) => {
-    open(config, "info");
+    return open(config, "info");
   };
 
   const success = (config: configType) => {
-    open(config, "success");
+    return open(config, "success");
   };
 
   const warning = (config: configType) => {
-    open(config, "warning");
+    return open(config, "warning");
   };
 
   const danger = (config: configType) => {
-    open(config, "danger");
+    return open(config, "danger");
+  };
+
+  const loading = (config: configType) => {
+    return open(config, "loading");
   };
 
   return {
@@ -25,7 +29,9 @@ const useNotification = () => {
       info,
       success,
       warning,
-      danger
+      danger,
+      loading,
+      remove
     }
   };
 };

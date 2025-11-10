@@ -38,13 +38,15 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
       info: "bu-text-light-primary",
       warning: "bu-text-light-warning",
       success: "bu-text-light-success",
-      danger: "bu-text-light-danger"
+      danger: "bu-text-light-danger",
+      loading: "bu-text-light-label bu-animate-spin"
     },
     dark: {
       info: "bu-text-dark-primary",
       warning: "bu-text-dark-warning",
       success: "bu-text-dark-success",
-      danger: "bu-text-dark-danger"
+      danger: "bu-text-dark-danger",
+      loading: "bu-text-dark-label bu-animate-spin"
     }
   };
 
