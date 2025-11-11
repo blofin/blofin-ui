@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import { Notification } from "../components/Notification/Notification";
 import { ThemeProvider } from "..";
 import useMode from "../hooks/useMode";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { NoticeProvider } from "../provider/NoticeProvider";
 import useNotification from "../hooks/useNotification";
 
@@ -82,7 +82,7 @@ const ButtonGroup = () => {
         console.log("onClose");
       }
     });
-  }
+  };
 
   const [sum, setSum] = useState(1);
 
@@ -100,6 +100,23 @@ const ButtonGroup = () => {
         position: "rightTop"
       });
     }
+  };
+
+  const manualId = useRef(0);
+
+  const openManual = () => {
+    const id = methods.loading({
+      title: "Manual",
+      msg: "Manual",
+      position: "rightBottom",
+      autoClose: false
+    });
+
+    manualId.current = id;
+  };
+
+  const closeManual = () => {
+    methods.remove(manualId.current);
   };
 
   return (
@@ -121,6 +138,12 @@ const ButtonGroup = () => {
       </Button>
       <Button size="medium" onClick={maxLimit}>
         最多2个
+      </Button>
+      <Button size="medium" onClick={openManual}>
+        手动打开
+      </Button>
+      <Button size="medium" onClick={closeManual}>
+        手动关闭
       </Button>
     </>
   );
