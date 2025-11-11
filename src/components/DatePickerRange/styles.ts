@@ -3,8 +3,8 @@ import { cva } from "class-variance-authority";
 export const ArrowLine = cva("", {
   variants: {
     theme: {
-      light: "bu-text-light-label",
-      dark: "bu-text-dark-label"
+      light: "bu-text-light-label-60",
+      dark: "bu-text-dark-label-60"
     }
   },
 });
@@ -21,8 +21,8 @@ export const TextDescribe = cva("", {
 export const DatePickerBg = cva("", {
   variants: {
     theme: {
-      light: "bu-bg-light-background bu-border-light-line-secondary",
-      dark: "bu-bg-dark-background bu-border-dark-line-secondary"
+      light: "bu-bg-light-background bu-border-light-line-secondary hover:bu-bg-light-fill-secondary",
+      dark: "bu-bg-dark-background bu-border-dark-line-secondary hover:bu-bg-dark-fill-secondary"
     }
   }
 });
