@@ -50,7 +50,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
     if (currentTheme === "light" && checked && !disabled) {
       return (
         <svg xmlns="http://www.w3.org/2000/svg" width={svgWidth} height={svgHeight} viewBox="0 0 12 12" fill="none">
-          <path fillRule="evenodd" clipRule="evenodd" d="M1.86667 0C0.835735 0 0 0.835735 0 1.86667V10.1333C0 11.1643 0.835735 12 1.86667 12H10.1333C11.1643 12 12 11.1643 12 10.1333V1.86667C12 0.835735 11.1643 0 10.1333 0H1.86667ZM5.33459 8.66642L10.0487 3.95239L9.10586 3.0096L5.33459 6.78084L3.449 4.89518L2.50619 5.83805L5.33459 8.66642Z" fill="#FF8800"/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M1.86667 0C0.835735 0 0 0.835735 0 1.86667V10.1333C0 11.1643 0.835735 12 1.86667 12H10.1333C11.1643 12 12 11.1643 12 10.1333V1.86667C12 0.835735 11.1643 0 10.1333 0H1.86667ZM5.33459 8.66642L10.0487 3.95239L9.10586 3.0096L5.33459 6.78084L3.449 4.89518L2.50619 5.83805L5.33459 8.66642Z" fill="var(--light-primary-default)"/>
         </svg>
       );
     }
