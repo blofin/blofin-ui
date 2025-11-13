@@ -32,7 +32,7 @@
 
 /* Light theme hover */
 .container:hover .unchecked path[fill="#0A0A0A"] {
-  fill: #FF8800;
+  fill: var(--light-primary-default);
   fill-opacity: 1;
 }
 
