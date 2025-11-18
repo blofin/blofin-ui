@@ -253,11 +253,11 @@ const buyStyles = cva("bu-text-white", {
   }
 });
 
-const buyDisabledStyles = cva("bu-text-white", {
+const buyDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-label-20", "hover:bu-bg-light-label-20"],
-      dark: ["bu-bg-dark-label-20", "hover:bu-bg-dark-label-20"]
+      light: ["bu-bg-light-green-alpha", "hover:bu-bg-light-green-alpha", "bu-text-light-label-20"],
+      dark: ["bu-bg-dark-green-alpha", "hover:bu-bg-dark-green-alpha", "bu-text-dark-label-40"]
     }
   }
 });
@@ -271,11 +271,11 @@ const sellStyles = cva("bu-text-white", {
   }
 });
 
-const sellDisabledStyles = cva("bu-text-white", {
+const sellDisabledStyles = cva("", {
   variants: {
     theme: {
-      light: ["bu-bg-light-label-20", "hover:bu-bg-light-label-20"],
-      dark: ["bu-bg-dark-label-20", "hover:bu-bg-dark-label-20"]
+      light: ["bu-bg-light-red-alpha", "hover:bu-bg-light-red-alpha", "bu-text-light-label-20"],
+      dark: ["bu-bg-dark-red-alpha", "hover:bu-bg-dark-red-alpha", "bu-text-dark-label-40"]
     }
   }
 });

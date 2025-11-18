@@ -98,7 +98,7 @@ export const All = {
             primary
           </Button>
           <Button variant="buy" disabled size="medium">
-            buy
+            buy-disabled
           </Button>
           <Button variant="sell" size="medium">
             sell
