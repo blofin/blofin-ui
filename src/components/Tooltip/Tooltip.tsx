@@ -27,6 +27,7 @@ interface TooltipProps {
    * */
   y?: number;
   x?: number;
+  delayPositive?: boolean;
 }
 
 type ContentProps = Omit<TooltipProps, "children"> & {
@@ -121,11 +122,12 @@ const Tooltip: FC<TooltipProps> = ({
   isShow,
   theme: toolTipTheme,
   containerClassName,
+  delayPositive=true,
   ...props
 }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
-  const [enter, setEnter] = useDelayEvent<boolean>(false, 300, true, true);
+  const [enter, setEnter] = useDelayEvent<boolean>(false, 300, true, delayPositive);
 
   const [show, setShow] = useState(false);
 
