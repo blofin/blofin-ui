@@ -102,7 +102,11 @@ const Tab = forwardRef<TabRef, TabProps>((props, ref) => {
       </div>
       <div className={cn("bu-h-full bu-w-full", className)}>
         {items.map((item, index) => {
-          return <Fragment key={index}>{active === item.key ? item.children : null}</Fragment>;
+          return (
+            <Fragment key={item.key ?? index}>
+              {active === item.key ? item.children : null}
+            </Fragment>
+          );
         })}
       </div>
     </div>
