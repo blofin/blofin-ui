@@ -25,8 +25,8 @@ function addEntryFiles() {
   // Initialize exports object
   const exports = {
     ".": {
-      "import": "./dist/index.es.js",
-      "types": "./dist/index.d.ts"
+      import: "./dist/index.es.js",
+      types: "./dist/index.d.ts"
     },
     "./blofin.css": "./dist/blofin.css",
     "./theme": "./dist/config/theme.js"
@@ -109,7 +109,7 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ["react", "react-dom", "tailwindcss"],
+      external: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime", "tailwindcss"],
       output: {
         banner: '"use client";',
         // Provide global variables to use in the UMD build
