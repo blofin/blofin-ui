@@ -71,3 +71,51 @@ export const Primary: Story = {
     );
   }
 };
+
+export const LeftPlacement: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    const mode = useTheme();
+
+    return (
+      <ThemeProvider value={{ theme: mode }}>
+        <Button size="medium" onClick={() => setOpen(true)}>
+          Open Left Drawer
+        </Button>
+        <Drawer
+          open={open}
+          title="左侧抽屉"
+          drawerContentClass="bu-w-[400px]"
+          placement="left"
+          hideIcon={false}
+          cancel={() => setOpen(false)}
+          content={<Content />}
+        />
+      </ThemeProvider>
+    );
+  }
+};
+
+export const WithCloseIcon: Story = {
+  render: () => {
+    const [open, setOpen] = useState(false);
+    const mode = useTheme();
+
+    return (
+      <ThemeProvider value={{ theme: mode }}>
+        <Button size="medium" onClick={() => setOpen(true)}>
+          Open Drawer with Close Icon
+        </Button>
+        <Drawer
+          open={open}
+          title="带关闭图标的抽屉"
+          drawerContentClass="bu-w-[500px]"
+          placement="right"
+          hideIcon={false}
+          cancel={() => setOpen(false)}
+          content={<Content />}
+        />
+      </ThemeProvider>
+    );
+  }
+};

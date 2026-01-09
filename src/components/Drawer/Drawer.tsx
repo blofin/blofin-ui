@@ -1,14 +1,20 @@
 import * as React from "react";
+import { useMemo, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import CloseIcon from "../../assets/icons/close.svg";
 import { useTheme } from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
+import { cn } from "../../utils/utils";
 import styles from "./index.module.scss";
-import { drawerVariants, iconStyles } from "./styles";
+import { drawerVariants as drawerThemeVariants, iconStyles } from "./styles";
+import { overlayVariants, drawerVariants, transition } from "./animations";
+import { useDrawerCallbacks } from "./useDrawerCallbacks";
+
 export interface DrawerProps {
   title: null | string | React.ReactNode;
   content: string | React.ReactNode;
-  drawerContentClass:string;
+  drawerContentClass: string;
   cancel?: () => void;
   open: boolean;
   theme?: BUITheme;
@@ -25,58 +31,77 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
     hideIcon = false,
     open,
     placement = "right",
-    drawerContentClass='bu-w-[300px]'
+    drawerContentClass = 'bu-w-[300px]'
   } = props;
+  
   const { theme } = useTheme();
-  const getTheme = () => {
-    return mode ? mode : theme;
-  };
+  const { handleCancel, handleOverlayClick, handleKeyDown } = useDrawerCallbacks(cancel);
 
-  if (!open) {
-    return null;
-  }
+  // 使用 useMemo 缓存主题计算
+  const currentTheme = useMemo(() => mode ?? theme, [mode, theme]);
 
-  const handleCancel = () => {
-    if (cancel) {
-      cancel();
+  // 使用 useMemo 缓存 drawer className
+  const drawerClassName = useMemo(
+    () => cn(
+      styles.drawerContent,
+      drawerThemeVariants({ theme: currentTheme }),
+      styles[placement],
+      drawerContentClass
+    ),
+    [currentTheme, placement, drawerContentClass]
+  );
+
+  // 使用 useMemo 缓存 icon className
+  const iconClassName = useMemo(
+    () => iconStyles({ theme: currentTheme }),
+    [currentTheme]
+  );
+
+  // ESC 键盘事件监听
+  useEffect(() => {
+    if (open) {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
     }
-  };
-  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
-      event.stopPropagation();
-      handleCancel();
-    }
-  };
-  const drawerStyle = {
-    transition: open ? "transform .3s ease-in-out" : "transform .3s ease-in-out, opacity 0.3s ease",
-    transform: open ? "translateX(0)" : "translateX(100%)",
-    opacity: open ? 1 : 0
-  };
-  return open
-    ? createPortal(
-        <div className={styles.mock} onClick={handleOverlayClick}>
-          <div
-            className={`${styles.drawerContent}
-        ${drawerVariants({
-          theme: getTheme()
-        })}
-        ${styles[placement]} ${drawerContentClass}`}
-            style={drawerStyle}>
+  }, [open, handleKeyDown]);
+
+  // 使用 createPortal 渲染到 body
+  return createPortal(
+    <AnimatePresence mode="wait">
+      {open && (
+        <motion.div
+          className={styles.mock}
+          variants={overlayVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          transition={transition}
+          onClick={handleOverlayClick}
+        >
+          <motion.div
+            className={drawerClassName}
+            variants={drawerVariants[placement]}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={transition}
+          >
             <div className={styles.drawerHeader}>
               <div className={styles.title}>{title}</div>
               {!hideIcon && (
                 <CloseIcon
-                  className={`${iconStyles({
-                    theme: getTheme()
-                  })}`}
+                  className={iconClassName}
                   onClick={handleCancel}
                 />
               )}
             </div>
             <div className={styles.content}>{content}</div>
-          </div>
-        </div>,
-        document.body
-      )
-    : null;
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body
+  );
 };

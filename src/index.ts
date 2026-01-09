@@ -33,6 +33,7 @@ export * from "./components/Typography";
 export * from "./components/Sortable";
 export * from "./components/Alert";
 export * from "./components/MultiSelect";
+export * from "./components/Sort";
 
 export * from "./provider/NoticeProvider";
 export * from "./provider/ThemeProvider";
