@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { useMemo, useEffect } from "react";
 import { createPortal } from "react-dom";
@@ -59,13 +61,17 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
 
   // ESC 键盘事件监听
   useEffect(() => {
-    if (open) {
+    if (open && typeof document !== 'undefined') {
       document.addEventListener('keydown', handleKeyDown);
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
     }
   }, [open, handleKeyDown]);
+
+  if (typeof document === 'undefined') {
+    return null;
+  }
 
   // 使用 createPortal 渲染到 body
   return createPortal(
