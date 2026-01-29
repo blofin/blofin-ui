@@ -32,6 +32,7 @@ export interface DialogProps {
   loading?: boolean;
   containerRef?: React.RefObject<HTMLDivElement>;
   modalClassName?: string;
+  id?: string;
 }
 
 interface DialogComponent extends React.FC<DialogProps> {
@@ -60,7 +61,8 @@ const Dialog: DialogComponent = (props) => {
     open,
     loading = false,
     containerRef,
-    modalClassName
+    modalClassName,
+    id
   } = props;
 
   const { theme } = useTheme();
@@ -98,6 +100,7 @@ const Dialog: DialogComponent = (props) => {
     ? createPortal(
         <div className={`${styles.mock} ${modalClassName}`} onClick={closeMask}>
           <div
+            id={id}
             className={`${styles.dialog} ${dialogVariants({
               size,
               theme: getTheme()
