@@ -329,7 +329,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
           />
         ) : (
           <SelectArrow
-            className={`bu-ml-[4px] bu-h-[10px] bu-w-[10px] ${enter ? "bu-rotate-180" : ""} ${cn(
+            className={`ltr:bu-ml-[4px] rtl:bu-mr-[4px] bu-h-[10px] bu-w-[10px] ${enter ? "bu-rotate-180" : ""} ${cn(
               outlinedStyles({
                 theme: mode || theme
               })

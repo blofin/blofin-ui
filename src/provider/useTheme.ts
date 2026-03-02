@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { ThemeContext } from "./ThemeProvider";
 
 const useTheme = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme, direction = "ltr" } = useContext(ThemeContext);
 
   return {
-    theme
+    theme,
+    direction
   };
 };
 
-
-export default useTheme
+export default useTheme;

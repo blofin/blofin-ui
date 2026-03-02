@@ -13,9 +13,13 @@ export const drawerVariants = cva(
   );
   
 export const iconStyles = cva(
-    "bu-absolute bu-right-[20px] bu-h-[24px] bu-w-[24px] bu-cursor-pointer",
+    "bu-absolute bu-h-[24px] bu-w-[24px] bu-cursor-pointer",
     {
       variants: {
+        direction: {
+          ltr: "bu-right-[20px]",
+          rtl: "bu-left-[20px]"
+        },
         theme: {
           dark: "bu-text-dark-label",
           light: "bu-text-light-label-40"

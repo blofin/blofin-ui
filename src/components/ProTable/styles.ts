@@ -26,7 +26,7 @@ export const theadStyles = cva("bu-sticky bu-top-0 bu-z-[100]", {
 
 // Th 样式
 export const thStyles = cva(
-  "bu-relative bu-z-[999] bu-h-[25px] bu-select-none bu-border-b bu-px-[4px] bu-text-left bu-text-[12px] bu-font-medium bu-transition-all bu-duration-300",
+  "bu-relative bu-z-[999] bu-h-[25px] bu-select-none bu-border-b bu-px-[4px] bu-text-[12px] bu-font-medium bu-transition-all bu-duration-300",
   {
     variants: {
       theme: {
@@ -95,7 +95,7 @@ export const draggingStyles = cva("bu-z-[1002] !bu-cursor-grabbing bu-opacity-60
 });
 
 // Sort Icon 样式
-export const sortIconStyles = cva("bu-ml-2 bu-inline-flex bu-flex-col bu-align-middle");
+export const sortIconStyles = cva("ltr:bu-ml-2 rtl:bu-mr-2 bu-inline-flex bu-flex-col bu-align-middle");
 
 // Sort Arrow 样式
 export const sortArrowStyles = cva(

@@ -47,7 +47,8 @@ const Calendar: React.FC<CalendarProps> = ({
   locale,
   ...props
 }) => {
-  const { theme } = useTheme();
+  const { theme, direction } = useTheme();
+  const isRTL = direction === "rtl";
 
   function CustomCaption(props: CaptionProps) {
     const { goToMonth, nextMonth, previousMonth } = useNavigation();
@@ -82,12 +83,24 @@ const Calendar: React.FC<CalendarProps> = ({
 
         {props.displayIndex === 1 && (
           <div className="bu-flex bu-gap-6">
-            <ArrowLeftLine
-              className={`bu-h-6 bu-w-6 bu-cursor-pointer ${ArrowLine({ theme })}`}
-              onClick={() => previousMonth && goToMonth(previousMonth)}></ArrowLeftLine>
-            <ArrowRightLine
-              className={`bu-h-6 bu-w-6 bu-cursor-pointer ${ArrowLine({ theme })}`}
-              onClick={() => nextMonth && goToMonth(nextMonth)}></ArrowRightLine>
+            {isRTL ? (
+              <ArrowRightLine
+                className={`bu-h-6 bu-w-6 bu-cursor-pointer ${ArrowLine({ theme })}`}
+                onClick={() => previousMonth && goToMonth(previousMonth)}></ArrowRightLine>
+            ) : (
+              <ArrowLeftLine
+                className={`bu-h-6 bu-w-6 bu-cursor-pointer ${ArrowLine({ theme })}`}
+                onClick={() => previousMonth && goToMonth(previousMonth)}></ArrowLeftLine>
+            )}
+            {isRTL ? (
+              <ArrowLeftLine
+                className={`bu-h-6 bu-w-6 bu-cursor-pointer ${ArrowLine({ theme })}`}
+                onClick={() => nextMonth && goToMonth(nextMonth)}></ArrowLeftLine>
+            ) : (
+              <ArrowRightLine
+                className={`bu-h-6 bu-w-6 bu-cursor-pointer ${ArrowLine({ theme })}`}
+                onClick={() => nextMonth && goToMonth(nextMonth)}></ArrowRightLine>
+            )}
           </div>
         )}
       </div>
@@ -103,9 +116,11 @@ const Calendar: React.FC<CalendarProps> = ({
         month: "bu-space-y-4",
         caption: "bu-flex bu-justify-center bu-pt-1 bu-relative bu-items-center",
         caption_label: "bu-text-base bu-font-medium",
-        caption_start: `bu-border-r bu-pr-[16px] bu-pt-[16px] ${CaptionStart({ theme })} ${
-          startMonthShow ? "bu-hidden" : ""
-        }`,
+        caption_start: `ltr:bu-border-r rtl:bu-border-l ltr:bu-pr-[16px] rtl:bu-pl-[16px] bu-pt-[16px] ${CaptionStart(
+          {
+            theme
+          }
+        )} ${startMonthShow ? "bu-hidden" : ""}`,
         caption_end: `bu-pt-[16px] ${endMonthShow ? "bu-hidden" : ""}`,
         nav: "bu-space-x-1 bu-flex bu-items-center",
         nav_button: `${NavButton({

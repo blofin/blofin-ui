@@ -10,6 +10,24 @@ import useDelayEvent from "../../hooks/useDelayEvent";
 import { TooltipPlacement } from "./type";
 import { OFFSET, PLACEMENT, PLACEMENT_REVERSE } from "./enum";
 
+const resolvePlacementByDir = (placement: TooltipPlacement, isRTL: boolean): TooltipPlacement => {
+  if (!isRTL) return placement;
+  // 组件 API 使用 topLeft/topRight/bottomLeft/bottomRight 表达“物理方位”
+  // 但 Popper 的 start/end 会受 RTL 影响，因此在 RTL 下需要互换 Left/Right
+  switch (placement) {
+    case "topLeft":
+      return "topRight";
+    case "topRight":
+      return "topLeft";
+    case "bottomLeft":
+      return "bottomRight";
+    case "bottomRight":
+      return "bottomLeft";
+    default:
+      return placement;
+  }
+};
+
 interface TooltipProps {
   placement: TooltipPlacement;
   flipPlacement?: TooltipPlacement[];
@@ -34,6 +52,7 @@ type ContentProps = Omit<TooltipProps, "children"> & {
   parent: HTMLDivElement | null;
   enter: boolean;
   theme?: BUITheme;
+  direction?: "ltr" | "rtl";
 };
 
 const Content: FC<ContentProps> = ({
@@ -48,25 +67,38 @@ const Content: FC<ContentProps> = ({
   isShow = false,
   flipPlacement,
   theme,
+  direction = "ltr",
   x,
   y = 0
 }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
+  const isRTL = direction === "rtl";
+  const resolvedPlacement = useMemo(
+    () => resolvePlacementByDir(placement, isRTL),
+    [placement, isRTL]
+  );
+  const resolvedFlipPlacement = useMemo(
+    () => (flipPlacement ? flipPlacement.map((p) => resolvePlacementByDir(p, isRTL)) : undefined),
+    [flipPlacement, isRTL]
+  );
+
   const { styles, attributes, update, state } = usePopper(parent, targetRef.current, {
-    placement: PLACEMENT[placement],
+    placement: PLACEMENT[resolvedPlacement],
     strategy: "fixed",
     modifiers: [
       {
         name: "offset",
         options: {
-          offset: [x ? x : OFFSET[placement], 4 + y]
+          offset: [x ? x : OFFSET[resolvedPlacement], 4 + y]
         }
       },
       {
         name: "flip",
         options: {
-          fallbackPlacements: flipPlacement ? flipPlacement.map((item) => PLACEMENT[item]) : []
+          fallbackPlacements: resolvedFlipPlacement
+            ? resolvedFlipPlacement.map((item) => PLACEMENT[item])
+            : []
         }
       }
     ]
@@ -100,9 +132,10 @@ const Content: FC<ContentProps> = ({
       {!hideArrow && state && (
         <div
           className={arrowPositionStyles({
-            placement: PLACEMENT_REVERSE[
-              state.placement as keyof typeof PLACEMENT
-            ] as TooltipPlacement
+            placement: resolvePlacementByDir(
+              PLACEMENT_REVERSE[state.placement as keyof typeof PLACEMENT] as TooltipPlacement,
+              isRTL
+            )
           })}>
           <ArrowIcon
             className={
@@ -141,7 +174,7 @@ const Tooltip: FC<TooltipProps> = ({
     setEnter(false);
   };
 
-  const { theme: mode } = useTheme();
+  const { theme: mode, direction } = useTheme();
 
   const theme = useMemo(() => {
     return toolTipTheme ? toolTipTheme : mode;
@@ -163,7 +196,14 @@ const Tooltip: FC<TooltipProps> = ({
       onMouseLeave={mouseLeave}>
       {children}
       {isClient && (
-        <Content {...props} enter={enter} theme={theme} isShow={show} parent={targetRef.current} />
+        <Content
+          {...props}
+          enter={enter}
+          theme={theme}
+          isShow={show}
+          parent={targetRef.current}
+          direction={direction}
+        />
       )}
     </div>
   );

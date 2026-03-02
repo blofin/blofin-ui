@@ -3,10 +3,10 @@ import { cva } from "class-variance-authority";
 const itemStyles = cva("bu-min-w-[32px] bu-cursor-pointer", {
   variants: {
     size: {
-      small: "bu-text-[14px] bu-mr-[16px]",
-      medium: "bu-text-[14px] bu-mr-[16px]",
-      large: "bu-text-[16px] bu-mr-[16px]",
-      max: "bu-text-[20px] bu-mr-[24px]"
+      small: "bu-text-[14px] ltr:bu-mr-[16px] rtl:bu-ml-[16px]",
+      medium: "bu-text-[14px] ltr:bu-mr-[16px] rtl:bu-ml-[16px]",
+      large: "bu-text-[16px] ltr:bu-mr-[16px] rtl:bu-ml-[16px]",
+      max: "bu-text-[20px] ltr:bu-mr-[24px] rtl:bu-ml-[24px]"
     }
   }
 });

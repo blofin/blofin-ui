@@ -104,7 +104,8 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
     },
     ref
   ) => {
-    const { theme } = useTheme();
+    const { theme, direction } = useTheme();
+    const isRTL = direction === "rtl";
 
     const targetRef = useRef<HTMLDivElement | null>(null);
 
@@ -112,7 +113,7 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
 
     const { offset, resize } = useAlign(parent);
 
-    const { offsetX, offsetY } = offset;
+    const { offsetX, offsetY, offsetRight } = offset;
 
     const [isBottomed, setIsBottomed] = useState(false);
 
@@ -176,7 +177,7 @@ const Options = forwardRef<HTMLDivElement, OptionsProps>(
             className={`${styles.options} ${className} ${bgStyles({ theme })}`}
             style={{
               top: isBottomed ? offsetY - optionHeight - 4 : offsetY + height + 4 + "px",
-              left: offsetX + "px"
+              ...(isRTL ? { right: offsetRight + "px" } : { left: offsetX + "px" })
             }}
             ref={targetRef}>
             <div ref={ref} style={{ width: width + offsetPixels + "px" }}>
@@ -397,7 +398,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
             styles.input,
             valueClassName,
             "bu-flex bu-h-full bu-w-full bu-items-center bu-justify-between bu-rounded bu-border-[1px]",
-            base === "div" && "bu-absolute bu-left-0 bu-top-0",
+            base === "div" && "bu-absolute bu-top-0 ltr:bu-left-0 rtl:bu-right-0",
             theme === "light"
               ? "bu-border-light-line-secondary bu-bg-light-background"
               : "bu-border-dark-line-secondary bu-bg-dark-background"
@@ -408,7 +409,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
               !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
             }, 0);
           }}>
-          <div className="bu-pl-[8px] bu-text-[12px]">{selectedLabelNode}</div>
+          <div className="ltr:bu-pl-[8px] rtl:bu-pr-[8px] bu-text-[12px]">{selectedLabelNode}</div>
           {!hideEndAdornment && (
             <ArrorIcon
               onClick={() => {

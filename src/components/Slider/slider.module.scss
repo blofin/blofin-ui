@@ -33,24 +33,24 @@
         @apply bu-rounded-[1px];
         @apply bu-border;
         @apply bu-cursor-pointer;
-        @apply -bu-translate-x-[50%];
+        @apply ltr:-bu-translate-x-[50%] rtl:bu-translate-x-[50%];
         &:first-of-type {
-          @apply -bu-translate-x-[0];
+          @apply ltr:-bu-translate-x-[0] rtl:bu-translate-x-[0];
         }
         &:last-of-type {
-          @apply -bu-translate-x-[100%];
+          @apply ltr:-bu-translate-x-[100%] rtl:bu-translate-x-[100%];
         }
       }
       .mark-label {
         @apply bu-absolute;
         @apply bu-text-[12px];
         @apply bu-top-3;
-        @apply -bu-translate-x-[50%];
+        @apply ltr:-bu-translate-x-[50%] rtl:bu-translate-x-[50%];
         &:first-of-type {
-          @apply -bu-translate-x-[0];
+          @apply ltr:-bu-translate-x-[0] rtl:bu-translate-x-[0];
         }
         &:last-of-type {
-          @apply -bu-translate-x-[100%];
+          @apply ltr:-bu-translate-x-[100%] rtl:bu-translate-x-[100%];
         }
       }
     }
@@ -68,7 +68,7 @@
       @apply bu-rounded-[2px];
       @apply bu-border-2;
       @apply bu-top-1/2;
-      @apply -bu-translate-x-[6px] -bu-translate-y-1/2 bu-transform;
+      @apply -bu-translate-y-1/2 bu-transform ltr:-bu-translate-x-[6px] rtl:bu-translate-x-[6px];
       @apply bu-cursor-grab;
     }
 
@@ -79,7 +79,7 @@
       @apply bu-text-white;
       @apply bu-px-[8px];
       @apply bu-py-[2px];
-      @apply -bu-translate-x-[50%] -bu-translate-y-[150%] bu-transform;
+      @apply -bu-translate-y-[150%] bu-transform ltr:-bu-translate-x-[50%] rtl:bu-translate-x-[50%];
       @apply bu-transition-all;
       @apply bu-opacity-0;
       @apply bu-pointer-events-none;

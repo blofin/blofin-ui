@@ -62,7 +62,7 @@ const Dialog: DialogComponent = (props) => {
     modalClassName
   } = props;
 
-  const { theme } = useTheme();
+  const { theme, direction } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   const getTheme = () => {
@@ -104,7 +104,8 @@ const Dialog: DialogComponent = (props) => {
             {!hideIcon && (
               <CloseIcon
                 className={`${iconStyles({
-                  theme: getTheme()
+                  theme: getTheme(),
+                  direction
                 })}`}
                 onClick={handleCancel}
               />
@@ -132,7 +133,7 @@ const Dialog: DialogComponent = (props) => {
                   )}
                   {!hideConfirm && (
                     <Button
-                      className={!hideCancel ? "bu-ml-[16px]" : ""}
+                      className={!hideCancel ? "ltr:bu-ml-[16px] rtl:bu-mr-[16px]" : ""}
                       size={footerSize}
                       variant="primary"
                       loading={loading}

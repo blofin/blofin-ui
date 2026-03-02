@@ -51,7 +51,7 @@ const iconstyles = (type: BUIComponentType, theme: BUITheme) => {
   };
 
   return cva(
-    "bu-w-[24px bu-mr-[8px] bu-h-[24px] bu-shrink-0 max-[634px]:bu-mb-[8px] max-[634px]:bu-mr-[0]",
+    "bu-w-[24px] ltr:bu-mr-[8px] rtl:bu-ml-[8px] bu-h-[24px] bu-shrink-0 max-[634px]:bu-mb-[8px] max-[634px]:ltr:bu-mr-[0] max-[634px]:rtl:bu-ml-[0]",
     {
       variants: {
         theme: {

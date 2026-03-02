@@ -190,12 +190,11 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
               proTableStyles.dragHandle({
                 theme
               }),
-              "group-hover:bu-opacity-100"
+              "group-hover:bu-opacity-100 ltr:bu-ml-[4px] rtl:bu-mr-[4px]"
             )} drag-handle-icon`}
             style={{
               display: "flex",
-              alignItems: "center",
-              marginLeft: "4px"
+              alignItems: "center"
             }}>
             {dragHandleIcon !== null && (dragHandleIcon || <DragHandleIcon />)}
           </span>
@@ -236,7 +235,7 @@ const Thead: React.FC<TheadProps> = (props) => {
       <span
         className={clsx(
           "bu-inline-flex bu-align-middle bu-transition-opacity bu-duration-200",
-          "bu-ml-[4px]"
+          "ltr:bu-ml-[4px] rtl:bu-mr-[4px]"
         )}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
