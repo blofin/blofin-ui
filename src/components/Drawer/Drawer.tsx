@@ -27,7 +27,7 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
     placement = "right",
     drawerContentClass='bu-w-[300px]'
   } = props;
-  const { theme, direction } = useTheme();
+  const { theme } = useTheme();
   const getTheme = () => {
     return mode ? mode : theme;
   };
@@ -68,8 +68,7 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
               {!hideIcon && (
                 <CloseIcon
                   className={`${iconStyles({
-                    theme: getTheme(),
-                    direction
+                    theme: getTheme()
                   })}`}
                   onClick={handleCancel}
                 />

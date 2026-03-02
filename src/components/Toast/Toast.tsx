@@ -79,7 +79,7 @@ const ToastList: FC<{
   onRemove: (id: number) => void;
 }> = ({ toasts, onRemove }) => {
   return (
-    <TransitionGroup className="bu-fixed bu-left-[50%] bu-top-[40px] bu-z-[99999] bu-translate-x-[-50%] bu-text-center">
+    <TransitionGroup className="bu-fixed bu-left-0 bu-right-0 bu-top-[40px] bu-z-[99999] bu-flex bu-flex-col bu-items-center">
       {toasts.map(({ node, id, type, customTheme }) => (
         <CSSTransition
           key={id}

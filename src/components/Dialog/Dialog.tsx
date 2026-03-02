@@ -62,7 +62,7 @@ const Dialog: DialogComponent = (props) => {
     modalClassName
   } = props;
 
-  const { theme, direction } = useTheme();
+  const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   const getTheme = () => {
@@ -104,8 +104,7 @@ const Dialog: DialogComponent = (props) => {
             {!hideIcon && (
               <CloseIcon
                 className={`${iconStyles({
-                  theme: getTheme(),
-                  direction
+                  theme: getTheme()
                 })}`}
                 onClick={handleCancel}
               />
