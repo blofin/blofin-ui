@@ -25,7 +25,7 @@ interface TheadProps {
 const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) => {
   const { columns, customeTheme, data, moveEnd, drag, onChange, type,methodRef } = props;
 
-  const { theme } = useTheme();
+  const { theme, direction } = useTheme();
 
   const theadRef = useRef<HTMLTableRowElement | null>(null);
 
@@ -53,7 +53,7 @@ const Thead = forwardRef<HTMLTableRowElement | null, TheadProps>((props, ref) =>
                 className={`${getClass(item, index).join(" ")} ${styles.th} ${bgStyles({
                   theme: customeTheme ? customeTheme : theme
                 })} ${item.fixed ? "no-drag" : "th-drag-item"}`}
-                style={cssPosition(item, offets[index].offset)}
+                style={cssPosition(item, offets[index].offset, direction)}
                 key={item.key}>
                 <SortButton
                   key={item.key}

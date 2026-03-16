@@ -13,8 +13,8 @@ export const cssFixed = (item: TableColumnProps) => {
 
 const TextAlign = {
   center: 'center',
-  'flex-start': 'left',
-  'flex-end': 'right',
+  'flex-start': 'start',
+  'flex-end': 'end',
 };
 
 export const cssStyle = (item: TableColumnProps) => {
@@ -26,12 +26,16 @@ export const cssStyle = (item: TableColumnProps) => {
   return css;
 };
 
-export const cssPosition = (item: TableColumnProps, position: number) => {
+export const cssPosition = (item: TableColumnProps, position: number, direction?: 'ltr' | 'rtl') => {
   const style = {
     ...cssStyle(item),
   };
   if (item.fixed) {
-    style[item.fixed] = position + 'px';
+    const isRtl = direction === 'rtl';
+    const prop = item.fixed === 'left'
+      ? (isRtl ? 'right' : 'left')
+      : (isRtl ? 'left' : 'right');
+    style[prop] = position + 'px';
   }
 
   return style;

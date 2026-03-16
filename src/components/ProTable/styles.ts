@@ -182,9 +182,9 @@ export const emptyStyles = cva("bu-px-5 bu-py-10 bu-text-center", {
 // 获取文本对齐样式
 export const getTextAlign = (align?: "center" | "flex-start" | "flex-end") => {
   const alignMap = {
-    "flex-start": "left",
+    "flex-start": "start",
     center: "center",
-    "flex-end": "right"
+    "flex-end": "end"
   };
   return alignMap[align || "center"];
 };

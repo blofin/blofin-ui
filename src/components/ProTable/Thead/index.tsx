@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { useSortable, defaultAnimateLayoutChanges } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { AnimateLayoutChanges } from "@dnd-kit/sortable";
+import useTheme from "../../../provider/useTheme";
 
 // 拖拽手柄图标组件
 const DragHandleIcon: React.FC<{ className?: string }> = ({ className }) => (
@@ -45,6 +46,8 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
   dragHandleIcon,
   theme = "light"
 }) => {
+  const { direction } = useTheme();
+  const isRtl = direction === "rtl";
   const nodeRef = React.useRef<HTMLTableCellElement | null>(null);
   const [computedWidth, setComputedWidth] = React.useState<number | null>(null);
 
@@ -127,7 +130,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
           leftOffset += parseInt(columns[i].width || "150");
         }
       }
-      style.left = `${leftOffset}px`;
+      style[isRtl ? "right" : "left"] = `${leftOffset}px`;
     } else if (column.fixed === "right") {
       let rightOffset = 0;
       for (let i = index + 1; i < columns.length; i++) {
@@ -135,7 +138,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
           rightOffset += parseInt(columns[i].width || "150");
         }
       }
-      style.right = `${rightOffset}px`;
+      style[isRtl ? "left" : "right"] = `${rightOffset}px`;
     }
 
     return style;

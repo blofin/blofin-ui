@@ -2,9 +2,12 @@ import * as React from "react";
 import { ProTableColumnProps, TbodyProps } from "../types";
 import proTableStyles from "../styles";
 import clsx from "clsx";
+import useTheme from "../../../provider/useTheme";
 
 const Tbody: React.FC<TbodyProps> = (props) => {
   const { columns, data, rowKey, tdClass, tbodyClass, theme = "light" } = props;
+  const { direction } = useTheme();
+  const isRtl = direction === "rtl";
 
   const getTdStyle = (column: ProTableColumnProps, index: number): React.CSSProperties => {
     const style: React.CSSProperties = {
@@ -18,7 +21,7 @@ const Tbody: React.FC<TbodyProps> = (props) => {
           leftOffset += parseInt(columns[i].width || "150");
         }
       }
-      style.left = `${leftOffset}px`;
+      style[isRtl ? "right" : "left"] = `${leftOffset}px`;
     } else if (column.fixed === "right") {
       let rightOffset = 0;
       for (let i = index + 1; i < columns.length; i++) {
@@ -26,7 +29,7 @@ const Tbody: React.FC<TbodyProps> = (props) => {
           rightOffset += parseInt(columns[i].width || "150");
         }
       }
-      style.right = `${rightOffset}px`;
+      style[isRtl ? "left" : "right"] = `${rightOffset}px`;
     }
 
     return style;

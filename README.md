@@ -6,9 +6,9 @@
 
 ![cover](./src/assets/cover.png)
 
-![NPM](https://img.shields.io/npm/l/blofin-ui)
-![npm](https://img.shields.io/npm/v/blofin-ui)
-![npm](https://img.shields.io/npm/dt/blofin-ui)
+![NPM](https://img.shields.io/npm/l/@blofin/blofin-ui)
+![npm](https://img.shields.io/npm/v/@blofin/blofin-ui)
+![npm](https://img.shields.io/npm/dt/@blofin/blofin-ui)
 
 **UI library for crypto exchanges.**
 
@@ -25,21 +25,21 @@ With our UI library, you can confidently offer your users a truly elevated and r
 **NPM**
 
 ```bash
-npm install blofin-ui
+npm install @blofin/blofin-ui
 ```
 
 **Yarn**
 
 ```bash
-yarn add blofin-ui
+yarn add @blofin/blofin-ui
 ```
 
 ## Usage
 
 ```jsx
 import "src/styles/globals.css";
-import { BlofinUiProvider } from "blofin-ui";
-import { Button } from "blofin-ui";
+import { BlofinUiProvider } from "@blofin/blofin-ui";
+import { Button } from "@blofin/blofin-ui";
 
 <BlofinUiProvider value={{ theme: "light" }}>
   <Component {...pageProps}></Component>
@@ -48,7 +48,7 @@ import { Button } from "blofin-ui";
 
 ```css
 /** global.css */
-@import "blofin-ui/blofin.css";
+@import "@blofin/blofin-ui/blofin.css";
 @import "./tailwind.css";
 
 /** tailwind.css */
@@ -59,29 +59,46 @@ import { Button } from "blofin-ui";
 
 ## Components
 
-- [x] Button
-- [x] Checkbox
-- [x] Input
-- [x] Select
-- [x] Textarea
-- [x] Tooltip
-- [x] Modal
-- [x] Dropdown
-- [x] Tabs
-- [x] Table
-- [x] Pagination
-- [x] Loader
 - [x] Alert
 - [x] Badge
-- [x] Card
+- [x] Button
+- [x] Calendar
+- [x] Checkbox
+- [x] CssDropdown
+- [x] DatePickerRange
+- [x] DateTimePicker
+- [x] Dialog
 - [x] Divider
-- [x] Silder
-- [x] List
-- [x] Tag
-- [x] Typography
-- [x] Avatar
+- [x] Drawer
+- [x] Dropdown
+- [x] Empty
+- [x] Form
 - [x] Icon
-- [x] Menu
+- [x] Input
+- [x] LabelTextField
+- [x] MonthPicker
+- [x] MultiSelect
+- [x] Notification
+- [x] Pagination
+- [x] Picker
+- [x] Popover
+- [x] Popup
+- [x] ProTable
+- [x] RadioButton
+- [x] SVG
+- [x] Select
+- [x] Slider
+- [x] Sort
+- [x] Sortable
+- [x] Switch
+- [x] Tab
+- [x] Table
+- [x] TextField
+- [x] TextSelect
+- [x] Textarea
+- [x] Toast
+- [x] Tooltip
+- [x] Typography
 
 ## Stack we use
 
