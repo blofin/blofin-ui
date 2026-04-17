@@ -20,7 +20,7 @@ interface TbodyProps {
 const Tbody = forwardRef<HTMLTableRowElement | null, TbodyProps>((props, ref) => {
   const { data, columns, customeTheme, tbodyClass } = props;
 
-  const { theme } = useTheme();
+  const { theme, direction } = useTheme();
 
   const getClass = useStickyClassName(columns);
 
@@ -57,7 +57,7 @@ const Tbody = forwardRef<HTMLTableRowElement | null, TbodyProps>((props, ref) =>
                   className={`${getClass(v, index).join(" ")} ${styles.td} ${bgStyles({
                     theme: customeTheme ? customeTheme : theme
                   })}`}
-                  style={cssPosition(v, offets[index].offset)}>
+                  style={cssPosition(v, offets[index].offset, direction)}>
                   {v.render ? v.render(item, col) : item[v.key as string]}
                 </td>
               ) : null;

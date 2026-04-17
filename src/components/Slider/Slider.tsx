@@ -94,10 +94,14 @@ function getValueFromPosition(
   railMin: number,
   railMax: number,
   step: number,
-  decimalPlaces: number
+  decimalPlaces: number,
+  isRTL: boolean = false
 ) {
   if (railMax === railMin) return min;
-  let percent = (clientX - railMin) / (railMax - railMin);
+  // RTL 模式下，从右到左计算百分比
+  let percent = isRTL
+    ? (railMax - clientX) / (railMax - railMin)
+    : (clientX - railMin) / (railMax - railMin);
   percent = clamp(percent, 0, 1);
   let value = min + percent * (max - min);
   // Snap to step
@@ -159,7 +163,10 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     disabled = false,
     showTooltip = true
   } = props;
-  const { theme } = useTheme();
+  const { theme, direction } = useTheme();
+
+  // 从 Context 获取方向，标准做法
+  const isRTL = direction === "rtl";
 
   const railRef = useRef<HTMLDivElement>(null);
 
@@ -197,11 +204,12 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
         railMin,
         railMax,
         step,
-        decimalPlaces
+        decimalPlaces,
+        isRTL
       );
       onSliderChange(newValue);
     },
-    [min, max, step, onSliderChange, decimalPlaces]
+    [min, max, step, onSliderChange, decimalPlaces, isRTL]
   );
 
   const handleMouseMove = useCallback(
@@ -252,7 +260,16 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
     if (!rect) return;
     const { left: railMin, right: railMax } = rect;
     const clientX = (e as any).clientX;
-    const newValue = getValueFromPosition(clientX, min, max, railMin, railMax, step, decimalPlaces);
+    const newValue = getValueFromPosition(
+      clientX,
+      min,
+      max,
+      railMin,
+      railMax,
+      step,
+      decimalPlaces,
+      isRTL
+    );
     onSliderChange(newValue);
     if (onDragEnd) {
       onDragEnd(newValue);
@@ -277,7 +294,11 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
             disabled,
             mode
           )} track`}
-          style={{ width: `${percent}%` }}></div>
+          style={
+            isRTL
+              ? { width: `${percent}%`, right: 0, left: "auto" }
+              : { width: `${percent}%`, left: 0 }
+          }></div>
         <div
           id={id ? `${id}-mark-container` : ""}
           className={`${styles["mark-container"]} mark-container`}
@@ -296,7 +317,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
                       value,
                       mode
                     )} mark ${mark.value < value ? "mark-active" : ""}`}
-                    style={{ left: `${markPercent}%` }}
+                    style={isRTL ? { right: `${markPercent}%` } : { left: `${markPercent}%` }}
                     onClick={(e) => (disabled ? undefined : handleMarkClick(e, mark.value))}
                   />
                 )}
@@ -306,7 +327,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
                     className={`${styles["mark-label"]} ${cn(
                       MarkLabelVariants({ theme: mode || theme })
                     )} mark-label ${mark.value <= value ? "mark-label-active" : ""}`}
-                    style={{ left: `${markPercent}%` }}>
+                    style={isRTL ? { right: `${markPercent}%` } : { left: `${markPercent}%` }}>
                     {renderLabel(mark.value)}
                   </span>
                 )}
@@ -317,9 +338,7 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>((props, ref) => 
         <div
           id={id ? `${id}-thumb-container` : ""}
           className={`${styles["thumb-container"]} thumb-container`}
-          style={{
-            left: `${percent}%`
-          }}>
+          style={isRTL ? { right: `${percent}%` } : { left: `${percent}%` }}>
           {showTooltip && (
             <div
               className={`${styles["tooltip"]} ${onMouseDown ? styles["tooltip-drag"] : ""} ${cn(

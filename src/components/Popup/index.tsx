@@ -2,6 +2,7 @@ import { ReactNode, forwardRef, useEffect, useImperativeHandle, useRef, useState
 import styles from "./index.module.scss";
 import { contentStyles } from "./styles";
 import useLatest from "../../hooks/useLatest";
+import useTheme from "../../provider/useTheme";
 
 interface PopupProps {
   title: ReactNode;
@@ -30,6 +31,9 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
   });
 
   const { title, content, cancel, distance = 10, disabled = false, auto } = props;
+
+  const { direction } = useTheme();
+  const isRTL = direction === "rtl";
 
   const [show, setShow] = useState(false);
 
@@ -76,13 +80,25 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
     if (targetRef.current && contentRef.current && show) {
       const screenHeight = window.innerHeight || document.documentElement.clientHeight;
       const screenWidth = window.innerWidth || document.documentElement.clientWidth;
-      const { bottom, right } = targetRef.current.getBoundingClientRect();
+      const { bottom, left, right } = targetRef.current.getBoundingClientRect();
       const { height, width } = contentRef.current.getBoundingClientRect();
 
-      if (right + width >= screenWidth) {
-        setIsRight(true);
+      // RTL 模式：默认右对齐，左边超出才切到左对齐
+      // LTR 模式：默认左对齐，右边超出才切到右对齐
+      if (isRTL) {
+        // RTL: 检查左边是否超出
+        if (left - width < 0) {
+          setIsRight(false); // 切换到左对齐
+        } else {
+          setIsRight(true); // 保持右对齐
+        }
       } else {
-        setIsRight(false);
+        // LTR: 检查右边是否超出
+        if (right + width >= screenWidth) {
+          setIsRight(true); // 切换到右对齐
+        } else {
+          setIsRight(false); // 保持左对齐
+        }
       }
 
       if (!auto) {
@@ -95,7 +111,7 @@ const Popup = forwardRef<PopupRef, PopupProps>((props, ref) => {
         }
       }
     }
-  }, [show, auto]);
+  }, [show, auto, isRTL]);
 
   useEffect(() => {
     if (popupRef.current) {

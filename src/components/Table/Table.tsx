@@ -49,7 +49,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
     methodRef
   } = props;
 
-  const { theme } = useTheme();
+  const { theme, direction } = useTheme();
 
   const getClass = useStickyClassName(columns);
 
@@ -181,7 +181,7 @@ const Table = forwardRef<HTMLDivElement, TableProps>((props, ref) => {
                       } ${bgStyles({
                         theme: theme
                       })} ${item.fixed ? "no-drag" : "th-drag-item"}`}
-                      style={cssPosition(item, offets[index].offset)}
+                      style={cssPosition(item, offets[index].offset, direction)}
                       key={item.key}
                       drag-id={item.key}>
                       <SortButton

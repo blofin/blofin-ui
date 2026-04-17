@@ -132,7 +132,7 @@ const Dialog: DialogComponent = (props) => {
                   )}
                   {!hideConfirm && (
                     <Button
-                      className={!hideCancel ? "bu-ml-[16px]" : ""}
+                      className={!hideCancel ? "ltr:bu-ml-[16px] rtl:bu-mr-[16px]" : ""}
                       size={footerSize}
                       variant="primary"
                       loading={loading}

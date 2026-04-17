@@ -21,7 +21,7 @@ export const alertBgVariants = cva(
   }
 );
 
-export const alertIconVariants = cva("bu-mr-[8px] bu-text-[20px]", {
+export const alertIconVariants = cva("ltr:bu-mr-[8px] rtl:bu-ml-[8px] bu-text-[20px]", {
   variants: {
     type: {
       doubt: "bu-text-base-primary",

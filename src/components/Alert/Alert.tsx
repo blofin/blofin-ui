@@ -73,7 +73,7 @@ export const Alert: FC<Props> = ({
       </div>
       {buttonText && (
         <div
-          className="bu-ml-[8px] bu-flex bu-cursor-pointer bu-items-center"
+          className="ltr:bu-ml-[8px] rtl:bu-mr-[8px] bu-flex bu-cursor-pointer bu-items-center"
           onClick={handleButtonClick}>
           <Typography
             variant="body4"
@@ -84,12 +84,12 @@ export const Alert: FC<Props> = ({
             {buttonText}
           </Typography>
           {buttonShowArrow && (
-            <Arrow className="bu-ml-[4px] bu-h-[16px] bu-w-[16px] bu-text-[16px] bu-text-base-primary"></Arrow>
+            <Arrow className="ltr:bu-ml-[4px] rtl:bu-mr-[4px] rtl:bu-rotate-180 bu-h-[16px] bu-w-[16px] bu-text-[16px] bu-text-base-primary"></Arrow>
           )}
         </div>
       )}
       {showCloseIcon && !isClose && (
-        <div className="bu-ml-[8px]" onClick={handleClose}>
+        <div className="ltr:bu-ml-[8px] rtl:bu-mr-[8px]" onClick={handleClose}>
           <Close className="bu-h-[16px] bu-w-[16px] bu-cursor-pointer bu-text-[16px] bu-text-base-label-40 hover:bu-text-base-label"></Close>
         </div>
       )}

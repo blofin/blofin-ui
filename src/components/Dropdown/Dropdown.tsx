@@ -22,12 +22,14 @@ interface DropdownProps {
 const DropMenu: FC<{
   menus: Menus[];
   offsetX: number;
+  offsetRight: number;
   offsetY: number;
   close: () => void;
   variant: "fill" | "line";
   placement?: "top" | "bottom";
-}> = ({ menus, offsetX, offsetY, close, variant }) => {
-  const { theme } = useTheme();
+}> = ({ menus, offsetX, offsetRight, offsetY, close, variant }) => {
+  const { theme, direction } = useTheme();
+  const isRTL = direction === "rtl";
 
   return ReactDOM.createPortal(
     <div
@@ -37,7 +39,10 @@ const DropMenu: FC<{
         className={`bu-absolute bu-min-w-[80px] bu-overflow-hidden bu-rounded-[4px] bu-py-[8px] ${
           theme === "light" ? " bu-shadow-card" : ""
         }`}
-        style={{ left: offsetX + "px", top: offsetY + 18 + "px" }}>
+        style={{
+          ...(isRTL ? { right: offsetRight + "px" } : { left: offsetX + "px" }),
+          top: offsetY + 18 + "px"
+        }}>
         <ul>
           {menus?.map((item) => {
             return (
@@ -64,7 +69,8 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
   const [offset, setOffset] = useState({
     offsetX: 0,
-    offsetY: 0
+    offsetY: 0,
+    offsetRight: 0
   });
 
   const { theme } = useTheme();
@@ -81,10 +87,11 @@ const Dropdown: FC<DropdownProps> = (props) => {
 
   useEffect(() => {
     if (targetRef.current) {
-      const { offsetY, offsetX } = getOffset(targetRef.current);
+      const { offsetY, offsetX, offsetRight } = getOffset(targetRef.current);
       setOffset({
         offsetY,
         offsetX,
+        offsetRight
       });
     }
   }, [targetRef,hide]);
@@ -127,6 +134,7 @@ const Dropdown: FC<DropdownProps> = (props) => {
         <DropMenu
           menus={menus}
           offsetX={offset.offsetX}
+          offsetRight={offset.offsetRight}
           offsetY={offset.offsetY + 10}
           close={changeDropdown}
           variant={variant}

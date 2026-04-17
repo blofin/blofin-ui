@@ -65,10 +65,10 @@
 }
 
 .th:first-child {
-  padding-left: 20px;
+  padding-inline-start: 20px;
 }
 .th:last-child {
-  padding-right: 20px;
+  padding-inline-end: 20px;
 }
 
 .thead {
@@ -83,10 +83,10 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   &:first-child {
-    padding-left: 20px;
+    padding-inline-start: 20px;
   }
   &:last-child {
-    padding-right: 20px;
+    padding-inline-end: 20px;
   }
   @apply bu-order-1 bu-border-light-line-primary;
 }
@@ -114,7 +114,7 @@ tr:last-child {
 .pagination {
   @apply bu-flex;
   .prev {
-    @apply bu-mr-[10px] bu-w-[100px];
+    @apply ltr:bu-mr-[10px] rtl:bu-ml-[10px] bu-w-[100px];
   }
   .next {
     @apply bu-w-[100px];

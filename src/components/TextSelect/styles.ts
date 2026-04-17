@@ -37,8 +37,8 @@ const activeTextStyles = cva("", {
   }
 });
 
-const baseIconStyles = "bu-mr-[8px] bu-h-[16px] bu-w-[16px]";
-const baseIconStylesFill = "bu-mr-[8px] bu-h-[12px] bu-w-[12px]";
+const baseIconStyles = "ltr:bu-mr-[8px] rtl:bu-ml-[8px] bu-h-[16px] bu-w-[16px]";
+const baseIconStylesFill = "ltr:bu-mr-[8px] rtl:bu-ml-[8px] bu-h-[12px] bu-w-[12px]";
 
 const iconStyles = cva("", {
   variants: {

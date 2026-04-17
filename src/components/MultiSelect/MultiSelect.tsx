@@ -103,7 +103,8 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
     multiLimit
   } = props;
 
-  const { theme } = useTheme();
+  const { theme, direction } = useTheme();
+  const isRTL = direction === "rtl";
 
   const realTheme = propsTheme ? propsTheme : theme;
 
@@ -115,7 +116,7 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
 
   const { offset, resize } = useAlign(parent);
 
-  const { offsetX, offsetY } = offset;
+  const { offsetX, offsetY, offsetRight } = offset;
 
   const [isBottomed, setIsBottomed] = useState(false);
 
@@ -195,7 +196,7 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
           className={`${styles["menus"]} ${menusClassName} ${bgStyles({ theme })}`}
           style={{
             top: isBottomed ? offsetY - optionHeight - 4 : offsetY + height + 4 + "px",
-            left: offsetX + "px"
+            ...(isRTL ? { right: offsetRight + "px" } : { left: offsetX + "px" })
           }}
           onClick={(e) => e.stopPropagation()}
           onMouseDown={(e) => e.stopPropagation()}
@@ -271,7 +272,7 @@ const Menus = forwardRef<HTMLDivElement, OptionsProps>((props, ref) => {
                       <img
                         src={option.icon}
                         alt={option.label}
-                        className="bu-mr-[4px] bu-h-[20px] bu-w-[20px]"
+                        className="ltr:bu-mr-[4px] rtl:bu-ml-[4px] bu-h-[20px] bu-w-[20px]"
                       />
                     )}
                     <div>{option.label}</div>

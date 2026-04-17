@@ -145,9 +145,9 @@ const InputSizeTextStyle = cva("", {
 const InputSizeStyle = cva("", {
   variants: {
     inputSize: {
-      lg: "bu-pl-[var(--textfiled-padding-left-lg)]",
-      md: "bu-pl-[var(--textfiled-padding-left-md)]",
-      sm: "bu-pl-[var(--textfiled-padding-left-sm)]"
+      lg: "ltr:bu-pl-[var(--textfiled-padding-left-lg)] rtl:bu-pr-[var(--textfiled-padding-left-lg)]",
+      md: "ltr:bu-pl-[var(--textfiled-padding-left-md)] rtl:bu-pr-[var(--textfiled-padding-left-md)]",
+      sm: "ltr:bu-pl-[var(--textfiled-padding-left-sm)] rtl:bu-pr-[var(--textfiled-padding-left-sm)]"
     }
   }
 });

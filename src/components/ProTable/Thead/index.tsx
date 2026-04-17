@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { useSortable, defaultAnimateLayoutChanges } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { AnimateLayoutChanges } from "@dnd-kit/sortable";
+import useTheme from "../../../provider/useTheme";
 
 // 拖拽手柄图标组件
 const DragHandleIcon: React.FC<{ className?: string }> = ({ className }) => (
@@ -45,6 +46,8 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
   dragHandleIcon,
   theme = "light"
 }) => {
+  const { direction } = useTheme();
+  const isRtl = direction === "rtl";
   const nodeRef = React.useRef<HTMLTableCellElement | null>(null);
   const [computedWidth, setComputedWidth] = React.useState<number | null>(null);
 
@@ -127,7 +130,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
           leftOffset += parseInt(columns[i].width || "150");
         }
       }
-      style.left = `${leftOffset}px`;
+      style[isRtl ? "right" : "left"] = `${leftOffset}px`;
     } else if (column.fixed === "right") {
       let rightOffset = 0;
       for (let i = index + 1; i < columns.length; i++) {
@@ -135,7 +138,7 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
           rightOffset += parseInt(columns[i].width || "150");
         }
       }
-      style.right = `${rightOffset}px`;
+      style[isRtl ? "left" : "right"] = `${rightOffset}px`;
     }
 
     return style;
@@ -190,12 +193,11 @@ const SortableThCell: React.FC<SortableThCellProps> = ({
               proTableStyles.dragHandle({
                 theme
               }),
-              "group-hover:bu-opacity-100"
+              "group-hover:bu-opacity-100 ltr:bu-ml-[4px] rtl:bu-mr-[4px]"
             )} drag-handle-icon`}
             style={{
               display: "flex",
-              alignItems: "center",
-              marginLeft: "4px"
+              alignItems: "center"
             }}>
             {dragHandleIcon !== null && (dragHandleIcon || <DragHandleIcon />)}
           </span>
@@ -236,7 +238,7 @@ const Thead: React.FC<TheadProps> = (props) => {
       <span
         className={clsx(
           "bu-inline-flex bu-align-middle bu-transition-opacity bu-duration-200",
-          "bu-ml-[4px]"
+          "ltr:bu-ml-[4px] rtl:bu-mr-[4px]"
         )}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

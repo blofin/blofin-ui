@@ -1,0 +1,8 @@
+/*! rtl:begin:ignore */
+.radio-input:checked::after {
+  left: 50% !important;
+  right: auto !important;
+  border-right-width: 1.8px !important;
+  border-left-width: 0 !important;
+}
+/*! rtl:end:ignore */

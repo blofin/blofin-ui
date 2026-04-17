@@ -34,6 +34,8 @@ export interface TypographyProps {
   children?: React.ReactNode;
   theme?: BUITheme;
   component?: React.ElementType;
+  dir?: "ltr" | "rtl" | "auto";
+  style?: React.CSSProperties;
 }
 
 /**

@@ -101,9 +101,11 @@ export const Button = ({
         )
       ) : (
         <>
-          {startIcon && <span className="bu-mr-[9px]">{startIcon}</span>}
+          {startIcon && <span className="ltr:bu-mr-[9px] rtl:bu-ml-[9px]">{startIcon}</span>}
           {children}
-          {endIcon && <span className="bu-ml-[9px] bu-flex bu-items-center">{endIcon}</span>}
+          {endIcon && (
+            <span className="ltr:bu-ml-[9px] rtl:bu-mr-[9px] bu-flex bu-items-center">{endIcon}</span>
+          )}
           {icon}
         </>
       )}
@@ -120,9 +122,9 @@ const CheckButton: FC<ButtonProps & { checked: boolean }> = (props) => {
       <Button {...props} variant="ghost3"></Button>
       <div
         className={clsx(
-          "bu-absolute bu-right-0 bu-top-0",
+          "bu-absolute bu-top-0 ltr:bu-right-0 rtl:bu-left-0",
           theme === "light" ? "bu-text-light-label" : "bu-text-dark-label",
-          "bu-rounded-bl-[8px] bu-rounded-br-none bu-rounded-tl-none bu-rounded-tr-[8px]",
+          "ltr:bu-rounded-tr-[8px] ltr:bu-rounded-bl-[8px] ltr:bu-rounded-tl-none ltr:bu-rounded-br-none rtl:bu-rounded-tl-[8px] rtl:bu-rounded-br-[8px] rtl:bu-rounded-tr-none rtl:bu-rounded-bl-none",
           "bu-flex bu-items-center bu-justify-center"
         )}>
         {theme === "light" ? (

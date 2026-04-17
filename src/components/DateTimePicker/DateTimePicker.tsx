@@ -117,7 +117,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         <div className="bu-date-picker bu-relative">
           {startMonthShow && (
             <div
-              className={`bu-w-[333px] bu-flex-1 bu-pr-[16px] bu-pt-[16px] ${DatePickerBg({
+              className={`bu-w-[333px] bu-flex-1 ltr:bu-pr-[16px] rtl:bu-pl-[16px] bu-pt-[16px] ${DatePickerBg({
                 theme
               })} ${monthPickerClassName}`}
               style={{ height: monthHeight + "px" }}>
@@ -168,7 +168,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           />
           {!hideHoursAndMinutes && (
             <div
-              className={`bu-absolute bu-right-0 bu-top-[56px] bu-h-[236px] bu-w-[109px] ${
+              className={`bu-absolute bu-top-[56px] bu-h-[236px] bu-w-[109px] ltr:bu-right-0 rtl:bu-left-0 ${
                 startMonthShow ? "bu-hidden" : ""
               }`}>
               <div
@@ -177,7 +177,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
                 })}`}>
                 {" "}
               </div>
-              <div className="bu-flex bu-pl-1 bu-pt-2">
+              <div className="bu-flex ltr:bu-pl-1 rtl:bu-pr-1 bu-pt-2">
                 <ScrollableList
                   theme={theme}
                   items={hours}
@@ -194,7 +194,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
                   current={new Date().getHours()}
                 />
                 <span
-                  className={`bu-mx-1 bu-h-[236px] bu-w-[1px] bu-border-r ${HeadCell({
+                  className={`bu-mx-1 bu-h-[236px] bu-w-[1px] ltr:bu-border-r rtl:bu-border-l ${HeadCell({
                     theme
                   })}`}></span>
                 <ScrollableList

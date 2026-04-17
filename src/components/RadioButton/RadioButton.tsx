@@ -2,6 +2,7 @@ import { ReactNode, forwardRef } from "react";
 import { BUITheme, useTheme } from "../..";
 import { cn } from "../../utils/utils";
 import { RadioButtonInputVariants, RadioButtonLabelVariants } from "./styles";
+import styles from "./RadioButton.module.scss";
 
 export interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: ReactNode;
@@ -38,14 +39,14 @@ const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) 
         )} bu-flex bu-cursor-pointer bu-items-center bu-gap-[4px]`}>
         <input
           type="radio"
-          className={cn(
+          className={`${cn(
             RadioButtonInputVariants({
               theme: mode || theme,
               arrow,
               check: checked,
               disabled: otherProps.disabled || false
             })
-          )}
+          )} ${styles["radio-input"]}`}
           id={id ? id : `bui-radiobutton-${label}`}
           name={name}
           ref={ref}

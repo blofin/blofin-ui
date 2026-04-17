@@ -47,9 +47,10 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
       handleCancel();
     }
   };
+  const hiddenTranslateX = placement === "left" ? "-100%" : "100%";
   const drawerStyle = {
     transition: open ? "transform .3s ease-in-out" : "transform .3s ease-in-out, opacity 0.3s ease",
-    transform: open ? "translateX(0)" : "translateX(100%)",
+    transform: open ? "translateX(0)" : `translateX(${hiddenTranslateX})`,
     opacity: open ? 1 : 0
   };
   return open

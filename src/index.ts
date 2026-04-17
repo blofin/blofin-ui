@@ -38,7 +38,7 @@ import Sortable from "./components/Sortable";
 import SortItem from "./components/Sortable/SortItem";
 import Popup, { PopupRef } from "./components/Popup";
 import { NoticeProvider } from "./provider/NoticeProvider";
-import { ThemeProvider } from "./provider/ThemeProvider";
+import { ThemeProvider, Direction } from "./provider/ThemeProvider";
 import useTheme from "./provider/useTheme";
 import "./scss/base.scss";
 import { BUIComponentColor, BUIComponentSize, BUITheme } from "./types/component";
@@ -116,7 +116,8 @@ export type {
   ProTableColumnProps,
   SortProps,
   SortType,
-  SortState
+  SortState,
+  Direction
 };
 
 export { NoticeProvider, ThemeProvider };
