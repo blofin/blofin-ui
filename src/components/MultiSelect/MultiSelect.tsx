@@ -384,14 +384,18 @@ const MultiSelect = forwardRef<MultiSelectRefProps, MultiSelectProps>((props, re
         {currentSelected.length > 0 ? (
           currentSelected.map((value) => {
             const itemOption = options.find((op) => op.value === value);
+            const tagBgClass =
+              variant === "filled"
+                ? realTheme === "dark"
+                  ? "bu-bg-dark-hover-fill-secondary"
+                  : "bu-bg-light-hover-fill-secondary"
+                : realTheme === "dark"
+                ? "bu-bg-dark-hover-fill-primary"
+                : "bu-bg-light-hover-fill-primary";
             return (
               <div
                 key={value}
-                className={`bu-flex bu-items-center bu-gap-[2px] bu-rounded-[4px] bu-px-[4px] bu-py-[2px] ${
-                  realTheme === "dark"
-                    ? "bu-bg-dark-hover-fill-primary"
-                    : "bu-bg-light-hover-fill-primary"
-                }`}>
+                className={`bu-flex bu-items-center bu-gap-[2px] bu-rounded-[4px] bu-px-[4px] bu-py-[2px] ${tagBgClass}`}>
                 <div
                   className={`bu-text-[16px] bu-leading-[24px] ${
                     realTheme === "dark" ? "bu-text-dark-label" : "bu-text-light-label"

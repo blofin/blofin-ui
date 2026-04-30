@@ -150,7 +150,7 @@ export const Primary: Story = {
     return (
       <ThemeProvider value={{ theme: mode }}>
         <div ref={ref} className="bu-overflow-y-scroll">
-          <div className="bu-flex-col bu-p-[200px] bu-pt-[1000px]">
+          <div className="bu-flex-col bu-p-[200px]">
             <div className="bu-mb-[50px]">
               <Tooltip placement="top" content="价格" scrollContainer={ref.current}>
                 <TextSelect
@@ -192,6 +192,20 @@ export const Primary: Story = {
                 onChange={change}
                 inputChange={inputChange}
                 variant="fill">
+                <div>custom</div>
+              </TextSelect>
+            </div>
+            <div>
+              <TextSelect
+                preventDuplicateSelection={false}
+                placeholder={placeholder}
+                inputClassName="bu-w-[80px] bu-h-[30px] bu-text-[14px] bu-pl-[8px]"
+                defaultValue={value}
+                disabled={"limit"}
+                options={accountOptions}
+                onChange={change}
+                inputChange={inputChange}
+                variant="filled">
                 <div>custom</div>
               </TextSelect>
             </div>

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import useMode from "../hooks/useMode";
 import { ThemeProvider } from "../provider/ThemeProvider";
 import { useState } from "react";
-import { Dialog } from "..";
 import TextArea from "../components/Textarea";
 
 const meta: Meta<typeof TextArea> = {
@@ -22,20 +21,63 @@ type Story = StoryObj<typeof TextArea>;
 
 export const Primary: Story = {
   render: () => {
-    const [value, setValue] = useState("");
+    const mode = useMode();
+
+    const [outlinedValue, setOutlinedValue] = useState("");
+    const [filledValue, setFilledValue] = useState("");
+    const [errorValue, setErrorValue] = useState("");
 
     return (
-      <ThemeProvider value={{ theme: "dark" }}>
-        <TextArea
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          label="测试"
-          error={true}
-          helperText="3333"
-          endAdornment={
-            <div className="bu-flex bu-justify-end bu-text-[12px]">{value.length}/50</div>
-          }
-        />
+      <ThemeProvider value={{ theme: mode }}>
+        <div className="bu-flex bu-flex-col bu-gap-[24px] bu-p-[24px]">
+          <div>
+            <div className="bu-mb-[8px] bu-text-[14px]">variant="outlined" (default)</div>
+            <TextArea
+              value={outlinedValue}
+              onChange={(e) => setOutlinedValue(e.target.value)}
+              label="Outlined"
+              placeholder="Type something..."
+              endAdornment={
+                <div className="bu-flex bu-justify-end bu-text-[12px]">
+                  {outlinedValue.length}/50
+                </div>
+              }
+            />
+          </div>
+
+          <div>
+            <div className="bu-mb-[8px] bu-text-[14px]">variant="filled"</div>
+            <TextArea
+              variant="filled"
+              value={filledValue}
+              onChange={(e) => setFilledValue(e.target.value)}
+              label="Filled"
+              placeholder="Type something..."
+              endAdornment={
+                <div className="bu-flex bu-justify-end bu-text-[12px]">
+                  {filledValue.length}/50
+                </div>
+              }
+            />
+          </div>
+
+          <div>
+            <div className="bu-mb-[8px] bu-text-[14px]">error</div>
+            <TextArea
+              variant="filled"
+              value={errorValue}
+              onChange={(e) => setErrorValue(e.target.value)}
+              label="With error"
+              error={true}
+              helperText="This field has an error"
+              endAdornment={
+                <div className="bu-flex bu-justify-end bu-text-[12px]">
+                  {errorValue.length}/50
+                </div>
+              }
+            />
+          </div>
+        </div>
       </ThemeProvider>
     );
   }
