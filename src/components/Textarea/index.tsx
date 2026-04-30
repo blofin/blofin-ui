@@ -2,11 +2,17 @@ import { LegacyRef, ReactNode, forwardRef } from "react";
 import useTheme from "../../provider/useTheme";
 import { BUITheme } from "../../types/component";
 import { Typography } from "../..";
-import { HelperTextVariants, borderStyles, errorBorderStyles, textAreaStyles } from "./style";
+import {
+  HelperTextVariants,
+  borderStyles,
+  errorBorderStyles,
+  textAreaStyles,
+  TextareaVariant
+} from "./style";
 import styles from "./index.module.scss";
 
 export interface TextareaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
-  //   variant: InputVariant;
+  variant?: TextareaVariant;
   label?: ReactNode;
   theme?: BUITheme;
   endAdornment?: ReactNode;
@@ -32,8 +38,11 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
     row = 4,
     className,
     wrapperClassName,
+    variant = "outlined",
     ...otherProps
   } = props;
+
+  const currentTheme = mode ? mode : theme;
 
   return (
     <div>
@@ -48,8 +57,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
       <div
         className={`${wrapperClassName} ${
           error
-            ? errorBorderStyles({ theme: mode ? mode : theme })
-            : borderStyles({ theme: mode ? mode : theme })
+            ? errorBorderStyles({ theme: currentTheme })
+            : borderStyles({ theme: currentTheme, variant })
         }`}>
         <textarea
           id={typeof label === "string" ? (id ? id : `bui-${label}`) : undefined}
@@ -57,7 +66,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
           disabled={disabled}
           rows={row}
           className={`${styles.hideScrollbar} ${textAreaStyles({
-            theme: mode ? mode : theme
+            theme: currentTheme,
+            variant
           })} ${className}`}
           {...otherProps}></textarea>
         {endAdornment && (
@@ -73,7 +83,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
         <div className="bu-mt-1">
           <Typography
             variant="body4"
-            className={HelperTextVariants({ theme: mode ? mode : theme })}>
+            className={HelperTextVariants({ theme: currentTheme })}>
             {helperText}
           </Typography>
         </div>

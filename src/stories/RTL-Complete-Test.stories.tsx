@@ -480,12 +480,28 @@ export const CompleteTest = {
 
                   <div>
                     <h4>Pagination - 分页</h4>
-                    <Pagination
-                      currentPage={currentPage}
-                      total={100}
-                      pageSize={10}
-                      onPageChange={(page) => setCurrentPage(page)}
-                    />
+                    <div className="bu-flex bu-flex-col bu-gap-[16px]">
+                      <div>
+                        <Typography variant="body3">基础分页 (totalPages)</Typography>
+                        <Pagination
+                          currentPage={currentPage}
+                          totalPages={10}
+                          onChange={(page) => setCurrentPage(page)}
+                        />
+                      </div>
+                      <div>
+                        <Typography variant="body3">可切换 pageSize (sizeCanChange)</Typography>
+                        <Pagination
+                          currentPage={currentPage}
+                          total={100}
+                          pageSize={10}
+                          sizeCanChange
+                          sizeOptions={[10, 20, 30, 50]}
+                          onPageChange={(page) => setCurrentPage(page)}
+                          countPerPage="Page"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>

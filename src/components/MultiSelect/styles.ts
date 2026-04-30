@@ -7,8 +7,8 @@ const InputFilledStyles = cva("", {
   variants: {
     theme: {
       light:
-        "bu-border-transparent bu-bg-light-fill-secondary focus-within:!bu-border-light-primary hover:bu-border-[1px] hover:bu-border-light-primary",
-      dark: "bu-border-transparent bu-bg-dark-fill-secondary focus-within:!bu-border-dark-primary hover:bu-border-[1px] hover:bu-border-dark-primary"
+        "bu-border-transparent bu-bg-light-fill-secondary focus-within:!bu-border-light-primary hover:bu-border-[1px] hover:bu-border-light-line-tertiary",
+      dark: "bu-border-transparent bu-bg-dark-fill-secondary focus-within:!bu-border-dark-primary hover:bu-border-[1px] hover:bu-border-dark-line-tertiary"
     }
   }
 });

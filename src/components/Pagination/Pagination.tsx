@@ -79,7 +79,8 @@ export function Pagination({
 
   const isFirstRendering = useRef(true);
 
-  const { theme: defaultTheme } = useTheme();
+  const { theme: defaultTheme, direction } = useTheme();
+  const isRTL = direction === "rtl";
 
   const isFirstPage = currentPage === 1;
 
@@ -155,20 +156,30 @@ export function Pagination({
           className={arrowVariants({ theme: theme || defaultTheme })}
           data-disabled={isFirstPage}
           onClick={handlePageChange("prev")}>
-          <Arrow className="bu-h-[24px] bu-w-[24px] bu-rotate-90" />
+          <Arrow
+            className={`bu-h-[24px] bu-w-[24px] ${isRTL ? "-bu-rotate-90" : "bu-rotate-90"}`}
+          />
         </li>
         {pageList.map((pageNum, i) => {
+          const isStringPage = typeof pageNum === "string";
           return (
             <li
               key={`${pageNum}-${i}`}
               {...(currentPage === pageNum
                 ? { "data-current": true, style: activeStyle }
                 : { "data-current": false })}
-              className={paginationVariants({ theme: theme || defaultTheme })}>
-              {typeof pageNum === "string" ? (
+              className={paginationVariants({ theme: theme || defaultTheme })}
+              onClick={isStringPage ? undefined : handlePageChange(pageNum as number)}>
+              {isStringPage ? (
                 <span>{pageNum}</span>
               ) : (
-                <button onClick={handlePageChange(pageNum)}>{pageNum}</button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePageChange(pageNum as number)();
+                  }}>
+                  {pageNum}
+                </button>
               )}
             </li>
           );
@@ -178,7 +189,9 @@ export function Pagination({
           className={arrowVariants({ theme: theme || defaultTheme })}
           data-disabled={isLastPage}
           onClick={handlePageChange("next")}>
-          <Arrow className="bu-h-[24px] bu-w-[24px] -bu-rotate-90" />
+          <Arrow
+            className={`bu-h-[24px] bu-w-[24px] ${isRTL ? "bu-rotate-90" : "-bu-rotate-90"}`}
+          />
         </li>
       </ul>
       <PageOption

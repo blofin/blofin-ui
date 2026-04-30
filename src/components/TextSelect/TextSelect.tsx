@@ -69,7 +69,7 @@ export interface TextSelectProps {
   size?: InputSize;
   highlightMode?: "text" | "background";
   preventHideFun?: boolean;
-  variant?: "fill" | "line";
+  variant?: "fill" | "line" | "filled" | "outlined";
 }
 
 type OptionsProps = Omit<TextSelectProps, "placeholder"> & {
@@ -346,7 +346,12 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
     };
   }, []);
 
-  const ArrorIcon = variant === "fill" ? ArrowDown : SelectArrow;
+  const ArrorIcon = variant === "fill" || variant === "filled" ? ArrowDown : SelectArrow;
+
+  const textFieldVariant: "filled" | "outlined" = variant === "filled" ? "filled" : "outlined";
+
+  const iconVariant: "fill" | "line" =
+    variant === "fill" || variant === "filled" ? "fill" : "line";
 
   return (
     <div className="bu-relative bu-cursor-pointer" ref={targetRef}>
@@ -355,7 +360,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
         disabled={inputDisabled}
         ref={inputRef}
         inputClassName={`${styles.input} ${valueClassName} ${base === "div" ? "bu-h-0" : ""}`}
-        variant="outlined"
+        variant={textFieldVariant}
         error={error}
         onFocus={() => {
           setShow(true);
@@ -383,7 +388,7 @@ const TextSelect = forwardRef<TextSelectRefProps, TextSelectProps>((props, ref) 
                   !isFocus ? inputRef.current?.focus() : inputRef.current?.blur();
                 }, 0);
               }}
-              className={`${iconStylesVariants({ theme, disabled: inputDisabled, variant })} ${
+              className={`${iconStylesVariants({ theme, disabled: inputDisabled, variant: iconVariant })} ${
                 isFocus ? styles.roate : ""
               }`}
             />
