@@ -254,18 +254,21 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
   };
 
   const mouseEnter = () => {
+    if (inputDisabled) return;
     if (trigger === "hover") {
       setEnter(true);
     }
   };
 
   const mouseLeave = () => {
+    if (inputDisabled) return;
     if (trigger === "hover") {
       setEnter(false);
     }
   };
 
   const handleClick = () => {
+    if (inputDisabled) return;
     if (trigger === "click" && enter === false) {
       setEnter(true);
     }
@@ -300,7 +303,12 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
       <div
         id={labelId}
         ref={selectRef}
-        className={`bu-group bu-flex bu-cursor-pointer bu-select-none bu-items-center bu-justify-center ${className}`}
+        aria-disabled={inputDisabled}
+        className={`bu-group bu-flex bu-select-none bu-items-center bu-justify-center ${
+          inputDisabled
+            ? "bu-cursor-not-allowed bu-opacity-50 bu-pointer-events-none"
+            : "bu-cursor-pointer"
+        } ${className}`}
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
         onClick={handleClick}>
@@ -370,6 +378,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>((props, ref) => {
         type="hidden"
         ref={ref}
         value={value}
+        disabled={inputDisabled}
         {...otherProps}
       />
     </div>
