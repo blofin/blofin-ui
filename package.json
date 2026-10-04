@@ -44,7 +44,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "chromatic": "npx chromatic --project-token=chpt_d1d6e61f4152403 --auto-accept-changes",
+    "chromatic": "chromatic --auto-accept-changes",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
